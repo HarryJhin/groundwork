@@ -133,7 +133,7 @@ flow는 작업 리포에 파일을 남긴다.
 | 스펙 | `docs/specs/` | `SPEC-NNNN-<topic>.md` | ○ |
 | 플랜 | `docs/plans/` | `PLAN-NNNN-<topic>.md` | ○ |
 | ADR | `docs/adr/` | `ADR-NNNN-<slug>.md` | ○ |
-| 프로토타입 | `.claude/artifacts/` | `ARTIFACT-NNNN-proto.<ext>` | × |
+| 프로토타입 | `docs/artifacts/` | `ARTIFACT-NNNN-proto.<ext>` | × |
 
 번호는 네 자리다. 스펙과 플랜이 같은 번호를 공유해 짝을 이룬다. ADR은 Architecture Decision Record, 아키텍처 결정 기록이다.
 
