@@ -9,7 +9,7 @@
     {
       "name": "groundwork",
       "source": "./",
-      "description": "코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 flow와 그 진입을 강제하는 SessionStart 부트스트랩을 제공한다. 문서는 한국어다.",
+      "description": "코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 단계 사슬을 스킬로 덮고, 세션마다 에이전트가 그 사슬에 진입하도록 강제한다.",
       "category": "productivity",
       "keywords": [
         "workflow",
