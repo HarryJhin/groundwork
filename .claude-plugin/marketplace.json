@@ -1,0 +1,12 @@
+{
+  "name": "groundwork",
+  "description": "jjh 로컬 설계 flow 마켓플레이스 (단일 사용자, 비공개).",
+  "owner": { "name": "jjh" },
+  "plugins": [
+    {
+      "name": "groundwork",
+      "source": "./",
+      "description": "설계·리뷰 flow 스킬·부트스트랩"
+    }
+  ]
+}

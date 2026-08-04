@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# SessionStart hook for the groundwork plugin.
+# using-groundwork 부트스트랩 본문을 additionalContext로 방출한다.
+# 방출 실패(파일 부재·읽기 오류)는 무해 종료(exit 0)로 세션을 막지 않는다.
+# 방출 성공 = 본문이 컨텍스트에 실림. 본문 존재 자체가 주입 성공 신호다(별도 마커 없음).
+
+set -u
+
+# 플러그인 루트 결정: Claude Code가 CLAUDE_PLUGIN_ROOT를 준다. 없으면 스크립트 위치에서 유도.
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  PLUGIN_ROOT="$CLAUDE_PLUGIN_ROOT"
+else
+  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+  PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+fi
+
+BOOTSTRAP="${PLUGIN_ROOT}/skills/using-groundwork/SKILL.md"
+
+# 파일이 없거나 읽을 수 없으면 조용히 종료(세션 무중단).
+[ -r "$BOOTSTRAP" ] || exit 0
+content=$(cat "$BOOTSTRAP" 2>/dev/null) || exit 0
+[ -n "$content" ] || exit 0
+
+# JSON 임베딩용 이스케이프(bash 파라미터 치환, C 레벨 단일 패스).
+escape_for_json() {
+  local s="$1"
+  s="${s//\\/\\\\}"
+  s="${s//\"/\\\"}"
+  s="${s//$'\n'/\\n}"
+  s="${s//$'\r'/\\r}"
+  s="${s//$'\t'/\\t}"
+  printf '%s' "$s"
+}
+
+escaped=$(escape_for_json "$content")
+
+# 래퍼: 부트스트랩 본문을 통째로 실어 존재를 탐지 가능하게 한다.
+session_context="<EXTREMELY_IMPORTANT>\ngroundwork flow 부트스트랩. 아래는 'groundwork:using-groundwork' 스킬 전문이다. groundwork 클래스 작업의 진입 규율이며, 사용자 지시가 이보다 우선한다.\n\n${escaped}\n</EXTREMELY_IMPORTANT>"
+
+# additionalContext 방출(printf, heredoc 회피). Claude Code는 hookSpecificOutput.additionalContext를 읽는다.
+printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+
+exit 0

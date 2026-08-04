@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# 실행 플랜에서 태스크 하나의 전문을 파일로 뽑는다. 구현자가 한 번의 Read로 읽고,
+# 태스크 텍스트가 컨트롤러 컨텍스트를 거치지 않는다.
+#
+# 태스크 헤딩은 groundwork 플랜 규약을 따른다: `### Task N: <이름>`
+# (`groundwork:writing-plans`의 태스크 형식). 코드 펜스 안의 매치는 무시한다.
+#
+# 사용법: task-brief PLAN_FILE TASK_NUMBER [OUTFILE]
+# 기본 OUTFILE: <repo-root>/.groundwork/sdd/<plan-basename>/task-<N>-brief.md
+# (플랜마다 워킹 트리마다 갈린다. 같은 워킹 트리에서 같은 플랜을 동시에 돌리면 공유한다.)
+set -euo pipefail
+
+if [ $# -lt 2 ] || [ $# -gt 3 ]; then
+  echo "usage: task-brief PLAN_FILE TASK_NUMBER [OUTFILE]" >&2
+  exit 2
+fi
+
+plan=$1
+n=$2
+[ -f "$plan" ] || { echo "no such plan file: $plan" >&2; exit 2; }
+
+if [ $# -eq 3 ]; then
+  out=$3
+else
+  dir=$("$(cd "$(dirname "$0")" && pwd)/sdd-workspace" "$plan")
+  out="$dir/task-${n}-brief.md"
+fi
+
+awk -v n="$n" '
+  /^```/ { infence = !infence }
+  !infence && /^#+[ \t]+Task[ \t]+[0-9]+/ {
+    intask = ($0 ~ ("^#+[ \t]+Task[ \t]+" n "([^0-9]|$)"))
+  }
+  intask { print }
+' "$plan" > "$out"
+
+if [ ! -s "$out" ]; then
+  echo "task ${n} not found in ${plan} (no heading matching 'Task ${n}')" >&2
+  exit 3
+fi
+
+echo "wrote ${out}: $(wc -l < "$out" | tr -d ' ') lines"

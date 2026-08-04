@@ -1,0 +1,6 @@
+{
+  "name": "groundwork",
+  "version": "0.2.0",
+  "description": "jjh의 설계·리뷰 flow 플러그인. finding-unknowns → spec-review → writing-plans 스킬과 축별 리뷰어 렌즈, using-groundwork 부트스트랩(SessionStart 주입)을 제공한다.",
+  "skills": "./skills/"
+}
