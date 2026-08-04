@@ -2,7 +2,7 @@
 
 코딩 에이전트를 위한 개발방법론 플러그인이다. 설계에서 종료까지 이어지는 단계 사슬(이하 flow)과, 에이전트가 그 사슬을 반드시 거치게 만드는 세션 진입 규율로 이뤄진다.
 
-비공개 단일 사용자용이다. 배포하지 않고 로컬 디렉터리를 마켓플레이스로 등록해 쓴다. 문서는 전부 한국어다.
+문서와 스킬 본문은 전부 한국어다. 에이전트에게 주는 지시가 한국어라는 뜻이므로 한국어로 일하는 환경을 전제한다.
 
 ## 용어
 
@@ -29,14 +29,22 @@
 
 ### Claude Code
 
-로컬 디렉터리를 마켓플레이스로 등록한 뒤 플러그인을 설치한다.
+이 리포가 곧 마켓플레이스다. 등록한 뒤 플러그인을 설치한다.
 
 ```bash
-/plugin marketplace add /Users/jjh/Projects/groundwork
+/plugin marketplace add HarryJhin/groundwork
 /plugin install groundwork@groundwork
 ```
 
-설치 뒤 세션을 재시작해야 SessionStart 훅이 돈다. 스킬을 고친 다음에는 `/reload-plugins`로 반영한다.
+설치 뒤 세션을 재시작해야 SessionStart 훅이 돈다.
+
+훅이 bash 스크립트라 지원 플랫폼은 macOS와 Linux다. Windows는 WSL에서 쓴다.
+
+리포를 직접 고치며 쓰려면 로컬 경로로 등록한다. 스킬을 고친 다음에는 `/reload-plugins`로 반영한다.
+
+```bash
+/plugin marketplace add ./groundwork
+```
 
 ### Codex
 
@@ -154,6 +162,8 @@ Claude Code 전용이다.
 
 스펙·플랜에는 `created`와 `status` 프론트매터를 단다. 작업이 끝나면 `finish`가 `status: closed`를 기입한다.
 
+이 리포의 `docs/`는 groundwork 자신을 만들며 나온 산출물이다. flow가 실제로 무엇을 남기는지 보여주는 예시이면서, 동시에 **완료된 작업의 기록이라 현재 상태를 서술하지 않는다**. 읽는 법은 [docs/README.md](docs/README.md)에 있다.
+
 ## 철학
 
 - 테스트 우선. 구현보다 테스트를 먼저 쓴다
@@ -186,11 +196,13 @@ groundwork 자신을 고칠 때는 flow를 쓰지 않는다. 새 기능이나 �
 
 ## 남은 과제
 
-- 모든 스킬에 `junior-read`를 전수 적용해 발견을 고쳤으나 재판정을 돌리지 않았다. 감사 기록은 `docs/reviews/junior-read-audit-all-skills.md`에 있다
+- 모든 스킬에 `junior-read`를 전수 적용해 발견을 고쳤으나 재판정을 돌리지 않았다
 - Codex에서 서브에이전트 디스패치와 보조 스크립트 실행이 미검증이다
 - 양쪽에 다 쓰이는 리뷰어의 프롬프트가 `skills/spec-review/`와 `skills/plan-review/`에 두 벌로 존재한다. 한쪽을 고치면 다른 쪽을 함께 고쳐야 한다
 - 리뷰 이력이 파일로 남지 않아 세션이 끊기면 이전 라운드 발견이 사라진다
 
 ## 라이선스
 
-비공개 전제 아래 배포하지 않으므로 이식한 superpowers 콘텐츠에 저작권·허가 고지를 넣지 않았다. 이 전제가 깨져 외부 배포가 생기면 MIT 고지 의무가 되살아난다(Copyright © 2025 Jesse Vincent).
+MIT. 전문은 [LICENSE](LICENSE)에 있다.
+
+이식한 superpowers 콘텐츠의 저작권 고지는 [NOTICE](NOTICE)에 있다. 원본과 동일한 파일 여섯과 개작한 스킬 아홉을 파일 단위로 밝혔다(Copyright © 2025 Jesse Vincent, MIT).

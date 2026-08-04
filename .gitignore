@@ -1,0 +1,15 @@
+# groundwork 산출물 중 커밋하지 않는 것
+# 스펙·플랜·ADR은 docs/에 커밋한다. 아래는 수명이 세션에 묶인 것들이다.
+.claude/artifacts/
+.claude/local/
+.groundwork/
+
+# 개인 설정·지침
+.claude/settings.local.json
+CLAUDE.local.md
+
+# 워크스페이스 격리
+.worktrees/
+
+# OS
+.DS_Store

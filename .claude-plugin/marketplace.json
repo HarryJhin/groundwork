@@ -1,12 +1,24 @@
 {
   "name": "groundwork",
-  "description": "jjh 로컬 설계 flow 마켓플레이스 (단일 사용자, 비공개).",
-  "owner": { "name": "jjh" },
+  "description": "groundwork 플러그인을 배포하는 마켓플레이스.",
+  "owner": {
+    "name": "Harry Jhin",
+    "url": "https://github.com/HarryJhin"
+  },
   "plugins": [
     {
       "name": "groundwork",
       "source": "./",
-      "description": "설계·리뷰 flow 스킬·부트스트랩"
+      "description": "코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 flow와 그 진입을 강제하는 SessionStart 부트스트랩을 제공한다. 문서는 한국어다.",
+      "category": "productivity",
+      "keywords": [
+        "workflow",
+        "spec-driven-development",
+        "planning",
+        "code-review",
+        "tdd",
+        "korean"
+      ]
     }
   ]
 }

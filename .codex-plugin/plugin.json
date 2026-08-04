@@ -1,6 +1,6 @@
 {
   "name": "groundwork",
   "version": "0.2.0",
-  "description": "jjh의 설계·리뷰 flow 플러그인. finding-unknowns → spec-review → writing-plans 스킬과 축별 리뷰어 렌즈, using-groundwork 부트스트랩(SessionStart 주입)을 제공한다.",
+  "description": "코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 flow와 그 진입을 강제하는 부트스트랩을 제공한다. 훅은 Claude Code 전용이라 Codex에서는 스킬만 노출된다. 문서는 한국어다.",
   "skills": "./skills/"
 }
