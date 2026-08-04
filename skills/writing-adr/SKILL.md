@@ -110,7 +110,7 @@ Negative:
 
 헬퍼 스크립트는 없다. 아래 단계를 에이전트가 직접 수행한다.
 
-**REQUIRED SUB-SKILL**: 4단계(파일 작성) 전에 `groundwork:writing-for-junior`(세션 맥락 없는 주니어 독자 기준의 작성 규범과 판정 렌즈)를 로드한다. ADR을 읽을 사람은 결정을 뒤집으려는 다음 사람이고 그 결정이 나온 대화를 갖지 않는다. Context·Decision의 용어와 참조가 특히 걸린다.
+**REQUIRED SUB-SKILL**: 4단계(파일 작성) 전에 `groundwork:writing-for-junior`(맥락 없는 주니어 독자 기준의 작성 규범과 판정 렌즈)를 로드한다. ADR을 읽을 사람은 결정을 뒤집으려는 다음 사람이고 그 결정이 나온 대화를 갖지 않는다. Context·Decision의 용어와 참조가 특히 걸린다.
 
 **1. 위치**
 - repo 루트를 `git rev-parse --show-toplevel`로 얻어 `<repo 루트>/docs/adr/`를 대상으로 삼는다.
@@ -157,8 +157,13 @@ ADR로 남기지 않는 것도 갈라둔다. 코드가 스스로 설명하는 �
 
 ## references 읽기 트리거
 
-상세는 references/에 두었다. 아래 상황에 해당 파일을 읽는다:
-- ADR 리뷰·승인·대체 프로세스의 상세가 필요하면 [aws-adr-process.md](references/aws-adr-process.md).
-- ADR 품질·이력 보존·저장 위치 모범사례를 점검하려면 [aws-adr-best-practices.md](references/aws-adr-best-practices.md).
-- 경계 판단(언제 ADR을 쓰나, 무엇을 담나, Superseded 처리)이 애매하면 [aws-adr-faq.md](references/aws-adr-faq.md).
-- 섹션 세부의 외부 배경을 확인하려면 [aws-adr-template.md](references/aws-adr-template.md). 이 문서의 형식은 위 「형식 정본」과 어긋나는 지점이 있으므로 형식 기준으로 삼지 않는다.
+상세는 `references/`에 두었다. 아래 상황에 해당 파일을 읽는다.
+
+| 언제 여나 | 파일 |
+|---|---|
+| ADR 리뷰·승인·대체 프로세스의 상세가 필요함 | [aws-adr-process.md](references/aws-adr-process.md) |
+| ADR 품질·이력 보존·저장 위치 모범사례를 점검함 | [aws-adr-best-practices.md](references/aws-adr-best-practices.md) |
+| 경계 판단(언제 ADR을 쓰나, 무엇을 담나, Superseded 처리)이 애매함 | [aws-adr-faq.md](references/aws-adr-faq.md) |
+| 섹션 세부의 외부 배경을 확인함 | [aws-adr-template.md](references/aws-adr-template.md) |
+
+`aws-adr-template.md`의 형식은 위 「형식 정본」과 어긋나는 지점이 있다. 형식 기준으로 삼지 않는다.

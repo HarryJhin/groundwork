@@ -59,7 +59,7 @@ description: 스펙 문서를 리뷰어 패널로 검증한다. finding-unknowns
 
 - 전원: 스펙 경로.
 - `junior-read`: 경로만. 세션 요약·작업 배경을 동봉하지 않는다(격리 자체가 판정 도구다).
-- `intent`: 사용자 요청 원문·인터뷰 Q&A·승인 대화 요지를 verbatim 동봉한다. 원문이 세션 휘발로 부재하면 스펙의 「인터뷰 요약」 절(스펙 절 구성의 정본은 `groundwork:finding-unknowns`의 「스펙에 담는 것」이다)을 대체 원본으로 쓴다. 그 절도 없으면 사용자에게 원문을 요청하고, 받지 못하면 `intent`를 로스터에서 뺀다.
+- `intent`: 사용자 요청 원문·인터뷰 Q&A·승인 대화 요지를 verbatim 동봉한다. 스펙은 인터뷰 내용을 담는 절을 두지 않으므로(스펙 절 구성의 정본은 `groundwork:finding-unknowns`의 「스펙에 담는 것」이다) 문서 안에 대체 원본이 없다. 원문이 세션 휘발로 부재하면 사용자에게 요청하고, 받지 못하면 `intent`를 로스터에서 뺀다.
 - `experience`·`crossref`: 각 프롬프트가 요구하는 참조물 목록.
 
 ## Workflow

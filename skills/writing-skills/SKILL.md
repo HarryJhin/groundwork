@@ -107,7 +107,7 @@ skills/
 
 그 스킬이 셸 블록을 담으면 다음을 더 밝힌다. 블록이 쓰는 변수가 문서 안에서 대입되는지, 여러 블록이 상태를 공유한다면 같은 셸에서 도는 전제인지.
 
-**REQUIRED SUB-SKILL**: 스킬 본문을 쓰기 전에 `groundwork:writing-for-junior`(세션 맥락 없는 주니어 독자 기준의 작성 규범과 판정 렌즈)를 로드한다. 그 스킬의 `delta-skill.md`가 위 항목을 판정 축으로 갖는다.
+**REQUIRED SUB-SKILL**: 스킬 본문을 쓰기 전에 `groundwork:writing-for-junior`(맥락 없는 주니어 독자 기준의 작성 규범과 판정 렌즈)를 로드한다. 그 스킬의 `delta-skill.md`가 위 항목을 판정 축으로 갖는다.
 
 이 문서 자신의 경로 기준도 같은 규칙을 따른다. 아래에서 파일명만 적은 참조는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/` 기준이고, `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
 

@@ -12,8 +12,8 @@
 - **flow**: 설계에서 종료까지 순서가 고정된 단계 사슬. 단계마다 그 단계를 실행하는 스킬이 있다. 단계 목록은 아래 「flow」에 있다.
 - **메인 에이전트**: 사용자와 대화하는 세션의 에이전트. 서브에이전트를 띄우는 쪽이다.
 - **리뷰어**: 문서나 코드를 한 가지 관점에서 검증하는 서브에이전트. 정의 파일 없이 프롬프트 파일 한 장으로 존재한다. 관점마다 리뷰어가 하나씩 있다.
-- **산출물**: flow가 파일로 남기는 것. 스펙, 플랜, ADR(Architecture Decision Record, 아키텍처 결정 기록), 그리고 아티팩트다.
-- **아티팩트**: 산출물 중 커밋하지 않는 것. 리뷰 승인 요약과 프로토타입이 여기 든다.
+- **산출물**: flow가 파일로 남기는 것. 스펙, 플랜, ADR(Architecture Decision Record, 아키텍처 결정 기록), 그리고 프로토타입이다.
+- **프로토타입**: 산출물 중 커밋하지 않는 것. 말로 답이 안 나오는 UI·UX 방향을 실물로 병치해 반응을 받을 때만 만든다.
 
 이 문서의 상대 경로는 모두 리포 루트 기준이다.
 
@@ -145,12 +145,12 @@ Claude Code 전용이다.
 
 | 타입 | 위치 | 명명 | 커밋 |
 |---|---|---|---|
-| 스펙 | `docs/specs/` | `SPEC-NNNN-<topic>.md` | 커밋한다 |
-| 플랜 | `docs/plans/` | `PLAN-NNNN-<topic>.md` | 커밋한다 |
-| ADR | `docs/adr/` | `ADR-NNNN-<slug>.md` | 커밋한다 |
-| 아티팩트 | `.claude/artifacts/` | `ARTIFACT-NNNN-<review\|proto>.<ext>` | 커밋 금지 |
+| 스펙 | `docs/specs/` | `SPEC-NNNN-<topic>.md` | ○ |
+| 플랜 | `docs/plans/` | `PLAN-NNNN-<topic>.md` | ○ |
+| ADR | `docs/adr/` | `ADR-NNNN-<slug>.md` | ○ |
+| 프로토타입 | `.claude/artifacts/` | `ARTIFACT-NNNN-proto.<ext>` | × |
 
-번호는 네 자리다. 스펙과 플랜이 같은 번호를 공유해 짝을 이룬다. 아티팩트도 대응 스펙의 번호를 쓰고 용도 접미로 승인 요약(`review`)과 프로토타입(`proto`)을 가른다.
+번호는 네 자리다. 스펙과 플랜이 같은 번호를 공유해 짝을 이룬다. 프로토타입도 대응 스펙의 번호를 쓴다.
 
 스펙·플랜에는 `created`와 `status` 프론트매터를 단다. 작업이 끝나면 `finish`가 `status: closed`를 기입한다.
 

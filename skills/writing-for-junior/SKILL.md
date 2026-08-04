@@ -1,11 +1,11 @@
 ---
 name: writing-for-junior
-description: 세션 맥락이 없는 주니어 독자가 문서만으로 이해하고 실행할 수 있게 쓰는 규범과 그것을 판정하는 렌즈. Use when 스펙·플랜·스킬·ADR을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.
+description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 실행할 수 있게 쓰는 규범과 그것을 판정하는 렌즈. Use when 스펙·플랜·스킬·ADR을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.
 ---
 
 # writing-for-junior
 
-문서를 읽을 사람은 세션 맥락이 없다. 이 스킬은 그 독자가 문서만으로 이해하고 실행하게 만드는 작성 규범이고, 같은 기준으로 문서를 판정하는 리뷰 렌즈의 정본이다.
+문서를 읽을 사람에게는 이 문서를 만든 맥락이 없다. 이 스킬은 그 독자가 문서만으로 이해하고 실행하게 만드는 작성 규범이고, 같은 기준으로 문서를 판정하는 리뷰 렌즈의 정본이다.
 
 ## 입력·주체·출력
 
@@ -26,7 +26,7 @@ description: 세션 맥락이 없는 주니어 독자가 문서만으로 이해�
 
 **못 가진 것**
 - 도메인 지식. 이 프로젝트·조직·제품에서만 통하는 용어·약칭·코드명·관행·역사.
-- 이 문서를 만든 대화. 질문과 답, 기각된 대안, 세션에서 생긴 약칭, "아까"의 시점.
+- 이 문서를 만든 대화. 질문과 답, 기각된 대안, 그 대화에서 생긴 약칭, "아까"의 시점.
 - 시간. 참조물 하나를 확인하려고 리포를 통독하지 않는다.
 
 여기서 "주니어"는 능력이 아니라 **맥락의 부재**를 가리킨다. 문서를 쓴 다음 주의 자신도 이 독자다.
@@ -153,7 +153,7 @@ description: 세션 맥락이 없는 주니어 독자가 문서만으로 이해�
 | 유형 | 필수 절 |
 |---|---|
 | 스킬 | 입력(무엇을 받는가, 없으면 어떻게 하는가) / 경로 기준(문서가 적은 상대 경로의 기준 디렉터리) / 주체(이 문서를 실행하는 것이 누구이고 다른 역할 이름과 어떤 관계인가) / 출력(무엇을 반환하는가) |
-| 스펙 | 목표 / 제외 범위 / 용어(고유 용어가 셋 이상이면) |
+| 스펙 | 도입부(제목 아래 헤딩 없는 리드. 무엇이 문제이고 이 문서가 무엇을 하는가) / 범위 / 제외 범위 / 용어(고유 용어가 셋 이상이면) |
 | 플랜 | Goal과 대응 스펙 경로 / Global Constraints / 태스크마다 Files·Interfaces·검증 커맨드 |
 | ADR | 결정을 강제한 힘 / 결정 / 파급(부정 포함) |
 
@@ -178,11 +178,13 @@ description: 세션 맥락이 없는 주니어 독자가 문서만으로 이해�
 
 규범과 판정 축의 근거 원문을 `references/`에 두었다. 이 문서의 상대 경로는 모두 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-for-junior/` 기준이고, `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다. 평소에는 읽지 않는다. 아래 상황에 해당 파일만 연다.
 
-- 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론이 나오면 [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md). 그 요구가 왜 듣지 않는지와, 격리된 리뷰어가 필요한 이유가 거기 있다.
-- 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 그 판정 기준을 고치려 하면 [comprehension-mechanics.md](references/comprehension-mechanics.md).
-- 어떤 결함부터 잡아야 하는지 우선순위를 정할 때 [api-doc-failures.md](references/api-doc-failures.md). 문제 유형별 정의와 실무 분포가 있다.
-- 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기되면 [newcomer-barriers.md](references/newcomer-barriers.md).
-- 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안이 나오면 [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md). 목록을 두지 않고 대체 가능성 판정을 쓰는 이유가 거기 있다.
-- 「제작 사정 누출」의 판정이 문체 지적 아니냐는 반론이 나오거나 이식성 테스트의 기준 환경을 고치려 하면 [writer-based-prose.md](references/writer-based-prose.md). 현상의 명칭과 판정 규칙의 출처가 거기 있다.
+| 언제 여나 | 파일 | 담긴 것 |
+|---|---|---|
+| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론 | [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md) | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거 |
+| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함 | [comprehension-mechanics.md](references/comprehension-mechanics.md) | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문 |
+| 어떤 결함부터 잡을지 우선순위를 정할 때 | [api-doc-failures.md](references/api-doc-failures.md) | 문제 유형별 정의와 실무 분포 |
+| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨 | [newcomer-barriers.md](references/newcomer-barriers.md) | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
+| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안 | [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md) | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유 |
+| 「제작 사정 누출」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | [writer-based-prose.md](references/writer-based-prose.md) | 현상의 명칭과 판정 규칙의 출처 |
 
 `references/`의 파일은 모두 「확인 범위」 절에 무엇을 원문으로 확인했고 무엇을 대조하지 않았는지 적었다. 인용을 다른 문서로 옮길 때 그 표기를 함께 옮긴다.
