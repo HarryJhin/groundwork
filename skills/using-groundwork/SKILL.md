@@ -36,7 +36,7 @@ groundwork 클래스 작업에는 다음을 강제한다.
 
 1. **진입**: 코드·탐색 전에 `groundwork:finding-unknowns`로 unknowns부터 턴다.
 2. **발산 리다이렉트**: 실행 환경이 제공하는 아이디어 발산·요구 탐색 스킬이 먼저 걸려도 groundwork 클래스면 거기 머물지 않고 `groundwork:finding-unknowns`로 넘어간다. finding-unknowns가 필요한 발산을 내부에서 이끈다.
-3. **게이트**: 스펙은 `groundwork:spec-review`, 플랜은 `groundwork:plan-review`가 전원 PASS를 내야 하고 여기에 사용자 명시 승인이 더해져야 다음 단계로 간다. 침묵·모호 발화는 승인이 아니다.
+3. **게이트**: 스펙은 `groundwork:spec-review`, 플랜은 `groundwork:plan-review`를 거쳐야 하고 여기에 사용자 명시 승인이 더해져야 다음 단계로 간다. 리뷰를 돌릴지와 어느 범위로 돌릴지는 각 리뷰 스킬이 첫 단계에서 사용자에게 묻는다. 저자가 대신 정하지 않고, 스킬 호출 자체를 건너뛰지도 않는다. 두 스킬은 `통과`·`조건부 통과`·`건너뜀` 셋 중 하나로 끝나며 어느 쪽인지 사용자에게 밝힌다. 침묵·모호 발화는 승인이 아니다.
 4. **flow**: 사슬의 단계마다 소유가 다르다.
 
    | 단계 | 소유 |

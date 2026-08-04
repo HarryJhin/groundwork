@@ -59,7 +59,7 @@ created: 2026-08-04
 
 - **Files**
   - 변경 `skills/finding-unknowns/SKILL.md`: 「기법」 절 제목에서 "순서·전부 강제 아님" 삭제. 조건 판정이 성립하지 않는 이유(찾기 전에는 없어 보임)를 본문에 명시. 각 기법 설명의 조건절("낯선 코드·도메인이면", "참조 코드·목업이 있으면", "docs로 확인되면 생략") 삭제. 빈 결과가 근거로 남는다는 문단 추가
-  - 변경 `skills/finding-unknowns/SKILL.md`: 「안 하는 것」에 저자 판정 생략 금지 추가. 「Red Flags」 표 신설(합리화 문장과 그 반박)
+  - 변경 `skills/finding-unknowns/SKILL.md`: 「금지」에 저자 판정 생략 금지 추가. 「Red Flags」 표 신설(합리화 문장과 그 반박)
 - **Interfaces**
   - Consumes: Task 1의 반환 토큰. 본문이 "훑은 범위와 함께 없음을 반환한다"로 그 계약을 서술한다
 - **실행 검증**: `! grep -q '강제 아님' skills/finding-unknowns/SKILL.md` · `grep -q '무조건 발동' skills/finding-unknowns/SKILL.md` · `grep -q 'Red Flags' skills/finding-unknowns/SKILL.md`
