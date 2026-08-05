@@ -59,6 +59,10 @@
 - `writing-adr` ADR 작성
 - `writing-clearly-and-concisely` 문장 층위 산문 규범
 
+**리포 표준**
+
+- `managing-community-health-files` GitHub 커뮤니티 헬스 파일의 감사·스캐폴딩과 조직 `.github` 상속 구성
+
 **진입**
 
 - `using-groundwork` 부트스트랩. SessionStart 훅이 이 본문을 매 세션 주입한다
