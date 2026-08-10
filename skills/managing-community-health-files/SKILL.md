@@ -5,14 +5,14 @@ description: Use when 커뮤니티 헬스 파일(CODE_OF_CONDUCT, CONTRIBUTING, 
 
 # 커뮤니티 헬스 파일 관리
 
-GitHub 표준 커뮤니티 헬스 파일을 감사하고, 표준에 맞게 채우고, 조직 `.github` 상속 모델을 구성한다.
+GitHub 표준 커뮤니티 헬스 파일을 감사하고 표준에 맞게 채우고 조직 `.github` 상속 모델을 구성한다.
 
 **경로 기준**: 이 문서가 적은 `references/`·`scripts/`는 이 스킬 디렉터리
 `${CLAUDE_PLUGIN_ROOT}/skills/managing-community-health-files/` 기준이고,
 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가
 아니다. 헬스 파일이 놓이는 경로는 대상 repo 루트 기준이다.
 
-**사실의 근거**: 아래 GitHub 표준은 공식 문서에 근거하고, 문단별 출처 URL은
+**사실의 근거**: 아래 GitHub 표준은 공식 문서에 근거하고 문단별 출처 URL은
 [github-standard.md](references/github-standard.md)에 있다. GitHub이 문서로 규정하지 않아
 관측으로 채운 항목은 관측이라고 밝혀 적는다. 둘을 섞지 않는다.
 
@@ -77,10 +77,10 @@ bash ${CLAUDE_PLUGIN_ROOT}/skills/managing-community-health-files/scripts/audit-
 ### 2. 스캐폴딩 (부재 파일 생성)
 
 **전제 확인**: 형제에 조직 `.github` 리포가 있으면 이 리포에 상속 문서를 만들지 않는다.
-하위 리포의 자체 파일은 정본을 이기고, 이슈 템플릿은 폴더 단위로 이겨서 정본 폴더 전체를
+하위 리포의 자체 파일은 정본을 이기고 이슈 템플릿은 폴더 단위로 이겨서 정본 폴더 전체를
 무효로 만든다. 상속 모델을 쓰는 리포라면 [작업 3](#3-조직-github-정본-셋업)으로 전환한다.
 
-단일 리포(상속 없음)에서만 생성한다. 파일 내용은 아래 표준을 따르되, 프로젝트 고유 정보
+단일 리포(상속 없음)에서만 생성한다. 파일 내용은 아래 표준을 따르되 프로젝트 고유 정보
 (연락처, 지원 버전, 행동강령 담당자)는 사용자에게 확인해 채운다. 추측으로 채우지 않는다.
 
 CoC 소스 선택, CLA 채택 여부, SECURITY 보고 경로 설계처럼 판단이 필요하면 주요 기업의 실제

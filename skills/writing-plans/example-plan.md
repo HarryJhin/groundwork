@@ -16,9 +16,9 @@ created: 2026-08-04
 
 # 플랜: 인터뷰를 추출에서 grounding으로 전환
 
-`finding-unknowns`의 조사 발동에서 저자 판정을 걷어내고, 인터뷰를 묻기와 돌려주기의 순환으로 바꾼다. 대응 스펙: `docs/specs/SPEC-0002-interview-grounding.md`.
+`finding-unknowns`의 조사 발동에서 저자 판정을 없애고 인터뷰를 묻기와 돌려주기의 순환으로 바꾼다. 대응 스펙: `docs/specs/SPEC-0002-interview-grounding.md`.
 
-이 repo에는 빌드·테스트 인프라가 없다. 산출물은 스킬(`skills/*/SKILL.md`)·프롬프트 템플릿(`skills/*/*-prompt.md`)·근거 문서(`skills/*/references/*.md`)다. 태스크 경계의 "green"은 다음 셋이 모두 참인 상태로 정의한다.
+이 repo에는 빌드·테스트 인프라가 없다. 산출물은 스킬(`skills/*/SKILL.md`)·프롬프트 템플릿(`skills/*/*-prompt.md`)·근거 문서(`skills/*/references/*.md`)다. 태스크 경계의 "green"은 다음 3가지가 모두 참인 상태로 정의한다.
 
 - 스킬 프론트매터에 `name`과 `description`이 있다
 - 그 태스크가 만들기로 한 파일이 실재한다
@@ -44,11 +44,11 @@ created: 2026-08-04
 
 ### Task 1: 조사원 프롬프트 입력 계약 완화
 
-세 프롬프트가 저자만 알 수 있는 값을 필수 입력으로 요구해 디스패치를 막고 있다. 후보 탐색과 가정 식별을 조사원의 첫 절차로 옮긴다.
+프롬프트 3종이 저자만 알 수 있는 값을 필수 입력으로 요구해 디스패치를 막고 있다. 후보 탐색과 가정 식별을 조사원의 첫 절차로 옮긴다.
 
 - **Files** (모두 `skills/finding-unknowns/`)
-  - 변경 `reference-prompt.md`: 「입력」에서 참조 실체 위치를 선택으로 내리고, 「절차」 1번에 후보 탐색 추가. 「출력」에 `REFERENCE_FOUND: 없음` + `SEARCHED` 경로 추가
-  - 변경 `spike-prompt.md`: 「입력」에서 검증할 가정을 선택으로 내리고, 「절차」 1번에 가정 식별 추가. 「출력」에 `ASSUMPTIONS_FOUND: 없음` + `SCANNED`, `DEFERRED` 경로 추가
+  - 변경 `reference-prompt.md`: 「입력」에서 참조 실체 위치를 선택으로 내리고 「절차」 1번에 후보 탐색 추가. 「출력」에 `REFERENCE_FOUND: 없음` + `SEARCHED` 경로 추가
+  - 변경 `spike-prompt.md`: 「입력」에서 검증할 가정을 선택으로 내리고 「절차」 1번에 가정 식별 추가. 「출력」에 `ASSUMPTIONS_FOUND: 없음` + `SCANNED`, `DEFERRED` 경로 추가
   - 변경 `blindspot-prompt.md`: 도입부와 역할 문장에서 "낯선 코드·도메인이면" 조건 삭제. "전수 발굴"을 훑은 범위 반환으로 낮춤
 - **Interfaces**
   - Produces: 조사원 반환 토큰 `REFERENCE_FOUND`·`SEARCHED`·`ASSUMPTIONS_FOUND`·`SCANNED`·`DEFERRED`. Task 2가 본문에서 이 토큰들을 빈 결과의 근거로 지목한다
@@ -69,7 +69,7 @@ created: 2026-08-04
 
 - **Files**
   - 신규 `skills/finding-unknowns/references/grounding-in-interview.md`: Clark & Brennan 1991의 presentation·acceptance 정의, grounding criterion, installment, least collaborative effort를 원문 인용으로. 「확인 범위」 절에 원문 대조 여부 표기
-  - 변경 `skills/finding-unknowns/SKILL.md`: 「역인터뷰 절차」를 「인터뷰 절차」로 승격. 두 방향 구조와 근거 문단 추가. 절차를 조각 단위 순환으로 재작성(묻기 → 돌려주기 → 어긋나면 그 조각 재닫기). 최소 확정 항목(제외 범위·완료 판정·조사가 드러낸 갈림길) 추가. 원문 명시 항목의 면제를 확인 문항 발행으로 교체
+  - 변경 `skills/finding-unknowns/SKILL.md`: 「역인터뷰 절차」를 「인터뷰 절차」로 승격. 두 방향 구조와 근거 문단 추가. 절차를 조각 단위 순환으로 재작성(묻기 → 돌려주기 → 어긋나면 그 조각 다시 마무리). 최소 확정 항목(제외 범위·완료 판정·조사가 드러낸 갈림길) 추가. 원문 명시 항목의 면제를 확인 문항 발행으로 교체
   - 변경 `skills/finding-unknowns/SKILL.md`: 「references 읽기 트리거」에 새 근거 파일 행 추가
 - **Interfaces**
   - Produces: 절 이름 「인터뷰 절차」. Task 4의 리뷰어 프롬프트가 이 절이 정한 규칙(0문항 금지, 확인 문항 발행)을 판정 기준으로 인용한다

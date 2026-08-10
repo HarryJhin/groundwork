@@ -10,7 +10,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
 - **한계 1, 관찰이지 검증이 아니다.** 여기 적힌 것은 "대기업이 하는 관행"이지 "커뮤니티
   건강에 효과가 있다고 독립 연구로 입증된 것"이 아니다. 모든 출처가 벤더 자사(GitHub·각 기업)다.
   독립 제3자 효과성 연구(OpenSSF Scorecard, CHAOSS 등)는 이 조사 범위 밖이다. 아래 "판단"은
-  관찰에서 끌어낸 해석이고, 그 근거 사실만 검증 경로로 뒷받침된다.
+  관찰에서 끌어낸 해석이고 그 근거 사실만 검증 경로로 뒷받침된다.
 - **한계 2, 규모 편향.** 이들은 법무팀·보안팀·전용 인프라를 갖춘 초대형 조직이다. 자체 브랜드
   CoC, CLA 봇, 전용 취약점 포털은 그 규모라서 가능하다. 소규모 프로젝트에 그대로 복제하면
   과설계다. "무엇을 베낄지"가 아니라 "어떤 원리를 규모에 맞게 적용할지"로 읽는다.
@@ -33,14 +33,14 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
 
 ### 1. 조직 `.github` 상속을 정본으로 쓴다
 
-- 여섯 조직 중 다섯이 `<org>/.github` 정본 리포를 운영한다. Android만 GitHub 모델 밖이다
+- 조직 6곳 중 5곳이 `<org>/.github` 정본 리포를 운영한다. Android만 GitHub 모델 밖이다
   (`gh api repos/{google,apple,facebook,aws,microsoft}/.github/contents` 각각 성공, Android는
   아래 별도 섹션).
 - Microsoft `.github`는 README에서 "Default Community Health Files for the Microsoft
-  organization"이라고 목적을 자기 선언하고, `profile/`·`policies/`·`CLA/` 디렉터리까지 조직
+  organization"이라고 목적을 자기 선언하고 `profile/`·`policies/`·`CLA/` 디렉터리까지 조직
   인프라로 확장했다 (`gh api repos/microsoft/.github/contents/README.md`, `.../contents`).
 - **판단**: 조직 단위로 관리하면 정본을 한 곳에서 고치고 산하 리포는 예외일 때만 override
-  한다. override는 파일 단위이고 이슈 템플릿은 폴더 단위라, 하위 리포 `.github/ISSUE_TEMPLATE/`에
+  한다. override는 파일 단위이고 이슈 템플릿은 폴더 단위라 하위 리포 `.github/ISSUE_TEMPLATE/`에
   파일이 하나라도 있으면 정본 폴더 전체가 무시된다(GitHub 상속 규칙, github-standard.md 참조).
 
 ### 2. CoC의 실질 공통분모는 Contributor Covenant다
@@ -49,14 +49,14 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   (`gh api repos/apple/.github/contents/CODE_OF_CONDUCT.md`), Meta는 1.4
   (`gh api repos/facebook/react/contents/CODE_OF_CONDUCT.md`), AWS는 2.1
   (`gh api repos/aws/.github/contents/CODE_OF_CONDUCT.md` + https://aws.github.io/code-of-conduct),
-  Microsoft는 2.0이다. Microsoft는 리포 CoC 파일이 짧은 스텁이라 Covenant 언급이 없고, 정책
+  Microsoft는 2.0이다. Microsoft는 리포 CoC 파일이 짧은 스텁이라 Covenant 언급이 없고 정책
   사이트 attribution에 "adapted from the Contributor Covenant, version 2.0"으로 명시된다
   (https://opensource.microsoft.com/codeofconduct/).
 - Google만 예외로 기본 CoC가 자체 "Community Guidelines"이고 Contributor Covenant는 옵션으로만
   제공한다 (`gh api repos/google/.github/contents/CODE_OF_CONDUCT.md`).
 - 버전이 조직마다 갈린다. Meta는 1.4이고 AWS는 2.1을 쓴다. 2.1은 실재하는 상위 버전이다
   (https://www.contributor-covenant.org/version/2/1/). 어느 버전이 "최신"인지는 확인하지 않았다.
-- **판단**: CoC는 Contributor Covenant 채택이 사실상 표준이고, 자체 브랜딩은 대규모 조직의
+- **판단**: CoC는 Contributor Covenant 채택이 사실상 표준이고 자체 브랜딩은 대규모 조직의
   오버레이일 뿐 소규모엔 불필요하다. 채택 시 **집행 연락처(이메일)를 채우는 것**이 핵심이다.
   실제 각 사가 연락처를 명시한다(Meta `opensource-conduct@fb.com`
   `gh api repos/facebook/react/contents/CODE_OF_CONDUCT.md`, MS `opencode@microsoft.com`
@@ -90,7 +90,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   - GitHub 기본 기능: Apple은 private vulnerability reporting
     (`gh api repos/apple/.github/contents/SECURITY.md`)
 - Microsoft SECURITY.md는 버전 마커(예: `<!-- BEGIN MICROSOFT SECURITY.MD V0.0.9 BLOCK -->`)로
-  감싸 전 리포에 표준 블록을 자동 배포하고, 응답 SLA와 CVD 원칙을 명문화한다
+  감싸 전 리포에 표준 블록을 자동 배포하고 응답 SLA와 CVD 원칙을 명문화한다
   (`gh api repos/microsoft/.github/contents/SECURITY.md`).
 - **판단**: SECURITY.md에 ① 사적 보고 경로(소규모는 GitHub private vulnerability reporting으로
   충분), ② 지원 버전 표, ③ 공개 이슈 금지를 담는다. 전용 포털·바운티는 대규모의 선택지다.
@@ -102,7 +102,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   `gh api repos/aws/aws-sdk-java-v2/contents/CONTRIBUTING.md`).
 - Swift는 리포 CONTRIBUTING이 swift.org의 커뮤니티 문서로 위임하는 중앙화 방식이다
   (`gh api repos/apple/swift/contents/CONTRIBUTING.md` + https://www.swift.org/contributing/).
-- **판단**: 공통 절차는 조직 정본에 두고, 빌드·테스트가 리포마다 다른 성숙한 프로젝트만 자체
+- **판단**: 공통 절차는 조직 정본에 두고 빌드·테스트가 리포마다 다른 성숙한 프로젝트만 자체
   CONTRIBUTING으로 확장한다.
 
 ## Android/AOSP: 헬스 파일 모델이 적용되지 않는 사례

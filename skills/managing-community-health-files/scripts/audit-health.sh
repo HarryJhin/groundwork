@@ -8,7 +8,7 @@ set -u
 REPO="${1:-$PWD}"
 cd "$REPO" 2>/dev/null || { echo "경로 없음: $REPO" >&2; exit 1; }
 
-# 세 위치(.github → 루트 → docs)에서 인식되는 파일. 대소문자 정확 매칭.
+# 3개 위치(.github → 루트 → docs)에서 인식되는 파일. 대소문자 정확 매칭.
 # FUNDING.yml과 템플릿 디렉터리는 인식 위치가 달라 아래에서 따로 처리한다.
 FILES="CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md SUPPORT.md GOVERNANCE.md PULL_REQUEST_TEMPLATE.md CODEOWNERS LICENSE README.md"
 

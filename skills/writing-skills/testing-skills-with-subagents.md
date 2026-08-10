@@ -166,7 +166,7 @@ You have access to: [skill-being-tested]
 **새 합리화를 그대로 포착한다:**
 - "이 경우는 다르다, 왜냐하면..."
 - "문구가 아니라 정신을 따르는 것이다"
-- "목적은 X이고, 나는 X를 다른 방식으로 달성한다"
+- "목적은 X이고 나는 X를 다른 방식으로 달성한다"
 - "실용적이라는 건 상황에 맞춘다는 것이다"
 - "X시간을 지우는 건 낭비다"
 - "테스트를 먼저 쓰는 동안 참고용으로 남겨둔다"
@@ -234,7 +234,7 @@ description: Use when you wrote code before tests, when tempted to test after, o
 
 **에이전트가 새 합리화를 찾으면:** REFACTOR 사이클을 계속한다.
 
-**에이전트가 규칙을 따르면:** 성공. 이 시나리오에 대해 스킬이 방탄이다.
+**에이전트가 규칙을 따르면:** 성공. 이 시나리오에서 스킬이 방탄이다.
 
 ## 메타 테스트 (GREEN이 안 될 때)
 
@@ -247,7 +247,7 @@ How could that skill have been written differently to make
 it crystal clear that Option A was the only acceptable answer?
 ```
 
-**가능한 응답 세 가지:**
+**가능한 응답 3가지:**
 
 1. **"스킬은 명확했다, 내가 무시하기로 한 것이다"**
    - 문서 문제가 아니다
@@ -331,7 +331,7 @@ Meta-test: "Skill was clear, I should follow it"
 ## 흔한 실수 (TDD와 동일)
 
 **나쁨: 테스트 전에 스킬 작성 (RED 건너뜀)**
-실제로 막아야 할 것이 아니라 당신이 막아야 한다고 생각하는 것을 드러낸다.
+실제로 막아야 할 것이 아니라 네가 막아야 한다고 생각하는 것을 드러낸다.
 좋음: 항상 베이스라인 시나리오를 먼저 돌린다.
 
 **나쁨: 테스트 실패를 제대로 지켜보지 않음**

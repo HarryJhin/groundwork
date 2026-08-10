@@ -8,14 +8,14 @@ description: Use when starting any conversation - groundwork 설계 flow 진입�
 </SUBAGENT-STOP>
 
 <EXTREMELY-IMPORTANT>
-groundwork 클래스 작업(새 기능·멀티파일·낯선 도메인)에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다. flow는 설계에서 종료까지 이어지는 스킬 사슬이고, 단계와 소유 스킬은 아래 「The Rule」의 표에 있다.
+groundwork 클래스 작업(새 기능·멀티파일·낯선 도메인)에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다. flow는 설계에서 종료까지 이어지는 스킬 사슬이고 단계와 소유 스킬은 아래 「The Rule」의 표에 있다.
 
 flow 진입은 선택이 아니다. 합리화로 빠져나가지 않는다.
 </EXTREMELY-IMPORTANT>
 
 ## 이 문서의 범위
 
-부트스트랩은 진입 스위치다. 무엇을 언제 부를지만 정한다. 아래 규약은 담지 않으니, 필요하면 여기서 찾지 말고 소유 스킬을 로드한다.
+부트스트랩은 진입 스위치다. 무엇을 언제 부를지만 정한다. 아래 규약은 담지 않으니 필요하면 여기서 찾지 말고 소유 스킬을 로드한다.
 
 | 규약 | 소유 스킬 |
 |---|---|
@@ -30,13 +30,13 @@ flow 진입은 선택이 아니다. 합리화로 빠져나가지 않는다.
 
 ## The Rule (진입 강제)
 
-관련되거나 요청된 스킬은 어떤 응답·행동보다 먼저 invoke한다. 확인 질문, 코드 탐색, 파일 열람도 그 뒤다. 상황에 안 맞으면 그때 접으면 된다.
+관련되거나 요청된 스킬은 어떤 응답·행동보다 먼저 invoke한다. 확인 질문, 코드 탐색, 파일 열람도 그 뒤다. 상황에 안 맞으면 그때 그만두면 된다.
 
 groundwork 클래스 작업에는 다음을 강제한다.
 
-1. **진입**: 코드·탐색 전에 `groundwork:finding-unknowns`로 unknowns부터 턴다.
+1. **진입**: 코드·탐색 전에 `groundwork:finding-unknowns`로 unknowns부터 찾아낸다.
 2. **발산 리다이렉트**: 실행 환경이 제공하는 아이디어 발산·요구 탐색 스킬이 먼저 걸려도 groundwork 클래스면 거기 머물지 않고 `groundwork:finding-unknowns`로 넘어간다. finding-unknowns가 필요한 발산을 내부에서 이끈다.
-3. **게이트**: 스펙은 `groundwork:spec-review`, 플랜은 `groundwork:plan-review`를 거쳐야 하고 여기에 사용자 명시 승인이 더해져야 다음 단계로 간다. 리뷰를 돌릴지와 어느 범위로 돌릴지는 각 리뷰 스킬이 첫 단계에서 사용자에게 묻는다. 저자가 대신 정하지 않고, 스킬 호출 자체를 건너뛰지도 않는다. 두 스킬은 `통과`·`조건부 통과`·`건너뜀` 셋 중 하나로 끝나며 어느 쪽인지 사용자에게 밝힌다. 침묵·모호 발화는 승인이 아니다.
+3. **게이트**: 스펙은 `groundwork:spec-review`, 플랜은 `groundwork:plan-review`를 거쳐야 하고 여기에 사용자 명시 승인이 더해져야 다음 단계로 간다. 리뷰를 돌릴지와 어느 범위로 돌릴지는 각 리뷰 스킬이 첫 단계에서 사용자에게 묻는다. 저자가 대신 정하지 않고 스킬 호출 자체를 건너뛰지도 않는다. 두 스킬은 `통과`·`조건부 통과`·`건너뜀` 3가지 중 하나로 끝나며 어느 쪽인지 사용자에게 밝힌다. 침묵·모호 발화는 승인이 아니다.
 4. **flow**: 사슬의 단계마다 소유가 다르다.
 
    | 단계 | 소유 |
@@ -59,9 +59,9 @@ invoke할 때는 "Using [skill] to [purpose]"를 알리고 스킬을 그대로 �
 
 ## Skill Priority
 
-여러 스킬이 걸리면 process 스킬이 먼저다. process 스킬이 접근을 잡고, 그 뒤 구현 스킬이 실행한다.
+여러 스킬이 걸리면 process 스킬이 먼저다. process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
 
-- "X를 만들자" → groundwork 클래스면 `groundwork:finding-unknowns` 먼저. groundwork 클래스가 아니면 실행 환경이 제공하는 발산·요구 탐색 스킬을 쓰고, 그런 스킬이 없으면 바로 처리한다.
+- "X를 만들자" → groundwork 클래스면 `groundwork:finding-unknowns` 먼저. groundwork 클래스가 아니면 실행 환경이 제공하는 발산·요구 탐색 스킬을 쓰고 그런 스킬이 없으면 바로 처리한다.
 - "이 버그 고쳐" → `groundwork:systematic-debugging` 먼저, 그다음 도메인 스킬.
 
 ## Red Flags
@@ -82,7 +82,7 @@ invoke할 때는 "Using [skill] to [purpose]"를 알리고 스킬을 그대로 �
 
 사용자 지시 > groundwork > 다른 플러그인 스킬 > 기본 동작.
 
-groundwork는 설계·리뷰 flow와 실행층 규율을 함께 담는다. 실행층은 다음이 정본이고, 같은 규율의 다른 플러그인 스킬이 함께 걸리면 groundwork 것을 쓴다.
+groundwork는 설계·리뷰 flow와 실행층 규율을 함께 담는다. 실행층은 다음이 정본이고 같은 규율의 다른 플러그인 스킬이 함께 걸리면 groundwork 것을 쓴다.
 
 | 규율 | 정본 |
 |---|---|
@@ -96,4 +96,4 @@ groundwork는 설계·리뷰 flow와 실행층 규율을 함께 담는다. 실�
 
 ## User Instructions
 
-사용자 지시(CLAUDE.md·직접 요청)가 스킬에 우선하고, 스킬이 기본 동작에 우선한다. 사용자가 명시로 지시했을 때만 스킬 워크플로우나 지시를 건너뛴다.
+사용자 지시(CLAUDE.md·직접 요청)가 스킬에 우선하고 스킬이 기본 동작에 우선한다. 사용자가 명시로 지시했을 때만 스킬 워크플로우나 지시를 건너뛴다.

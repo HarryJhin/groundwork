@@ -1,6 +1,6 @@
 ---
 name: finish
-description: 구현이 끝나고 테스트가 통과한 뒤 작업을 통합하는 방법을 정하고 산출물 수명을 닫는다. Use when 전 태스크 완료, 브랜치 마무리, 머지·PR 결정, 개발 종료.
+description: 구현이 끝나고 테스트가 통과한 뒤 작업을 통합하는 방법을 정하고 산출물에 종료 표기를 남긴다. Use when 전 태스크 완료, 브랜치 마무리, 머지·PR 결정, 개발 종료.
 ---
 
 # finish
@@ -9,15 +9,15 @@ description: 구현이 끝나고 테스트가 통과한 뒤 작업을 통합하�
 
 ## 입력·주체·출력
 
-**입력**은 방금 끝낸 작업의 워크스페이스다. 커맨드는 그 워크스페이스 안에서 시작한다. 7단계가 닫을 스펙·플랜 파일의 경로는 호출자에게 받는다. `groundwork:executing-plan`이나 `groundwork:subagent-driven-development`가 이 스킬을 부를 때 실행한 플랜 경로와 그 플랜 Goal 절이 지목한 스펙 경로를 함께 넘긴다. 경로를 받지 못했으면 사용자에게 묻고, 사용자가 산출물이 없다고 하면 7단계를 건너뛴다.
+**입력**은 방금 끝낸 작업의 워크스페이스다. 커맨드는 그 워크스페이스 안에서 시작한다. 7단계가 종료 표기할 스펙·플랜 파일의 경로는 호출자에게 받는다. `groundwork:executing-plan`이나 `groundwork:subagent-driven-development`가 이 스킬을 부를 때 실행한 플랜 경로와 그 플랜 Goal 절이 지목한 스펙 경로를 함께 넘긴다. 경로를 받지 못했으면 사용자에게 묻고 사용자가 산출물이 없다고 하면 7단계를 건너뛴다.
 
-**주체**는 작업을 마친 에이전트다. 아래에서 무주어로 적은 지시는 전부 그 에이전트 몫이고, "사용자"는 통합을 결정하는 사람이다.
+**주체**는 작업을 마친 에이전트다. 아래에서 무주어로 적은 지시는 전부 그 에이전트 몫이고 "사용자"는 통합을 결정하는 사람이다.
 
-**출력**은 사용자가 고른 통합 방식의 실행 결과다. 선택과 그 결과, 워크트리·브랜치를 어떻게 처리했는지, 산출물을 닫았는지를 보고하고 끝낸다.
+**출력**은 사용자가 고른 통합 방식의 실행 결과다. 선택과 그 결과, 워크트리·브랜치를 어떻게 처리했는지, 산출물에 종료 표기를 남겼는지를 보고하고 끝낸다.
 
 ## 1단계. 테스트 확인
 
-프로젝트의 전체 테스트 스위트를 돌린다. 아래에서 프로젝트에 맞는 커맨드를 골라 `TEST_CMD`에 담고, 이후 단계는 그 값을 다시 쓴다.
+프로젝트의 전체 테스트 스위트를 돌린다. 아래에서 프로젝트에 맞는 커맨드를 골라 `TEST_CMD`에 담고 이후 단계는 그 값을 다시 쓴다.
 
 ```bash
 TEST_CMD='npm test'   # 또는 'cargo test' / 'pytest' / 'go test ./...'
@@ -45,7 +45,7 @@ WORKTREE_PATH=$(git rev-parse --show-toplevel)
 FEATURE_BRANCH=$(git branch --show-current)   # detached HEAD면 빈 문자열
 ```
 
-**1단계부터 6단계까지의 셸 블록은 같은 셸에서 돈다.** 여기서 잡은 값을 뒤 단계가 그대로 참조하므로, 셸이 끊기면 이 블록부터 다시 돌린다. 값이 빈 채로 `git worktree remove`나 `git branch -d`를 실행하지 않는다.
+**1단계부터 6단계까지의 셸 블록은 같은 셸에서 돈다.** 여기서 잡은 값을 뒤 단계가 그대로 참조하므로 셸이 끊기면 이 블록부터 다시 돌린다. 값이 빈 채로 `git worktree remove`나 `git branch -d`를 실행하지 않는다.
 
 어느 메뉴를 보일지와 정리 방식이 여기서 갈린다. 두 메뉴의 문안은 4단계에 있다.
 
@@ -90,7 +90,7 @@ BASE_BRANCH=<확인한 base 브랜치 이름>
 어느 것으로 할까요?
 ```
 
-메뉴를 적힌 그대로 제시한다. 간결하게, 모든 선택지를 위 목록에서 가져온다. 작업 폐기는 사용자가 명시로 요청할 때만 일어난다(아래 「사용자가 폐기를 요청하면」). 답을 기다린다. 통합 결정은 사용자의 것이다.
+메뉴를 적힌 그대로 간결하게 제시하고 모든 선택지를 위 목록에서 가져온다. 작업 폐기는 사용자가 명시로 요청할 때만 일어난다(아래 「사용자가 폐기를 요청하면」). 답을 기다린다. 통합 결정은 사용자의 것이다.
 
 ## 5단계. 선택 실행
 
@@ -110,7 +110,7 @@ git merge --ff-only "$FEATURE_BRANCH"
 eval "$TEST_CMD"
 ```
 
-`BASE_BRANCH`는 3단계에서 확인한 base 브랜치 이름이다. `--ff-only`가 기본이고, fast-forward가 불가해 거부되면 브랜치를 base 위로 rebase한 뒤 다시 ff로 머지한다.
+`BASE_BRANCH`는 3단계에서 확인한 base 브랜치 이름이다. `--ff-only`가 기본이고 fast-forward가 불가해 거부되면 브랜치를 base 위로 rebase한 뒤 다시 ff로 머지한다.
 
 ```bash
 git checkout "$FEATURE_BRANCH"
@@ -135,7 +135,7 @@ git push -u origin "$FEATURE_BRANCH"
 # git push origin HEAD:refs/heads/<new-branch>
 ```
 
-그다음 `$BASE_BRANCH`를 대상으로 PR을 만든다. 코드 호스팅 서비스(GitHub·GitLab 등)의 도구를 쓴다. CLI가 있으면 그것을, 없으면 푸시할 때 대부분의 서비스가 출력하는 생성 URL을 쓴다. repo에 PR 템플릿·관례가 있으면 따르고, URL을 사용자에게 보고한다. GitHub PR은 squash가 기본이다.
+그다음 `$BASE_BRANCH`를 대상으로 PR을 만든다. 코드 호스팅 서비스(GitHub·GitLab 등)의 도구를 쓴다. CLI가 있으면 그것을, 없으면 푸시할 때 대부분의 서비스가 출력하는 생성 URL을 쓴다. repo에 PR 템플릿·관례가 있으면 따르고 URL을 사용자에게 보고한다. GitHub PR은 squash가 기본이다.
 
 워크트리를 유지한다. 사용자가 거기서 PR 피드백을 반영한다.
 
@@ -175,7 +175,7 @@ git branch -D "$FEATURE_BRANCH"
 
 **`GIT_DIR == GIT_COMMON`이면**: 일반 repo다. 정리할 워크트리가 없다. 끝.
 
-**`WORKTREE_PATH`가 메인 repo 루트 바로 밑의 `.worktrees/`나 `worktrees/` 안이면**: `groundwork:using-git-worktrees`가 만든 워크트리다. 정리는 우리 몫이다. 여기서 메인 repo 루트는 `$MAIN_ROOT`, 곧 `git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel`이 준 경로다.
+**`WORKTREE_PATH`가 메인 repo 루트 바로 밑의 `.worktrees/`나 `worktrees/` 안이면**: `groundwork:using-git-worktrees`가 만든 워크트리다. 정리는 이 스킬 몫이다. 여기서 메인 repo 루트는 `$MAIN_ROOT`, 곧 `git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel`이 준 경로다.
 
 ```bash
 git worktree remove "$WORKTREE_PATH"

@@ -4,7 +4,7 @@ GitHub 공식 문서 기준의 배치 규칙, 상속 모델, 파일별 문법 �
 파일 위치를 판정할 때 이 문서를 근거로 삼는다. 각 섹션 헤더 아래의 "출처" URL이 그 섹션을
 검증하는 docs 페이지다.
 
-표시 없는 항목은 GitHub이 강제하는 동작 규칙(배치·문법·상속)이고, `[권장]`으로 표시된 것만
+표시 없는 항목은 GitHub이 강제하는 동작 규칙(배치·문법·상속)이고 `[권장]`으로 표시된 것만
 GitHub의 권고다.
 
 ## 상속 모델 (default community health file)
@@ -15,7 +15,7 @@ GitHub의 권고다.
   소유의 다른 리포가 그 타입 파일을 자체 보유하지 않을 때 GitHub이 default를 사용·표시한다.
 - private `.github` 리포는 상속에 쓰이지 않는다. 반드시 public이어야 한다.
 - `.github` 리포의 default 파일은 개별 리포의 파일 브라우저·Git 히스토리에 나타나지
-  않고, clone·package·download에도 포함되지 않는다.
+  않고 clone·package·download에도 포함되지 않는다.
 - 리포가 자체 `.github/ISSUE_TEMPLATE` 폴더에 파일을 하나라도 두면, default
   `.github/ISSUE_TEMPLATE` 폴더 내용은 **전혀** 쓰이지 않는다(폴더 단위 override).
 - 이슈 템플릿이 label을 지정하면, 그 label은 `.github` 리포와 템플릿을 쓰는 모든
@@ -32,7 +32,7 @@ FUNDING.yml, GOVERNANCE.md, 이슈·PR 템플릿과 config.yml, SECURITY.md, SUP
 
 출처: 위 creating-a-default 페이지(배치 규칙 종합). 파일별 상세는 아래 각 섹션의 출처.
 
-각 파일은 세 위치에서 인식된다. 여러 곳에 있으면 아래 우선순위로 첫 매칭을 쓴다.
+각 파일은 3개 위치에서 인식된다. 여러 곳에 있으면 아래 우선순위로 첫 매칭을 쓴다.
 
 | 파일 | 인식 위치 | 우선순위 | 비고 |
 |---|---|---|---|
@@ -46,8 +46,8 @@ FUNDING.yml, GOVERNANCE.md, 이슈·PR 템플릿과 config.yml, SECURITY.md, SUP
 | ISSUE_TEMPLATE/ | `.github/ISSUE_TEMPLATE/`만 | 고정 | default 브랜치, 다른 브랜치 불가 |
 | CODEOWNERS | `.github/` / 루트 / `docs/` | `.github` → 루트 → `docs` | 3MB 미만이어야 로드 |
 
-파일명 대소문자는 파일마다 규정이 다르다. GitHub이 명시하는 것은 셋뿐이다. CONTRIBUTING과
-PR 템플릿과 이슈 템플릿의 파일명은 "not case sensitive"이고, SUPPORT는 "with all caps"이며,
+파일명 대소문자는 파일마다 규정이 다르다. GitHub이 명시하는 것은 3가지뿐이다. CONTRIBUTING과
+PR 템플릿과 이슈 템플릿의 파일명은 "not case sensitive"이고 SUPPORT는 "with all caps"이며,
 CODEOWNERS 안에 적는 **경로**는 대소문자를 구분한다. CODE_OF_CONDUCT를 비롯한 나머지는 공식
 문서가 어느 쪽도 말하지 않으므로 표준 대문자로 쓰고 대소문자 무관을 가정하지 않는다.
 
@@ -61,14 +61,14 @@ CODEOWNERS 안에 적는 **경로**는 대소문자를 구분한다. CODE_OF_CON
   **GitHub 제공 템플릿을 쓴 경우에만**이다. 수동 작성한 CoC도 동작은 하나 체크마크는 안 붙는다.
 - 감지된 CoC는 community profile API에서 이름으로 노출된다(예: `Contributor Covenant`,
   key `contributor_covenant`).
-- `[권장]` 채택 전 여러 CoC를 조사해 커뮤니티에 맞는 것을 고르고, 실제 집행 의지·능력을
+- `[권장]` 채택 전 여러 CoC를 조사해 커뮤니티에 맞는 것을 고르고 실제 집행 의지·능력을
   갖췄는지 신중히 판단한다. 남이 만든 것을 쓸 때는 attribution 지침을 따른다.
 
 ### CONTRIBUTING
 
 출처: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors
 
-- `CONTRIBUTING.md`가 있으면 이슈·PR 생성 화면에 링크가 뜨고, `contribute` 페이지와
+- `CONTRIBUTING.md`가 있으면 이슈·PR 생성 화면에 링크가 뜨고 `contribute` 페이지와
   리포 개요의 "Contributing" 링크에 노출된다.
 - `[권장]` 이슈·PR 생성 절차, 외부 문서·메일링리스트·CoC 링크, 커뮤니티 기대치를 담는다.
 
@@ -201,7 +201,7 @@ docs/*               @org/docs               # 한 단계만 (더 깊은 중첩 
 
 - `GET /repos/{owner}/{repo}/community/profile`이 메트릭을 반환한다(포크 리포는 불가).
 - `health_percentage`는 "권장 커뮤니티 헬스 파일 중 몇 개가 있는지의 비율"이다. **GitHub은
-  그 항목 목록도 산식도 공개하지 않는다.** REST 문서는 비율이라고만 쓰고, community profile
+  그 항목 목록도 산식도 공개하지 않는다.** REST 문서는 비율이라고만 쓰고 community profile
   페이지도 "such as README, CODE_OF_CONDUCT, LICENSE, or CONTRIBUTING"으로 예시만 든다.
 - 응답의 `files` 객체(code_of_conduct, code_of_conduct_file, contributing, issue_template,
   pull_request_template, license, readme)는 **채점 대상 목록이 아니다.** 감지된 파일의 링크를
@@ -215,7 +215,7 @@ docs/*               @org/docs               # 한 단계만 (더 깊은 중첩 
   항목 7개는 리포 설명(description)·README·LICENSE·CoC·CONTRIBUTING·이슈 템플릿·PR 템플릿이다.
 - 조직(Organization) 소유 리포의 점수는 전부 12.5의 배수(25·37·50·75·87·100)로 떨어진다.
   위 7개에 SECURITY.md가 더해진 8항목이다.
-- 따라서 **파일이 아닌 리포 설명이 점수에 들어가고, SECURITY.md는 조직 리포에서만 채점된다.**
+- 따라서 **파일이 아닌 리포 설명이 점수에 들어가고 SECURITY.md는 조직 리포에서만 채점된다.**
   "SECURITY·SUPPORT·GOVERNANCE·FUNDING은 지표에 없다"는 서술은 조직 리포에서 틀린다.
 
 근거가 되는 대조군은 이렇다.
@@ -226,7 +226,7 @@ docs/*               @org/docs               # 한 단계만 (더 깊은 중첩 
 | torvalds/linux | User | 설명·README·LICENSE | 42 | 3/7 |
 | junegunn/fzf | User | 설명·README·LICENSE·이슈템플릿·PR템플릿 | 71 | 5/7. SECURITY.md가 있는데 안 세어진다 |
 | ORNL/HeCBench | Org | README·LICENSE (설명 없음) | 25 | 2/8 |
-| 0dotxyz/marginfi-v2 | Org | README·LICENSE·SECURITY (설명 없음) | 37 | 3/8. SECURITY가 세 번째 항목이다 |
+| 0dotxyz/marginfi-v2 | Org | README·LICENSE·SECURITY (설명 없음) | 37 | 3/8. SECURITY가 3번째 항목이다 |
 | facebook/react | Org | 8항목 | 100 | `files.issue_template`이 null인데도 100이다 |
 
 재현 방법은 다음과 같다.
@@ -237,10 +237,10 @@ gh api repos/{owner}/{repo} --jq '{owner_type: .owner.type, description}'
 ```
 
 **실무 결론**: 이 수치로 완전성을 판단하지 않는다. 100%여도 SUPPORT·GOVERNANCE·FUNDING은
-없을 수 있고, 개인 리포는 SECURITY.md가 없어도 100%가 된다. 완전성은 파일별 존재로 판단한다.
+없을 수 있고 개인 리포는 SECURITY.md가 없어도 100%가 된다. 완전성은 파일별 존재로 판단한다.
 
 ---
 
-위 출처는 전부 `docs.github.com/en/` 하위 페이지이고, 2026-08-05에 Crawl4AI로 크롤해 확인했다.
+위 출처는 전부 `docs.github.com/en/` 하위 페이지이고 2026-08-05에 Crawl4AI로 크롤해 확인했다.
 같은 날 `gh api`로 산식 관측을 수행했다. 이슈 폼처럼 preview 상태인 기능은 문법이 바뀔 수 있으니
 스캐폴딩 전 해당 페이지를 재확인한다.

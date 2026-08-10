@@ -36,12 +36,12 @@ E는 그 문제를 언급한 사례 수, D는 그 문제를 보고한 개발자 
 
 "We concluded that the most pressing problems were related to content, as opposed to presentation."
 
-가장 심각한 세 문제는 ambiguity, incompleteness, incorrectness다. 응답자들이 여섯 문제를 최소 한 번 이상 "blocker"로 지목했고(incompleteness, ambiguity, obsoleteness, incorrectness, inconsistency, unexplained examples) 초록은 이것을 "다른 API를 쓰게 만든 blocker"로 표현한다. ambiguity를 최우선 과제로 고른 비율이 51.9%다.
+가장 심각한 문제 3가지는 ambiguity, incompleteness, incorrectness다. 응답자들이 문제 6가지를 최소 한 번 이상 "blocker"로 지목했고(incompleteness, ambiguity, obsoleteness, incorrectness, inconsistency, unexplained examples) 초록은 이것을 "다른 API를 쓰게 만든 blocker"로 표현한다. ambiguity를 최우선 과제로 고른 비율이 51.9%다.
 
 ## 스킬에서 쓴 지점
 
 - **content가 presentation을 크게 웃돈다(61 대 25)**는 결과가 이 스킬의 구성 판단과 같은 방향이다. 문장을 다듬는 것보다 내용의 공백·모호·불일치를 잡는 쪽이 우선이라는 뜻이다. groundwork 스킬 전수 리뷰에서도 산문 결함보다 구조 계약 결함(입력·경로 기준·주체 누락)이 많았다.
-- **Incompleteness의 정의**가 "기대한 자리에 없었다"인 점이 B축(참조 해소)의 근거다. 정보가 리포 어딘가에 있어도 독자가 기대한 자리에 없으면 없는 것과 같다. 해소 비용 항목이 여기서 나온다.
+- **Incompleteness의 정의**가 "기대한 곳에 없었다"인 점이 B축(참조 해소)의 근거다. 정보가 리포 어딘가에 있어도 독자가 기대한 곳에 없으면 없는 것과 같다. 해소 비용 항목이 여기서 나온다.
 - **Fragmentation**("too many pages or sections에 흩어짐")이 D3(정보 분산)에 직접 대응한다.
 - **Inconsistency**("함께 쓰라고 한 요소들의 문서가 서로 어긋남")가 D3의 "같은 규칙을 두 곳에서 다른 값으로 지시" 판정에 대응한다.
 - **Bloat**과 **Tangled information**이 D4(형식 부담)에 대응한다. 표로 표현해야 읽히는 것을 산문에 묻는 경우와, 독자가 필요로 하지 않는 정보가 엉킨 경우다.
