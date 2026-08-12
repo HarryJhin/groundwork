@@ -101,7 +101,7 @@
 Claude Code 전용이다. `hooks/hooks.json`이 등록한다.
 
 - `hooks/session-start-groundwork` `skills/using-groundwork/SKILL.md` 전문을 읽어 `<EXTREMELY_IMPORTANT>` 블록으로 감싼 뒤 세션 컨텍스트에 주입한다. 파일 부재나 읽기 실패는 무해 종료라 세션을 막지 않는다
-- `hooks/pre-artifact-write-junior-gate` 스펙·플랜·ADR·스킬을 새로 만드는 첫 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다. 같은 파일의 다음 쓰기는 통과시킨다. 이미 있는 파일 편집은 처음부터 통과시킨다
+- `hooks/pre-artifact-write-junior-gate` 스펙·플랜·ADR·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다. 차단은 한 세션에서 문서 종류마다 한 번이다(스펙·플랜·ADR·스킬 각 1회, 세션당 최대 4회). 같은 종류의 다음 문서는 차단하지 않고 규범을 계속 적용하라는 한 줄만 낸다. 이미 있는 파일 편집은 처음부터 통과시킨다. 파일 단위로 차단하던 이전 동작은 문서를 여러 개 쓰는 세션에서 같은 안내문을 파일 수만큼 반복했고 그때마다 완성된 쓰기 내용이 폐기됐다
 
 ### 스크립트
 

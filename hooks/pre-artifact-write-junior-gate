@@ -6,7 +6,12 @@
 #
 # 신규 파일에만 건다. 이미 있는 파일 편집은 통과시킨다(초안 손실을 막고,
 # 재작성 루프를 만들지 않기 위해서다).
-# 파일마다 한 번만 차단한다. 마커를 남겨 같은 파일의 재시도는 통과시킨다.
+#
+# 차단은 세션 안에서 문서 종류마다 한 번이다. 파일마다 차단하지 않는다.
+# 파일 단위로 걸면 스펙 49개를 쓰는 세션이 같은 안내문을 49번 받고, 그때마다
+# 이미 완성된 Write content가 통째로 폐기된다(실측 세션 하나에서 21만 자).
+# 안내 내용은 종류별로 고정이라 두 번째부터는 새 정보가 없다. 그래서 종류당
+# 첫 문서만 차단해 규범 전문을 주고, 그 뒤로는 통과시키며 한 줄만 남긴다.
 #
 # 파싱·환경 실패는 전부 무해 통과(exit 0)다. 이 훅이 작업을 막지 않는다.
 
@@ -43,6 +48,7 @@ fi
 # 후보 중 게이트 대상 하나를 고른다. 없으면 통과.
 # 개행만 구분자로 두어 공백이 든 경로도 한 후보로 읽는다.
 KIND=""
+SLUG=""
 FILE_PATH=""
 OLD_IFS="$IFS"
 IFS='
@@ -53,11 +59,13 @@ for CANDIDATE in $CANDIDATES; do
   case "$CANDIDATE" in
     */docs/specs/SPEC-*.md|docs/specs/SPEC-*.md)
       KIND="스펙"
+      SLUG="spec"
       EXTRA="- 고유 용어·약칭·코드명을 셋 이상 쓰면 목표 앞에 「용어」 절을 두고 한자리에 모은다.
 - 결론만 적는다. \"TBD\"·\"구현하며 결정\"은 스펙 결함이다."
       ;;
     */docs/plans/PLAN-*.md|docs/plans/PLAN-*.md)
       KIND="플랜"
+      SLUG="plan"
       EXTRA="- 구현자는 플랜 전문이 아니라 자기 태스크 하나를 뽑은 브리프만 받는다. 태스크 본문이
   플랜 서두나 다른 태스크의 정의에 기대면 그 정의는 구현자에게 도달하지 않는다.
 - 앞 태스크의 산출물에 기대면 Interfaces의 Consumes에 적는다. 거기 없는 의존은 전달되지 않는다.
@@ -65,11 +73,13 @@ for CANDIDATE in $CANDIDATES; do
       ;;
     */docs/adr/ADR-*.md|docs/adr/ADR-*.md)
       KIND="ADR"
+      SLUG="adr"
       EXTRA="- Consequences의 Negative는 기재 의무다. 긍정 효과만 나열하면 미완성이다.
 - 규범이 아니라 결정 기록이다. 결정을 강제한 힘을 Context에 적는다."
       ;;
     */skills/*/SKILL.md|skills/*/SKILL.md)
       KIND="스킬"
+      SLUG="skill"
       EXTRA="- 실행 계약 절이 없으면 스킬이 시작조차 못 한다. 아래를 모두 담는다.
   (1) 입력: 무엇을 받는가, 못 받으면 어떻게 하는가
   (2) 경로 기준: 문서가 적은 상대 경로의 기준 디렉터리(실행 시점 작업 디렉터리와 다르다)
@@ -89,10 +99,13 @@ IFS="$OLD_IFS"
 
 [ -n "$FILE_PATH" ] || exit 0
 
-# 파일 단위 1회. 마커가 있으면 통과.
+# 세션 안에서 문서 종류마다 1회. 마커가 있으면 차단하지 않고 한 줄만 남긴다.
+# 리마인더는 stdout으로 낸다. 차단하지 않는 경로(exit 0)에서 모델에 닿는 채널이
+# stdout이고, stderr는 차단(exit 2)의 사유 전달에 쓰인다.
 MARK_ROOT="${TMPDIR:-/tmp}/groundwork-junior-gate/${SID:-nosession}"
-KEY=$(printf '%s' "$FILE_PATH" | tr '/ ' '__')
+KEY="${SLUG:-other}"
 if [ -f "$MARK_ROOT/$KEY" ]; then
+  printf '[groundwork] %s 문서를 하나 더 만드는 중이다. 이 세션 앞에서 받은 주니어 독자 규범(groundwork:writing-for-junior)을 그대로 적용한다. 차단하지 않는다.\n' "$KIND"
   exit 0
 fi
 mkdir -p "$MARK_ROOT" 2>/dev/null && : > "$MARK_ROOT/$KEY" 2>/dev/null
@@ -130,7 +143,8 @@ cat >&2 <<EOF
 ${EXTRA}
 
 규범 전문과 판정 렌즈는 groundwork:writing-for-junior 스킬에 있다.
-이 안내는 파일마다 한 번만 나온다. 다시 Write하면 통과한다.
+이 안내는 이 세션에서 ${KIND} 문서를 처음 만들 때 한 번만 나온다. 다시 Write하면 통과하고,
+이후 이 세션의 ${KIND} 문서는 차단하지 않는다. 규범은 계속 적용한다.
 EOF
 
 exit 2
