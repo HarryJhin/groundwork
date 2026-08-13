@@ -24,7 +24,7 @@ S1까지 로스터는 필수 여섯을 문서 유형과 무관하게 디스패�
 둘째, superpowers `plan-document-reviewer-prompt.md`의 네 범주 중 둘에 대응하는 리뷰어가 없다.
 Task Decomposition(태스크 경계·의존·실행 가능성)과 Spec Alignment(플랜이 스펙을 이행하는가)다.
 특히 후자는 구조적 공백이었다.
-`consistency` 프롬프트가 판정 범위를 "같은 문서 안에서 두 진술이 동시에 참일 수 없는 지점"으로 못박아 페어 두 문서를 대조하는 리뷰어가 하나도 없었다.
+`consistency` 프롬프트가 판정 범위를 "같은 문서 안에서 두 진술이 동시에 참일 수 없는 지점"으로 한정해 페어 두 문서를 대조하는 리뷰어가 하나도 없었다.
 스펙과 플랜이 1:1 페어를 이루는 규약에서 이 공백은 가장 비싼 결함을 놓친다.
 플랜이 스펙 요구를 빠뜨리거나 값을 바꿔도 어느 리뷰어도 잡지 못한다.
 
@@ -37,14 +37,14 @@ Task Decomposition(태스크 경계·의존·실행 가능성)과 Spec Alignment
 
 - 공통 필수 다섯: `junior-read`·`completeness`·`consistency`·`clarity`·`yagni`.
 - 스펙 전용: `scope`.
-- 플랜 전용: `decomposition`(태스크 경계·green 경계·의존 순서·Interfaces 정합·구현자 착지), `spec-alignment`(커버리지·범위 이탈·Global Constraints verbatim·값 일치·결정 대체).
+- 플랜 전용: `decomposition`(태스크 경계·green 경계·의존 순서·Interfaces 정합·구현자 착수), `spec-alignment`(커버리지·범위 이탈·Global Constraints verbatim·값 일치·결정 대체).
 - 재량 넷(`experience`·`facts`·`crossref`·`intent`)은 유형과 무관하게 표면 조건으로 판단한다.
 
 `spec-alignment`에는 대응 스펙 경로를 필수 입력으로 동봉한다.
 경로 없이 디스패치되면 리뷰를 수행하지 않고 FAIL을 반환한다.
 이 리뷰어만 페어 두 문서를 대조하므로 대조 대상 부재는 축 자체의 붕괴다.
 
-이 집합을 담는 자리는 유형별 리뷰 스킬의 본문이다.
+이 집합을 담는 곳은 유형별 리뷰 스킬의 본문이다.
 `spec-review`가 스펙 집합을, `plan-review`가 플랜 집합을 각자 선언한다(ADR-0004).
 
 ## Consequences
@@ -75,4 +75,4 @@ Negative:
 - Version: 0.1
 - Changelog:
   - 0.1: 최초 제안 (S2 구현 중 플랜 리뷰 공백 실측으로 발의)
-  - 0.2: 로스터를 담는 자리를 `roster` 스킬에서 유형별 리뷰 스킬 본문으로 옮김 (ADR-0004의 스킬 분리 반영). 리뷰어 구성 결정 자체는 그대로다
+  - 0.2: 로스터를 담는 곳을 `roster` 스킬에서 유형별 리뷰 스킬 본문으로 옮김 (ADR-0004의 스킬 분리 반영). 리뷰어 구성 결정 자체는 그대로다

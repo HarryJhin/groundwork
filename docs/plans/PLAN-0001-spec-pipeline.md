@@ -13,12 +13,12 @@ flow 앞단(bootstrap·finding-unknowns·spec-review)과 그 기반(멀티하네
 
 이 repo에는 빌드·테스트 인프라가 없다.
 산출물은 스킬(`skills/*/SKILL.md`)·프롬프트 템플릿(`skills/*/*-prompt.md`)·훅(bash)·매니페스트(json)다.
-태스크 경계의 "green"은 다음으로 정의한다: 스킬 프론트매터가 유효(`name`·`description` 존재)하고, 프롬프트 파일이 존재하며, json이 `jq`로 파싱되고, 훅이 `bash -n`으로 문법 통과한다.
+태스크 경계의 "green"은 다음으로 정의한다: 스킬 프론트매터가 유효(`name`·`description` 존재)하고 프롬프트 파일이 존재하며 json이 `jq`로 파싱되고 훅이 `bash -n`으로 문법 통과한다.
 
 ## Global Constraints (스펙 verbatim)
 
 - 지원 하네스는 Claude Code와 Codex 둘이다.
-  `skills/` 하나를 공유하고, 훅은 Claude Code 전용이다(Codex 배포는 `hooks:{}`).
+  `skills/` 하나를 공유하고 훅은 Claude Code 전용이다(Codex 배포는 `hooks:{}`).
 - 서브에이전트는 템플릿형이다.
   정의 파일(`agents/`) 대신 `general-purpose`에 주입하는 프롬프트 템플릿(`*-prompt.md`)으로 둔다.
   도구 격리는 프롬프트 지시로 대체한다(예: "Read·Glob·Grep만 사용").
@@ -36,7 +36,7 @@ flow 앞단(bootstrap·finding-unknowns·spec-review)과 그 기반(멀티하네
 
 다음은 개명이 끝나는 T7 이후에 전역으로 참이어야 하는 통합 종료 불변식이다.
 개별 태스크 green이 아니라 플랜 최종 검증이다.
-각 태스크의 green은 자기 실행 검증 커맨드로 판정하고, 그 grep 범위는 태스크가 소유한 디렉터리로 한정한다(초기 태스크가 미착수 스킬의 잔존 탓에 오판되지 않도록).
+각 태스크의 green은 자기 실행 검증 커맨드로 판정하고 그 grep 범위는 태스크가 소유한 디렉터리로 한정한다(초기 태스크가 미착수 스킬의 잔존 탓에 오판되지 않도록).
 
 - `! grep -rniq 'critic-panel' skills/` (spec-review로 개명 완료)
 - `! grep -rniq '크리틱' skills/` (리뷰로 표기 전환 완료)

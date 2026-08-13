@@ -43,7 +43,7 @@ CODE_OF_CONDUCT.md, CONTRIBUTING.md, Discussion category forms(`DISCUSSION_TEMPL
 
 파일명 대소문자는 파일마다 규정이 다르다.
 GitHub이 명시하는 것은 3가지뿐이다.
-CONTRIBUTING과 PR 템플릿과 이슈 템플릿의 파일명은 "not case sensitive"이고 SUPPORT는 "with all caps"이며, CODEOWNERS 안에 적는 **경로**는 대소문자를 구분한다.
+CONTRIBUTING과 PR 템플릿과 이슈 템플릿의 파일명은 "not case sensitive"이고 SUPPORT는 "with all caps"이며 CODEOWNERS 안에 적는 **경로**는 대소문자를 구분한다.
 CODE_OF_CONDUCT를 비롯한 나머지는 공식 문서가 어느 쪽도 말하지 않으므로 표준 대문자로 쓰고 대소문자 무관을 가정하지 않는다.
 
 ## 파일별 요점

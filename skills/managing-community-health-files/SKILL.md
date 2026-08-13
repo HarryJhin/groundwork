@@ -7,7 +7,7 @@ description: Use when 커뮤니티 헬스 파일(CODE_OF_CONDUCT, CONTRIBUTING, 
 
 GitHub 표준 커뮤니티 헬스 파일을 감사하고 표준에 맞게 채우고 조직 `.github` 상속 모델을 구성한다.
 
-**경로 기준**: 이 문서가 적은 `references/`·`scripts/`는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/managing-community-health-files/` 기준이고, `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
+**경로 기준**: 이 문서가 적은 `references/`·`scripts/`는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/managing-community-health-files/` 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
 헬스 파일이 놓이는 경로는 대상 repo 루트 기준이다.
 
 **사실의 근거**: 아래 GitHub 표준은 공식 문서에 근거하고 문단별 출처 URL은 [github-standard.md](references/github-standard.md)에 있다.

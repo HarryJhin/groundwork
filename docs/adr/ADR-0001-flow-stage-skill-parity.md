@@ -2,7 +2,7 @@
 
 ## Title
 
-groundwork flow의 각 단계를 그 이름을 가진 스킬 하나에 대응시키고, 여러 단계를 임시로 겸하던 `implementation-plan`을 분해한다.
+groundwork flow의 각 단계를 그 이름을 가진 스킬 하나에 대응시키고 여러 단계를 임시로 겸하던 `implementation-plan`을 분해한다.
 
 ## Status
 
@@ -26,7 +26,7 @@ flow 사슬의 이름과 실물이 어긋나 부트스트랩을 읽은 에이전
 `plan-review` 단계는 사정이 다르다.
 기존 `spec-review`가 이미 스펙과 플랜을 함께 리뷰하도록 설계됐고 리뷰어 프롬프트가 문서 유형을 입력으로 받는다.
 여기에 `plan-review` 스킬을 따로 세우면 코멘트 루프·사이드카 규약이 두 벌로 갈린다.
-superpowers 원본은 `plan-document-reviewer-prompt.md` 한 장으로 얕게 처리하는데, groundwork의 코멘트 수렴 루프가 그보다 깊어 재사용이 더 이익이다.
+superpowers 원본은 `plan-document-reviewer-prompt.md` 한 장으로 얕게 처리하는데 groundwork의 코멘트 수렴 루프가 그보다 깊어 재사용이 더 이익이다.
 
 ## Decision
 

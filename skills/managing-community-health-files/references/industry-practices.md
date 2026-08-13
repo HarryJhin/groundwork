@@ -64,7 +64,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   Apple/Swift는 소스 파일 헤더로 라이선스를 명시하고 기여자 귀속은 Git이 처리한다 (`gh api repos/apple/swift/contents/CONTRIBUTING.md`에 CLA·서명 문구 부재, grep 전수 스캔).
   AWS는 CONTRIBUTING에 "기여의 라이선스를 확인하겠다"는 문구만 두고 서명 절차는 없다 (`gh api repos/aws/.github/contents/CONTRIBUTING.md`, `gh api repos/aws/aws-cli/contents/CONTRIBUTING.md` 전수 스캔으로 CLA 부재 확인).
 - **판단**: CLA는 커뮤니티 건강 지표가 아니라 기업 법무 요구다.
-  기여 진입장벽 비용이 있고, Apple과 AWS 두 사례가 CLA 없이도 대형 오픈소스가 성립함을 보여준다.
+  기여 진입장벽 비용이 있고 Apple과 AWS 두 사례가 CLA 없이도 대형 오픈소스가 성립함을 보여준다.
   경량 대안으로 DCO(Developer Certificate of Origin, `git commit -s`)가 있다.
   CLA를 기본값으로 권하지 않는다.
   법적 필요가 분명할 때만 비용을 알고 채택한다.
@@ -90,8 +90,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
 ## Android/AOSP: 헬스 파일 모델이 적용되지 않는 사례
 
 - AOSP는 GitHub이 아니라 Gerrit(android-review.googlesource.com) 기반이다.
-  기여는 `repo`/`git`
-  + Gerrit 리뷰 흐름이고(`repo start` → `git commit -s` → `repo upload`), GitHub PR·`.github` 정본 모델이 적용되지 않는다 (https://source.android.com/docs/setup/contribute/submit-patches).
+  기여는 `repo`/`git` + Gerrit 리뷰 흐름이고(`repo start` → `git commit -s` → `repo upload`) GitHub PR·`.github` 정본 모델이 적용되지 않는다 (https://source.android.com/docs/setup/contribute/submit-patches).
 - 승인 권한은 Google 직원만 가지고(Code-Review+2), CLA는 여기서도 필수이며 Google 공통 CLA와 같은 URL을 쓴다 (https://source.android.com/docs/setup/contribute).
 - **함의**: "GitHub 커뮤니티 헬스 파일"은 GitHub 호스팅 전제의 관행이다.
   Gerrit·GitLab 등에서는 등가물(각 플랫폼의 기여 가이드·CoC 배치)로 옮겨 생각한다.
