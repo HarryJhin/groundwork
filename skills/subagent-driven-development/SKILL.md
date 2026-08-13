@@ -150,9 +150,7 @@ flowchart TD
 
 구현자는 4가지 상태 중 하나로 보고한다.
 
-**DONE**: 리뷰 패키지를 만들고(`scripts/review-package PLAN_FILE BASE HEAD`를 돌리고 출력된 경로를 쓴다.
-BASE는 구현자 디스패치 전에 기록한 커밋이다.
-`HEAD~1`은 커밋이 여럿인 태스크에서 마지막 하나만 남기고 조용히 버리므로 절대 쓰지 않는다) 그 경로로 태스크 리뷰어를 디스패치한다.
+**DONE**: 리뷰 패키지를 만들고(`scripts/review-package PLAN_FILE BASE HEAD`를 돌리고 출력된 경로를 쓴다. BASE는 구현자 디스패치 전에 기록한 커밋이다. `HEAD~1`은 커밋이 여럿인 태스크에서 마지막 하나만 남기고 조용히 버리므로 절대 쓰지 않는다) 그 경로로 태스크 리뷰어를 디스패치한다.
 
 **DONE_WITH_CONCERNS**: 작업은 끝냈으나 의심을 표시한 상태다.
 진행 전에 우려를 읽는다.
@@ -289,8 +287,7 @@ FIX_BASE는 직전 리뷰가 본 head다.
 ## 최종 리뷰
 
 최종 리뷰도 패키지를 받는다.
-`scripts/review-package PLAN_FILE MERGE_BASE HEAD`를 돌리고(MERGE_BASE는 브랜치가 갈라져 나온 커밋이다.
-예: `git merge-base main HEAD`) 출력된 경로를 최종 리뷰 디스패치에 넣는다.
+`scripts/review-package PLAN_FILE MERGE_BASE HEAD`를 돌리고(MERGE_BASE는 브랜치가 갈라져 나온 커밋이다. 예: `git merge-base main HEAD`) 출력된 경로를 최종 리뷰 디스패치에 넣는다.
 최종 리뷰어가 git 커맨드로 브랜치 diff를 다시 만들지 않고 파일 하나를 읽는다.
 가장 유능한 모델로 디스패치하고(모델 선택 절) `groundwork:requesting-code-review`의 [code-reviewer-prompt.md](../requesting-code-review/code-reviewer-prompt.md)를 쓴다.
 진행 기록의 보류 minor와 보류 항목 줄을 가리켜 머지 전에 무엇을 고쳐야 할지 분류하게 한다.

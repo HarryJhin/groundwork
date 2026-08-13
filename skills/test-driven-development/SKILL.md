@@ -91,8 +91,8 @@ test('retry works', async () => {
 
 ### RED 확인. 실패를 목격한다
 
-**필수다.
-건너뛰지 않는다.**
+**필수다.**
+**건너뛰지 않는다.**
 
 ```bash
 npm test path/to/test.test.ts
