@@ -76,7 +76,7 @@ elif [ -e "$SIB/.git" ]; then
   echo "[상속] 형제 조직 .github 리포 감지: $SIB"
   echo "       이 리포에 상속 문서 사본을 만들면 정본을 덮어써 단일 출처를 깬다."
   echo "       (이슈 템플릿은 폴더 단위라 파일 하나만 둬도 정본 폴더 전체가 무시된다)"
-  echo "       고유 문서가 필요한지 먼저 판단하고, 아니면 정본($SIB)을 편집하라."
+  echo "       고유 문서가 필요한지 먼저 판단하고 아니면 정본($SIB)을 편집하라."
 else
   echo "[상속] 형제 조직 .github 리포 없음 → 단일 리포 모델. 자체 파일로 관리."
 fi
@@ -88,7 +88,7 @@ if command -v gh >/dev/null 2>&1 && origin="$(git remote get-url origin 2>/dev/n
   if hp="$(gh api "repos/$slug/community/profile" --jq '.health_percentage' 2>/dev/null)"; then
     echo "[community profile] $slug: health_percentage=$hp%"
     echo "  주의: GitHub은 이 수치의 채점 항목을 공개하지 않는다. 관측상 파일이 아닌 리포 설명도"
-    echo "  포함되고, SECURITY.md는 조직 소유 리포에서만 채점된다. SUPPORT·GOVERNANCE·FUNDING은"
+    echo "  포함되고 SECURITY.md는 조직 소유 리포에서만 채점된다. SUPPORT·GOVERNANCE·FUNDING은"
     echo "  어느 경우에도 안 보인다. 완전성은 위 [존재]로 판단하라(references/github-standard.md)."
   else
     echo "[community profile] 조회 실패(비공개·미인증·원격 없음). 위 [존재]로 판단."

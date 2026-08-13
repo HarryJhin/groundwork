@@ -35,7 +35,7 @@ escape_for_json() {
 escaped=$(escape_for_json "$content")
 
 # 래퍼: 부트스트랩 본문을 통째로 실어 존재를 탐지 가능하게 한다.
-session_context="<EXTREMELY_IMPORTANT>\ngroundwork flow 부트스트랩. 아래는 'groundwork:using-groundwork' 스킬 전문이다. groundwork 클래스 작업의 진입 규율이며, 사용자 지시가 이보다 우선한다.\n\n${escaped}\n</EXTREMELY_IMPORTANT>"
+session_context="<EXTREMELY_IMPORTANT>\ngroundwork flow 부트스트랩. 아래는 'groundwork:using-groundwork' 스킬 전문이다. groundwork 클래스 작업의 진입 규율이며 사용자 지시가 이보다 우선한다.\n\n${escaped}\n</EXTREMELY_IMPORTANT>"
 
 # additionalContext 방출(printf, heredoc 회피). Claude Code는 hookSpecificOutput.additionalContext를 읽는다.
 printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
