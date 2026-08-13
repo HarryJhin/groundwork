@@ -1,6 +1,10 @@
 출처: https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/appendix.html
 
-주의: 이 파일은 AWS 원본 예시 ADR이다. 우리 델타 넷(h1 `# ADR-NNNN: <짧은 제목>`, Status 5값, Alternatives 없음, 섹션명 영문·본문 한국어)을 반영하지 않는다. 원본의 4값 Status, h1 부재, Consequences 미분리를 형식 기준으로 삼지 말라. 형식 정본은 이 스킬의 SKILL.md 본문이다. 이 파일은 델타가 다루지 않은 섹션 세부의 배경 확인용이다.
+주의: 이 파일은 AWS 원본 예시 ADR이다.
+우리 델타 넷(h1 `# ADR-NNNN: <짧은 제목>`, Status 5값, Alternatives 없음, 섹션명 영문·본문 한국어)을 반영하지 않는다.
+원본의 4값 Status, h1 부재, Consequences 미분리를 형식 기준으로 삼지 말라.
+형식 정본은 이 스킬의 SKILL.md 본문이다.
+이 파일은 델타가 다루지 않은 섹션 세부의 배경 확인용이다.
 
 # Appendix: Example ADR
 

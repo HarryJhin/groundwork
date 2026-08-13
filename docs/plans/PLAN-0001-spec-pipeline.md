@@ -7,23 +7,36 @@ status: closed
 
 ## Goal
 
-groundwork를 superpowers(정렬 기준으로 삼는 형제 플러그인 리포, `~/Projects/superpowers/`)의 구조에 정렬하는 재편의 첫 조각(S1)을 구현한다. flow 앞단(bootstrap·finding-unknowns·spec-review)과 그 기반(멀티하네스 배포·템플릿형 서브에이전트·산출물 규약·규율 게이트 제거)을 짓는다. 대응 스펙: `docs/specs/SPEC-0001-spec-pipeline.md`.
+groundwork를 superpowers(정렬 기준으로 삼는 형제 플러그인 리포, `~/Projects/superpowers/`)의 구조에 정렬하는 재편의 첫 조각(S1)을 구현한다.
+flow 앞단(bootstrap·finding-unknowns·spec-review)과 그 기반(멀티하네스 배포·템플릿형 서브에이전트·산출물 규약·규율 게이트 제거)을 짓는다.
+대응 스펙: `docs/specs/SPEC-0001-spec-pipeline.md`.
 
-이 repo에는 빌드·테스트 인프라가 없다. 산출물은 스킬(`skills/*/SKILL.md`)·프롬프트 템플릿(`skills/*/*-prompt.md`)·훅(bash)·매니페스트(json)다. 태스크 경계의 "green"은 다음으로 정의한다: 스킬 프론트매터가 유효(`name`·`description` 존재)하고, 프롬프트 파일이 존재하며, json이 `jq`로 파싱되고, 훅이 `bash -n`으로 문법 통과한다.
+이 repo에는 빌드·테스트 인프라가 없다.
+산출물은 스킬(`skills/*/SKILL.md`)·프롬프트 템플릿(`skills/*/*-prompt.md`)·훅(bash)·매니페스트(json)다.
+태스크 경계의 "green"은 다음으로 정의한다: 스킬 프론트매터가 유효(`name`·`description` 존재)하고, 프롬프트 파일이 존재하며, json이 `jq`로 파싱되고, 훅이 `bash -n`으로 문법 통과한다.
 
 ## Global Constraints (스펙 verbatim)
 
-- 지원 하네스는 Claude Code와 Codex 둘이다. `skills/` 하나를 공유하고, 훅은 Claude Code 전용이다(Codex 배포는 `hooks:{}`).
-- 서브에이전트는 템플릿형이다. 정의 파일(`agents/`) 대신 `general-purpose`에 주입하는 프롬프트 템플릿(`*-prompt.md`)으로 둔다. 도구 격리는 프롬프트 지시로 대체한다(예: "Read·Glob·Grep만 사용").
-- "크리틱" 표기를 "리뷰"로 바꾼다(사용자 대면 표기만). 게이트 훅이 파싱하던 내부 토큰은 게이트째 삭제로 소멸한다. spec-review 리뷰어 프롬프트의 출력 판정 토큰은 `REVIEW_VERDICT`로 맞춘다.
+- 지원 하네스는 Claude Code와 Codex 둘이다.
+  `skills/` 하나를 공유하고, 훅은 Claude Code 전용이다(Codex 배포는 `hooks:{}`).
+- 서브에이전트는 템플릿형이다.
+  정의 파일(`agents/`) 대신 `general-purpose`에 주입하는 프롬프트 템플릿(`*-prompt.md`)으로 둔다.
+  도구 격리는 프롬프트 지시로 대체한다(예: "Read·Glob·Grep만 사용").
+- "크리틱" 표기를 "리뷰"로 바꾼다(사용자 대면 표기만).
+  게이트 훅이 파싱하던 내부 토큰은 게이트째 삭제로 소멸한다.
+  spec-review 리뷰어 프롬프트의 출력 판정 토큰은 `REVIEW_VERDICT`로 맞춘다.
 - spec-review lens: 기본 6 = `junior-read`·`completeness`·`consistency`·`clarity`·`scope`·`yagni`. 재량 4 = `experience`·`facts`·`crossref`·`intent`. 기본 5축(junior-read 제외)은 superpowers 사양서 리뷰어를 번역해 신규 작성한다.
-- 규율 게이트를 제거하고 안전 게이트 3종은 유지한다. 전역 훅 변경은 되돌리기 전 사용자 확인을 받는다.
+- 규율 게이트를 제거하고 안전 게이트 3종은 유지한다.
+  전역 훅 변경은 되돌리기 전 사용자 확인을 받는다.
 - 산출물 4종: 스펙 `docs/specs/SPEC-NNNN-<topic>.md`, 플랜 `docs/plans/PLAN-NNNN-<topic>.md`, ADR `docs/adr/ADR-NNNN-<slug>.md`, 아티팩트 `.claude/artifacts/ARTIFACT-NNNN-<review|proto>.<ext>`. 번호 4자리, 스펙·플랜 페어 번호 공유. 노트는 폐지.
-- `korean-writing`은 이관하지 않는다. 비공개 전제 아래 MIT 고지를 넣지 않는다.
+- `korean-writing`은 이관하지 않는다.
+  비공개 전제 아래 MIT 고지를 넣지 않는다.
 
 ## 공통 완료 기준 (통합 종료 불변식, T7 이후)
 
-다음은 개명이 끝나는 T7 이후에 전역으로 참이어야 하는 통합 종료 불변식이다. 개별 태스크 green이 아니라 플랜 최종 검증이다. 각 태스크의 green은 자기 실행 검증 커맨드로 판정하고, 그 grep 범위는 태스크가 소유한 디렉터리로 한정한다(초기 태스크가 미착수 스킬의 잔존 탓에 오판되지 않도록).
+다음은 개명이 끝나는 T7 이후에 전역으로 참이어야 하는 통합 종료 불변식이다.
+개별 태스크 green이 아니라 플랜 최종 검증이다.
+각 태스크의 green은 자기 실행 검증 커맨드로 판정하고, 그 grep 범위는 태스크가 소유한 디렉터리로 한정한다(초기 태스크가 미착수 스킬의 잔존 탓에 오판되지 않도록).
 
 - `! grep -rniq 'critic-panel' skills/` (spec-review로 개명 완료)
 - `! grep -rniq '크리틱' skills/` (리뷰로 표기 전환 완료)
@@ -36,13 +49,15 @@ groundwork를 superpowers(정렬 기준으로 삼는 형제 플러그인 리포,
 
 - **Files**
   - 신규 `.codex-plugin/plugin.json`: superpowers `.codex-plugin/plugin.json`을 본떠 `name`·`version`·`description`·`"skills":"./skills/"`·`"hooks":{}`. `interface` 블록은 생략(선택).
-  - 변경 없음 `.claude-plugin/plugin.json`: skills 자동 발견이라 포인터 불요. 현행 유지 확인.
+  - 변경 없음 `.claude-plugin/plugin.json`: skills 자동 발견이라 포인터 불요.
+    현행 유지 확인.
 - **실행 검증**: `jq . .codex-plugin/plugin.json` · `jq -e '.skills=="./skills/" and (.hooks|length==0)' .codex-plugin/plugin.json`
 - **의존**: 없음
 
 ### T2 · spec-review 리뷰어 프롬프트 (lens 10종)
 
-`agents/critic-*.md` 일곱을 lens 재구성에 맞춰 `skills/spec-review/` 프롬프트 템플릿으로 이전·신규 작성한다. 각 프롬프트는 `general-purpose` 대상이며 다음을 반드시 담는다: (a) read-only 도구 격리 지시("Read·Glob·Grep만 사용", facts·crossref는 실측 도구 추가 허용), (b) 출력 마지막 줄 `REVIEW_VERDICT: PASS|FAIL`, (c) 판정 근거를 문서·리포·일반지식으로 한정(전역 `artifacts.md` 참조 금지, 필요한 규범은 프롬프트에 내재화).
+`agents/critic-*.md` 일곱을 lens 재구성에 맞춰 `skills/spec-review/` 프롬프트 템플릿으로 이전·신규 작성한다.
+각 프롬프트는 `general-purpose` 대상이며 다음을 반드시 담는다: (a) read-only 도구 격리 지시("Read·Glob·Grep만 사용", facts·crossref는 실측 도구 추가 허용), (b) 출력 마지막 줄 `REVIEW_VERDICT: PASS|FAIL`, (c) 판정 근거를 문서·리포·일반지식으로 한정(전역 `artifacts.md` 참조 금지, 필요한 규범은 프롬프트에 내재화).
 
 - **Files** (모두 `skills/spec-review/`)
   - 신규 `junior-read-prompt.md`: `agents/critic-coldreader.md` 본문 이전(자기완결 판독 축), `artifacts.md` 참조는 자체 규범으로 대체.
@@ -93,13 +108,16 @@ groundwork를 superpowers(정렬 기준으로 삼는 형제 플러그인 리포,
 
 ### T8 · 규율 게이트 제거 (전역, 사용자 확인)
 
-`~/.claude/` 전역을 바꾸는 비가역 변경이다. 착수 전 사용자 확인을 받는다.
+`~/.claude/` 전역을 바꾸는 비가역 변경이다.
+착수 전 사용자 확인을 받는다.
 
 - **Files**
   - 삭제 `~/.claude/hooks/`: `mark-critic-pass.sh`·`critic-roster-reset.sh`·`artifact-number-gate.sh`·`artifact-prose-gate.sh`·`health-freshness-gate.sh`·**`mark-doc-write.sh`**(등록 로직이 페이로드 전부라 no-op 대신 삭제).
   - 삭제 `~/.claude/hooks/test/`: `test-artifact-number-gate.sh`·`test-artifact-prose-gate.sh`·`test-health-gate.sh`(삭제되는 게이트 훅의 전용 테스트라 함께 소멸, 이관 불요).
-  - 이관 후 삭제 `~/.claude/hooks/test/test-critic-gate.sh`: 이 파일의 안전 게이트(`block-dangerous-git`) 서브테스트는 유지 대상 커버리지다. 신설 `~/.claude/hooks/test/test-block-dangerous-git.sh`로 그 서브테스트를 이관해 회귀 그물을 보존한 뒤 원본을 삭제한다.
-  - 이관 후 삭제 `~/.claude/hooks/test/test-critic-scope.sh`: 삭제 훅 `mark-doc-write` 참조로 red가 되나, 존치 훅 `stale-spec-check.sh`의 회귀 서브테스트(closed 미경고·active 경고·stale 경고)도 담는다. 그 stale 서브테스트를 신설 `~/.claude/hooks/test/test-stale-spec-check.sh`로 이관해 커버리지를 보존한 뒤 원본을 삭제한다.
+  - 이관 후 삭제 `~/.claude/hooks/test/test-critic-gate.sh`: 이 파일의 안전 게이트(`block-dangerous-git`) 서브테스트는 유지 대상 커버리지다.
+    신설 `~/.claude/hooks/test/test-block-dangerous-git.sh`로 그 서브테스트를 이관해 회귀 그물을 보존한 뒤 원본을 삭제한다.
+  - 이관 후 삭제 `~/.claude/hooks/test/test-critic-scope.sh`: 삭제 훅 `mark-doc-write` 참조로 red가 되나, 존치 훅 `stale-spec-check.sh`의 회귀 서브테스트(closed 미경고·active 경고·stale 경고)도 담는다.
+    그 stale 서브테스트를 신설 `~/.claude/hooks/test/test-stale-spec-check.sh`로 이관해 커버리지를 보존한 뒤 원본을 삭제한다.
   - 부분 편집 `~/.claude/hooks/plan-file-gate.sh`(크리틱 게이트 블록 제거 + 잔존 plan 권고 메시지의 "크리틱"→"리뷰" 표기 갱신)·`stale-spec-check.sh`(`critic-gate` GC 라인 제거)·`lib/hook-common.sh`(`CRITIC_GATE_DIR` 정의 제거, 다른 헬퍼는 잔존 훅이 쓰므로 유지)·`test/test-plan-file-gate.sh`(크리틱 케이스가 있으면 정리).
   - 변경 `~/.claude/settings.json`: 삭제 훅의 배선 제거 + `mark-doc-write.sh`의 PostToolUse `Edit`·`Write` 두 배선 제거.
 - **실행 검증**: `make -C ~/.claude/hooks test` (green) · `bash -n ~/.claude/hooks/plan-file-gate.sh` · `jq . ~/.claude/settings.json` · `! test -e ~/.claude/hooks/mark-critic-pass.sh` · `! test -e ~/.claude/hooks/mark-doc-write.sh`
@@ -121,5 +139,6 @@ T5 ─────────┘             │              │
 T2 ─→ T9 ─────────────────┴──────────────┘
 ```
 - T3은 T2(프롬프트)와 T4(roster lens)를 소비한다.
-- T6은 T3·T5를 소비한다. T7은 T3·T5·T6을 소비한다.
+- T6은 T3·T5를 소비한다.
+  T7은 T3·T5·T6을 소비한다.
 - T8은 모든 브랜치의 공통 종점이다(T1·T7·T9 포함 전 태스크 뒤).
