@@ -111,6 +111,18 @@ groundwork는 설계·리뷰 flow와 실행층 규율을 함께 담는다.
 | 받은 리뷰 처리 | `groundwork:receiving-code-review` |
 | 워크스페이스 격리 | `groundwork:using-git-worktrees` |
 | 독립 문제의 병렬 조사 | `groundwork:dispatching-parallel-agents` |
+| 역인터뷰 품질 | `groundwork:finding-unknowns`(인터뷰 절차) |
+
+### 기본 동작보다 우선하는 질문
+
+「기본 동작」에는 세션의 기본 성향도 든다.
+확인 질문 없이 진행하려는 성향이 그 예다.
+사용자만 결정할 수 있는 사항이나 확인이 필요한 질문은 그 성향을 이유로 생략하지 않는다.
+groundwork 클래스 작업이 아니어도 이 규율은 적용된다.
+
+`AskUserQuestion`으로 물을 때는 주제 하나당 질문 하나를 담는다.
+선택지를 제시할 수 있으면 각 선택지와 그 결과를 한 줄로 제시한다.
+자세한 절차의 정본은 `groundwork:finding-unknowns`의 「인터뷰 절차」다.
 
 ## User Instructions
 
