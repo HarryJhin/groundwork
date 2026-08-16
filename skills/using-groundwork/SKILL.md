@@ -15,13 +15,13 @@ groundwork flow 진입 규율이다.
 
 <EXTREMELY-IMPORTANT>
 groundwork 클래스 작업에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다.
-flow는 설계에서 종료까지 이어지는 스킬 사슬이고 단계와 소유 스킬은 아래 「The Rule」의 표에 있다.
+flow는 설계에서 종료까지 이어지는 스킬 사슬이고 단계와 소유 스킬은 아래 「The rule」의 표에 있다.
 
 flow 진입은 선택이 아니다.
 합리화로 빠져나가지 않는다.
 </EXTREMELY-IMPORTANT>
 
-## 이 문서의 범위
+## Scope of this document
 
 부트스트랩은 진입 스위치다.
 무엇을 언제 부를지만 정한다.
@@ -36,7 +36,7 @@ flow 진입은 선택이 아니다.
 | 모델 티어와 벤더 교차 디스패치 | `groundwork:using-groundwork`의 `choosing-model-tier.md` |
 | 각 단계의 절차 | 아래 flow 표가 지목하는 스킬 |
 
-## groundwork 클래스 판별
+## groundwork-class test
 
 판별 기준은 **틀린 방향으로 갔을 때 그 사실이 얼마나 늦게 드러나는가**다.
 아래 셋 중 하나라도 `예`면 groundwork 클래스다.
@@ -59,7 +59,7 @@ flow 진입은 선택이 아니다.
 판별이 서지 않으면 1번 물음만 다시 본다.
 요청을 두 가지로 읽을 수 있는데도 어느 쪽인지 모른 채 시작하는 것이 가장 비싼 실패다.
 
-## The Rule (진입 강제)
+## The rule (mandatory entry)
 
 관련되거나 요청된 스킬은 어떤 응답·행동보다 먼저 invoke한다.
 확인 질문, 코드 탐색, 파일 열람도 그 뒤다.
@@ -98,7 +98,7 @@ groundwork 클래스 작업에는 다음을 강제한다.
 invoke할 때는 "Using [skill] to [purpose]"를 알리고 스킬을 그대로 따른다.
 체크리스트가 있으면 항목마다 todo를 만든다.
 
-## Skill Priority
+## Skill priority
 
 여러 스킬이 걸리면 process 스킬이 먼저다.
 process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
@@ -106,7 +106,7 @@ process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
 - "X를 만들자" → groundwork 클래스면 `groundwork:finding-unknowns` 먼저. groundwork 클래스가 아니면 실행 환경이 제공하는 발산·요구 탐색 스킬을 쓰고 그런 스킬이 없으면 바로 처리한다.
 - "이 버그 고쳐" → `groundwork:systematic-debugging` 먼저, 그다음 도메인 스킬.
 
-## Red Flags
+## Red flags
 
 아래 생각이 들면 멈춘다.
 합리화 중이라는 신호다.
@@ -116,14 +116,14 @@ process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
 | "이건 그냥 간단한 질문이야" | 질문도 작업이다. 스킬을 확인한다. |
 | "맥락부터 더 모아야 해" | 스킬 확인이 확인 질문보다 먼저다. |
 | "코드베이스부터 좀 볼게" | 스킬이 탐색 방법을 알려준다. 먼저 확인한다. |
-| "파일 하나만 고치면 되니 flow는 과해" | 크기는 판별 기준이 아니다. 「groundwork 클래스 판별」의 세 물음으로 가른다. |
+| "파일 하나만 고치면 되니 flow는 과해" | 크기는 판별 기준이 아니다. 「groundwork-class test」의 세 물음으로 가른다. |
 | "멀티파일이니 무조건 flow" | 이것도 크기 판정이다. 정답이 하나뿐이면 flow는 세금이다. 세 물음으로 가른다. |
 | "이 스킬 기억나" | 스킬은 바뀐다. 현재 버전을 읽는다. |
 | "일단 이것 하나만 먼저" | 무엇이든 하기 전에 확인한다. |
 | "요청이 애매하지만 내가 알아서 읽으면 돼" | 1번 물음이 `예`다. 그게 flow 진입 조건이다. |
 | "테스트가 통과하니 방향도 맞을 것이다" | 2번 물음이 그 착각을 겨눈다. 검증은 문법을 보지 의도를 보지 않는다. |
 
-## 우선순위
+## Precedence
 
 사용자 지시 > groundwork > 다른 플러그인 스킬 > 기본 동작.
 
@@ -143,7 +143,7 @@ groundwork는 설계·리뷰 flow와 실행층 규율을 함께 담는다.
 | 역인터뷰 품질 | `groundwork:finding-unknowns`(인터뷰 절차) |
 | 모델 티어 배정 | `groundwork:using-groundwork`의 `choosing-model-tier.md` |
 
-### 기본 동작보다 우선하는 질문
+### Questions that outrank default behavior
 
 「기본 동작」에는 세션의 기본 성향도 든다.
 확인 질문 없이 진행하려는 성향이 그 예다.
@@ -152,9 +152,9 @@ groundwork 클래스 작업이 아니어도 이 규율은 적용된다.
 
 `AskUserQuestion`으로 물을 때는 주제 하나당 질문 하나를 담는다.
 선택지를 제시할 수 있으면 각 선택지와 그 결과를 한 줄로 제시한다.
-자세한 절차의 정본은 `groundwork:finding-unknowns`의 「인터뷰 절차」다.
+자세한 절차의 정본은 `groundwork:finding-unknowns`의 「Interview procedure」다.
 
-## User Instructions
+## User instructions
 
 사용자 지시(CLAUDE.md·직접 요청)가 스킬에 우선하고 스킬이 기본 동작에 우선한다.
 사용자가 명시로 지시했을 때만 스킬 워크플로우나 지시를 건너뛴다.

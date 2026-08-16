@@ -8,7 +8,7 @@ description: 새 스킬을 만들거나 기존 스킬을 편집할 때, 또는 �
 **스킬 작성은 프로세스 문서에 적용한 테스트 주도 개발(TDD)이다.**
 먼저 스킬 없이 실패하는 시나리오를 만들고 그 실패를 없애는 최소 문서를 쓴다.
 
-## 스킬을 두는 곳
+## Where skills live
 
 **스킬을 어디에 두는가**는 누가 쓰느냐로 갈린다.
 나 혼자 쓰는 개인 스킬은 에이전트 실행 환경(Claude Code·Codex·Copilot CLI·Gemini CLI 같은 코딩 에이전트 제품)의 스킬 디렉터리에 둔다.
@@ -27,7 +27,7 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 **공식 가이드:** Anthropic의 공식 스킬 작성 베스트 프랙티스는 anthropic-best-practices.md를 참조한다.
 그 문서는 이 스킬의 TDD 중심 접근을 보완하는 추가 패턴·가이드라인을 담는다.
 
-## 스킬의 정의
+## What a skill is
 
 **스킬**은 검증된 기법·패턴·도구의 레퍼런스 가이드다.
 스킬은 후속 에이전트가 효과적인 접근을 찾아 적용하도록 돕는다.
@@ -36,7 +36,7 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 
 **스킬이 아닌 것:** 문제를 한 번 어떻게 풀었는지에 대한 서사
 
-## 스킬을 위한 TDD 대응
+## The TDD analogue for skills
 
 | TDD 개념 | 스킬 작성 |
 |-------------|----------------|
@@ -53,7 +53,7 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 
 스킬 작성 과정 전체가 RED-GREEN-REFACTOR를 따른다.
 
-## 스킬 신설
+## Creating a skill
 
 **만든다:**
 - 그 기법이 너에게 직관적으로 자명하지 않았다
@@ -67,20 +67,20 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 - 프로젝트 한정 규약(지침 파일에 넣는다)
 - 기계적 제약(regex·검증으로 강제할 수 있으면 자동화한다. 문서는 판단이 필요한 경우에 남긴다)
 
-## 스킬 유형
+## Skill types
 
 세 유형으로 갈리고 유형에 따라 본문에 담을 것이 다르다.
 
-### 기법(Technique)
+### Technique
 따라 할 단계가 있는 구체적 방법(condition-based-waiting, root-cause-tracing)
 
-### 패턴(Pattern)
+### Pattern
 문제를 사고하는 방식(flatten-with-flags, test-invariants)
 
-### 레퍼런스(Reference)
+### Reference
 API 문서, 문법 가이드, 도구 사용법 문서
 
-## 디렉터리 구조
+## Directory structure
 
 
 ```text
@@ -101,16 +101,16 @@ skills/
 - 코드 패턴(50줄 미만)
 - 그 밖의 모든 것
 
-## 이 스킬의 입력과 출력
+## Input and output of this skill
 
 **입력**: 쓰거나 고칠 대상 스킬을 받는다.
 신규면 스킬 이름과 그것이 다룰 기법을, 편집이면 대상 `SKILL.md`의 경로를 호출자에게 받는다.
 둘 다 받지 못했으면 무엇을 쓸지 사용자에게 묻는다.
 
-**출력**: 위 「스킬을 두는 곳」이 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.
-아래 「스킬 작성 체크리스트」를 통과하면 끝이고 다음 스킬로 자동으로 넘기지 않는다.
+**출력**: 위 「Where skills live」이 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.
+아래 「Skill authoring checklist (TDD applied)」를 통과하면 끝이고 다음 스킬로 자동으로 넘기지 않는다.
 
-## 실행 계약 (쓰는 스킬에 담아야 할 것)
+## Execution contract (what the skill you write must carry)
 
 스킬 문서는 읽히는 것이 아니라 실행된다.
 아래 항목 중 하나라도 없으면 그 스킬의 첫 행동이 막힌다.
@@ -134,7 +134,19 @@ skills/
 이 문서 자신의 경로 기준도 같은 규칙을 따른다.
 아래에서 파일명만 적은 참조는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/` 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
 
-## SKILL.md 구조
+## SKILL.md structure
+
+**제목은 영문, 본문은 한국어.**
+h1부터 모든 헤딩을 영문 sentence case로 쓰고 본문 서술만 한국어로 쓴다.
+h1은 스킬 디렉터리 이름을 그대로 쓴다.
+
+작업을 지시하는 제목은 원형 동사로 시작한다(`Apply the review gate`).
+`-ing` 형을 첫 단어로 쓰지 않는다.
+개념을 가리키는 제목은 `-ing`로 시작하지 않는 명사구로 쓴다(`Reviewer roster`).
+선택 구역은 제목 앞에 `Optional:`을 붙인다.
+
+본문에서 다른 절을 가리킬 때는 그 영문 제목을 `「」`로 감싸 그대로 적는다.
+번역해 부르면 독자가 찾을 헤딩이 문서에 없다.
 
 **Frontmatter (YAML):**
 - 필수 필드 둘: `name`과 `description`(지원 필드 전체는 [agentskills.io/specification](https://agentskills.io/specification) 참조)
@@ -143,7 +155,7 @@ skills/
 - `description`: 3인칭, **언제 쓰는가만** 서술한다(무엇을 하는지는 쓰지 않는다)
     - "Use when..."으로 시작해 트리거 조건에 집중한다
     - 구체적 증상·상황·맥락을 담는다
-    - **스킬의 프로세스나 워크플로를 절대 요약하지 않는다**(이유는 아래 「스킬 탐색 최적화 (SDO, Skill Discovery Optimization)」 절 참조)
+    - **스킬의 프로세스나 워크플로를 절대 요약하지 않는다**(이유는 아래 「Skill discovery optimization (SDO)」 절 참조)
     - 가능하면 500자 이하로 유지한다
 
 ```markdown
@@ -181,11 +193,11 @@ Concrete results
 ```
 
 
-## 스킬 탐색 최적화 (SDO, Skill Discovery Optimization)
+## Skill discovery optimization (SDO)
 
 **탐색에 결정적:** 후속 에이전트가 네 스킬을 찾아야 한다
 
-### 풍부한 description 필드
+### A rich description field
 
 **목적:** 에이전트는 주어진 작업에 어떤 스킬을 로드할지 정하려고 description을 읽는다.
 "지금 이 스킬을 읽어야 하나?"에 답하게 만든다.
@@ -246,7 +258,7 @@ description: Use when tests have race conditions, timing dependencies, or pass/f
 description: Use when using React Router and handling authentication redirects
 ```
 
-### 키워드 커버리지
+### Keyword coverage
 
 에이전트가 검색할 단어를 쓴다:
 - 에러 메시지: "Hook timed out", "ENOTEMPTY", "race condition"
@@ -254,7 +266,7 @@ description: Use when using React Router and handling authentication redirects
 - 동의어: "timeout/hang/freeze", "cleanup/teardown/afterEach"
 - 도구: 실제 명령, 라이브러리명, 파일 타입
 
-### 서술형 이름
+### Descriptive names
 
 **능동태, 동사 우선을 쓴다:**
 - 좋음: `creating-skills`, `skill-creation` 아님
@@ -271,7 +283,7 @@ description: Use when using React Router and handling authentication redirects
 - 능동적이고 네가 취하는 행동을 서술한다
 
 
-### 토큰 효율 (결정적)
+### Token efficiency (decisive)
 
 **문제:** 모든 세션에 주입되는 진입 스킬(groundwork에서는 `using-groundwork`)과 자주 참조되는 스킬은 모든 대화에 로드된다.
 토큰 하나하나가 중요하다.
@@ -327,7 +339,7 @@ wc -w skills/path/SKILL.md
 # Other frequently-loaded: aim for <200 total
 ```
 
-### 다른 스킬 cross-reference
+### Cross-reference other skills
 
 **다른 스킬을 참조하는 문서를 쓸 때:**
 
@@ -339,7 +351,7 @@ wc -w skills/path/SKILL.md
 
 **왜 @ 링크를 쓰지 않나:** `@` 문법은 파일을 즉시 강제 로드해, 필요하기 전에 200k 넘는 컨텍스트를 소비한다.
 
-## 플로차트 사용
+## Flowchart usage
 
 ```dot
 digraph when_flowchart {
@@ -374,7 +386,7 @@ ${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디�
 ${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디렉터리> --combine # 전부 한 SVG로
 ```
 
-## 코드 예시
+## Code examples
 
 **훌륭한 예시 하나가 그저 그런 예시 여럿을 이긴다**
 
@@ -398,18 +410,18 @@ ${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디�
 너는 포팅을 잘한다.
 훌륭한 예시 하나면 충분하다.
 
-## 파일 조직
+## File organization
 
 스킬 크기에 따라 셋 중 하나를 고른다.
 
-### 자기완결 스킬
+### Self-contained skill
 ```text
 defense-in-depth/
   SKILL.md    # Everything inline
 ```
 언제: 모든 내용이 들어가고 무거운 레퍼런스가 필요 없을 때
 
-### 재사용 도구가 딸린 스킬
+### Skill with reusable tools
 ```text
 condition-based-waiting/
   SKILL.md    # Overview + patterns
@@ -417,7 +429,7 @@ condition-based-waiting/
 ```
 언제: 도구가 서사가 아니라 재사용 코드일 때
 
-### 무거운 레퍼런스가 딸린 스킬
+### Skill with heavy references
 ```text
 pptx/
   SKILL.md       # Overview + workflows
@@ -427,7 +439,7 @@ pptx/
 ```
 언제: 레퍼런스 자료가 인라인으로 두기엔 너무 클 때
 
-## Iron Law (TDD와 동일)
+## Iron law (same as TDD)
 
 ```text
 NO SKILL WITHOUT A FAILING TEST FIRST
@@ -451,11 +463,11 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 **REQUIRED BACKGROUND:** groundwork:test-driven-development 스킬이 이것이 왜 중요한지 설명한다.
 같은 원칙이 문서에 적용된다.
 
-## 모든 스킬 유형 테스트하기
+## Test every skill type
 
 스킬 유형이 다르면 테스트 접근도 다르다:
 
-### 규율 강제 스킬 (규칙·요구)
+### Discipline-enforcing skill (rules and requirements)
 
 **예:** TDD, verification-before-completion, designing-before-coding
 
@@ -467,7 +479,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 
 **성공 기준:** 최대 압박 속에서 에이전트가 규칙을 따른다
 
-### 기법 스킬 (how-to 가이드)
+### Technique skill (how-to guide)
 
 **예:** condition-based-waiting, root-cause-tracing, defensive-programming
 
@@ -478,7 +490,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 
 **성공 기준:** 에이전트가 새 시나리오에 기법을 성공적으로 적용한다
 
-### 패턴 스킬 (멘탈 모델)
+### Pattern skill (mental model)
 
 **예:** reducing-complexity, information-hiding 개념
 
@@ -489,7 +501,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 
 **성공 기준:** 에이전트가 패턴을 언제·어떻게 적용할지 올바로 식별한다
 
-### 레퍼런스 스킬 (문서·API)
+### Reference skill (documentation and API)
 
 **예:** API 문서, 명령 레퍼런스, 라이브러리 가이드
 
@@ -500,7 +512,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 
 **성공 기준:** 에이전트가 레퍼런스 정보를 찾아 올바로 적용한다
 
-## 테스트 건너뛰기의 흔한 합리화
+## Common rationalizations for skipping tests
 
 | 핑계 | 현실 |
 |--------|---------|
@@ -516,21 +528,21 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 **이 모두가 뜻하는 것: 배포 전에 테스트하라.**
 **예외 없다.**
 
-## 형식을 실패에 맞춘다
+## Match the format to the failure
 
 규칙 문구를 쓰기 전에 베이스라인 실패를 분류하라.
 한 실패 유형을 방탄으로 만드는 형식이 다른 유형에는 측정 가능하게 역효과를 낸다.
 
 | 베이스라인 실패 | 맞는 형식 | 틀린 형식 |
 |---|---|---|
-| 압박 속에서 규칙을 건너뛰거나 위반(더 잘 알면서도 그냥 한다) | 금지 + 합리화 표 + Red Flags(아래 「합리화에 맞선 스킬 방탄화」 참조) | 부드러운 가이드("~를 선호하라", "~를 고려하라") |
+| 압박 속에서 규칙을 건너뛰거나 위반(더 잘 알면서도 그냥 한다) | 금지 + 합리화 표 + Red Flags(아래 「Bulletproof the skill against rationalization」 참조) | 부드러운 가이드("~를 선호하라", "~를 고려하라") |
 | 준수하지만 출력의 형태가 틀림(부푼 프롬프트, 묻힌 판정, 요구 재서술) | 긍정 레시피나 계약: 출력이 무엇**인지** 명시(부분들을 순서대로) | 금지 목록("재서술하지 마라", "서술하지 마라") |
 | 이미 만드는 것에서 필수 요소를 누락 | 구조적: 채워 넣는 템플릿의 REQUIRED 필드나 슬롯 | 템플릿 근처의 산문 알림 |
 | 동작이 조건에 따라 달라져야 함 | 관측 가능한 술어에 건 조건문("brief가 있으면 참조하라") | 무조건 규칙 + 예외 조항 |
 
 **왜 금지가 형태 문제에 역효과인가:** 경쟁 인센티브("프롬프트를 자기완결로 만들어라") 아래서 에이전트는 "X 하지 마라"와 협상한다.
 서브에이전트 디스패치 프롬프트 작성 규칙을 대상으로 한 문구 테스트에서, 금지 방식은 레시피 방식보다 원치 않는 내용을 뚜렷이 더 많이 만들었고(분포가 완전히 분리됨), 규칙 문구가 없는 대조군보다도 나빴다.
-기본으로 금지에 손대지 말고 자기 사례를 직접 마이크로 테스트하라(아래 「전체 시나리오 전에 문구를 마이크로 테스트한다」).
+기본으로 금지에 손대지 말고 자기 사례를 직접 마이크로 테스트하라(아래 「Micro-test the wording before the full scenario」).
 레시피는 협상할 여지를 남기지 않는다.
 출력이 명시된 형태에 맞거나 안 맞거나 둘 중 하나다.
 
@@ -542,7 +554,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
   "이 제한은 코드 블록에 적용되지 않는다"는 여전히 코드 블록을 억누른다.
   출력의 일부가 면제돼야 하면, 규칙이 거기 닿지 못하게 구조를 다시 짜라.
 
-## 합리화에 맞선 스킬 방탄화
+## Bulletproof the skill against rationalization
 
 규율을 강제하는 스킬(TDD 같은)은 합리화에 저항해야 한다.
 에이전트는 똑똑하고 압박받으면 빈틈을 찾아낸다.
@@ -550,12 +562,12 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 **범위:** 이 도구모음은 규율 실패용이다.
 규칙을 알면서 압박 속에 건너뛰는 에이전트 말이다.
 형태가 틀린 출력이나 누락된 요소에는 금지 기반 방탄화가 역효과다.
-「형식을 실패에 맞춘다」의 형식을 쓰라.
+「Match the format to the failure」의 형식을 쓰라.
 
 **심리 노트:** 설득 기법이 왜 통하는지 이해하면 그것을 체계적으로 적용할 수 있다.
 연구 근거(Cialdini 2021, Meincke et al. 2025)의 authority, commitment, scarcity, social proof, unity 원칙은 persuasion-principles.md를 참조한다.
 
-### 모든 빈틈을 명시적으로 막는다
+### Close every loophole explicitly
 
 규칙을 진술만 하지 말고 구체적 우회를 금지하라:
 
@@ -575,7 +587,7 @@ Write code before test? Delete it. Start over.
 - Delete means delete
 ```
 
-### "정신 대 문구" 논변에 대응한다
+### Answer the "spirit versus letter" argument
 
 근본 원칙을 일찍 넣는다:
 
@@ -585,7 +597,7 @@ Write code before test? Delete it. Start over.
 
 이것은 "나는 정신을 따르고 있다" 부류의 합리화 전체를 끊는다.
 
-### 합리화 표를 만든다
+### Build a rationalization table
 
 베이스라인 테스트에서 나온 합리화를 잡는다(아래 테스트 절 참조).
 에이전트가 대는 모든 핑계가 표에 들어간다:
@@ -598,7 +610,7 @@ Write code before test? Delete it. Start over.
 | "Tests after achieve same goals" | Tests-after = "what does this do?" Tests-first = "what should this do?" |
 ```
 
-### Red Flags 목록을 만든다
+### Build a red flags list
 
 에이전트가 합리화 중일 때 스스로 점검하기 쉽게 만든다:
 
@@ -614,7 +626,7 @@ Write code before test? Delete it. Start over.
 **All of these mean: Delete code. Start over with TDD.**
 ```
 
-### 위반 증상으로 SDO를 업데이트한다
+### Update SDO with violation symptoms
 
 규칙을 위반하기 **직전**의 증상을 description에 추가한다:
 
@@ -622,11 +634,11 @@ Write code before test? Delete it. Start over.
 description: use when implementing any feature or bugfix, before writing implementation code
 ```
 
-## 스킬을 위한 RED-GREEN-REFACTOR
+## RED-GREEN-REFACTOR for skills
 
 TDD 사이클을 따른다:
 
-### RED: 실패하는 테스트 작성(베이스라인)
+### RED: write the failing test (baseline)
 
 스킬 **없이** 서브에이전트로 압박 시나리오를 돌린다.
 정확한 행동을 기록한다:
@@ -637,7 +649,7 @@ TDD 사이클을 따른다:
 이것이 "테스트가 실패하는 걸 지켜보기"다.
 스킬을 쓰기 전에 에이전트가 자연스럽게 무엇을 하는지 봐야 한다.
 
-### GREEN: 최소 스킬 작성
+### GREEN: write the minimum skill
 
 그 구체적 합리화를 겨냥한 스킬을 쓴다.
 가상의 경우를 위한 추가 내용을 넣지 않는다.
@@ -645,13 +657,13 @@ TDD 사이클을 따른다:
 같은 시나리오를 스킬과 **함께** 돌린다.
 이제 에이전트가 준수해야 한다.
 
-### REFACTOR: 빈틈 막기
+### REFACTOR: close the loopholes
 
 에이전트가 새 합리화를 찾았나?
 명시적 반박을 추가한다.
 방탄이 될 때까지 재테스트한다.
 
-### 전체 시나리오 전에 문구를 마이크로 테스트한다
+### Micro-test the wording before the full scenario
 
 전체 압박 시나리오 실행이 최종 관문이지만 반복당 느리고 비싸다.
 문구 자체를 먼저 마이크로 테스트로 검증하라:
@@ -678,28 +690,28 @@ TDD 사이클을 따른다:
 - 빈틈을 체계적으로 막기
 - 메타 테스트 기법
 
-## 안티패턴
+## Anti-patterns
 
 아래 넷은 실측에서 스킬을 약하게 만든 패턴이다.
 
-### 나쁨: 서사적 예시
+### Bad: narrative examples
 "2025-10-03 세션에서 빈 projectDir가 ~를 유발했다..."
 **왜 나쁜가:** 너무 구체적이라 재사용 불가
 
-### 나쁨: 다언어 희석
+### Bad: multi-language dilution
 example-js.js, example-py.py, example-go.go **왜 나쁜가:** 품질이 그저 그렇고 유지보수 부담
 
-### 나쁨: 플로차트 속 코드
+### Bad: code inside a flowchart
 ```dot
 step1 [label="import fs"];
 step2 [label="read file"];
 ```
 **왜 나쁜가:** 복사-붙여넣기 불가, 읽기 어려움
 
-### 나쁨: 일반 라벨
+### Bad: generic labels
 helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어야 한다
 
-## STOP: 다음 스킬로 넘어가기 전 점검
+## STOP: check before moving to the next skill
 
 **어떤 스킬이든 쓴 뒤, 반드시 멈춰 배포 프로세스를 완료해야 한다.**
 
@@ -712,7 +724,7 @@ helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어�
 
 테스트 안 한 스킬 배포 = 테스트 안 한 코드 배포. 품질 기준 위반이다.
 
-## 스킬 작성 체크리스트 (TDD 적용)
+## Skill authoring checklist (TDD applied)
 
 **중요: 아래 체크리스트 항목마다 todo를 만든다.**
 
@@ -729,7 +741,7 @@ helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어�
 - [ ] 검색용 키워드를 곳곳에(에러, 증상, 도구)
 - [ ] 핵심 원칙이 담긴 명확한 개요
 - [ ] RED에서 식별한 구체적 베이스라인 실패에 대응
-- [ ] 규칙 문구의 형식이 실패 유형에 맞음(「형식을 실패에 맞춘다」 참조)
+- [ ] 규칙 문구의 형식이 실패 유형에 맞음(「Match the format to the failure」 참조)
 - [ ] 행동을 형성하는 규칙 문구는 대조군과 함께 마이크로 테스트(5회 이상, 플래그된 매치 하나하나 직접 읽음) - 순수 레퍼런스 스킬은 해당 없음
 - [ ] 코드 인라인 또는 별도 파일 링크
 - [ ] 훌륭한 예시 하나(다언어 아님)
@@ -752,7 +764,7 @@ helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어�
 **배포:**
 - [ ] 스킬을 git에 커밋
 
-## 탐색 워크플로
+## Discovery workflow
 
 후속 에이전트가 네 스킬을 찾는 법:
 

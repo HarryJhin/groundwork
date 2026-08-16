@@ -20,7 +20,7 @@ repo 밖에 ADR을 두지 않는다.
 `references/`처럼 이 스킬이 거느린 파일은 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-adr/` 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
 `docs/adr/`처럼 산출물이 놓이는 경로는 대상 repo 루트 기준이고 그 루트는 `git rev-parse --show-toplevel`로 얻는다.
 
-## 산출물 규약
+## Artifact conventions
 
 - **위치**: `<repo 루트>/docs/adr/`. repo 루트는 `git rev-parse --show-toplevel`로 얻는다.
 - **명명**: `ADR-NNNN-<topic>.md`. `NNNN`은 4자리 제로패딩이고 `<topic>`은 결정 요지의 영문 kebab-case다.
@@ -28,12 +28,12 @@ repo 밖에 ADR을 두지 않는다.
   repo마다 독립이라 다른 repo의 번호는 보지 않는다.
 - **설계 문서와 독립**: 같은 repo의 `docs/designs/DESIGN-NNNN-<topic>.md`는 프로토타입과 번호를 공유하는 별도 축이고 ADR은 거기 참여하지 않는다.
   한 작업이 ADR을 몇 개 남기든 설계 문서 번호는 줄지 않는다.
-  번호가 겹쳐도 파일명 접두(`ADR-` 대 `SPEC-`)가 구분한다.
+  번호가 겹쳐도 파일명 접두(`ADR-` 대 `DESIGN-`)가 구분한다.
 - **커밋**: 그 repo의 정규 산출물이다.
   결정을 낳은 코드 변경과 함께 커밋한다.
 - **소비자**: 후속 세션이 `docs/adr/`를 열어 `ADR-NNNN`으로 인용한다.
 
-## 형식 정본
+## Format (source of truth)
 
 ADR 파일은 최상단 h1 하나와 그 아래 `##` 섹션으로 이뤄진다.
 섹션은 아래 순서를 지킨다.
@@ -51,10 +51,11 @@ ADR 파일은 최상단 h1 하나와 그 아래 `##` 섹션으로 이뤄진다.
 
 **h1**: `# ADR-NNNN: <짧은 제목>` 형식이다.
 `NNNN`을 리터럴 자리표시자로 남기지 말고 신설 시점에 확정된 실제 4자리 번호를 채워 파일명 `ADR-NNNN-<topic>.md`의 번호와 일치시킨다.
-h1의 짧은 제목은 파일명의 `<topic>`을 자연어로 요약한 명사구이고 `## Title` 섹션은 결정을 한 문장으로 정의하는 완결 문장이다.
+h1의 짧은 제목은 파일명의 `<topic>`을 자연어로 요약한 영문 명사구이고 `## Title` 섹션은 결정을 한 문장으로 정의하는 완결 문장이다.
 둘은 역할이 달라 같은 문장으로 채우지 않는다.
 
-**언어**: 섹션명은 영문, 본문 내용은 한국어로 쓴다.
+**언어**: h1을 포함한 모든 제목은 영문, 본문 내용은 한국어로 쓴다.
+영문 제목은 sentence case로 쓰고 고유명사와 코드 항목의 대소문자는 원래 표기를 지킨다.
 이 규칙의 대상은 서술문이다.
 `Consequences`의 `Positive:`·`Negative:`는 서술문이 아니라 형식 라벨이라 영문 그대로 둔다.
 
@@ -77,13 +78,13 @@ h1의 짧은 제목은 파일명의 `<topic>`을 자연어로 요약한 명사�
 수락 후에는 불변으로 둔다.
 결정을 번복할 때는 Changelog를 고치지 않고 새 ADR을 만들어, 원 ADR의 `Status`를 `Superseded`로 돌리고 원 ADR `## Notes`에 `- Superseded by: ADR-NNNN` 줄을 더한다.
 
-### 스켈레톤 예시
+### Skeleton example
 
 아래는 형식 예시다.
 신설 시 실제 번호·날짜·내용을 채운다.
 
 ```markdown
-# ADR-0007: 테스트 러너를 vitest로 통일
+# ADR-0007: Standardize the test runner on vitest
 
 ## Title
 
@@ -127,7 +128,7 @@ Negative:
   - 0.1: 최초 제안 버전
 ```
 
-## 신설 절차 (에이전트가 직접 수행)
+## Creation procedure (the agent performs it)
 
 **입력**: 기록할 결정의 내용, 곧 그 결정을 강제한 맥락과 결정 자체, 기각한 대안이다.
 호출자가 넘기지 않으면 방금 내린 결정에서 뽑는다.
@@ -135,7 +136,7 @@ Negative:
 무엇으로 확정할지 사용자에게 먼저 확인한다.
 
 **주체와 범위**: 이 스킬의 실행 범위는 `Proposed` 상태의 ADR 파일 신설까지다.
-아래 「작성 프로세스」의 상태 전이는 그 뒤 다른 시점에 일어나고 거기서 말하는 `저자`는 그 시점에 ADR을 고치는 사람을, `리뷰`는 사용자가 그 결정을 판정하는 절차를 가리킨다.
+아래 「Authoring process」의 상태 전이는 그 뒤 다른 시점에 일어나고 거기서 말하는 `저자`는 그 시점에 ADR을 고치는 사람을, `리뷰`는 사용자가 그 결정을 판정하는 절차를 가리킨다.
 
 헬퍼 스크립트는 없다.
 아래 단계를 에이전트가 직접 수행한다.
@@ -155,16 +156,16 @@ Context·Decision의 용어와 참조가 특히 걸린다.
   `ADR-[0-9][0-9][0-9][0-9]-*.md`를 훑어 최대 번호 +1이고 매치가 없으면 `0001`이다.
   4자리 제로패딩을 쓰고 4자리가 아닌 파일은 무시한다.
 - `docs/designs/`는 스캔하지 않는다.
-  ADR은 그 번호 축에 참여하지 않는다(위 「산출물 규약」).
+  ADR은 그 번호 축에 참여하지 않는다(위 「Artifact conventions」).
 
 **3. `<topic>`**
 - 결정 요지의 영문 kebab-case로 짓는다.
 
 **4. 파일 작성**
 - `ADR-NNNN-<topic>.md`를 위 형식 정본대로 쓴다.
-  h1과 파일명에 실제 번호를 적고 `## Date`는 오늘, `## Status`는 `Proposed`, 섹션명은 영문, 본문은 한국어.
+  h1과 파일명에 실제 번호를 적고 `## Date`는 오늘, `## Status`는 `Proposed`, 제목은 영문, 본문은 한국어.
 
-## 작성 대상
+## What to record
 
 ADR로 남길 결정의 종류:
 - 구조 (예: 마이크로서비스 같은 패턴)
@@ -180,7 +181,7 @@ ADR로 남기지 않는 것도 갈라둔다.
 코드가 스스로 설명하는 구현 세부는 코드 주석에 둔다.
 설계 문서에 이미 적힌 결정은 중복이라 옮기지 않는다.
 
-## 작성 프로세스
+## Authoring process
 
 - 신설 시 `Proposed`로 연다.
 - 리뷰를 거쳐 `Accepted`(승인), `Rejected`(기각), `Deprecated`(무효화) 중 하나로 간다.
@@ -195,16 +196,16 @@ ADR로 남기지 않는 것도 갈라둔다.
   cwd가 git repo가 아니면 진행하지 말고 물어본다.
   홈 경로 같은 임의 위치로 폴백하지 말라.
 - 번호를 뗄 때 설계 문서 디렉터리를 훑지 말라.
-  ADR 번호 축은 `SPEC-` 축과 독립이라 `docs/adr/` 하나만 본다.
-  같은 repo에 `SPEC-0003`과 `ADR-0003`이 공존하는 것이 정상이다.
+  ADR 번호 축은 `DESIGN-` 축과 독립이라 `docs/adr/` 하나만 본다.
+  같은 repo에 `DESIGN-0003`과 `ADR-0003`이 공존하는 것이 정상이다.
 - `Changelog`는 수락 전 제안 이력 전용이다.
   수락 후 결정 번복은 Changelog 추가가 아니라 새 ADR + 원 ADR `Superseded` 처리다.
-- 섹션명은 영문 그대로 두고 본문만 한국어로 쓴다.
-  `## Context`를 `## 맥락`으로 번역하지 않는다.
+- 제목은 영문 그대로 두고 본문만 한국어로 쓴다.
+  `## Context`를 `## 맥락`으로 번역하지 않고 h1도 영문으로 쓴다.
 - h1의 짧은 제목(명사구)과 `## Title`(완결 문장)을 같은 문장으로 채우지 말라.
   서로 다른 역할이다.
 
-## references 읽기 트리거
+## When to read the references
 
 상세는 `references/`에 두었다.
 아래 상황에 해당 파일을 읽는다.
@@ -216,7 +217,7 @@ ADR로 남기지 않는 것도 갈라둔다.
 | 경계 판단(언제 ADR을 쓰나, 무엇을 담나, Superseded 처리)이 애매함 | [aws-adr-faq.md][aws-adr-faq] |
 | 섹션 세부의 외부 배경을 확인함 | [aws-adr-template.md][aws-adr-template] |
 
-`aws-adr-template.md`의 형식은 위 「형식 정본」과 어긋나는 지점이 있다.
+`aws-adr-template.md`의 형식은 위 「Format (source of truth)」과 어긋나는 지점이 있다.
 형식 기준으로 삼지 않는다.
 
 [aws-adr-process]: references/aws-adr-process.md

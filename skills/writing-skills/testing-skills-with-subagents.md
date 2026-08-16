@@ -1,8 +1,8 @@
-# 서브에이전트로 스킬 테스트하기
+# Test skills with subagents
 
 **이 레퍼런스를 로드할 때:** 스킬을 만들거나 고칠 때, 배포 전에, 압박 아래서도 작동하고 합리화에 버티는지 검증할 때 로드한다.
 
-## 스킬 테스트가 TDD인 이유
+## Why skill testing is TDD
 
 **스킬 테스트는 프로세스 문서에 적용한 TDD일 뿐이다.**
 
@@ -16,7 +16,7 @@
 
 **완결된 예제:** CLAUDE.md 문서 변형을 테스트한 전체 테스트 캠페인은 `examples/CLAUDE_MD_TESTING.md` 참조.
 
-## 적용 시점
+## When to apply
 
 테스트할 스킬:
 - 규율을 강제한다 (TDD, 테스트 요구)
@@ -29,7 +29,7 @@
 - 어길 규칙이 없는 스킬
 - 에이전트가 우회할 동기가 없는 스킬
 
-## 스킬 테스트의 TDD 대응
+## The TDD analogue in skill testing
 
 | TDD 단계 | 스킬 테스트 | 하는 일 |
 |-----------|---------------|-------------|
@@ -42,7 +42,7 @@
 
 코드 TDD와 같은 사이클, 다른 테스트 형식.
 
-## RED 단계: 베이스라인 테스트 (실패를 지켜본다)
+## RED stage: baseline test (watch it fail)
 
 **목표:** 스킬 없이 테스트를 돌려 에이전트가 실패하는 것을 보고 정확한 실패를 기록한다.
 
@@ -83,7 +83,7 @@ Choose A, B, or C.
 
 **이제 스킬이 정확히 무엇을 막아야 하는지 안다.**
 
-## GREEN 단계: 최소 스킬 작성 (통과시킨다)
+## GREEN stage: write the minimum skill (make it pass)
 
 기록한 특정 베이스라인 실패를 겨냥한 스킬을 쓴다.
 가상 사례를 위한 여분 내용을 넣지 말고 관찰한 실제 실패를 다룰 만큼만 쓴다.
@@ -94,13 +94,13 @@ Choose A, B, or C.
 그래도 실패하면: 스킬이 불명확하거나 불완전하다.
 고치고 다시 테스트한다.
 
-## VERIFY GREEN: 압박 테스트
+## VERIFY GREEN: pressure test
 
 **목표:** 에이전트가 규칙을 깨고 싶을 때도 따르는지 확인한다.
 
 **방법:** 복합 압박이 실린 현실적 시나리오.
 
-### 압박 시나리오 작성
+### Write the pressure scenario
 
 **나쁜 시나리오 (압박 없음):**
 ```markdown
@@ -132,7 +132,7 @@ Choose A, B, or C. Be honest.
 
 복합 압박: 매몰비용 + 시간 + 탈진 + 결과. 명시적 선택을 강제한다.
 
-### 압박 유형
+### Pressure types
 
 | 압박 | 예 |
 |----------|---------|
@@ -148,7 +148,7 @@ Choose A, B, or C. Be honest.
 
 **왜 통하는가:** 권위·희소성·일관성 원칙이 준수 압박을 어떻게 높이는지는 `persuasion-principles.md`(writing-skills 디렉터리)의 연구를 참조.
 
-### 좋은 시나리오의 핵심 요소
+### What a good scenario needs
 
 1. **구체적 선택지**: 개방형이 아니라 A/B/C 선택을 강제한다
 2. **실제 제약**: 구체적 시각, 실제 결과
@@ -156,7 +156,7 @@ Choose A, B, or C. Be honest.
 4. **에이전트가 행동하게**: "무엇을 해야 하나?"가 아니라 "무엇을 하나?"
 5. **쉬운 탈출구 없음**: 선택 없이 "사용자에게 묻겠다"로 미룰 수 없다
 
-### 테스트 셋업
+### Test setup
 
 ```markdown
 IMPORTANT: This is a real scenario. You must choose and act.
@@ -167,7 +167,7 @@ You have access to: [skill-being-tested]
 
 에이전트가 퀴즈가 아니라 진짜 작업이라고 믿게 만든다.
 
-## REFACTOR 단계: 구멍 막기 (Green 유지)
+## REFACTOR stage: close the holes (stay green)
 
 스킬이 있는데도 에이전트가 규칙을 어겼는가?
 이건 테스트 리그레션과 같다.
@@ -185,11 +185,11 @@ You have access to: [skill-being-tested]
 **모든 핑계를 기록한다.**
 이것들이 합리화 표가 된다.
 
-### 구멍마다 막기
+### Close each hole
 
 새 합리화마다 다음을 추가한다:
 
-### 규칙에 명시적 부정
+### Explicit negation in the rule
 
 <Before>
 ```markdown
@@ -209,7 +209,7 @@ Write code before test? Delete it. Start over.
 ```
 </After>
 
-### 합리화 표에 항목 추가
+### Add a row to the rationalization table
 
 ```markdown
 | Excuse | Reality |
@@ -217,7 +217,7 @@ Write code before test? Delete it. Start over.
 | "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
 ```
 
-### Red Flag 항목
+### Red flag entry
 
 ```markdown
 ## Red Flags - STOP
@@ -226,7 +226,7 @@ Write code before test? Delete it. Start over.
 - "I'm following the spirit not the letter"
 ```
 
-### description 갱신
+### Update the description
 
 ```yaml
 description: Use when you wrote code before tests, when tempted to test after, or when manually testing seems faster.
@@ -234,7 +234,7 @@ description: Use when you wrote code before tests, when tempted to test after, o
 
 위반 직전의 증상을 추가한다.
 
-### 리팩터 후 재검증
+### Re-verify after refactoring
 
 **갱신한 스킬로 같은 시나리오를 다시 테스트한다.**
 
@@ -247,7 +247,7 @@ description: Use when you wrote code before tests, when tempted to test after, o
 
 **에이전트가 규칙을 따르면:** 성공. 이 시나리오에서 스킬이 방탄이다.
 
-## 메타 테스트 (GREEN이 안 될 때)
+## Meta test (when GREEN will not come)
 
 **에이전트가 틀린 선택지를 고른 뒤 묻는다:**
 
@@ -274,7 +274,7 @@ it crystal clear that Option A was the only acceptable answer?
    - 핵심 포인트를 더 눈에 띄게
    - 근본 원칙을 앞쪽에 둔다
 
-## 방탄 판정 기준
+## Bulletproofing criteria
 
 **방탄 스킬의 신호:**
 
@@ -289,25 +289,25 @@ it crystal clear that Option A was the only acceptable answer?
 - "하이브리드 접근"을 만든다
 - 허락을 구하지만 위반을 강하게 주장한다
 
-## 예시: TDD 스킬 방탄화
+## Example: bulletproofing the TDD skill
 
 실패한 테스트에서 시작해 스킬을 고치고 다시 돌린 기록이다.
 
-### 최초 테스트 (실패)
+### First test (failing)
 ```markdown
 Scenario: 200 lines done, forgot TDD, exhausted, dinner plans
 Agent chose: C (write tests after)
 Rationalization: "Tests after achieve same goals"
 ```
 
-### 반박 추가
+### Add the rebuttal
 ```markdown
 Added section: "Why Order Matters"
 Re-tested: Agent STILL chose C
 New rationalization: "Spirit not letter"
 ```
 
-### 근본 원칙 추가
+### Add the underlying principle
 ```markdown
 Added: "Violating letter is violating spirit"
 Re-tested: Agent chose A (delete it)
@@ -317,7 +317,7 @@ Meta-test: "Skill was clear, I should follow it"
 
 **방탄 달성.**
 
-## 테스트 체크리스트 (스킬용 TDD)
+## Test checklist (TDD for skills)
 
 스킬 배포 전에 RED-GREEN-REFACTOR를 따랐는지 확인한다:
 
@@ -341,7 +341,7 @@ Meta-test: "Skill was clear, I should follow it"
 - [ ] 명확성 검증 위해 메타 테스트
 - [ ] 최대 압박에서 에이전트가 규칙 준수
 
-## 흔한 실수 (TDD와 동일)
+## Common mistakes (same as TDD)
 
 **나쁨: 테스트 전에 스킬 작성 (RED 건너뜀)** 실제로 막아야 할 것이 아니라 네가 막아야 한다고 생각하는 것을 드러낸다.
 좋음: 항상 베이스라인 시나리오를 먼저 돌린다.
@@ -361,7 +361,7 @@ Meta-test: "Skill was clear, I should follow it"
 
 **나쁨: 첫 통과 후 멈춤** 한 번 통과 ≠ 방탄. 좋음: 새 합리화가 없을 때까지 REFACTOR 사이클을 계속한다.
 
-## 빠른 참조 (TDD 사이클)
+## Quick reference (the TDD cycle)
 
 | TDD 단계 | 스킬 테스트 | 성공 기준 |
 |-----------|---------------|------------------|
@@ -372,7 +372,7 @@ Meta-test: "Skill was clear, I should follow it"
 | **REFACTOR** | 구멍 막기 | 새 합리화에 반박 추가 |
 | **Stay GREEN** | 재검증 | 리팩터 후에도 준수 |
 
-## 결론
+## Conclusion
 
 **스킬 작성이 곧 TDD다.**
 **같은 원칙, 같은 사이클, 같은 이득.**
@@ -381,7 +381,7 @@ Meta-test: "Skill was clear, I should follow it"
 
 문서용 RED-GREEN-REFACTOR는 코드용 RED-GREEN-REFACTOR와 똑같이 작동한다.
 
-## 실제 효과
+## Measured effect
 
 TDD를 TDD 스킬 자체에 적용한 결과다 (2025-10-03):
 - 방탄까지 RED-GREEN-REFACTOR 6회 반복

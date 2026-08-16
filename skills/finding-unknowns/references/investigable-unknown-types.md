@@ -1,6 +1,6 @@
-# 조사로 해소하는 유형의 계보
+# Lineage of the investigable types
 
-`SKILL.md`의 「조사로 해소하는 유형의 정의」가 쓰는 유형 4종의 이름(리포 미지·표면 미지·관측 미지·참조 미지)은 이 스킬의 조어다.
+`SKILL.md`의 「Definitions of the investigable types」가 쓰는 유형 4종의 이름(리포 미지·표면 미지·관측 미지·참조 미지)은 이 스킬의 조어다.
 4종을 한 묶음으로 갖는 통용 분류 체계는 확인되지 않았다.
 각 유형은 서로 다른 문헌의 독립된 개념에 대응하고 이 문서가 그 대응과 실증 근거를 담는다.
 
@@ -8,7 +8,7 @@
 통용 명칭들은 각각 자기 연구 전통에서 왔고 서로를 참조하지 않는다.
 이 스킬이 필요한 축은 "어느 조사원에게 넘기는가" 하나이고 그 축으로 4종을 한 표에 세우려면 공통 명명이 필요하다.
 
-## 리포 미지 → 프로그램 이해 (program comprehension)
+## Repo unknown to program comprehension
 
 출처: Sillito, Murphy & De Volder, "Asking and Answering Questions during a Programming Change Task", IEEE Transactions on Software Engineering, 2008년 7월.
 
@@ -28,7 +28,7 @@ Questions over groups of subgraphs
 이 스킬의 4종과 같은 층이 아니다.
 블라인드 스팟 조사원이 무엇을 물어야 하는지 정할 때 참조할 목록이다.
 
-## 표면 미지 → API 학습 (API learning)
+## Surface unknown to API learning
 
 출처: Robillard, "What Makes APIs Hard to Learn? Answers from Developers", IEEE Software 26(6), 2009년 11/12월. 마이크로소프트 개발자 대상 설문(응답 83명, 유효 80명)과 후속 인터뷰 12건.
 
@@ -47,7 +47,7 @@ Table 1의 주요 범주와 응답자 수는 다음과 같다.
 
 학습 전략 응답은 문서 읽기 78%, 코드 예제 사용 55%, API 실험 34%, 기사 읽기 30%, 동료에게 묻기 29%다.
 
-## 관측 미지 → 스파이크 (spike solution)
+## Observation unknown to the spike solution
 
 용어는 익스트림 프로그래밍에서 왔다.
 Kent Beck과 Ward Cunningham이 1990년대 후반 단일 기술 질문에 답하려고 쓰는 버릴 프로그램을 그렇게 불렀다.
@@ -62,7 +62,7 @@ Robillard Table 1에서 `Structure` 아래 `Testing and debugging`(응답자 10)
 
 Ko, DeLine & Venolia(아래)에서 가장 자주 미뤄진 정보가 이 유형이다.
 
-## 참조 미지 → 유추 재사용 (analogical reuse), 사례 기반 추론 (case-based reasoning)
+## Reference unknown to analogical reuse and case-based reasoning
 
 사례 기반 추론은 과거 문제의 해법을 사례로 저장해 두고 새 문제에 맞는 것을 꺼내 고쳐 쓰는 기법이다.
 유추 추론과 함께 설계 공간을 탐색하는 두 기제로 다뤄진다.
@@ -74,7 +74,7 @@ Ko, DeLine & Venolia(아래)에서 가장 자주 미뤄진 정보가 이 유형�
 Ko et al. §5.1은 개발자가 API 문서를 검색하고 다른 코드의 예제를 살피는 행위를 두고 "기존 재사용 가능 코드의 공간을 탐색하는 것"으로 볼 수 있다고 적는다.
 Robillard에서 코드 예제 사용은 55%이고 `Resources` 아래 `Examples`(응답자 20)가 최다 하위 범주다.
 
-## 「답이 있는 곳」 축의 실증 근거
+## Empirical basis for the "where the answer lives" axis
 
 출처: Ko, DeLine & Venolia, "Information Needs in Collocated Software Development Teams", ICSE 2007. 대형 소프트웨어 회사의 개발자 17명을 90분 세션으로 관찰해 정보 탐색 334건을 정보 요구 21종으로 추상화했다.
 
@@ -103,7 +103,7 @@ sources were thought to be inaccurate and out of date.
 그리고 "이 문제들 때문에 두 명을 뺀 모든 개발자가 설계 지식 부재로 결정을 미뤘다"고 이어진다.
 설계 의도가 코드에도 문서에도 신뢰할 만하게 남지 않는다는 관측이라 이 스킬이 설계 의도를 조사가 아니라 역인터뷰로 돌리는 배치를 지지한다.
 
-## 확인 범위
+## Verification scope
 
 - Ko, DeLine & Venolia 2007: 원문 PDF의 본문(정보 요구 절 전체와 Figure 3)을 직접 대조했다.
   인용문과 출처 목록은 원문에서 옮겼다.

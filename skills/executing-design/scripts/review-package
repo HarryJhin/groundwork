@@ -3,6 +3,10 @@
 # 리뷰어가 한 번의 Read로 읽는다. 태스크마다 기록해 둔 BASE를 쓴다(HEAD~1이 아니다).
 # HEAD~1은 커밋이 여럿인 태스크에서 마지막 하나만 남기고 조용히 버린다.
 #
+# stdout은 만들어진 파일의 절대 경로 한 줄이다. 호출자가 그 줄을 그대로 디스패치에
+# 넣는다. 커밋 수·바이트 수 같은 관측값은 stderr로 낸다. 둘을 한 줄에 섞으면
+# 호출자가 경로를 잘라내야 하고 그 파싱이 실패하면 리뷰어가 빈 경로를 받는다.
+#
 # 사용법: review-package DESIGN_FILE BASE HEAD [OUTFILE]
 # 기본 OUTFILE: <repo-root>/.groundwork/run/<design-basename>/review-<base7>..<head7>.diff
 # (범위마다 이름이 갈려 수정 후 재리뷰가 새 파일을 받는다.)
@@ -24,7 +28,7 @@ git rev-parse --verify --quiet "$head" >/dev/null || { echo "bad HEAD: $head" >&
 if [ $# -eq 4 ]; then
   out=$4
 else
-  dir=$("$(cd "$(dirname "$0")" && pwd)/design-workspace" "$design")
+  dir=$("$(cd "$(dirname "$0")" && pwd)/design-scratch" "$design")
   out="$dir/review-$(git rev-parse --short "$base")..$(git rev-parse --short "$head").diff"
 fi
 
@@ -42,4 +46,5 @@ fi
 } > "$out"
 
 commits=$(git rev-list --count "${base}..${head}")
-echo "wrote ${out}: ${commits} commit(s), $(wc -c < "$out" | tr -d ' ') bytes"
+echo "wrote ${out}: ${commits} commit(s), $(wc -c < "$out" | tr -d ' ') bytes" >&2
+echo "$out"

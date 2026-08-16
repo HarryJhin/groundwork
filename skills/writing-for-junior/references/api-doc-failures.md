@@ -4,13 +4,13 @@
 
 Gias Uddin, Martin P. Robillard. IEEE Software 32(4), 2015, 68–75. DOI 10.1109/MS.2014.80.
 
-## 조사 규모
+## Study scale
 
 IBM 소프트웨어 전문가 323명을 대상으로 한 조사 두 건이다.
 탐색 조사는 698명에게 보내 69명이 응답했고(9.9%), 검증 조사는 1,064명에게 보내 254명이 응답했다(23.8%).
 탐색 조사에서 문서 사례 179건(좋은 예 90, 나쁜 예 89)을 모아 문서 단위 131개, API 72종을 다뤘다.
 
-## 10개 문제 (Table 2 verbatim)
+## The ten problems (Table 2 verbatim)
 
 E는 그 문제를 언급한 사례 수, D는 그 문제를 보고한 개발자 수다.
 
@@ -34,7 +34,7 @@ E는 그 문제를 언급한 사례 수, D는 그 문제를 보고한 개발자 
 | Excess structural information | "The description of an element contained redundant information about the element's syntax or structure, which could be easily obtained through modern IDEs." | 4 | 3 |
 | Tangled information | "The description of an API element or topic was tangled with information the respondent didn't need." | 4 | 3 |
 
-## 핵심 결론
+## Key conclusion
 
 "We concluded that the most pressing problems were related to content, as opposed to presentation."
 
@@ -42,7 +42,7 @@ E는 그 문제를 언급한 사례 수, D는 그 문제를 보고한 개발자 
 응답자들이 문제 6가지를 최소 한 번 이상 "blocker"로 지목했고(incompleteness, ambiguity, obsoleteness, incorrectness, inconsistency, unexplained examples) 초록은 이것을 "다른 API를 쓰게 만든 blocker"로 표현한다.
 ambiguity를 최우선 과제로 고른 비율이 51.9%다.
 
-## 스킬에서 쓴 지점
+## Where the skill uses this
 
 - **content가 presentation을 크게 웃돈다(61 대 25)**는 결과가 이 스킬의 구성 판단과 같은 방향이다.
   문장을 다듬는 것보다 내용의 공백·모호·불일치를 잡는 쪽이 우선이라는 뜻이다.
@@ -57,7 +57,7 @@ ambiguity를 최우선 과제로 고른 비율이 51.9%다.
 - **Unexplained examples**가 `delta-skill.md`의 I축(셸 블록 성립성)에 대응한다.
   코드 예시가 설명 없이 놓이면 독자가 그것을 실행으로 옮기지 못한다.
 
-## 확인 범위
+## Verification scope
 
 Table 2의 문제 정의와 수치, 조사 규모, 핵심 결론 문장은 저자 공개본 PDF 전문에서 확인했다.
 인용은 그 PDF의 표기 그대로다.

@@ -1,4 +1,4 @@
-# 구현자 서브에이전트 프롬프트 템플릿
+# Implementer subagent prompt template
 
 구현자 서브에이전트를 디스패치할 때 이 본문을 `general-purpose` 프롬프트로 주입한다.
 

@@ -1,11 +1,11 @@
-# 근본 원인 역추적
+# Root cause tracing
 
 버그는 콜스택 깊은 곳에서 드러나는 일이 많다(잘못된 디렉터리에서 git init, 엉뚱한 위치에 파일 생성, 잘못된 경로로 DB 열기).
 본능은 에러가 나타난 곳을 고치는 것이지만 그것은 증상 치료다.
 
 **핵심 원칙**: 원 유발점을 찾을 때까지 호출 사슬을 거슬러 올라간 뒤 출처에서 고친다.
 
-## 적용 대상
+## Where it applies
 
 - 에러가 실행 깊은 곳에서 일어난다(진입점이 아니다)
 - 스택 트레이스가 긴 호출 사슬을 보인다
@@ -14,22 +14,22 @@
 
 거슬러 올라갈 수 없는 막다른 지점이면 증상 지점에서 고치되 그 사실을 기록한다.
 
-## 추적 절차
+## Tracing procedure
 
 다섯 단계를 순서대로 돈다.
 
-### 증상을 관찰한다
+### Observe the symptom
 ```text
 Error: git init failed in ~/project/packages/core
 ```
 
-### 직접 원인을 찾는다
+### Find the immediate cause
 **어떤 코드가 이것을 직접 일으키는가**
 ```typescript
 await execFileAsync('git', ['init'], { cwd: projectDir });
 ```
 
-### 무엇이 이것을 호출했는지 묻는다
+### Ask what called this
 ```typescript
 WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → Session.initializeWorkspace()가 호출
@@ -37,20 +37,20 @@ WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → Project.create()의 테스트가 호출
 ```
 
-### 계속 거슬러 올라간다
+### Keep walking backward
 **어떤 값이 넘어왔나**
 - `projectDir = ''`(빈 문자열)
 - 빈 문자열이 `cwd`로 들어가면 `process.cwd()`로 해소된다
 - 그것이 소스 코드 디렉터리다
 
-### 원 유발점을 찾는다
+### Find the origin
 **빈 문자열은 어디서 왔나**
 ```typescript
 const context = setupCoreTest(); // { tempDir: '' }를 반환
 Project.create('name', context.tempDir); // beforeEach 전에 접근했다
 ```
 
-## 스택 트레이스 추가
+## Add a stack trace
 
 수동으로 추적할 수 없으면 계측을 넣는다.
 
@@ -79,7 +79,7 @@ npm test 2>&1 | grep 'DEBUG git init'
 
 **스택 트레이스를 분석한다**: 테스트 파일 이름을 찾고 호출을 유발한 줄 번호를 찾고 패턴을 식별한다(같은 테스트인가, 같은 파라미터인가).
 
-## 어느 테스트가 오염시키는지 찾기
+## Find which test pollutes
 
 테스트 중에 무언가가 나타나는데 어느 테스트인지 모르면 이 디렉터리의 이분 탐색 스크립트를 쓴다.
 
@@ -90,7 +90,7 @@ npm test 2>&1 | grep 'DEBUG git init'
 테스트를 하나씩 돌리고 첫 오염원에서 멈춘다.
 사용법은 스크립트를 본다.
 
-## 실제 사례: 빈 projectDir
+## A real case: empty projectDir
 
 **증상**: `.git`이 `packages/core/`(소스 코드)에 생성됐다
 
@@ -111,7 +111,7 @@ npm test 2>&1 | grep 'DEBUG git init'
 - 환경 가드: NODE_ENV 가드가 tmpdir 밖 git init을 거부
 - 디버그 계측: git init 전에 스택 트레이스 로깅
 
-## 핵심 원리
+## Core principle
 
 직접 원인을 찾았으면 한 단계 위로 올라갈 수 있는지 본다.
 올라갈 수 있으면 거슬러 올라가고 거기가 출처인지 묻는다.
@@ -122,7 +122,7 @@ npm test 2>&1 | grep 'DEBUG git init'
 **에러가 나타난 곳만 고치지 않는다.**
 원 유발점까지 거슬러 올라간다.
 
-## 스택 트레이스 요령
+## Stack trace tips
 
 - **테스트에서**: 로거가 아니라 `console.error()`를 쓴다.
   로거는 억제될 수 있다
@@ -130,6 +130,6 @@ npm test 2>&1 | grep 'DEBUG git init'
 - **맥락을 담는다**: 디렉터리, cwd, 환경 변수, 타임스탬프
 - **스택을 잡는다**: `new Error().stack`이 완전한 호출 사슬을 보인다
 
-## 연계
+## Related skills
 
 출처를 찾은 뒤에는 [defense-in-depth.md](defense-in-depth.md)로 각 층에 검증을 더한다.

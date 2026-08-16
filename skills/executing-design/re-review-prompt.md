@@ -1,4 +1,4 @@
-# 범위 한정 재리뷰 프롬프트 템플릿
+# Scoped re-review prompt template
 
 fix 라운드 뒤 재리뷰를 디스패치할 때 이 본문을 `general-purpose` 프롬프트로 주입한다.
 재리뷰어는 발견이 해소됐는지 검증하고 수정 diff에 새 파손이 있는지 본다.

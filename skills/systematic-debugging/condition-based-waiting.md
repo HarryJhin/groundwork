@@ -1,11 +1,11 @@
-# 조건 기반 대기
+# Condition-based waiting
 
 불안정한 테스트는 임의의 지연으로 타이밍을 추측하는 일이 많다.
 그러면 경쟁 조건이 생겨 빠른 기계에서는 통과하고 부하나 CI에서는 실패한다.
 
 **핵심 원칙**: 얼마나 걸릴지 추측하지 말고 실제로 관심 있는 조건을 기다린다.
 
-## 적용 대상
+## Where it applies
 
 **쓴다**:
 - 테스트에 임의 지연이 있다(`setTimeout`, `sleep`, `time.sleep()`)
@@ -17,7 +17,7 @@
 - 실제 타이밍 동작을 검사한다(디바운스, 스로틀 간격)
 - 임의 타임아웃을 쓸 때는 항상 **왜**인지 기록한다
 
-## 기본 패턴
+## Base pattern
 
 ```typescript
 // 전: 타이밍을 추측한다
@@ -31,7 +31,7 @@ const result = getResult();
 expect(result).toBeDefined();
 ```
 
-## 빠른 패턴
+## Quick patterns
 
 | 상황 | 패턴 |
 |---|---|
@@ -41,7 +41,7 @@ expect(result).toBeDefined();
 | 파일 대기 | `waitFor(() => fs.existsSync(path))` |
 | 복합 조건 | `waitFor(() => obj.ready && obj.value > 10)` |
 
-## 구현
+## Implementation
 
 범용 폴링 함수다.
 
@@ -68,7 +68,7 @@ async function waitFor<T>(
 
 도메인 헬퍼(`waitForEvent`, `waitForEventCount`, `waitForEventMatch`)를 포함한 완전한 구현은 이 디렉터리의 `condition-based-waiting-example.ts`에 있다.
 
-## 흔한 실수
+## Common mistakes
 
 **너무 빠른 폴링**: `setTimeout(check, 1)`은 CPU를 낭비한다.
 10ms마다 폴링한다.
@@ -79,7 +79,7 @@ async function waitFor<T>(
 **낡은 데이터**: 루프 전에 상태를 캐시한다.
 루프 안에서 게터를 호출해 신선한 데이터를 얻는다.
 
-## 임의 타임아웃이 옳은 경우
+## When an arbitrary timeout is right
 
 ```typescript
 // 도구가 100ms마다 틱한다. 부분 출력 검증에 2틱이 필요하다

@@ -2,20 +2,20 @@
 
 코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 단계 사슬을 스킬로 덮고 세션마다 에이전트가 그 사슬에 진입하도록 강제한다.
 
-## 목차
+## Contents
 
-- [groundwork가 푸는 문제](#groundwork가-푸는-문제)
-- [요구 사항](#요구-사항)
-- [설치](#설치)
-- [flow가 도는 방식](#flow가-도는-방식)
-- [산출물](#산출물)
-- [철학](#철학)
-- [실행되는 코드의 범위](#실행되는-코드의-범위)
-- [한계](#한계)
-- [기여](#기여)
-- [라이선스](#라이선스)
+- [The problem groundwork solves](#the-problem-groundwork-solves)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [How the flow runs](#how-the-flow-runs)
+- [Artifacts](#artifacts)
+- [Philosophy](#philosophy)
+- [What code actually runs](#what-code-actually-runs)
+- [Limits](#limits)
+- [Contributing](#contributing)
+- [License](#license)
 
-## groundwork가 푸는 문제
+## The problem groundwork solves
 
 디스크에만 있는 스킬은 죽은 코드다.
 에이전트가 부르지 않으면 실행되지 않는다.
@@ -29,7 +29,7 @@ groundwork는 이 문제를 세션 시작 훅으로 푼다.
 실행층 규율을 이식하고 설계 앞단을 다시 지었다.
 파일 단위 저작권 고지는 [NOTICE](NOTICE)에 있다.
 
-## 요구 사항
+## Requirements
 
 | 항목 | 값 |
 |---|---|
@@ -44,7 +44,7 @@ groundwork는 이 문제를 세션 시작 훅으로 푼다.
 여기서 하네스는 스킬과 서브에이전트를 실행하는 에이전트 런타임을 뜻한다.
 표준 용어 test harness와 무관하다.
 
-## 설치
+## Installation
 
 하네스마다 방법이 다르다.
 
@@ -74,7 +74,7 @@ claude plugin install groundwork@groundwork
 설치가 됐는지는 새 세션의 컨텍스트에 `using-groundwork` 부트스트랩 본문이 실렸는지로 확인한다.
 본문이 안 보이면 주입이 실패한 것이고 그 세션에서는 flow가 발동하지 않는다.
 
-#### 설치 스코프
+#### Installation scope
 
 `--scope`로 어디에 설치할지 정한다.
 생략하면 `user`다.
@@ -92,7 +92,7 @@ claude plugin install groundwork@groundwork --scope project
 팀 전체에 쓰려면 `project` 스코프로 설치한다.
 협업자가 리포 폴더를 신뢰할 때 설치 안내를 받는다.
 
-#### 제거
+#### Removal
 
 ```bash
 claude plugin uninstall groundwork@groundwork
@@ -107,9 +107,9 @@ claude plugin marketplace remove groundwork
 `.codex-plugin/plugin.json`이 `skills/`를 가리키는 매니페스트를 제공한다.
 훅은 Claude Code 전용이라 Codex 배포는 `hooks:{}`다.
 그 결과 Codex에서 부트스트랩은 자동 주입되지 않고 스킬 목록에만 노출된다.
-실제 설치와 동작은 아직 검증하지 않았다([한계](#한계) 참고).
+실제 설치와 동작은 아직 검증하지 않았다([Limits](#limits) 참고).
 
-## flow가 도는 방식
+## How the flow runs
 
 특별히 할 일은 없다.
 설치하고 평소처럼 요청하면 된다.
@@ -128,7 +128,7 @@ flow가 도는지 확인하려면 새 세션에서 이렇게 말해 본다.
 에이전트가 구현을 시작하지 않고 `groundwork:finding-unknowns`를 호출하면 정상이다.
 곧장 파일을 쓰기 시작하면 부트스트랩 주입이 실패한 것이다.
 
-### 단계
+### Stages
 
 | 단계 | 하는 일 |
 |---|---|
@@ -144,7 +144,7 @@ flow가 도는지 확인하려면 새 세션에서 이렇게 말해 본다.
 리뷰 과정은 파일을 남기지 않는다.
 발견은 반환 텍스트가 전부이고 처리 결과는 문서 개정으로 드러난다.
 
-### 발동 조건
+### Trigger conditions
 
 판별 기준은 틀린 방향으로 갔을 때 그 사실이 얼마나 늦게 드러나는가다.
 요청을 두 가지로 읽을 수 있거나, 틀린 것을 만들어도 검증이 통과하거나, 되돌리는 비용이 만드는 비용에 맞먹으면 flow로 들어간다.
@@ -154,7 +154,7 @@ flow가 도는지 확인하려면 새 세션에서 이렇게 말해 본다.
 flow를 쓰고 싶지 않은 리포가 있다면 그 리포의 `CLAUDE.md`에 적는다.
 부트스트랩이 사용자 지시를 groundwork보다 위에 두므로 그 지시가 이긴다.
 
-## 산출물
+## Artifacts
 
 flow는 작업 리포에 파일을 남긴다.
 
@@ -171,7 +171,7 @@ ADR은 Architecture Decision Record, 아키텍처 결정 기록이고 자기 디
 설계 문서에는 `created`와 `status` 프론트매터를 단다.
 작업이 끝나면 `status: closed`가 기입된다.
 
-## 철학
+## Philosophy
 
 flow의 각 단계가 무엇을 강제하는지는 이 다섯에서 나온다.
 
@@ -182,7 +182,7 @@ flow의 각 단계가 무엇을 강제하는지는 이 다섯에서 나온다.
   저자에게만 읽히는 문서는 미완성이다
 - YAGNI. 요청되지 않은 기능·추상화·유연성을 만들지 않는다
 
-## 실행되는 코드의 범위
+## What code actually runs
 
 플러그인은 훅으로 사용자 권한의 코드를 돌린다.
 설치 전에 무엇이 도는지 판단할 수 있도록 범위를 밝힌다.
@@ -196,7 +196,7 @@ flow의 각 단계가 무엇을 강제하는지는 이 다섯에서 나온다.
 스킬 본문은 에이전트에게 주는 지시라서 그 자체로는 아무것도 실행하지 않는다.
 실행 주체는 언제나 에이전트이고 도구 사용 승인은 하네스의 권한 설정을 따른다.
 
-## 한계
+## Limits
 
 - Codex에서 서브에이전트 디스패치와 보조 스크립트 실행이 미검증이다.
   스킬 노출까지만 확인했다
@@ -204,13 +204,17 @@ flow의 각 단계가 무엇을 강제하는지는 이 다섯에서 나온다.
   다른 벤더 모델을 리뷰어로 붙였을 때 독립성 이득이 실제로 나오는지는 측정된 적이 없다
 - 태스크 분해가 실행 시점으로 옮겨 가면서 분해 결과가 사용자 승인을 거치지 않는다.
   실행 스킬이 착수 전에 분해를 통지하지만 그것은 게이트가 아니다.
-  설계 문서의 「수용 기준」이 흐리면 잘못된 분해를 막을 지점이 없다
+  설계 문서의 「Acceptance criteria」이 흐리면 잘못된 분해를 막을 지점이 없다
 - Windows 네이티브 환경은 지원하지 않는다.
   훅이 bash 스크립트다
-- 리뷰 이력이 파일로 남지 않아 세션이 끊기면 이전 라운드 발견이 사라진다
+- 리뷰 이력이 파일로 남지 않아 세션이 끊기면 이전 라운드 발견이 사라진다.
+  확인 라운드의 대상을 정하는 개정 절 목록도 대화 맥락에만 있어 같은 조건에서 사라진다
+- 설계 리뷰의 `통과`는 결함이 없다는 판정이 아니다.
+  확인 라운드가 덮는 것은 개정된 절이고, 그 라운드가 낸 발견을 고친 개정은 다시 검증되지 않는다.
+  후퇴를 끊는 대가로 남긴 잔여다
 - 모든 스킬에 자기완결 판독 기준을 전수 적용해 발견을 고쳤으나 재판정을 돌리지 않았다
 
-## 기여
+## Contributing
 
 질문과 버그 제보는 [이슈](https://github.com/HarryJhin/groundwork/issues)로 받는다.
 PR도 받는다.
@@ -219,7 +223,7 @@ PR도 받는다.
 그래서 스킬 본문을 고치는 PR에는 근거를 요구한다.
 자세한 내용과 리포 구조는 [CONTRIBUTING.md](CONTRIBUTING.md)에 있다.
 
-## 라이선스
+## License
 
 MIT © 2026 Harry Jhin. 전문은 [LICENSE](LICENSE)에 있다.
 

@@ -1,4 +1,4 @@
-# 다층 방어 검증
+# Defense in depth
 
 잘못된 데이터가 일으킨 버그를 고칠 때 한 곳에 검증을 넣으면 충분해 보인다.
 그러나 그 단일 검사는 다른 코드 경로·리팩터링·목이 우회한다.
@@ -6,7 +6,7 @@
 **핵심 원칙**: 데이터가 지나는 **모든** 층에서 검증한다.
 그 버그를 구조적으로 불가능하게 만든다.
 
-## 여러 층을 두는 이유
+## Why there are several layers
 
 검증이 하나면 "버그를 고쳤다"이고 여러 층이면 "버그를 불가능하게 만들었다"이다.
 
@@ -16,11 +16,11 @@
 환경 가드는 맥락 고유의 위험을 막는다.
 디버그 로깅은 다른 층이 실패했을 때 돕는다.
 
-## 4개 층
+## The four layers
 
 층마다 막는 것과 막지 못하는 것이 다르다.
 
-### 진입점 검증
+### Entry point validation
 
 **목적**: API 경계에서 명백히 잘못된 입력을 거부한다
 
@@ -39,7 +39,7 @@ function createProject(name: string, workingDirectory: string) {
 }
 ```
 
-### 비즈니스 로직 검증
+### Business logic validation
 
 **목적**: 데이터가 이 연산에 말이 되는지 확인한다
 
@@ -52,7 +52,7 @@ function initializeWorkspace(projectDir: string, sessionId: string) {
 }
 ```
 
-### 환경 가드
+### Environment guard
 
 **목적**: 특정 맥락에서 위험한 연산을 막는다
 
@@ -73,7 +73,7 @@ async function gitInit(directory: string) {
 }
 ```
 
-### 디버그 계측
+### Debug instrumentation
 
 **목적**: 사후 분석을 위한 맥락을 남긴다
 
@@ -89,7 +89,7 @@ async function gitInit(directory: string) {
 }
 ```
 
-## 패턴 적용
+## Applying the pattern
 
 버그를 찾으면 이렇게 한다.
 
@@ -98,7 +98,7 @@ async function gitInit(directory: string) {
 3. **층마다 검증을 넣는다**: 진입, 비즈니스, 환경, 디버그
 4. **층마다 테스트한다**: 진입점 검증을 우회해 보고 비즈니스 로직 검증이 잡는지 확인한다
 
-## 사례
+## Cases
 
 버그: 빈 `projectDir`가 소스 코드에서 `git init`을 일으켰다
 
@@ -116,7 +116,7 @@ async function gitInit(directory: string) {
 
 **결과**: 전 테스트 통과, 버그 재현 불가
 
-## 핵심 통찰
+## Core insight
 
 4개 층이 모두 필요했다.
 테스트 중에 각 층이 다른 층이 놓친 버그를 잡았다.

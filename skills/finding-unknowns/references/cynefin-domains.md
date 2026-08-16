@@ -1,11 +1,11 @@
 출처: https://untools.co/cynefin-framework/
 
-# Cynefin 도메인과 행동 순서
+# Cynefin domains and the order of action
 
 Dave Snowden의 의사결정 틀이다.
 문제의 종류가 다르면 대응의 종류도 달라야 한다는 것이 요지다.
 
-## 도메인별 서술 (인용구 포함)
+## Description by domain (with quotations)
 
 | 도메인 | 성격 | 행동 순서 | 통하는 실천 |
 |---|---|---|---|
@@ -19,7 +19,7 @@ Complex 도메인의 처방을 출처는 이렇게 적는다.
 
 > "experiment first, learn about the problem. Then sense what you're dealing with and respond appropriately."
 
-## 스킬에서 쓴 지점
+## Where the skill uses this
 
 unknown의 종류마다 도구가 갈리는 구조가 이 틀과 같다.
 
@@ -31,7 +31,7 @@ unknown의 종류마다 도구가 갈리는 구조가 이 틀과 같다.
 분석이 통하지 않는 곳에서 분석을 더 하는 것이 이 틀이 경고하는 실패다.
 질문을 3번째로 반복하는 대신 프로토타입을 병치하라는 전환 규칙이 여기서 나온다.
 
-## 확인 범위
+## Verification scope
 
 위 인용구는 출처 페이지에서 확인했다.
 Snowden & Boone(HBR 2007) 원논문은 대조하지 않았고 실천 이름(best·good·emergent·novel practice)은 이 틀의 통용 표기를 따랐다.

@@ -3,7 +3,7 @@ name: managing-community-health-files
 description: Use when 커뮤니티 헬스 파일(CODE_OF_CONDUCT, CONTRIBUTING, SECURITY.md, SUPPORT, GOVERNANCE, FUNDING.yml, CODEOWNERS, ISSUE_TEMPLATE, PULL_REQUEST_TEMPLATE, DISCUSSION_TEMPLATE)이 빠졌는지 점검하거나 표준에 맞게 새로 만들 때, 조직 `.github` 상속을 구성하거나 정본 문서를 고칠 때, community profile·health_percentage 수치를 해석할 때. 단일 파일 한 줄 수정은 대상이 아니다.
 ---
 
-# 커뮤니티 헬스 파일 관리
+# Manage community health files
 
 GitHub 표준 커뮤니티 헬스 파일을 감사하고 표준에 맞게 채우고 조직 `.github` 상속 모델을 구성한다.
 
@@ -14,11 +14,11 @@ GitHub 표준 커뮤니티 헬스 파일을 감사하고 표준에 맞게 채우
 GitHub이 문서로 규정하지 않아 관측으로 채운 항목은 관측이라고 밝혀 적는다.
 둘을 섞지 않는다.
 
-## GitHub 표준 사실
+## GitHub standard facts
 
 출처: GitHub Docs "Creating a default community health file". FUNDING.yml·이슈 폼 YAML· CODEOWNERS의 상세 문법이나 배치 우선순위 표가 필요하면 [github-standard.md](references/github-standard.md)를 읽는다.
 
-### 조직 `.github` 리포에서 상속되는 파일
+### Files inherited from the organization `.github` repo
 
 `.github`라는 이름의 **public** 리포에 두면, 같은 계정 소유의 다른 리포가 자기 파일이 없을 때 상속한다.
 
@@ -31,7 +31,7 @@ GitHub이 문서로 규정하지 않아 관측으로 채운 항목은 관측이�
 - SECURITY.md
 - SUPPORT.md
 
-### 인식 디렉터리 우선순위
+### Recognized directory precedence
 
 각 파일은 이 순서로 탐색한다.
 현재 리포에 없으면 `.github` 리포를 같은 순서로 본다.
@@ -45,7 +45,7 @@ GitHub이 문서로 규정하지 않아 관측으로 채운 항목은 관측이�
 FUNDING.yml은 `.github/`의 default 브랜치에만 둔다.
 루트나 `docs/`에 있으면 GitHub이 무시한다.
 
-### LICENSE는 상속 대상이 아니다
+### LICENSE is not inherited
 
 라이선스는 clone·package·download에 포함돼야 하므로 각 리포에 직접 둔다.
 조직 `.github`에서 상속되지 않는다.
@@ -57,11 +57,11 @@ CODEOWNERS는 위 상속 목록에는 없지만 `.github`/루트/`docs`에서 �
 마지막으로 매칭되는 패턴이 최우선이고 한 패턴의 여러 owner는 반드시 같은 줄에 둔다.
 문법 상세는 github-standard.md에 있다.
 
-## 작업별 절차
+## Procedures by task
 
 요청이 어느 작업인지 먼저 판정하고 해당 절차만 실행한다.
 
-### 감사·진단
+### Audit and diagnosis
 
 리포에 무엇이 있고 무엇이 빠졌는지 리포트한다.
 **읽기 전용**이다.
@@ -74,11 +74,11 @@ bash ${CLAUDE_PLUGIN_ROOT}/skills/managing-community-health-files/scripts/audit-
 그 수치를 완전성 근거로 쓰지 않는다.
 이유는 [Gotchas](#gotchas)에 있다.
 
-### 스캐폴딩 (부재 파일 생성)
+### Scaffolding (create the missing files)
 
 **전제 확인**: 형제에 조직 `.github` 리포가 있으면 이 리포에 상속 문서를 만들지 않는다.
 하위 리포의 자체 파일은 정본을 이기고 이슈 템플릿은 폴더 단위로 이겨서 정본 폴더 전체를 무효로 만든다.
-상속 모델을 쓰는 리포라면 [작업 3](#3-조직-github-정본-셋업)으로 전환한다.
+상속 모델을 쓰는 리포라면 [Set up the organization `.github` source of truth](#set-up-the-organization-github-source-of-truth)로 전환한다.
 
 단일 리포(상속 없음)에서만 생성한다.
 파일 내용은 아래 표준을 따르되 프로젝트 고유 정보 (연락처, 지원 버전, 행동강령 담당자)는 사용자에게 확인해 채운다.
@@ -101,7 +101,7 @@ CoC 소스 선택, CLA 채택 여부, SECURITY 보고 경로 설계처럼 판단
 
 이슈 템플릿을 만들면 [Gotchas](#gotchas)의 체크마크 조건과 이름 길이 제한을 함께 지킨다.
 
-### 조직 `.github` 정본 셋업
+### Set up the organization `.github` source of truth
 
 상속 모델을 구성하거나 정본 문서를 편집한다.
 

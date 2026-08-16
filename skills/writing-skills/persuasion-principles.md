@@ -1,4 +1,4 @@
-# 스킬 설계를 위한 설득 원리
+# Persuasion principles for skill design
 
 LLM은 사람과 같은 설득 원리에 반응한다.
 이 심리를 이해하면 더 효과적인 스킬을 설계한다.
@@ -7,11 +7,11 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 **연구 기반:** Meincke et al. (2025)는 7가지 설득 원리를 N=28,000 AI 대화로 시험했다.
 설득 기법은 순응률을 두 배 넘게 높였다(33% → 72%, p < .001).
 
-## 7가지 원리
+## The seven principles
 
 일곱을 차례로 보고 각 원리가 스킬 문구에서 어떻게 나타나는지 짚는다.
 
-### 권위 (Authority)
+### Authority
 **정체:** 전문성·자격·공식 출처에 따르는 것.
 
 **스킬에서 작동하는 방식:**
@@ -30,7 +30,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 ❌ Consider writing tests first when feasible.
 ```
 
-### 약속 (Commitment)
+### Commitment
 **정체:** 앞선 행동·발언·공개 선언과 일관되려는 것.
 
 **스킬에서 작동하는 방식:**
@@ -49,7 +49,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 ❌ Consider letting your partner know which skill you're using.
 ```
 
-### 희소성 (Scarcity)
+### Scarcity
 **정체:** 시간 제한이나 한정된 가용성에서 오는 긴급함.
 
 **스킬에서 작동하는 방식:**
@@ -68,7 +68,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 ❌ You can review code when convenient.
 ```
 
-### 사회적 증거 (Social Proof)
+### Social proof
 **정체:** 남들이 하는 것, 다들 정상으로 여기는 것에 맞추는 것.
 
 **스킬에서 작동하는 방식:**
@@ -87,7 +87,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 ❌ Some people find a todo list helpful for checklists.
 ```
 
-### 유대 (Unity)
+### Unity
 **정체:** 공유 정체성, "우리라는 느낌", 내집단 소속.
 
 **스킬에서 작동하는 방식:**
@@ -105,7 +105,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 ❌ You should probably tell me if I'm wrong.
 ```
 
-### 상호성 (Reciprocity)
+### Reciprocity
 **정체:** 받은 이득을 되갚아야 한다는 의무감.
 
 **작동 방식:**
@@ -116,7 +116,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 **언제 피하나:**
 - 거의 항상(다른 원리가 더 효과적)
 
-### 호감 (Liking)
+### Liking
 **정체:** 좋아하는 상대와 협력하려는 선호.
 
 **작동 방식:**
@@ -127,7 +127,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 **언제 피하나:**
 - 규율 강제에는 항상
 
-## 스킬 유형별 원리 조합
+## Principle combinations by skill type
 
 | 스킬 유형 | 쓸 것 | 피할 것 |
 |------------|-----|-------|
@@ -136,7 +136,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 | 협력 | 유대 + 약속 | 권위, 호감 |
 | 레퍼런스 | 명료성만 | 모든 설득 |
 
-## 왜 통하나: 심리
+## Why it works: the psychology
 
 **분명한 경계선 규칙은 합리화를 줄인다:**
 - "YOU MUST"는 결정 피로를 없앤다
@@ -155,7 +155,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 - 약속 시퀀스(발언 → 행동)가 자주 모델링됐다
 - 사회적 증거 패턴(모두가 X를 한다)이 규범을 세운다
 
-## 윤리적 사용
+## Ethical use
 
 **정당:**
 - 핵심 관행이 지켜지게 하기
@@ -169,7 +169,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 
 **시험:** 사용자가 이 기법을 온전히 이해한다면 그것이 사용자의 진짜 이익에 부합하겠는가?
 
-## 연구 인용
+## Research citations
 
 **Cialdini, R. B. (2021).** *Influence: The Psychology of Persuasion (New and Expanded).* Harper Business.
 - 설득의 원리 7가지
@@ -181,7 +181,7 @@ LLM은 사람과 같은 설득 원리에 반응한다.
 - 권위·약속·희소성이 가장 효과적
 - LLM 행동의 준인간 모델을 입증
 
-## 빠른 참조
+## Quick reference
 
 스킬을 설계할 때 묻는다:
 

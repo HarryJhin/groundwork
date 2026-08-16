@@ -3,12 +3,12 @@
 - https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Self-references_to_avoid
 - https://github.com/azizkayumov/clean-code/blob/main/comments.md
 
-# 제작 사정 누출(G축)의 근거
+# Basis for production-circumstance leakage (axis G)
 
 G축이 잡는 결함에는 학술 명칭과 실무 판정 규칙이 각각 따로 있다.
 명칭은 현상을 가리키고 규칙은 판정 방법을 준다.
 
-## 현상의 명칭: writer-based prose
+## The name of the phenomenon: writer-based prose
 
 Linda S. Flower. "Writer-Based Prose: A Cognitive Basis for Problems in Writing." *College English* 41 (September 1979), 19-37.
 
@@ -30,7 +30,7 @@ Flower의 진단은 원인을 능력이나 성의가 아니라 **변형의 부�
 이 스킬의 「왜 저자는 이 실패를 못 알아채는가」가 같은 진단을 다룬다.
 G축은 그중 문서가 자기 제작 과정을 기록하는 형태를 떼어 판정 축으로 세운 것이다.
 
-## 판정 규칙: 이식성 테스트
+## The rule: the portability test
 
 Wikipedia Manual of Style, "Self-references to avoid".
 
@@ -46,7 +46,7 @@ G축의 판정식이 이 형태를 그대로 옮겼다.
 기준 환경만 바꾼다.
 위키백과 사본 대신 "이 문서를 만든 환경 밖"이고 그 환경은 저자의 도구 설정, 문서를 만든 세션, 거쳐 온 리뷰 라운드를 가리킨다.
 
-## 코드 주석의 대응 분류
+## The matching classification for code comments
 
 Robert C. Martin, *Clean Code*, 4장 Comments의 불량 주석 분류에서 3가지가 대응한다.
 
@@ -60,7 +60,7 @@ Journal Comment의 논리가 특히 쓸모 있다.
 정보가 틀려서 빼는 것이 아니라 **그 정보를 담을 더 나은 곳이 따로 있어서** 뺀다.
 G축이 "근거가 정말 필요하면 ADR이나 코드 주석으로 간다"고 적은 근거가 같다.
 
-## 부분만 겹치는 것
+## What only partly overlaps
 
 "throat clearing"은 글머리의 준비운동 문단과 "it is important to note that" 류의 빈 도입부를 가리킨다.
 독자가 아니라 저자를 위한 문장이라는 점이 겹치고 위치가 앞머리로 한정된다는 점이 갈린다.
@@ -70,7 +70,7 @@ Ken Hyland의 metadiscourse 분류(*Metadiscourse: Exploring Interaction in Writ
 범주 이름으로는 정확하지만 판정에는 쓰지 않았다.
 Hyland는 metadiscourse를 결함이 아니라 기능으로 다루고 설명서 연구에서는 독자를 안내하는 데 필요한 것으로 본다.
 
-## 확인 범위
+## Verification scope
 
 Flower의 정의 인용구는 저자 공개본 PDF에서 확인했다.
 논문 전문의 사례 분석과 개정 절차는 대조하지 않았다.

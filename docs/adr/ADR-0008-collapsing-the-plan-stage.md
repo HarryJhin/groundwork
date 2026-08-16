@@ -1,4 +1,4 @@
-# ADR-0008: 플랜 단계 소멸과 실행 시점 분해
+# ADR-0008: Collapse the plan stage and break work down at execution time
 
 ## Title
 
@@ -78,7 +78,7 @@ groundwork가 두 실행 환경을 함께 덮으므로 모델 배정 규율이 �
 
 **스펙을 계약으로 만든다.**
 스펙이 무엇을 만들고 무엇이 되면 끝인지를 정하되 어떤 순서로 어느 파일을 건드릴지는 정하지 않는다.
-스펙에 「전역 제약」과 「수용 기준」 두 절을 신설한다.
+스펙에 「Global constraints」과 「Acceptance criteria」 두 절을 신설한다.
 수용 기준은 항목마다 참·거짓이 갈려야 하고 무엇으로 확인하는지를 함께 담는다.
 절 구성의 정본은 `skills/finding-unknowns/SKILL.md`의 「스펙에 담는 것」이다.
 
@@ -133,7 +133,7 @@ Positive:
 Negative:
 - **분해가 사용자 승인을 거치지 않는다.**
   플랜 승인이 하던 "내가 원한 것이 빠지지 않았나" 판정 기회가 게이트에서 통지로 내려간다.
-  스펙의 「수용 기준」이 흐리면 잘못된 분해를 막을 지점이 없다.
+  스펙의 「Acceptance criteria」이 흐리면 잘못된 분해를 막을 지점이 없다.
   그 절의 품질이 이 결정의 안전 마진 전부다.
 - **분해가 커밋되지 않아 사후 추적이 어렵다.**
   무엇을 계획했고 무엇이 바뀌었는지가 진행 기록에만 남고 그 워크스페이스는 종료 시 삭제된다.
@@ -162,7 +162,7 @@ Negative:
 - `skills/`와 `hooks/` 어디에도 플랜 산출물을 만들라고 지시하는 문구가 없다.
 - `sdd-workspace`와 `review-package`가 `bash -n` 문법 검사를 통과하고 스펙 파일을 인자로 받아 동작한다.
 - `skills/using-groundwork/SKILL.md`의 flow 표가 실재하는 스킬만 지목한다.
-- `skills/finding-unknowns/SKILL.md`의 스펙 구성 요소 표에 「전역 제약」과 「수용 기준」이 있다.
+- `skills/finding-unknowns/SKILL.md`의 스펙 구성 요소 표에 「Global constraints」과 「Acceptance criteria」이 있다.
 - `docs/plans/`는 남되 새 파일이 생기지 않는다.
 
 ## Notes

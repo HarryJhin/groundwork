@@ -2,7 +2,7 @@
 - https://www.cmu.edu/dietrich/sds/docs/loewenstein/CurseknowledgeEconSet.pdf
 - https://journals.sagepub.com/doi/abs/10.1111/1467-9280.00439
 
-# 저자가 자기 문서의 맥락 누락을 못 알아채는 이유
+# Why authors cannot see the context missing from their own documents
 
 두 편이 같은 현상의 다른 층을 다룬다.
 아는 사람이 모르는 사람의 상태를 재구성하지 못한다는 것(curse of knowledge)과, 화자가 자기 의도의 전달 성공률을 실제보다 높게 잡는다는 것(illusion of transparency)이다.
@@ -29,7 +29,7 @@
 화자에게는 자기 의도가 투명하지만 청자의 판단은 실제로 전달된 것에만 묶인다는 것, 그리고 발화 행위 자체가 화자의 인지 자원을 소모해 청자를 관찰할 여력을 남기지 않는다는 것이다.
 둘이 겹쳐 화자가 자기중심적 기준점에 묶인다.
 
-## 스킬에서 쓴 지점
+## Where the skill uses this
 
 「왜 저자는 이 실패를 못 알아채는가」 절의 근거다.
 
@@ -41,7 +41,7 @@
 - `junior-read` 프롬프트의 "네가 아는 것은 근거가 아니다" 조항은 리뷰어에게도 같은 편향이 걸린다는 전제에서 나왔다.
   리뷰어가 도메인 지식을 지닌 채 판정하면 저자와 같은 처지가 된다.
 
-## 확인 범위
+## Verification scope
 
 Camerer 등의 서지 정보와 핵심 주장, 시장이 편향을 절반가량 줄인다는 결과는 검색 결과 요약과 서지 페이지에서 확인했고 논문 전문은 대조하지 않았다.
 Keysar & Henly의 72%/61% 수치와 illusion of transparency 명명, 두 가지 설명은 검색 결과 요약에서 확인했고 원논문 전문은 대조하지 않았다.

@@ -1,13 +1,13 @@
-# 기여
+# Contributing
 
 질문과 버그 제보는 [이슈](https://github.com/HarryJhin/groundwork/issues)로 받는다.
 PR도 받는다.
 
-## 스킬 변경에는 근거를 요구한다
+## Skill changes require evidence
 
 스킬은 산문이 아니라 에이전트 행동을 형성하는 코드다.
 표현이 어색해 보이는 대목이 대체로 에이전트 행동을 겨냥해 일부러 그렇게 쓴 대목이다.
-강한 어조, 반복, 「Red Flags」 표 같은 장치가 그렇다.
+강한 어조, 반복, 「Red flags」 표 같은 장치가 그렇다.
 
 그래서 스킬 본문을 고치는 PR에는 다음을 요구한다.
 
@@ -17,7 +17,7 @@ PR도 받는다.
 
 읽기 좋게 다듬는 변경만으로는 받기 어렵다.
 
-## 작업 규칙
+## Working rules
 
 - 스킬을 새로 쓰거나 고칠 때는 `writing-skills`를 따른다.
   프론트매터는 `name`과 `description`만 쓰고 `description`은 언제 쓰는지(트리거·증상·맥락)만 담는다.
@@ -26,17 +26,22 @@ PR도 받는다.
   Consequences의 Negative는 기재 의무다
 - 문서는 맥락 없는 독자를 기준으로 쓴다.
   기준은 `writing-for-junior`에 있다
+- **제목은 영문, 본문은 한국어로 쓴다.**
+  마크다운 헤딩은 h1부터 전부 영문 sentence case다.
+  작업을 지시하는 제목은 원형 동사로 시작하고(`Apply the review gate`) 개념을 가리키는 제목은 명사구로 쓴다(`Reviewer roster`).
+  둘 다 `-ing`를 첫 단어로 쓰지 않는다.
+  본문에서 절을 가리킬 때는 그 영문 제목을 `「」`로 감싸 그대로 적는다
 - 매니페스트를 고쳤으면 `claude plugin validate . --strict`를 돌린다
 
 `plugin.json`의 `version`은 명시돼 있다.
 이 값을 올리지 않으면 기존 사용자에게 변경이 가지 않으므로 배포할 변경에는 반드시 함께 올린다.
 
-## 리포 구조
+## Repo structure
 
 여섯 갈래로 나뉜다.
 스킬, 훅, 스크립트, 배포 매니페스트, 문서, 라이선스 표기다.
 
-### 스킬
+### Skills
 
 `skills/` 아래에 있다.
 디렉터리 이름이 곧 스킬 이름이고 각 디렉터리의 `SKILL.md`가 본문이다.
@@ -78,7 +83,7 @@ PR도 받는다.
 
 - `using-groundwork` 부트스트랩. SessionStart 훅이 이 본문을 매 세션 주입한다
 
-### 리뷰어
+### Reviewers
 
 리뷰어는 하네스별 정의 파일을 쓰지 않는다.
 메인 에이전트가 범용 에이전트에 프롬프트 텍스트를 주입해 띄우므로 런타임을 가리지 않는다.
@@ -88,7 +93,7 @@ PR도 받는다.
 프롬프트는 `skills/design-review/<리뷰어이름>-prompt.md`에 있다.
 
 「발동」의 필수는 항상 띄운다는 뜻이고 재량은 리뷰 스킬이 정한 조건을 만족할 때만 띄운다는 뜻이다.
-그 조건은 리뷰어마다 다르고 `skills/design-review/SKILL.md`의 「재량」 절에 있다.
+그 조건은 리뷰어마다 다르고 `skills/design-review/SKILL.md`의 「Discretionary」 절에 있다.
 
 | 리뷰어 | 발동 | 보는 것 |
 |---|---|---|
@@ -106,7 +111,7 @@ PR도 받는다.
 
 코드를 검증하는 리뷰어는 하나이고 프롬프트가 `skills/requesting-code-review/code-reviewer-prompt.md`에 있다.
 
-### 훅
+### Hooks
 
 Claude Code 전용이다.
 `hooks/hooks.json`이 등록한다.
@@ -119,7 +124,7 @@ Claude Code 전용이다.
   이미 있는 파일 편집은 처음부터 통과시킨다.
   파일 단위로 차단하던 이전 동작은 문서를 여러 개 쓰는 세션에서 같은 안내문을 파일 수만큼 반복했고 그때마다 완성된 쓰기 내용이 폐기됐다
 
-### 스크립트
+### Scripts
 
 `skills/executing-design/scripts/` 아래에 있다.
 실행 자산은 기본 경로인 `executing-design`이 소유하고 조건부 경로인 `subagent-driven-development`가 건너와서 쓴다.
@@ -127,14 +132,26 @@ Claude Code 전용이다.
 컨트롤러가 태스크 텍스트와 diff를 자기 컨텍스트로 통과시키면 그것이 남은 세션 내내 상주한다.
 스크립트가 산출물을 파일로 넘겨 그 비용을 없앤다.
 
-- `design-workspace` 설계 문서별 작업 디렉터리를 `.groundwork/run/` 아래에 확보한다
+- `design-scratch` 설계 문서별 실행 스크래치 디렉터리를 `.groundwork/run/` 아래에 확보한다
 - `review-package` 커밋 목록과 diff를 리뷰용 파일 하나로 묶는다
 
-두 스크립트 모두 첫 인자로 설계 문서 파일 경로를 받는다.
+두 스크립트 모두 첫 인자로 설계 문서 파일 경로를 받고 stdout으로 경로 한 줄만 낸다.
+관측값은 stderr로 나간다.
+호출자가 stdout을 그대로 다음 단계에 넣을 수 있어야 파싱이 개입하지 않는다.
+
+**실행 스크래치와 워크트리는 다른 것이고 이름을 갈라 쓴다.**
+워크트리는 `using-git-worktrees`가 만드는 git worktree이고 커밋된 코드가 산다.
+실행 스크래치는 그 워크트리 안의 커밋하지 않는 디렉터리이고 진행 기록·브리프·리뷰 패키지가 산다.
+둘을 같은 말로 부르면 종료 단계의 삭제가 어느 쪽을 겨누는지 갈리지 않는다.
+스크립트 이름에 `workspace`를 쓰지 않는 이유가 이것이다.
+
+**둘 다 지우는 것은 `finish`뿐이다.**
+실행 스킬은 만들기만 하고 지우지 않는다.
+실행 스킬이 스크래치를 지우면 `finish`의 「Report the outstanding findings」가 읽을 진행 기록이 없어진다.
 태스크 브리프를 뽑던 `task-brief`는 없앴다.
 분해가 문서가 아니라 실행 시점 산출물이 되면서 브리프를 파싱할 원본이 사라졌고, 이제 컨트롤러가 분해 결과를 브리프 파일로 직접 쓴다.
 
-### 매니페스트
+### Manifests
 
 같은 플러그인을 하네스별로 노출한다.
 
@@ -146,12 +163,12 @@ Claude Code 전용이다.
 플러그인 설명은 `plugin.json`, `marketplace.json` 엔트리, `.codex-plugin/plugin.json`, README 두 번째 줄, GitHub 리포 description 다섯 곳에 같은 문장으로 있다.
 고칠 때 함께 고친다.
 
-### 문서
+### Documentation
 
 `docs/`는 완료된 작업의 기록이고 현재 상태를 서술하지 않는다.
 읽는 법은 [docs/README.md](docs/README.md)에 있다.
 
-## 로컬에서 개발하기
+## Develop locally
 
 리포를 클론해 로컬 경로로 등록한다.
 
@@ -163,7 +180,7 @@ claude plugin install groundwork@groundwork
 `SKILL.md` 수정은 현재 세션에 즉시 반영된다.
 훅과 매니페스트 수정은 `/reload-plugins`나 재시작이 필요하다.
 
-## groundwork 자체 개정
+## Revising groundwork itself
 
 이 리포에서는 flow를 쓰지 않는다.
 새 기능이나 멀티파일 변경이라도 직접 처리한다.

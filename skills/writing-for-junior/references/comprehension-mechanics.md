@@ -3,7 +3,7 @@
 - https://web.stanford.edu/~clark/1970s/Haviland,%20S.E.%20_%20Clark,%20H.H.%20_What's%20new_%20Acquiring%20new%20information%20as%20a%20process%20in%20comprehension_%201974.pdf
 - https://bpspsychub.onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8279.1992.tb01017.x
 
-# 판정 축의 인지·심리언어학 근거
+# Cognitive and psycholinguistic basis for the axes
 
 3편이 각각 다른 축을 뒷받침한다.
 참조 해소(B), 전방 참조(C), 정보 분산(D3)이다.
@@ -45,7 +45,7 @@ Given-New Strategy에 따르면 청자는 문장을 이해할 때 먼저 기억�
 한 결정을 이해하는 데 필요한 정보가 문서 여러 곳에 흩어져 독자가 앞뒤를 오가야 하면 그 통합 비용이 판독을 막는다.
 "한 결정에 필요한 정보를 한자리에 모은다"는 처방이 물리적 통합에 대응한다.
 
-## 확인 범위
+## Verification scope
 
 3편 모두 서지 정보와 핵심 주장을 검색 결과 요약과 서지 페이지에서 확인했고 논문 전문은 대조하지 않았다.
 Clark & Marshall의 공유 근거 분류는 2차 요약을 경유한 것이라 원문의 분류 체계·명칭과 대조하지 않았다.

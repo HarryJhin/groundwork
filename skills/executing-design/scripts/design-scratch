@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 # 설계 문서 하나가 쓰는 단명 산출물(태스크 브리프·구현자 리포트·리뷰 패키지·진행 기록)의
-# 워킹 트리 디렉터리를 확정하고 만든다. 그 절대 경로를 출력한다.
+# 실행 스크래치 디렉터리를 확정하고 만든다. 그 절대 경로를 출력한다.
+#
+# 여기서 만드는 것은 격리 워크스페이스(git worktree)가 아니다. 그것은
+# using-git-worktrees가 만들고 finish가 정리한다. 이 스크립트가 만드는 것은 그
+# 워크트리 안에 사는 커밋하지 않는 스크래치 디렉터리다. 두 개념에 같은 이름을 쓰면
+# 종료 단계의 rm이 어느 쪽을 겨누는지 갈리지 않는다.
 #
 # 설계 문서마다 디렉터리 하나다(.groundwork/run/<design-basename>/). 같은 워킹 트리의 후속
 # 설계 문서가 다른 설계 문서의 산출물을 읽거나 덮어쓸 수 없다. 낡은 진행 기록을 현재 진행으로
 # 오독하면 컨트롤러가 완료된 태스크 묶음을 통째로 건너뛴다. 설계 문서 단위 격리가 그
 # 실패를 구조적으로 없앤다.
 #
-# 워크스페이스를 .git/ 밑이 아니라 워킹 트리에 두는 이유가 있다. Claude Code는 .git/을
+# 스크래치를 .git/ 밑이 아니라 워킹 트리에 두는 이유가 있다. Claude Code는 .git/을
 # 보호 경로로 취급해 에이전트 쓰기를 거부하고 그러면 구현자 서브에이전트가 리포트
 # 파일을 쓰지 못한다.
 #
@@ -17,14 +22,14 @@
 # 대상 repo의 git status로 샌다. 이 파일은 없을 때만 쓴다. 이미 있으면 그 repo가
 # 자기 규칙을 넣었을 수 있으므로 덮어쓰지 않는다.
 #
-# 워크스페이스 위치의 단일 정본이다. 진행 기록·브리프 쓰기와 review-package가 서로 다른
+# 스크래치 위치의 단일 정본이다. 진행 기록·브리프 쓰기와 review-package가 서로 다른
 # 디렉터리로 갈라지지 않게 한다.
 #
-# 사용법: design-workspace DESIGN_FILE
+# 사용법: design-scratch DESIGN_FILE
 set -euo pipefail
 
 if [ $# -ne 1 ]; then
-  echo "usage: design-workspace DESIGN_FILE" >&2
+  echo "usage: design-scratch DESIGN_FILE" >&2
   exit 2
 fi
 
@@ -33,7 +38,7 @@ design=$1
 
 slug=$(basename "$design" .md)
 [ -n "$slug" ] && [ "$slug" != "." ] && [ "$slug" != ".." ] \
-  || { echo "cannot derive a workspace name from: $design" >&2; exit 2; }
+  || { echo "cannot derive a scratch name from: $design" >&2; exit 2; }
 
 root=$(git rev-parse --show-toplevel)
 scratch="$root/.groundwork"

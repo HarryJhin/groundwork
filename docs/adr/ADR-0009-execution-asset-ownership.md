@@ -1,4 +1,4 @@
-# ADR-0009: 실행 자산의 소유를 기본 경로로 옮긴다
+# ADR-0009: Move ownership of execution assets to the default path
 
 ## Title
 

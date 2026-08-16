@@ -1,4 +1,4 @@
-# 태스크 리뷰어 프롬프트 템플릿
+# Task reviewer prompt template
 
 태스크 리뷰어 서브에이전트를 디스패치할 때 이 본문을 `general-purpose` 프롬프트로 주입한다.
 리뷰어는 태스크의 diff를 한 번 읽고 판정 둘을 반환한다.
@@ -115,7 +115,7 @@
 **자리표시자**
 - `[MODEL]`: 필수. SKILL.md 모델 선택 절에 따른 리뷰어 모델
 - `[BRIEF_FILE]`: 필수. 태스크 브리프 파일(컨트롤러가 분해 결과로 쓴 `<workspace>/task-<N>-brief.md`. 구현자가 작업한 것과 같은 파일)
-- `[GLOBAL_CONSTRAINTS]`: 설계 문서의 「전역 제약」·「수용 기준」에서 그대로 복사한 구속력 있는 요구. 정확한 값·형식·컴포넌트 사이의 관계 진술. 프로세스 규칙은 이 템플릿이 이미 담고 있으므로 넣지 않는다
+- `[GLOBAL_CONSTRAINTS]`: 설계 문서의 「Global constraints」·「Acceptance criteria」에서 그대로 복사한 구속력 있는 요구. 정확한 값·형식·컴포넌트 사이의 관계 진술. 프로세스 규칙은 이 템플릿이 이미 담고 있으므로 넣지 않는다
 - `[REPORT_FILE]`: 필수. 구현자가 상세 리포트를 쓴 파일
 - `[BASE_SHA]`: 이 태스크 직전 커밋
 - `[HEAD_SHA]`: 현재 커밋

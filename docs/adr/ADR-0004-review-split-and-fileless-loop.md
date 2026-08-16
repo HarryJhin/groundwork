@@ -1,4 +1,4 @@
-# ADR-0004: 문서 리뷰의 유형별 분리와 무파일 루프
+# ADR-0004: Split document review by type and run a fileless loop
 
 ## Title
 

@@ -3,13 +3,13 @@
 - https://www.iso.org/standard/78907.html
 - https://journals.sagepub.com/doi/10.1177/0963721417727521
 
-# 어휘 선택의 3개 층위: 현상·규범·강제
+# Three layers of word choice: phenomenon, norm, enforcement
 
-「지식 경계」의 용어 오용과 희소 어휘 항목이 기대는 근거다.
+「Knowledge boundary」의 용어 오용과 희소 어휘 항목이 기대는 근거다.
 3갈래가 각각 다른 층을 다룬다.
 왜 드문 단어가 판독을 막는가(현상), 무엇을 목표로 삼는가(규범), 어떻게 강제하는가(강제)다.
 
-## 현상: word frequency effect
+## Phenomenon: word frequency effect
 
 고빈도 단어가 저빈도 단어보다 효율적으로 처리된다.
 저빈도 단어는 인식에 더 오래 걸리고 읽기에서 고정 시간이 길고 오류율이 높다.
@@ -24,7 +24,7 @@
 사전에 있고 뜻도 맞는 단어가 왜 판독을 막는지 설명한다.
 맥락 단서가 비용을 줄인다는 결과가 "그 단어만이 정확히 그 뜻을 지시하면 쓰되 첫 등장에서 푼다"는 처방에 대응한다.
 
-## 규범: plain language (ISO 24495-1:2023)
+## Norm: plain language (ISO 24495-1:2023)
 
 "Plain language, Part 1: Governing principles and guidelines". 2023년 제정.
 
@@ -38,7 +38,7 @@
 **스킬에서 쓴 지점**: 이 스킬의 판정 기준이 "좋은 문장인가"가 아니라 "한 번 읽어 판독되는가"인 것과 같은 방향이다.
 기계적 척도를 쓰지 않고 사용 성공 여부로 판정한다는 원칙이 겹친다.
 
-## 강제: controlled natural language (ASD-STE100)
+## Enforcement: controlled natural language (ASD-STE100)
 
 Simplified Technical English. 기술 문서 작성용 통제 자연어 국제 규격이다.
 1980년대 유럽 항공우주 산업이 민간 항공 정비 매뉴얼의 명료성을 높이려고 만들었고(당시 AECMA, 현 ASD) 항공·방위·산업 문서에 쓰인다.
@@ -62,7 +62,7 @@ Simplified Technical English. 기술 문서 작성용 통제 자연어 국제 �
   대신 대체 가능성 판정으로 같은 효과를 노린다.
   더 흔한 동의어로 바꿔도 뜻이 유지되면 바꾼다.
 
-## 확인 범위
+## Verification scope
 
 출처 3개 모두 표준 소개 페이지·서지 페이지와 검색 결과 요약에서 확인했다.
 ASD-STE100과 ISO 24495-1의 규격 원문은 유료 배포라 대조하지 않았다.

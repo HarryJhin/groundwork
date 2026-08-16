@@ -1,4 +1,4 @@
-# ADR-0003: 실행층 전량 이식
+# ADR-0003: Port the full execution layer
 
 ## Title
 

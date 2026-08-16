@@ -1,4 +1,4 @@
-# ADR-0006: 리뷰 루프의 비용 통제
+# ADR-0006: Cost controls for the review loop
 
 ## Title
 
@@ -146,10 +146,10 @@ Negative:
 - `skills/plan-review/`에 `coherence-prompt.md`와 `yagni-prompt.md`가 있다.
   같은 디렉터리에 `clarity-prompt.md`와 `consistency-prompt.md`가 없다.
 - 합친 두 프롬프트가 축 라벨을 첫 슬롯에 요구하고 병합 패스를 절차에 둔다.
-- 리뷰어 프롬프트의 「재리뷰 모드」 절이 재사용 경로와 재디스패치 경로를 모두 서술한다.
+- 리뷰어 프롬프트의 「Re-review mode」 절이 재사용 경로와 재디스패치 경로를 모두 서술한다.
   대상은 `skills/spec-review/`와 `skills/plan-review/`의 모든 `*-prompt.md`, 그리고 `skills/writing-for-junior/junior-read-prompt.md`다.
 - 두 리뷰 스킬이 범위 문항 추천을 문서 이력 표로 정한다.
-  두 문서 모두 「라운드 비용 보고」 절을 두고 라운드 처리 끝에 그 한 줄을 낸다.
+  두 문서 모두 「Round cost report」 절을 두고 라운드 처리 끝에 그 한 줄을 낸다.
 - `skills/subagent-driven-development/choosing-model-tier.md`의 「문서 리뷰 렌즈」 표에 `coherence`와 `boundary`가 있고 없어진 렌즈 이름이 남아 있지 않다.
 
 ## Notes

@@ -1,10 +1,10 @@
-# 인터뷰가 두 방향인 근거
+# Why the interview runs in two directions
 
-`SKILL.md`의 「인터뷰 절차」가 묻기와 돌려주기를 짝으로 요구하는 근거다.
+`SKILL.md`의 「Interview procedure」가 묻기와 돌려주기를 짝으로 요구하는 근거다.
 인터뷰의 목적을 재료 수집 하나로 두면 돌려주기가 낭비로 보이고 사용자의 이해 형성을 목적에 넣으면 필수가 된다.
 아래 근거가 그 차이를 만든다.
 
-## 기여는 두 국면으로 완성된다
+## A contribution completes in two phases
 
 출처: Clark & Brennan, "Grounding in Communication", in Resnick, Levine & Teasley (eds.), *Perspectives on Socially Shared Cognition*, APA, 1991. 7장.
 
@@ -47,7 +47,7 @@ State 3: B understood what A meant by u.
 
 수용 증거로 가장 흔한 형태 3가지는 맞장구(acknowledgments), 적절한 다음 차례의 개시(initiation of the relevant next turn), 지속적 주의(continued attention)다.
 
-## 조각으로 나눠 조각마다 확인한다
+## Split into installments and confirm each one
 
 같은 논문이 어려운 내용을 다루는 기법으로 installment를 든다.
 
@@ -75,7 +75,7 @@ of an oil can" and then pauses for evidence that J has identified the referent.
 He goes on only when that installment has been grounded.
 ```
 
-## 확인을 생략하려는 압력은 기본값이다
+## The pressure to skip confirmation is the default
 
 같은 논문이 반대 방향의 힘도 이름 붙인다.
 
@@ -87,9 +87,9 @@ initiation of each contribution to its mutual acceptance.
 
 참여자는 상호 이해에 드는 총 노동을 줄이려 한다.
 그래서 확인 생략은 게으름이 아니라 대화의 기본 경향이다.
-규칙으로 명시하지 않으면 인터뷰가 저절로 추출로 수렴하는 이유가 이것이고 「인터뷰 절차」가 돌려주기를 순환의 한 단계로 고정한 이유도 같다.
+규칙으로 명시하지 않으면 인터뷰가 저절로 추출로 수렴하는 이유가 이것이고 「Interview procedure」가 돌려주기를 순환의 한 단계로 고정한 이유도 같다.
 
-## 응답자는 답이 담긴 그릇이 아니다
+## The respondent is not a vessel holding answers
 
 출처: Holstein & Gubrium, *The Active Interview*, Sage Qualitative Research Methods 37, 1995.
 
@@ -100,7 +100,7 @@ active interview는 이를 거부한다.
 이 관점이 이 스킬의 인터뷰가 사용자의 이해를 만들어도 되는(그리고 만들어야 하는) 근거다.
 추출 모델에서는 저자의 개입이 오염이지만 구성 모델에서는 그것이 인터뷰의 일부다.
 
-## 답하는 행위가 답하는 쪽의 이해를 키운다
+## Answering deepens the answerer's own understanding
 
 self-explanation effect다.
 학습자가 새 정보를 자기에게 설명하며 이해하려 할 때 학습 성과가 오른다는 관측이고 Michelene Chi의 연구가 이 분야의 기초로 꼽힌다.
@@ -113,7 +113,7 @@ self-explanation effect다.
 이 스킬에서는 사용자가 질문에 답하는 행위가 그 역할을 한다.
 답을 고르려면 자기 요구를 스스로 정리해야 하고 그 정리가 곧 이해다.
 
-## 확인 범위
+## Verification scope
 
 - Clark & Brennan 1991: 원문 PDF 본문(128~137쪽)을 직접 대조했다.
   인용 블록은 모두 원문에서 옮겼다.

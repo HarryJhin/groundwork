@@ -1,4 +1,4 @@
-# ADR-0002: 리뷰 로스터의 문서 유형별 분기
+# ADR-0002: Reviewer roster branches by document type
 
 ## Title
 

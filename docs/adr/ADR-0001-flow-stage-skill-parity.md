@@ -1,4 +1,4 @@
-# ADR-0001: flow 단계와 스킬의 1:1 정렬
+# ADR-0001: One-to-one alignment of flow stages and skills
 
 ## Title
 

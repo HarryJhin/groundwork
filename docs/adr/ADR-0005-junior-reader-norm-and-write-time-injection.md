@@ -1,4 +1,4 @@
-# ADR-0005: 주니어 독자 규범의 통합과 작성 시점 주입
+# ADR-0005: Consolidate the junior reader norm and inject it at write time
 
 ## Title
 

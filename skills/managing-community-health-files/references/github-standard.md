@@ -1,11 +1,11 @@
-# GitHub 커뮤니티 헬스 파일 공식 표준
+# Official GitHub community health file standard
 
 GitHub 공식 문서 기준의 배치 규칙, 상속 모델, 파일별 문법 레퍼런스. 스캐폴딩하거나 파일 위치를 판정할 때 이 문서를 근거로 삼는다.
 각 섹션 헤더 아래의 "출처" URL이 그 섹션을 검증하는 docs 페이지다.
 
 표시 없는 항목은 GitHub이 강제하는 동작 규칙(배치·문법·상속)이고 `[권장]`으로 표시된 것만 GitHub의 권고다.
 
-## 상속 모델 (default community health file)
+## Inheritance model (default community health file)
 
 출처: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
 
@@ -18,11 +18,11 @@ GitHub 공식 문서 기준의 배치 규칙, 상속 모델, 파일별 문법 �
 - **LICENSE는 default로 만들 수 없다.**
   clone·package·download에 포함되도록 개별 리포에 직접 둔다.
 
-### 지원되는 default 파일 목록
+### Supported default files
 
 CODE_OF_CONDUCT.md, CONTRIBUTING.md, Discussion category forms(`DISCUSSION_TEMPLATE/`), FUNDING.yml, GOVERNANCE.md, 이슈·PR 템플릿과 config.yml, SECURITY.md, SUPPORT.md.
 
-## 배치 위치와 탐색 우선순위
+## Placement and lookup precedence
 
 출처: 위 creating-a-default 페이지(배치 규칙 종합). 파일별 상세는 아래 각 섹션의 출처.
 
@@ -46,7 +46,7 @@ GitHub이 명시하는 것은 3가지뿐이다.
 CONTRIBUTING과 PR 템플릿과 이슈 템플릿의 파일명은 "not case sensitive"이고 SUPPORT는 "with all caps"이며 CODEOWNERS 안에 적는 **경로**는 대소문자를 구분한다.
 CODE_OF_CONDUCT를 비롯한 나머지는 공식 문서가 어느 쪽도 말하지 않으므로 표준 대문자로 쓰고 대소문자 무관을 가정하지 않는다.
 
-## 파일별 요점
+## Key points by file
 
 파일마다 GitHub이 인정하는 조건과 위치가 다르다.
 
@@ -81,7 +81,7 @@ CODE_OF_CONDUCT를 비롯한 나머지는 공식 문서가 어느 쪽도 말하�
 - 이슈 생성 시 SUPPORT 파일 링크가 표시된다.
 - `[권장]` README 등에서 SUPPORT로 링크해 발견성을 높인다.
 
-### FUNDING.yml 문법
+### FUNDING.yml syntax
 
 출처: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
 
@@ -109,11 +109,11 @@ custom: ["https://example.com/donate", "LINK2"]   # URL에 ':' 있으면 따옴�
 - 배열 내 custom URL에 `:`가 있으면 따옴표로 감싼다.
 - sponsor 버튼 활성화는 admin 권한이 필요하다(Settings → Features → Sponsorships).
 
-## 이슈·PR 템플릿
+## Issue and pull request templates
 
 출처: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates config.yml: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository PR 템플릿: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
 
-### 배치·감지 규칙
+### Placement and detection rules
 
 - 이슈 템플릿은 default 브랜치의 `.github/ISSUE_TEMPLATE`에만 둔다.
   마크다운은 `.md`, 이슈 폼은 `.yml`.
@@ -123,7 +123,7 @@ custom: ["https://example.com/donate", "LINK2"]   # URL에 ':' 있으면 따옴�
   파일명 숫자 프리픽스(`1-bug.yml`, 10개 이상은 `01-`)로 순서를 제어한다.
 - 다중 PR 템플릿은 지원 폴더 안 `PULL_REQUEST_TEMPLATE/` 하위 디렉터리에 두고 `?template=` 쿼리 파라미터로 선택한다.
 
-### config.yml (템플릿 chooser)
+### config.yml (template chooser)
 
 `.github/ISSUE_TEMPLATE/config.yml`:
 
@@ -135,7 +135,7 @@ contact_links:
     about: 질문은 여기서
 ```
 
-### 이슈 폼 YAML 문법
+### Issue form YAML syntax
 
 출처: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms body 요소 스키마: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema
 
@@ -159,7 +159,7 @@ contact_links:
 - `labels`는 리포에 없는 label을 자동 생성하지 않는다.
 - 이슈 폼은 public preview 상태다(문법 변경 가능).
 
-## CODEOWNERS 문법
+## CODEOWNERS syntax
 
 출처: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
@@ -198,7 +198,7 @@ docs/*               @org/docs               # 한 단계만 (더 깊은 중첩 
   감지된 파일의 링크를 주는 필드일 뿐이다.
   이 둘을 같은 것으로 읽으면 안 된다.
 
-### 산식 관측 (문서 미규정, 재현 가능)
+### Observed formula (undocumented, reproducible)
 
 아래는 공식 사실이 아니라 리포 18개를 조회해 역산한 관측이다.
 GitHub이 예고 없이 바꿀 수 있다.

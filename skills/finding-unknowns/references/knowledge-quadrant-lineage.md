@@ -1,11 +1,11 @@
 출처: https://en.wikipedia.org/wiki/There_are_unknown_unknowns
 
-# 지식 4분면의 계보
+# Lineage of the knowledge quadrants
 
 `finding-unknowns` 스킬이 쓰는 4분면이 어느 문헌에서 왔는지 원문으로 확인한다.
 분류나 도구 배정에 이의가 제기됐을 때 연다.
 
-## Rumsfeld 2002 발화 (verbatim)
+## The Rumsfeld 2002 remark (verbatim)
 
 2002년 2월 12일 미 국방부 브리핑.
 
@@ -17,7 +17,7 @@ things we do not know. But there are also unknown unknowns—the ones we don't
 know we don't know.
 ```
 
-## 출처 귀속
+## Attribution
 
 Rumsfeld 본인이 이 표현을 창안하지 않았다.
 그는 NASA 행정관 William Graham에게서 변형을 들었다고 밝혔고 두 사람은 1990년대 후반 탄도미사일 위협 위원회에서 함께 일했다.
@@ -32,7 +32,7 @@ Rumsfeld 본인이 이 표현을 창안하지 않았다.
 위 출처가 지목하는 계보는 NASA 경유다.
 이 스킬은 구조의 유사성만 취하고 파생 관계를 주장하지 않는다.
 
-## 4번째 칸의 두 정의
+## Two definitions of the fourth cell
 
 철학자 Slavoj Žižek이 4번째 칸을 제안했다.
 
@@ -48,7 +48,7 @@ that one knows
 스킬의 「미발화」·「무발화」 행은 요구공학 쪽 정의를 쓴다.
 Žižek 정의를 그대로 가져오면 사용자가 숨긴다는 전제가 딸려 들어와 질문 태도가 틀어진다.
 
-## 확인 범위
+## Verification scope
 
 Rumsfeld 발화, Johari 서술, Žižek 인용은 출처 페이지에서 확인했다.
 요구공학 쪽 정의의 근거는 RE'11이고 이 파일에서는 대조 목적으로만 요약했다.
