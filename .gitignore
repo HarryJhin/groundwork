@@ -1,5 +1,5 @@
 # groundwork 산출물 중 커밋하지 않는 것
-# 스펙·ADR은 docs/에 커밋한다. 아래는 수명이 세션에 묶인 것들이다.
+# 설계 문서는 docs/designs/에 커밋한다. 아래는 수명이 세션에 묶인 것들이다.
 # 프로토타입은 docs/ 아래 살지만 throwaway라 커밋하지 않는다.
 docs/artifacts/
 .claude/local/
