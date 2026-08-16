@@ -13,7 +13,7 @@ William Strunk Jr.'s *The Elements of Style* (1918) teaches you to write clearly
 
 **WARNING:** `elements-of-style.md` (the full 1918 text) consumes ~12,000 tokens. Read it only when writing or editing prose.
 
-## When to Use This Skill
+## When to use this skill
 
 Use this skill whenever you write prose for humans:
 
