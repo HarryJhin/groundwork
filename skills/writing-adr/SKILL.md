@@ -26,9 +26,9 @@ repo 밖에 ADR을 두지 않는다.
 - **명명**: `ADR-NNNN-<topic>.md`. `NNNN`은 4자리 제로패딩이고 `<topic>`은 결정 요지의 영문 kebab-case다.
 - **번호 축**: 그 repo `docs/adr/` 안에서만 증가한다.
   repo마다 독립이라 다른 repo의 번호는 보지 않는다.
-- **스펙·플랜과 독립**: 같은 repo의 `docs/specs/SPEC-NNNN-<topic>.md`와 `docs/plans/PLAN-NNNN-<topic>.md`는 둘이 짝을 이뤄 번호를 공유하는 별도 축이고 ADR은 거기 참여하지 않는다.
-  한 작업이 ADR을 몇 개 남기든 스펙 번호는 줄지 않는다.
-  번호가 겹쳐도 파일명 접두(`ADR-` 대 `SPEC-`·`PLAN-`)가 구분한다.
+- **설계 문서와 독립**: 같은 repo의 `docs/designs/DESIGN-NNNN-<topic>.md`는 프로토타입과 번호를 공유하는 별도 축이고 ADR은 거기 참여하지 않는다.
+  한 작업이 ADR을 몇 개 남기든 설계 문서 번호는 줄지 않는다.
+  번호가 겹쳐도 파일명 접두(`ADR-` 대 `SPEC-`)가 구분한다.
 - **커밋**: 그 repo의 정규 산출물이다.
   결정을 낳은 코드 변경과 함께 커밋한다.
 - **소비자**: 후속 세션이 `docs/adr/`를 열어 `ADR-NNNN`으로 인용한다.
@@ -154,7 +154,7 @@ Context·Decision의 용어와 참조가 특히 걸린다.
 - `docs/adr/` 하나만 스캔한다.
   `ADR-[0-9][0-9][0-9][0-9]-*.md`를 훑어 최대 번호 +1이고 매치가 없으면 `0001`이다.
   4자리 제로패딩을 쓰고 4자리가 아닌 파일은 무시한다.
-- `docs/specs/`·`docs/plans/`는 스캔하지 않는다.
+- `docs/designs/`는 스캔하지 않는다.
   ADR은 그 번호 축에 참여하지 않는다(위 「산출물 규약」).
 
 **3. `<topic>`**
@@ -178,7 +178,7 @@ ADR은 "어떻게 구현했나"가 아니라 "왜 그렇게 정했나"에 초점
 
 ADR로 남기지 않는 것도 갈라둔다.
 코드가 스스로 설명하는 구현 세부는 코드 주석에 둔다.
-스펙·플랜에 이미 적힌 결정은 중복이라 옮기지 않는다.
+설계 문서에 이미 적힌 결정은 중복이라 옮기지 않는다.
 
 ## 작성 프로세스
 
@@ -194,8 +194,8 @@ ADR로 남기지 않는 것도 갈라둔다.
 - repo 밖에는 쓰지 않는다.
   cwd가 git repo가 아니면 진행하지 말고 물어본다.
   홈 경로 같은 임의 위치로 폴백하지 말라.
-- 번호를 뗄 때 스펙·플랜 디렉터리를 훑지 말라.
-  ADR 번호 축은 `SPEC-`·`PLAN-` 축과 독립이라 `docs/adr/` 하나만 본다.
+- 번호를 뗄 때 설계 문서 디렉터리를 훑지 말라.
+  ADR 번호 축은 `SPEC-` 축과 독립이라 `docs/adr/` 하나만 본다.
   같은 repo에 `SPEC-0003`과 `ADR-0003`이 공존하는 것이 정상이다.
 - `Changelog`는 수락 전 제안 이력 전용이다.
   수락 후 결정 번복은 Changelog 추가가 아니라 새 ADR + 원 ADR `Superseded` 처리다.
@@ -211,10 +211,15 @@ ADR로 남기지 않는 것도 갈라둔다.
 
 | 언제 여나 | 파일 |
 |---|---|
-| ADR 리뷰·승인·대체 프로세스의 상세가 필요함 | [aws-adr-process.md](references/aws-adr-process.md) |
-| ADR 품질·이력 보존·저장 위치 모범사례를 점검함 | [aws-adr-best-practices.md](references/aws-adr-best-practices.md) |
-| 경계 판단(언제 ADR을 쓰나, 무엇을 담나, Superseded 처리)이 애매함 | [aws-adr-faq.md](references/aws-adr-faq.md) |
-| 섹션 세부의 외부 배경을 확인함 | [aws-adr-template.md](references/aws-adr-template.md) |
+| ADR 리뷰·승인·대체 프로세스의 상세가 필요함 | [aws-adr-process.md][aws-adr-process] |
+| ADR 품질·이력 보존·저장 위치 모범사례를 점검함 | [aws-adr-best-practices.md][aws-adr-best-practices] |
+| 경계 판단(언제 ADR을 쓰나, 무엇을 담나, Superseded 처리)이 애매함 | [aws-adr-faq.md][aws-adr-faq] |
+| 섹션 세부의 외부 배경을 확인함 | [aws-adr-template.md][aws-adr-template] |
 
 `aws-adr-template.md`의 형식은 위 「형식 정본」과 어긋나는 지점이 있다.
 형식 기준으로 삼지 않는다.
+
+[aws-adr-process]: references/aws-adr-process.md
+[aws-adr-best-practices]: references/aws-adr-best-practices.md
+[aws-adr-faq]: references/aws-adr-faq.md
+[aws-adr-template]: references/aws-adr-template.md

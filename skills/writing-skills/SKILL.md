@@ -3,11 +3,12 @@ name: writing-skills
 description: 새 스킬을 만들거나 기존 스킬을 편집할 때, 또는 배포 전 스킬이 실제로 작동하는지 검증할 때 쓴다. Use when 스킬 작성, SKILL.md 편집·수정, 스킬 테스트, 배포 전 스킬 검증.
 ---
 
-# Writing Skills
-
-## Overview
+# writing-skills
 
 **스킬 작성은 프로세스 문서에 적용한 테스트 주도 개발(TDD)이다.**
+먼저 스킬 없이 실패하는 시나리오를 만들고 그 실패를 없애는 최소 문서를 쓴다.
+
+## 스킬을 두는 곳
 
 **스킬을 어디에 두는가**는 누가 쓰느냐로 갈린다.
 나 혼자 쓰는 개인 스킬은 에이전트 실행 환경(Claude Code·Codex·Copilot CLI·Gemini CLI 같은 코딩 에이전트 제품)의 스킬 디렉터리에 둔다.
@@ -26,7 +27,7 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 **공식 가이드:** Anthropic의 공식 스킬 작성 베스트 프랙티스는 anthropic-best-practices.md를 참조한다.
 그 문서는 이 스킬의 TDD 중심 접근을 보완하는 추가 패턴·가이드라인을 담는다.
 
-## 스킬이란 무엇인가
+## 스킬의 정의
 
 **스킬**은 검증된 기법·패턴·도구의 레퍼런스 가이드다.
 스킬은 후속 에이전트가 효과적인 접근을 찾아 적용하도록 돕는다.
@@ -52,7 +53,7 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 
 스킬 작성 과정 전체가 RED-GREEN-REFACTOR를 따른다.
 
-## 스킬을 만들 때
+## 스킬 신설
 
 **만든다:**
 - 그 기법이 너에게 직관적으로 자명하지 않았다
@@ -68,6 +69,8 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 
 ## 스킬 유형
 
+세 유형으로 갈리고 유형에 따라 본문에 담을 것이 다르다.
+
 ### 기법(Technique)
 따라 할 단계가 있는 구체적 방법(condition-based-waiting, root-cause-tracing)
 
@@ -80,7 +83,7 @@ API 문서, 문법 가이드, 도구 사용법 문서
 ## 디렉터리 구조
 
 
-```
+```text
 skills/
   skill-name/
     SKILL.md              # Main reference (required)
@@ -104,7 +107,7 @@ skills/
 신규면 스킬 이름과 그것이 다룰 기법을, 편집이면 대상 `SKILL.md`의 경로를 호출자에게 받는다.
 둘 다 받지 못했으면 무엇을 쓸지 사용자에게 묻는다.
 
-**출력**: 위 「스킬을 어디에 두는가」가 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.
+**출력**: 위 「스킬을 두는 곳」이 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.
 아래 「스킬 작성 체크리스트」를 통과하면 끝이고 다음 스킬로 자동으로 넘기지 않는다.
 
 ## 실행 계약 (쓰는 스킬에 담아야 할 것)
@@ -138,10 +141,10 @@ skills/
 - 총 1024자 이하
 - `name`: 문자·숫자·하이픈만 쓴다(괄호·특수문자 없음)
 - `description`: 3인칭, **언제 쓰는가만** 서술한다(무엇을 하는지는 쓰지 않는다)
-  - "Use when..."으로 시작해 트리거 조건에 집중한다
-  - 구체적 증상·상황·맥락을 담는다
-  - **스킬의 프로세스나 워크플로를 절대 요약하지 않는다**(이유는 아래 「스킬 탐색 최적화 (SDO, Skill Discovery Optimization)」 절 참조)
-  - 가능하면 500자 이하로 유지한다
+    - "Use when..."으로 시작해 트리거 조건에 집중한다
+    - 구체적 증상·상황·맥락을 담는다
+    - **스킬의 프로세스나 워크플로를 절대 요약하지 않는다**(이유는 아래 「스킬 탐색 최적화 (SDO, Skill Discovery Optimization)」 절 참조)
+    - 가능하면 500자 이하로 유지한다
 
 ```markdown
 ---
@@ -182,7 +185,7 @@ Concrete results
 
 **탐색에 결정적:** 후속 에이전트가 네 스킬을 찾아야 한다
 
-### 1. 풍부한 description 필드
+### 풍부한 description 필드
 
 **목적:** 에이전트는 주어진 작업에 어떤 스킬을 로드할지 정하려고 description을 읽는다.
 "지금 이 스킬을 읽어야 하나?"에 답하게 만든다.
@@ -197,7 +200,7 @@ description은 트리거 조건만 서술해야 한다.
 **왜 중요한가:** 테스트로 드러난 사실이다.
 description이 스킬의 워크플로를 요약하면, 에이전트는 스킬 본문 전체를 읽는 대신 description을 따를 수 있다.
 "태스크 사이 코드 리뷰"라고 적힌 description은 에이전트가 리뷰를 한 번만 하게 만들었다.
-스킬의 플로차트는 리뷰 두 번(스펙 준수 다음 코드 품질)을 분명히 보여 줬는데도 그랬다.
+스킬의 플로차트는 리뷰 두 번(설계 준수 다음 코드 품질)을 분명히 보여 줬는데도 그랬다.
 
 description을 "Use when executing implementation plans with independent tasks"(워크플로 요약 없음)로 바꾸자, 에이전트는 플로차트를 제대로 읽고 2단계 리뷰 프로세스를 따랐다.
 
@@ -243,7 +246,7 @@ description: Use when tests have race conditions, timing dependencies, or pass/f
 description: Use when using React Router and handling authentication redirects
 ```
 
-### 2. 키워드 커버리지
+### 키워드 커버리지
 
 에이전트가 검색할 단어를 쓴다:
 - 에러 메시지: "Hook timed out", "ENOTEMPTY", "race condition"
@@ -251,7 +254,7 @@ description: Use when using React Router and handling authentication redirects
 - 동의어: "timeout/hang/freeze", "cleanup/teardown/afterEach"
 - 도구: 실제 명령, 라이브러리명, 파일 타입
 
-### 3. 서술형 이름
+### 서술형 이름
 
 **능동태, 동사 우선을 쓴다:**
 - 좋음: `creating-skills`, `skill-creation` 아님
@@ -268,7 +271,7 @@ description: Use when using React Router and handling authentication redirects
 - 능동적이고 네가 취하는 행동을 서술한다
 
 
-### 4. 토큰 효율 (결정적)
+### 토큰 효율 (결정적)
 
 **문제:** 모든 세션에 주입되는 진입 스킬(groundwork에서는 `using-groundwork`)과 자주 참조되는 스킬은 모든 대화에 로드된다.
 토큰 하나하나가 중요하다.
@@ -324,7 +327,7 @@ wc -w skills/path/SKILL.md
 # Other frequently-loaded: aim for <200 total
 ```
 
-### 5. 다른 스킬 cross-reference
+### 다른 스킬 cross-reference
 
 **다른 스킬을 참조하는 문서를 쓸 때:**
 
@@ -397,15 +400,17 @@ ${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디�
 
 ## 파일 조직
 
+스킬 크기에 따라 셋 중 하나를 고른다.
+
 ### 자기완결 스킬
-```
+```text
 defense-in-depth/
   SKILL.md    # Everything inline
 ```
 언제: 모든 내용이 들어가고 무거운 레퍼런스가 필요 없을 때
 
 ### 재사용 도구가 딸린 스킬
-```
+```text
 condition-based-waiting/
   SKILL.md    # Overview + patterns
   example.ts  # Working helpers to adapt
@@ -413,7 +418,7 @@ condition-based-waiting/
 언제: 도구가 서사가 아니라 재사용 코드일 때
 
 ### 무거운 레퍼런스가 딸린 스킬
-```
+```text
 pptx/
   SKILL.md       # Overview + workflows
   pptxgenjs.md   # 600 lines API reference
@@ -424,7 +429,7 @@ pptx/
 
 ## Iron Law (TDD와 동일)
 
-```
+```text
 NO SKILL WITHOUT A FAILING TEST FIRST
 ```
 
@@ -519,7 +524,7 @@ NO SKILL WITHOUT A FAILING TEST FIRST
 | 베이스라인 실패 | 맞는 형식 | 틀린 형식 |
 |---|---|---|
 | 압박 속에서 규칙을 건너뛰거나 위반(더 잘 알면서도 그냥 한다) | 금지 + 합리화 표 + Red Flags(아래 「합리화에 맞선 스킬 방탄화」 참조) | 부드러운 가이드("~를 선호하라", "~를 고려하라") |
-| 준수하지만 출력의 형태가 틀림(부푼 프롬프트, 묻힌 판정, 스펙 재서술) | 긍정 레시피나 계약: 출력이 무엇**인지** 명시(부분들을 순서대로) | 금지 목록("재서술하지 마라", "서술하지 마라") |
+| 준수하지만 출력의 형태가 틀림(부푼 프롬프트, 묻힌 판정, 요구 재서술) | 긍정 레시피나 계약: 출력이 무엇**인지** 명시(부분들을 순서대로) | 금지 목록("재서술하지 마라", "서술하지 마라") |
 | 이미 만드는 것에서 필수 요소를 누락 | 구조적: 채워 넣는 템플릿의 REQUIRED 필드나 슬롯 | 템플릿 근처의 산문 알림 |
 | 동작이 조건에 따라 달라져야 함 | 관측 가능한 술어에 건 조건문("brief가 있으면 참조하라") | 무조건 규칙 + 예외 조항 |
 
@@ -675,6 +680,8 @@ TDD 사이클을 따른다:
 
 ## 안티패턴
 
+아래 넷은 실측에서 스킬을 약하게 만든 패턴이다.
+
 ### 나쁨: 서사적 예시
 "2025-10-03 세션에서 빈 projectDir가 ~를 유발했다..."
 **왜 나쁜가:** 너무 구체적이라 재사용 불가
@@ -692,7 +699,7 @@ step2 [label="read file"];
 ### 나쁨: 일반 라벨
 helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어야 한다
 
-## STOP: 다음 스킬로 넘어가기 전에
+## STOP: 다음 스킬로 넘어가기 전 점검
 
 **어떤 스킬이든 쓴 뒤, 반드시 멈춰 배포 프로세스를 완료해야 한다.**
 

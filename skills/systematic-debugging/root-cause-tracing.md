@@ -1,7 +1,5 @@
 # 근본 원인 역추적
 
-## 개요
-
 버그는 콜스택 깊은 곳에서 드러나는 일이 많다(잘못된 디렉터리에서 git init, 엉뚱한 위치에 파일 생성, 잘못된 경로로 DB 열기).
 본능은 에러가 나타난 곳을 고치는 것이지만 그것은 증상 치료다.
 
@@ -18,18 +16,20 @@
 
 ## 추적 절차
 
-### 1. 증상을 관찰한다
-```
+다섯 단계를 순서대로 돈다.
+
+### 증상을 관찰한다
+```text
 Error: git init failed in ~/project/packages/core
 ```
 
-### 2. 직접 원인을 찾는다
+### 직접 원인을 찾는다
 **어떤 코드가 이것을 직접 일으키는가**
 ```typescript
 await execFileAsync('git', ['init'], { cwd: projectDir });
 ```
 
-### 3. 묻는다. 무엇이 이것을 호출했나
+### 무엇이 이것을 호출했는지 묻는다
 ```typescript
 WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → Session.initializeWorkspace()가 호출
@@ -37,13 +37,13 @@ WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → Project.create()의 테스트가 호출
 ```
 
-### 4. 계속 거슬러 올라간다
+### 계속 거슬러 올라간다
 **어떤 값이 넘어왔나**
 - `projectDir = ''`(빈 문자열)
 - 빈 문자열이 `cwd`로 들어가면 `process.cwd()`로 해소된다
 - 그것이 소스 코드 디렉터리다
 
-### 5. 원 유발점을 찾는다
+### 원 유발점을 찾는다
 **빈 문자열은 어디서 왔나**
 ```typescript
 const context = setupCoreTest(); // { tempDir: '' }를 반환
@@ -106,10 +106,10 @@ npm test 2>&1 | grep 'DEBUG git init'
 **수정**: tempDir를 beforeEach 전에 접근하면 예외를 던지는 게터로 만들었다
 
 **다층 방어도 추가했다**
-- 층 1: `Project.create()`가 디렉터리를 검증
-- 층 2: `WorkspaceManager`가 비어 있지 않음을 검증
-- 층 3: NODE_ENV 가드가 tmpdir 밖 git init을 거부
-- 층 4: git init 전에 스택 트레이스 로깅
+- 진입점 검증: `Project.create()`가 디렉터리를 검증
+- 비즈니스 로직 검증: `WorkspaceManager`가 비어 있지 않음을 검증
+- 환경 가드: NODE_ENV 가드가 tmpdir 밖 git init을 거부
+- 디버그 계측: git init 전에 스택 트레이스 로깅
 
 ## 핵심 원리
 

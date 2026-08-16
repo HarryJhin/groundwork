@@ -1,6 +1,6 @@
 ---
 name: writing-for-junior
-description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 실행할 수 있게 쓰는 규범과 같은 기준으로 문서를 판정하는 렌즈. Use when 스펙·플랜·스킬·ADR을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.
+description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 실행할 수 있게 쓰는 규범과 같은 기준으로 문서를 판정하는 렌즈. Use when 설계 문서·스킬·ADR을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.
 ---
 
 # writing-for-junior
@@ -10,13 +10,13 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 
 ## 입력·주체·출력
 
-**입력**은 지금 쓰거나 고치는 문서와 그 유형(스펙·플랜·스킬·ADR)이다.
+**입력**은 지금 쓰거나 고치는 문서와 그 유형(설계 문서·스킬·ADR)이다.
 호출자가 유형을 지정하지 않았으면 대상 문서의 경로와 형식으로 판정하고 그래도 정해지지 않으면 아래 공통 규범만 적용한다.
 
 **주체**는 그 문서를 쓰는 저자다.
 아래 규범은 전부 저자가 쓰는 시점에 적용한다.
 판정 렌즈는 저자가 자기 문서에 직접 돌리지 않는다.
-격리된 서브에이전트가 돌려야 판정이 성립하고 그 디스패치는 리뷰 스킬(`groundwork:spec-review`, `groundwork:plan-review`)이 맡는다.
+격리된 서브에이전트가 돌려야 판정이 성립하고 그 디스패치는 `groundwork:design-review`가 맡는다.
 
 **출력**은 규범을 적용해 쓴 문서다.
 이 스킬은 문서를 리뷰로 넘기지 않는다.
@@ -41,7 +41,7 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 여기서 "주니어"는 능력이 아니라 **맥락의 부재**를 가리킨다.
 문서를 쓴 다음 주의 자신도 이 독자다.
 
-## 왜 저자는 이 실패를 못 알아채는가
+## 저자가 이 실패를 못 알아채는 이유
 
 저자는 판정에 필요한 조건의 정반대에 있다.
 방금 읽은 원본, 방금 나눈 대화, 머릿속에 선 구조가 전부 해소된 상태다.
@@ -243,26 +243,24 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 | 유형 | 필수 절 |
 |---|---|
 | 스킬 | 입력(무엇을 받는가, 없으면 어떻게 하는가) / 경로 기준(문서가 적은 상대 경로의 기준 디렉터리) / 주체(이 문서를 실행하는 것이 누구이고 다른 역할 이름과 어떤 관계인가) / 출력(무엇을 반환하는가) |
-| 스펙 | 도입부(제목 아래 헤딩 없는 리드. 무엇이 문제이고 이 문서가 무엇을 하는가) / 범위 / 제외 범위 / 용어(고유 용어가 3개 이상이면) |
-| 플랜 | Goal과 대응 스펙 경로 / Global Constraints / 태스크마다 Files·Interfaces·검증 커맨드 |
+| 설계 문서 | 도입부(제목 아래 헤딩 없는 리드. 무엇이 문제이고 이 문서가 무엇을 하는가) / 범위 / 제외 범위 / 수용 기준 / 용어(고유 용어가 3개 이상이면) |
 | ADR | 결정을 강제한 힘 / 결정 / 파급(부정 포함) |
 
-스펙·플랜·ADR의 절 구성 정본은 각각 `groundwork:finding-unknowns`, `groundwork:writing-plans`, `groundwork:writing-adr`이다.
+설계 문서와 ADR의 절 구성 정본은 각각 `groundwork:finding-unknowns`와 `groundwork:writing-adr`이다.
 이 표는 그중 판독성에 직결되는 최소 집합이다.
 
 ## 판정 렌즈
 
 이 규범으로 문서를 판정하는 리뷰어 프롬프트가 이 디렉터리에 있다.
-스펙은 `groundwork:spec-review`가, 플랜은 `groundwork:plan-review`가 이 프롬프트를 서브에이전트에 주입해 쓴다.
+`groundwork:design-review`가 이 프롬프트를 서브에이전트에 주입해 쓴다.
 
 - [junior-read-prompt.md](junior-read-prompt.md): 공통 판정 렌즈. 위 축을 그대로 판정한다.
   모든 문서 유형에 쓴다.
 - 유형별 델타: 공통 렌즈에 더해 그 유형에만 있는 축을 담는다.
   렌즈를 주입하는 리뷰 스킬이 공통 렌즈와 델타를 이어 붙여 함께 넣는다.
-  - [delta-plan.md](delta-plan.md): 플랜 전용. 태스크 하나가 그 단위만으로 읽히는가.
-  - [delta-skill.md](delta-skill.md): 스킬 전용. 실행 계약.
+    - [delta-skill.md](delta-skill.md): 스킬 전용. 실행 계약.
 
-델타가 없는 유형(스펙·ADR)은 공통 렌즈만 쓴다.
+델타가 없는 유형(설계 문서·ADR)은 공통 렌즈만 쓴다.
 
 ## 자기 적용
 
@@ -279,12 +277,19 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 
 | 언제 여나 | 파일 | 담긴 것 |
 |---|---|---|
-| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론 | [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md) | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거 |
-| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함 | [comprehension-mechanics.md](references/comprehension-mechanics.md) | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문 |
-| 어떤 결함부터 잡을지 우선순위를 정할 때 | [api-doc-failures.md](references/api-doc-failures.md) | 문제 유형별 정의와 실무 분포 |
-| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨 | [newcomer-barriers.md](references/newcomer-barriers.md) | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
-| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안 | [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md) | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유 |
-| 「제작 사정 누출」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | [writer-based-prose.md](references/writer-based-prose.md) | 현상의 명칭과 판정 규칙의 출처 |
+| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론 | [why-authors-cannot-see-it.md][why-authors-cannot-see-it] | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거 |
+| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함 | [comprehension-mechanics.md][comprehension-mechanics] | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문 |
+| 어떤 결함부터 잡을지 우선순위를 정할 때 | [api-doc-failures.md][api-doc-failures] | 문제 유형별 정의와 실무 분포 |
+| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨 | [newcomer-barriers.md][newcomer-barriers] | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
+| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안 | [plain-language-and-controlled-vocabulary.md][plain-language-and-controlled-vocabulary] | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유 |
+| 「제작 사정 누출」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | [writer-based-prose.md][writer-based-prose] | 현상의 명칭과 판정 규칙의 출처 |
 
 `references/`의 파일은 모두 「확인 범위」 절에 무엇을 원문으로 확인했고 무엇을 대조하지 않았는지 적었다.
 인용을 다른 문서로 옮길 때 그 표기를 함께 옮긴다.
+
+[why-authors-cannot-see-it]: references/why-authors-cannot-see-it.md
+[comprehension-mechanics]: references/comprehension-mechanics.md
+[api-doc-failures]: references/api-doc-failures.md
+[newcomer-barriers]: references/newcomer-barriers.md
+[plain-language-and-controlled-vocabulary]: references/plain-language-and-controlled-vocabulary.md
+[writer-based-prose]: references/writer-based-prose.md

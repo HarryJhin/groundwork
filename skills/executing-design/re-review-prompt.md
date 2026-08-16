@@ -7,7 +7,7 @@ fix 라운드 뒤 재리뷰를 디스패치할 때 이 본문을 `general-purpos
 
 **목적**: 직전 리뷰의 발견마다 해소 여부를 판정하고 수정 자체가 아무것도 깨뜨리지 않았는지 확인한다.
 
-```
+```text
 서브에이전트 (general-purpose):
   description: "태스크 T[N] fix 라운드 [R] 재리뷰"
   model: [MODEL — 필수. SKILL.md 모델 선택 절에 따라 고른다. 작은 수정 diff의
@@ -68,10 +68,10 @@ fix 라운드 뒤 재리뷰를 디스패치할 때 이 본문을 `general-purpos
 **자리표시자**
 - `[MODEL]`: 필수. SKILL.md 모델 선택 절에 따른 리뷰어 모델. 작은 수정 diff는 싸거나 중간 티어
 - `[BRIEF_FILE]`: 태스크 브리프 파일(구현자가 작업한 것과 같은 파일)
-- `[FINDINGS]`: 직전 리뷰의 Critical·Important 발견과 스펙 공백을 그대로 복사해 불릿 하나에 하나씩
+- `[FINDINGS]`: 직전 리뷰의 Critical·Important 발견과 설계 문서의 공백을 그대로 복사해 불릿 하나에 하나씩
 - `[REPORT_FILE]`: 구현자 리포트 파일(수정 리포트가 덧붙어 있다)
 - `[FIX_BASE_SHA]`: 직전 리뷰가 본 head
 - `[HEAD_SHA]`: 현재 커밋
-- `[DIFF_FILE]`: `scripts/review-package PLAN_FILE FIX_BASE HEAD`가 출력한 경로
+- `[DIFF_FILE]`: `scripts/review-package DESIGN_FILE FIX_BASE HEAD`가 출력한 경로
 
 **재리뷰어가 반환하는 것**: 발견별 판정(ADDRESSED·NOT ADDRESSED), 수정 diff의 새 파손, 범위 밖 관찰, 라운드 판정

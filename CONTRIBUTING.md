@@ -33,6 +33,9 @@ PR도 받는다.
 
 ## 리포 구조
 
+여섯 갈래로 나뉜다.
+스킬, 훅, 스크립트, 배포 매니페스트, 문서, 라이선스 표기다.
+
 ### 스킬
 
 `skills/` 아래에 있다.
@@ -42,14 +45,12 @@ PR도 받는다.
 
 - `finding-unknowns` 설계 진입. 블라인드 스팟 탐색, 기존 구현·문서와의 대조, 위험 가정 검증(스파이크)을 서브에이전트로 병렬 조사한다.
   에이전트가 사용자에게 되묻는 인터뷰와 프로토타이핑은 메인 에이전트가 전담한다
-- `spec-review` 스펙 전용 리뷰
-- `plan-review` 플랜 전용 리뷰
-- `writing-plans` 태스크 분해와 플랜 작성
+- `design-review` 설계 리뷰. flow의 유일한 문서 리뷰다
 
 **실행**
 
-- `subagent-driven-development` 태스크마다 fresh 서브에이전트와 리뷰 게이트. 플랜 실행의 기본 경로
-- `executing-plan` 현재 세션에서 직접 실행하는 대체 경로
+- `executing-design` 설계 문서를 태스크로 쪼개 현재 세션에서 실행하고 태스크마다 리뷰 게이트를 건다. 설계 실행의 기본 경로
+- `subagent-driven-development` 태스크마다 서브에이전트를 띄운다. 태스크가 많고 독립이고 기계적일 때만 쓰는 조건부 경로
 - `test-driven-development` 테스트 우선
 - `systematic-debugging` 근본 원인 규명
 - `verification-before-completion` 완료 주장 전 증거 확보
@@ -84,34 +85,26 @@ PR도 받는다.
 도구 격리는 프롬프트 지시로 대체한다.
 
 프롬프트는 각 리뷰 스킬 디렉터리에 있다.
-스펙용은 `skills/spec-review/<리뷰어이름>-prompt.md`, 플랜용은 `skills/plan-review/<리뷰어이름>-prompt.md`다.
-양쪽에 다 쓰이는 리뷰어는 프롬프트를 복제하고 문구를 문서 유형별로 특화했다.
+프롬프트는 `skills/design-review/<리뷰어이름>-prompt.md`에 있다.
 
-「적용」은 어느 문서 유형의 리뷰에서 그 리뷰어를 쓰는지 가리킨다.
 「발동」의 필수는 항상 띄운다는 뜻이고 재량은 리뷰 스킬이 정한 조건을 만족할 때만 띄운다는 뜻이다.
-그 조건은 리뷰어마다 다르고 `skills/spec-review/SKILL.md`와 `skills/plan-review/SKILL.md`의 「재량」 절에 있다.
+그 조건은 리뷰어마다 다르고 `skills/design-review/SKILL.md`의 「재량」 절에 있다.
 
-| 리뷰어 | 적용 | 발동 | 보는 것 |
-|---|---|---|---|
-| `junior-read` | 공통 | 필수 | 맥락 없는 독자의 판독 가능성 |
-| `completeness` | 공통 | 필수 | 누락·엣지케이스·뒤로 미룬 결정 |
-| `coherence` | 공통 | 필수 | 모호한 표현·이중 해석과 내부 모순·절 사이 충돌 |
-| `boundary` | 스펙 | 필수 | 범위 이탈·독립 서브시스템 혼재와 불필요한 기능·과설계 |
-| `yagni` | 플랜 | 필수 | 불필요한 기능·과설계·조기 추상화 |
-| `decomposition` | 플랜 | 필수 | 태스크 경계·의존 순서·태스크 하나만 읽고 착수할 수 있는 자기완결성 |
-| `spec-alignment` | 플랜 | 필수 | 플랜과 대응 스펙의 정합 |
-| `experience` | 공통 | 재량 | 사용자 대면 요소(UX·카피·에러 메시지) |
-| `facts` | 공통 | 재량 | 외부 근거에 기대는 주장(수치·인용·API 시그니처) |
-| `crossref` | 공통 | 재량 | 연관 산출물과의 정합 |
-| `intent` | 공통 | 재량 | 인터뷰 답변·승인 대화와 문서 결정의 정합 |
+| 리뷰어 | 발동 | 보는 것 |
+|---|---|---|
+| `junior-read` | 필수 | 맥락 없는 독자의 판독 가능성 |
+| `completeness` | 필수 | 누락·엣지케이스·뒤로 미룬 결정과 수용 기준의 판정 가능성 |
+| `coherence` | 필수 | 모호한 표현·이중 해석과 내부 모순·절 사이 충돌 |
+| `boundary` | 필수 | 범위 이탈·독립 서브시스템 혼재와 불필요한 기능·과설계 |
+| `experience` | 재량 | 사용자 대면 요소(UX·카피·에러 메시지) |
+| `facts` | 재량 | 외부 근거에 기대는 주장(수치·인용·API 시그니처) |
+| `crossref` | 재량 | 연관 산출물과의 정합 |
+| `intent` | 재량 | 인터뷰 답변·승인 대화와 문서 결정의 정합 |
 
 `junior-read`만 예외로 프롬프트가 `skills/writing-for-junior/junior-read-prompt.md` 한 곳에 있다.
 판정 기준과 작성 규범이 같은 지식의 양면이라 `writing-for-junior`가 함께 소유한다.
 
 코드를 검증하는 리뷰어는 하나이고 프롬프트가 `skills/requesting-code-review/code-reviewer-prompt.md`에 있다.
-
-공통 리뷰어의 프롬프트가 `spec-review`와 `plan-review`에 두 벌로 존재한다.
-한쪽을 고치면 다른 쪽을 함께 고쳐야 한다.
 
 ### 훅
 
@@ -120,23 +113,26 @@ Claude Code 전용이다.
 
 - `hooks/session-start-groundwork` `skills/using-groundwork/SKILL.md` 전문을 읽어 `<EXTREMELY_IMPORTANT>` 블록으로 감싼 뒤 세션 컨텍스트에 주입한다.
   파일 부재나 읽기 실패는 무해 종료라 세션을 막지 않는다
-- `hooks/pre-artifact-write-junior-gate` 스펙·플랜·ADR·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다.
-  차단은 한 세션에서 문서 종류마다 한 번이다(스펙·플랜·ADR·스킬 각 1회, 세션당 최대 4회).
+- `hooks/pre-artifact-write-junior-gate` 설계 문서·ADR·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다.
+  차단은 한 세션에서 문서 종류마다 한 번이다(설계 문서·ADR·스킬 각 1회, 세션당 최대 3회).
   같은 종류의 다음 문서는 차단하지 않고 규범을 계속 적용하라는 한 줄만 낸다.
   이미 있는 파일 편집은 처음부터 통과시킨다.
   파일 단위로 차단하던 이전 동작은 문서를 여러 개 쓰는 세션에서 같은 안내문을 파일 수만큼 반복했고 그때마다 완성된 쓰기 내용이 폐기됐다
 
 ### 스크립트
 
-`skills/subagent-driven-development/scripts/` 아래에 있다.
+`skills/executing-design/scripts/` 아래에 있다.
+실행 자산은 기본 경로인 `executing-design`이 소유하고 조건부 경로인 `subagent-driven-development`가 건너와서 쓴다.
 존재 이유는 컨텍스트 경제다.
 컨트롤러가 태스크 텍스트와 diff를 자기 컨텍스트로 통과시키면 그것이 남은 세션 내내 상주한다.
 스크립트가 산출물을 파일로 넘겨 그 비용을 없앤다.
 
-- `sdd-workspace` 플랜별 작업 디렉터리를 `.groundwork/sdd/` 아래에 확보한다
-- `task-brief` 플랜에서 태스크 하나를 뽑아 브리프 파일로 낸다.
-  헤딩 형식 `### Task N: <이름>`에 결합돼 있다
+- `design-workspace` 설계 문서별 작업 디렉터리를 `.groundwork/run/` 아래에 확보한다
 - `review-package` 커밋 목록과 diff를 리뷰용 파일 하나로 묶는다
+
+두 스크립트 모두 첫 인자로 설계 문서 파일 경로를 받는다.
+태스크 브리프를 뽑던 `task-brief`는 없앴다.
+분해가 문서가 아니라 실행 시점 산출물이 되면서 브리프를 파싱할 원본이 사라졌고, 이제 컨트롤러가 분해 결과를 브리프 파일로 직접 쓴다.
 
 ### 매니페스트
 
@@ -167,7 +163,7 @@ claude plugin install groundwork@groundwork
 `SKILL.md` 수정은 현재 세션에 즉시 반영된다.
 훅과 매니페스트 수정은 `/reload-plugins`나 재시작이 필요하다.
 
-## groundwork 자신을 고칠 때
+## groundwork 자체 개정
 
 이 리포에서는 flow를 쓰지 않는다.
 새 기능이나 멀티파일 변경이라도 직접 처리한다.

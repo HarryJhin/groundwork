@@ -48,6 +48,8 @@ CODE_OF_CONDUCT를 비롯한 나머지는 공식 문서가 어느 쪽도 말하�
 
 ## 파일별 요점
 
+파일마다 GitHub이 인정하는 조건과 위치가 다르다.
+
 ### CODE_OF_CONDUCT
 
 출처: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project
@@ -173,7 +175,7 @@ contact_links:
 - gitignore 패턴을 대부분 따르나 CODEOWNERS에서 **안 되는 것**: `#`을 `\`로 이스케이프, `!` negation, `[ ]` 문자 범위.
 - 파일 3MB 이상이면 로드되지 않아 owner 정보가 표시되지 않는다.
 
-```
+```text
 *                    @org/global-owners      # 전체 기본
 *.js                 @org/frontend           # 확장자
 /build/logs/         @org/ops                # 디렉터리+하위

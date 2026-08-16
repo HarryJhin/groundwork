@@ -15,12 +15,12 @@ description: 코드 리뷰어 서브에이전트를 디스패치해 완료된 �
 **핵심 원칙**: 일찍 리뷰하고 자주 리뷰한다.
 
 이 스킬은 코드 리뷰를 다룬다.
-스펙 문서 리뷰는 `groundwork:spec-review`, 플랜 문서 리뷰는 `groundwork:plan-review` 소관이다.
+문서 리뷰는 `groundwork:design-review` 소관이다.
 
 ## 리뷰 시점
 
 **필수**:
-- `groundwork:subagent-driven-development`로 플랜을 실행할 때 각 태스크 후
+- `groundwork:executing-design`이나 `groundwork:subagent-driven-development`로 설계 문서를 실행할 때 각 태스크 후
 - 주요 기능 완료 후
 - main 머지 전
 
@@ -49,13 +49,13 @@ echo "$DIFF_FILE"
 `general-purpose` 서브에이전트에 [code-reviewer-prompt.md](code-reviewer-prompt.md) 전문을 주입하고 자리표시자를 채운다.
 
 - `[DESCRIPTION]`: 무엇을 만들었는지 짧은 요약
-- `[PLAN_OR_REQUIREMENTS]`: 무엇을 해야 하는지(플랜 경로·태스크 텍스트·요구)
+- `[DESIGN_OR_REQUIREMENTS]`: 무엇을 해야 하는지(설계 문서 경로·태스크 브리프 텍스트·요구)
 - `[BASE_SHA]`: 시작 커밋
 - `[HEAD_SHA]`: 종료 커밋
 - `[DIFF_FILE]`: 위에서 만든 diff 파일 경로. diff를 파일로 넘기면 조율자 컨텍스트에 diff가 들어오지 않는다
 
 **리뷰어의 모델을 명시해 띄운다.**
-티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `${CLAUDE_PLUGIN_ROOT}/skills/subagent-driven-development/choosing-model-tier.md`의 「코드 리뷰 태스크」에 있다(`${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이고 실행 시점 작업 디렉터리가 아니다).
+티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`의 「코드 리뷰 태스크」에 있다(`${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이고 실행 시점 작업 디렉터리가 아니다).
 모델을 빠뜨리면 세션 모델을 상속한다.
 
 **3. 피드백에 대응한다**

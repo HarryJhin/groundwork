@@ -33,7 +33,9 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
 
 ## 축별 분석
 
-### 1. 조직 `.github` 상속을 정본으로 쓴다
+조사한 조직들의 실무를 다섯 축으로 갈라 본다.
+
+### 조직 `.github` 상속을 정본으로 쓴다
 
 - 조직 6곳 중 5곳이 `<org>/.github` 정본 리포를 운영한다.
   Android만 GitHub 모델 밖이다 (`gh api repos/{google,apple,facebook,aws,microsoft}/.github/contents` 각각 성공, Android는 아래 별도 섹션).
@@ -41,7 +43,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
 - **판단**: 조직 단위로 관리하면 정본을 한 곳에서 고치고 산하 리포는 예외일 때만 override 한다.
   override는 파일 단위이고 이슈 템플릿은 폴더 단위라 하위 리포 `.github/ISSUE_TEMPLATE/`에 파일이 하나라도 있으면 정본 폴더 전체가 무시된다(GitHub 상속 규칙, github-standard.md 참조).
 
-### 2. CoC의 실질 공통분모는 Contributor Covenant다
+### CoC의 실질 공통분모는 Contributor Covenant다
 
 - Apple·AWS·Meta·Microsoft는 Contributor Covenant 파생이다.
   Apple은 표준 문안 (`gh api repos/apple/.github/contents/CODE_OF_CONDUCT.md`), Meta는 1.4 (`gh api repos/facebook/react/contents/CODE_OF_CONDUCT.md`), AWS는 2.1 (`gh api repos/aws/.github/contents/CODE_OF_CONDUCT.md` + https://aws.github.io/code-of-conduct), Microsoft는 2.0이다.
@@ -56,7 +58,7 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   실제 각 사가 연락처를 명시한다(Meta `opensource-conduct@fb.com` `gh api repos/facebook/react/contents/CODE_OF_CONDUCT.md`, MS `opencode@microsoft.com` https://opensource.microsoft.com/codeofconduct/, AWS `opensource-codeofconduct@amazon.com` https://aws.github.io/code-of-conduct).
   집행 의지 없는 CoC는 장식이다.
 
-### 3. CLA는 규범이 아니라 트레이드오프다
+### CLA는 규범이 아니라 트레이드오프다
 
 - 갈린다.
   Google·Meta는 CLA를 요구한다 (`gh api repos/google/.github/contents/CONTRIBUTING.md`가 cla.developers.google.com 유도, `gh api repos/facebook/.github/contents/CONTRIBUTING.md`가 code.facebook.com/cla 유도).
@@ -69,19 +71,19 @@ Google, Android, Apple, Meta, AWS, Microsoft가 공개 리포에서 실제로 �
   CLA를 기본값으로 권하지 않는다.
   법적 필요가 분명할 때만 비용을 알고 채택한다.
 
-### 4. SECURITY는 "공개 금지 + 사적 경로"가 원리, 채널은 규모별이다
+### SECURITY는 "공개 금지 + 사적 경로"가 원리, 채널은 규모별이다
 
 - 공통 원리는 공개 이슈 금지 + 사적 경로다.
   구체 채널만 규모에 따라 다르다.
-  - 이메일 직결: AWS `aws-security@amazon.com` (`gh api repos/aws/.github/contents/SECURITY.md`, HackerOne https://hackerone.com/aws_vdp도 병기)
-  - 전용 포털: Microsoft MSRC (`gh api repos/microsoft/.github/contents/SECURITY.md`), Google g.co/vulnz 중앙 인테이크 (`gh api repos/google/.github/contents/SECURITY.md`)
-  - 버그바운티: Meta facebook.com/whitehat (`gh api repos/facebook/.github/contents/SECURITY.md`)
-  - GitHub 기본 기능: Apple은 private vulnerability reporting (`gh api repos/apple/.github/contents/SECURITY.md`)
+    - 이메일 직결: AWS `aws-security@amazon.com` (`gh api repos/aws/.github/contents/SECURITY.md`, HackerOne https://hackerone.com/aws_vdp도 병기)
+    - 전용 포털: Microsoft MSRC (`gh api repos/microsoft/.github/contents/SECURITY.md`), Google g.co/vulnz 중앙 인테이크 (`gh api repos/google/.github/contents/SECURITY.md`)
+    - 버그바운티: Meta facebook.com/whitehat (`gh api repos/facebook/.github/contents/SECURITY.md`)
+    - GitHub 기본 기능: Apple은 private vulnerability reporting (`gh api repos/apple/.github/contents/SECURITY.md`)
 - Microsoft SECURITY.md는 버전 마커(예: `<!-- BEGIN MICROSOFT SECURITY.MD V0.0.9 BLOCK -->`)로 감싸 전 리포에 표준 블록을 자동 배포하고 응답 SLA와 CVD 원칙을 명문화한다 (`gh api repos/microsoft/.github/contents/SECURITY.md`).
 - **판단**: SECURITY.md에 ① 사적 보고 경로(소규모는 GitHub private vulnerability reporting으로 충분), ② 지원 버전 표, ③ 공개 이슈 금지를 담는다.
   전용 포털·바운티는 대규모의 선택지다.
 
-### 5. CONTRIBUTING은 조직 템플릿 + 리포별 오버라이드 혼용이 흔하다
+### CONTRIBUTING은 조직 템플릿 + 리포별 오버라이드 혼용이 흔하다
 
 - AWS는 `.github`에 범용 CONTRIBUTING.md를 두고 성숙한 리포는 전용판으로 override 한다 (`gh api repos/aws/.github/contents/CONTRIBUTING.md` vs `gh api repos/aws/aws-sdk-java-v2/contents/CONTRIBUTING.md`).
 - Swift는 리포 CONTRIBUTING이 swift.org의 커뮤니티 문서로 위임하는 중앙화 방식이다 (`gh api repos/apple/swift/contents/CONTRIBUTING.md` + https://www.swift.org/contributing/).

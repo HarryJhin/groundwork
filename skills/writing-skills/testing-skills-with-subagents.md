@@ -2,7 +2,7 @@
 
 **이 레퍼런스를 로드할 때:** 스킬을 만들거나 고칠 때, 배포 전에, 압박 아래서도 작동하고 합리화에 버티는지 검증할 때 로드한다.
 
-## 개요
+## 스킬 테스트가 TDD인 이유
 
 **스킬 테스트는 프로세스 문서에 적용한 TDD일 뿐이다.**
 
@@ -16,7 +16,7 @@
 
 **완결된 예제:** CLAUDE.md 문서 변형을 테스트한 전체 테스트 캠페인은 `examples/CLAUDE_MD_TESTING.md` 참조.
 
-## 언제 쓰는가
+## 적용 시점
 
 테스트할 스킬:
 - 규율을 강제한다 (TDD, 테스트 요구)
@@ -189,7 +189,7 @@ You have access to: [skill-being-tested]
 
 새 합리화마다 다음을 추가한다:
 
-### 1. 규칙에 명시적 부정
+### 규칙에 명시적 부정
 
 <Before>
 ```markdown
@@ -209,7 +209,7 @@ Write code before test? Delete it. Start over.
 ```
 </After>
 
-### 2. 합리화 표에 항목 추가
+### 합리화 표에 항목 추가
 
 ```markdown
 | Excuse | Reality |
@@ -217,7 +217,7 @@ Write code before test? Delete it. Start over.
 | "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
 ```
 
-### 3. Red Flag 항목
+### Red Flag 항목
 
 ```markdown
 ## Red Flags - STOP
@@ -226,7 +226,7 @@ Write code before test? Delete it. Start over.
 - "I'm following the spirit not the letter"
 ```
 
-### 4. description 갱신
+### description 갱신
 
 ```yaml
 description: Use when you wrote code before tests, when tempted to test after, or when manually testing seems faster.
@@ -274,7 +274,7 @@ it crystal clear that Option A was the only acceptable answer?
    - 핵심 포인트를 더 눈에 띄게
    - 근본 원칙을 앞쪽에 둔다
 
-## 스킬이 방탄일 때
+## 방탄 판정 기준
 
 **방탄 스킬의 신호:**
 
@@ -291,6 +291,8 @@ it crystal clear that Option A was the only acceptable answer?
 
 ## 예시: TDD 스킬 방탄화
 
+실패한 테스트에서 시작해 스킬을 고치고 다시 돌린 기록이다.
+
 ### 최초 테스트 (실패)
 ```markdown
 Scenario: 200 lines done, forgot TDD, exhausted, dinner plans
@@ -298,14 +300,14 @@ Agent chose: C (write tests after)
 Rationalization: "Tests after achieve same goals"
 ```
 
-### 반복 1: 반박 추가
+### 반박 추가
 ```markdown
 Added section: "Why Order Matters"
 Re-tested: Agent STILL chose C
 New rationalization: "Spirit not letter"
 ```
 
-### 반복 2: 근본 원칙 추가
+### 근본 원칙 추가
 ```markdown
 Added: "Violating letter is violating spirit"
 Re-tested: Agent chose A (delete it)
