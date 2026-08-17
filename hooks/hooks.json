@@ -3,7 +3,8 @@
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start-groundwork" }
+          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start-groundwork" },
+          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start-standard-docs" }
         ]
       }
     ],
@@ -11,7 +12,8 @@
       {
         "matcher": "Write|Edit",
         "hooks": [
-          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/pre-artifact-write-junior-gate" }
+          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/pre-artifact-write-junior-gate" },
+          { "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/pre-standard-doc-write-gate" }
         ]
       }
     ]

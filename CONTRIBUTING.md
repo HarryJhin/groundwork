@@ -77,7 +77,7 @@ PR도 받는다.
 
 **리포 표준**
 
-- `managing-community-health-files` GitHub 커뮤니티 헬스 파일의 감사·스캐폴딩과 조직 `.github` 상속 구성
+- `managing-repo-standard-docs` README·CONTRIBUTING·SECURITY·CHANGELOG 등 리포 표준 문서의 감사와 표준 준수 작성
 
 **진입**
 
@@ -118,11 +118,25 @@ Claude Code 전용이다.
 
 - `hooks/session-start-groundwork` `skills/using-groundwork/SKILL.md` 전문을 읽어 `<EXTREMELY_IMPORTANT>` 블록으로 감싼 뒤 세션 컨텍스트에 주입한다.  
   파일 부재나 읽기 실패는 무해 종료라 세션을 막지 않는다
+- `hooks/session-start-standard-docs` 작업 디렉터리에 빠진 리포 표준 문서를 세션 컨텍스트에 알린다.  
+  git 리포이고 origin 원격이 있고 부재가 하나라도 있을 때만 방출하므로 완비된 리포에서는 출력이 없다.  
+  네트워크를 쓰지 않는다.  
+  쓰기 게이트가 못 잡는 경우를 덮는다. 없는 파일은 쓰이지도 변경되지도 않아 `PreToolUse`·`FileChanged` 어느 쪽에도 안 걸린다
 - `hooks/pre-artifact-write-junior-gate` 설계 문서·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다.  
   차단은 한 세션에서 문서 종류마다 한 번이다(설계 문서·스킬 각 1회).  
   같은 종류의 다음 문서는 차단하지 않고 규범을 계속 적용하라는 한 줄만 낸다.  
   이미 있는 파일 편집은 처음부터 통과시킨다.  
   파일 단위로 차단하던 이전 동작은 문서를 여러 개 쓰는 세션에서 같은 안내문을 파일 수만큼 반복했고 그때마다 완성된 쓰기 내용이 폐기됐다
+- `hooks/pre-standard-doc-write-gate` README·CONTRIBUTING·CODE_OF_CONDUCT·SECURITY·SUPPORT·GOVERNANCE·CHANGELOG·이슈 템플릿·PR 템플릿을 새로 만드는 쓰기를 한 번 막고 그 문서의 표준 요지와 읽을 레퍼런스를 반환한다.  
+  대상은 리포 루트·`.github/`·`docs/`에 놓인 것뿐이라 하위 디렉터리의 동명 파일은 걸리지 않는다.  
+  차단은 한 세션에서 문서 종류마다 한 번이다.  
+  이미 있는 문서를 고칠 때는 차단하지 않고 한 줄만 낸다.  
+  `managing-repo-standard-docs` 스킬이 정본이고 이 훅은 그 스킬로 들어가는 입구다
+
+`PreToolUse` 훅에서 차단하지 않는 안내는 JSON `hookSpecificOutput.additionalContext`로 낸다.  
+exit 0의 평문 stdout은 디버그 로그로만 가고 모델에 닿지 않는다.  
+평문 stdout이 컨텍스트가 되는 이벤트는 `SessionStart`·`UserPromptSubmit`·`UserPromptExpansion` 셋뿐이다.  
+차단(exit 2)의 사유는 stderr로 전달한다.
 
 ### Scripts
 

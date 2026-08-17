@@ -94,12 +94,12 @@ IFS="$OLD_IFS"
 [ -n "$FILE_PATH" ] || exit 0
 
 # 세션 안에서 문서 종류마다 1회. 마커가 있으면 차단하지 않고 한 줄만 남긴다.
-# 리마인더는 stdout으로 낸다. 차단하지 않는 경로(exit 0)에서 모델에 닿는 채널이
-# stdout이고 stderr는 차단(exit 2)의 사유 전달에 쓰인다.
+# 리마인더는 JSON additionalContext로 낸다. PreToolUse에서 exit 0의 평문 stdout은
+# 디버그 로그로만 가고 모델에 닿지 않는다. stderr는 차단(exit 2)의 사유 전달에 쓰인다.
 MARK_ROOT="${TMPDIR:-/tmp}/groundwork-junior-gate/${SID:-nosession}"
 KEY="${SLUG:-other}"
 if [ -f "$MARK_ROOT/$KEY" ]; then
-  printf '[groundwork] %s 문서를 하나 더 만드는 중이다. 이 세션 앞에서 받은 주니어 독자 규범(groundwork:writing-for-junior)을 그대로 적용한다. 차단하지 않는다.\n' "$KIND"
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"[groundwork] %s 문서를 하나 더 만드는 중이다. 이 세션 앞에서 받은 주니어 독자 규범(groundwork:writing-for-junior)을 그대로 적용한다. 차단하지 않는다."}}\n' "$KIND"
   exit 0
 fi
 mkdir -p "$MARK_ROOT" 2>/dev/null && : > "$MARK_ROOT/$KEY" 2>/dev/null

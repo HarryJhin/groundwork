@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# SessionStart hook for the groundwork plugin.
+#
+# 작업 디렉터리가 공유 리포일 때 리포 표준 문서의 부재를 세션 컨텍스트에 알린다.
+# PreToolUse 게이트(pre-standard-doc-write-gate)는 문서를 쓸 때만 걸리므로 부재를
+# 잡지 못한다. 없는 파일은 영원히 쓰이지도 변경되지도 않기 때문이다. 이 훅이 그 구멍을 덮는다.
+#
+# 방출 조건을 셋으로 좁혀 소음을 없앤다.
+#   1. git 리포일 것. 임시 디렉터리에 걸리지 않는다.
+#   2. origin 원격이 있을 것. 남에게 보일 리포만 대상으로 한다.
+#   3. 부재가 하나라도 있을 것. 완비된 리포에서는 출력이 0이다.
+#
+# 네트워크를 쓰지 않는다. `gh api`는 세션 시작을 늦추므로 부르지 않고
+# community profile 해석은 감사 스크립트(scripts/audit-docs.sh)에 맡긴다.
+#
+# 어떤 실패도 무해 종료(exit 0)다. 이 훅이 세션을 막지 않는다.
+
+set -u
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+[ -n "$ROOT" ] || exit 0
+cd "$ROOT" 2>/dev/null || exit 0
+git remote get-url origin >/dev/null 2>&1 || exit 0
+
+# 인식 위치 3곳의 파일명을 한 번에 모은다. 파일마다 find를 돌리지 않는다.
+# find는 대소문자를 정확히 가리므로 대소문자 무시 파일시스템에서도 SUPPORT 같은
+# 전대문자 규정을 그대로 판정한다.
+ANYWHERE="$(find .github . docs -maxdepth 1 -type f 2>/dev/null | sed 's#.*/##' | sort -u)"
+ROOTFILES="$(find . -maxdepth 1 -type f 2>/dev/null | sed 's#.*/##')"
+
+# -F로 고정 문자열 비교한다. 없으면 파일명의 '.'이 임의 문자로 매칭돼 READMEXmd 같은
+# 파일이 README.md 존재로 읽힌다.
+has()  { printf '%s\n' "$2" | grep -qxF -- "$1"; }
+hasi() { printf '%s\n' "$2" | grep -qxiF -- "$1"; }
+
+MISSING=""
+
+# 파일명 대소문자 규정이 있는 것과 없는 것을 나눈다. GitHub이 "not case sensitive"라고
+# 명시한 CONTRIBUTING과 PR 템플릿만 대소문자를 무시한다. SUPPORT는 전대문자 규정이 있고
+# 나머지는 규정이 없어 표준 대문자로 본다.
+for f in README.md CODE_OF_CONDUCT.md SECURITY.md SUPPORT.md GOVERNANCE.md; do
+  has "$f" "$ANYWHERE" || MISSING="$MISSING $f"
+done
+hasi "CONTRIBUTING.md" "$ANYWHERE" || MISSING="$MISSING CONTRIBUTING.md"
+
+# PR 템플릿은 단일 파일과 다중 템플릿 디렉터리 둘 다 유효하다.
+PR_DIR=""
+for d in .github/PULL_REQUEST_TEMPLATE PULL_REQUEST_TEMPLATE docs/PULL_REQUEST_TEMPLATE; do
+  if [ -d "$d" ] && find "$d" -maxdepth 1 -type f 2>/dev/null | grep -q .; then PR_DIR="$d"; break; fi
+done
+if [ -z "$PR_DIR" ]; then
+  hasi "PULL_REQUEST_TEMPLATE.md" "$ANYWHERE" || MISSING="$MISSING PULL_REQUEST_TEMPLATE.md"
+fi
+
+# CHANGELOG는 GitHub이 인식하지 않는다. Keep a Changelog가 정한 위치는 리포 루트다.
+has "CHANGELOG.md" "$ROOTFILES" || MISSING="$MISSING CHANGELOG.md"
+
+
+# 이슈 템플릿은 .github/ISSUE_TEMPLATE/ 아래만 유효하다.
+if ! { [ -d ".github/ISSUE_TEMPLATE" ] && find ".github/ISSUE_TEMPLATE" -maxdepth 1 -type f 2>/dev/null | grep -q .; }; then
+  MISSING="$MISSING .github/ISSUE_TEMPLATE/"
+fi
+
+[ -n "$MISSING" ] || exit 0
+
+LIST="${MISSING# }"
+CONTEXT="[groundwork] 이 리포에 없는 표준 문서: ${LIST}. 만들거나 점검할 일이 생기면 'groundwork:managing-repo-standard-docs' 스킬을 쓴다. 지금 만들라는 지시가 아니다. 사용자가 요청하지 않았으면 알림으로만 둔다."
+
+# additionalContext 방출. 값은 위 고정 목록에서만 나오므로 따옴표·역슬래시가 섞이지 않는다.
+printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$CONTEXT"
+
+exit 0
