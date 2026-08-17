@@ -1,4 +1,4 @@
-출처: https://research.aston.ac.uk/en/publications/unknown-knowns-tacit-knowledge-in-requirements-engineering/
+출처: [^unknown-knowns-tacit-knowledge-in-requir]
 
 # Unknown knowns: Tacit knowledge in requirements engineering
 
@@ -46,3 +46,5 @@ Gervasi 등의 틀은 소프트웨어 프로젝트 참여자 사이의 소통을
 저자들은 원인을 분류할 뿐 원인별 대응 기법을 제시하지 않는다.  
 위 「Where the skill uses this」의 도구 배정은 이 스킬의 판단이고 논문의 주장이 아니다.  
 인용을 다른 문서로 옮길 때 이 표기를 함께 옮긴다.
+
+[^unknown-knowns-tacit-knowledge-in-requir]: https://research.aston.ac.uk/en/publications/unknown-knowns-tacit-knowledge-in-requirements-engineering/

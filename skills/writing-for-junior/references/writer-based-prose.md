@@ -1,7 +1,7 @@
 출처:
-- https://mwover.com/wp-content/uploads/2018/05/flower-writer-based-prose.pdf
-- https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Self-references_to_avoid
-- https://github.com/azizkayumov/clean-code/blob/main/comments.md
+- [^flower-writer-based-prose-pdf]
+- [^self-references-to-avoid]
+- [^comments-md]
 
 # Basis for production-circumstance leakage (axis G)
 
@@ -82,3 +82,7 @@ Clean Code 분류의 이름과 정의는 공개 요약본에서 확인했고 원
 
 기술 문서 실무에서 이 결함을 지목하는 전용 안티패턴 명칭은 찾지 못했다.  
 코드 주석에는 이름이 붙었고 문서에는 붙지 않은 상태로 보인다.
+
+[^comments-md]: https://github.com/azizkayumov/clean-code/blob/main/comments.md
+[^flower-writer-based-prose-pdf]: https://mwover.com/wp-content/uploads/2018/05/flower-writer-based-prose.pdf
+[^self-references-to-avoid]: https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Self-references_to_avoid

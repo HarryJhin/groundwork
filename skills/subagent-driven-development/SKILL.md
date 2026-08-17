@@ -21,10 +21,9 @@ description: 승인된 설계 문서를 태스크마다 fresh 구현자 서브�
 `사용자`는 설계 문서를 승인한 사람이다.  
 컨트롤러는 조율만 하고 코드를 직접 고치지 않는다.
 
-**경로 기준**: 이 문서의 상대 경로는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/subagent-driven-development/` 기준이다.  
-`${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.  
+**경로 기준**: 이 문서의 상대 경로는 이 스킬 디렉터리 기준이다.
 다만 실행 자산은 이 디렉터리에 없다.  
-스크립트와 태스크 리뷰어·재리뷰 프롬프트는 기본 경로인 `groundwork:executing-design`이 소유하므로 아래에서 `scripts/X`라고 적은 것은 `${CLAUDE_PLUGIN_ROOT}/skills/executing-design/scripts/X`이고, 마크다운 링크의 `../executing-design/`이 그 디렉터리다.  
+스크립트와 태스크 리뷰어·재리뷰 프롬프트는 기본 경로인 `groundwork:executing-design`이 소유하므로 아래에서 `scripts/X`라고 적은 것은 `groundwork:executing-design`의 `scripts/X`이고, 마크다운 링크의 `../executing-design/`이 그 디렉터리다.  
 이 스킬이 소유하는 것은 구현자 프롬프트 하나다.  
 워크트리와 실행 스크래치, 코드 산출물의 경로는 대상 repo 루트 기준이다(두 디렉터리의 정의는 아래 「Setup」).
 

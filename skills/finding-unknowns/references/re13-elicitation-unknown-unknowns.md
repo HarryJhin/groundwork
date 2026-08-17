@@ -1,4 +1,4 @@
-출처: https://research.aston.ac.uk/en/publications/requirements-elicitation-towards-the-unknown-unknowns/
+출처: [^requirements-elicitation-towards-the-unk]
 
 # Requirements elicitation: towards the unknown unknowns
 
@@ -30,3 +30,5 @@ A. Sutcliffe, P. Sawyer. RE'13 (21st IEEE International Requirements Engineering
 민족지 관련 서술은 검색 요약을 경유한 것이라 원문과 대조하지 않았다.  
 이 스킬은 이 대목을 "노출로만 줄어든다"는 방향 근거로만 쓰고 수치나 강한 주장을 덧붙이지 않는다.  
 인용을 다른 문서로 옮길 때 이 표기를 함께 옮긴다.
+
+[^requirements-elicitation-towards-the-unk]: https://research.aston.ac.uk/en/publications/requirements-elicitation-towards-the-unknown-unknowns/

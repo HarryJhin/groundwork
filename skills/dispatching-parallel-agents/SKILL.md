@@ -88,7 +88,7 @@ description: 독립적인 문제 영역마다 서브에이전트 하나를 붙�
 응답마다 하나씩이면 순차 실행이다.
 
 **에이전트마다 모델을 명시한다.**  
-티어는 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`의 「Dispatch axis: investigation tasks」에 있다(`${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이고 실행 시점 작업 디렉터리가 아니다).  
+티어는 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: investigation tasks」에 있다.  
 모델을 빠뜨리면 세션 모델을 상속해 영역 수만큼 최상위 모델이 돈다.
 
 ### Review and integrate

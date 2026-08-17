@@ -1,4 +1,4 @@
-출처: https://www.cs.mcgill.ca/~martin/papers/ieeesw2015.pdf
+출처: [^ieeesw2015-pdf]
 
 # How API Documentation Fails
 
@@ -68,3 +68,5 @@ Table 2의 문제 정의와 수치, 조사 규모, 핵심 결론 문장은 저�
 
 논문의 "ambiguity"는 "대체로 완전하지만 불명확함"으로 정의돼 `coherence` 렌즈의 `모호` 축과 `junior-read`의 D축에 걸쳐 있다.  
 어느 한쪽에 배타적으로 대응하지 않는다.
+
+[^ieeesw2015-pdf]: https://www.cs.mcgill.ca/~martin/papers/ieeesw2015.pdf

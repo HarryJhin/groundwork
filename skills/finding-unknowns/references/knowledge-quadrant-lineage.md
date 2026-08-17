@@ -1,4 +1,4 @@
-출처: https://en.wikipedia.org/wiki/There_are_unknown_unknowns
+출처: [^there-are-unknown-unknowns]
 
 # Lineage of the knowledge quadrants
 
@@ -52,3 +52,5 @@ that one knows
 
 Rumsfeld 발화, Johari 서술, Žižek 인용은 출처 페이지에서 확인했다.  
 요구공학 쪽 정의의 근거는 RE'11이고 이 파일에서는 대조 목적으로만 요약했다.
+
+[^there-are-unknown-unknowns]: https://en.wikipedia.org/wiki/There_are_unknown_unknowns

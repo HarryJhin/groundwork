@@ -33,14 +33,14 @@ description: 구현이 끝나고 테스트가 통과한 뒤 작업을 통합하�
   받지 못했으면 사용자에게 묻고 사용자가 산출물이 없다고 하면 「Stamp the updated date」를 건너뛴다.
 - 실행 스크래치의 경로.  
   같은 호출자가 함께 넘긴다.  
-  받지 못했으면 `${CLAUDE_PLUGIN_ROOT}/skills/executing-design/scripts/design-scratch DESIGN_FILE`을 돌려 얻는다.  
+  받지 못했으면 `groundwork:executing-design`의 `scripts/design-scratch DESIGN_FILE`을 돌려 얻는다.  
   그 디렉터리가 없거나 `progress.md`가 없으면 실행 스킬이 이미 정리한 것이므로 「Report the outstanding findings」를 건너뛰고 그 사실을 사용자에게 밝힌다.
 
 **주체**는 작업을 마친 에이전트다.  
 아래에서 무주어로 적은 지시는 전부 그 에이전트 몫이고 "사용자"는 통합을 결정하는 사람이다.
 
 **경로 기준**: 이 문서의 경로는 두 기준으로 갈린다.  
-`${CLAUDE_PLUGIN_ROOT}/skills/executing-design/scripts/`의 스크립트는 groundwork 플러그인이 설치된 디렉터리 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 실행 시점 작업 디렉터리가 아니다.  
+`scripts/`의 스크립트는 `groundwork:executing-design`이 소유하므로 그 스킬을 로드해 그쪽의 스킬 루트 기준으로 해소한다.  
 설계 문서 경로와 셸 블록이 도는 위치는 대상 repo의 워크트리 기준이다.
 
 **출력**은 사용자가 고른 통합 방식의 실행 결과다.  

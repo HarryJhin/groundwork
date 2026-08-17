@@ -9,7 +9,7 @@ description: Apply Strunk's timeless writing rules to ANY prose humans will read
 
 William Strunk Jr.'s *The Elements of Style* (1918) teaches you to write clearly and cut ruthlessly.
 
-**Path base:** Relative paths in this document are rooted at this skill's directory, `${CLAUDE_PLUGIN_ROOT}/skills/writing-clearly-and-concisely/`, where `${CLAUDE_PLUGIN_ROOT}` is the installed groundwork plugin directory, not the working directory at run time.
+**Path base:** Relative paths in this document are rooted at this skill's directory, not the working directory at run time.
 
 **WARNING:** `elements-of-style.md` (the full 1918 text) consumes ~12,000 tokens. Read it only when writing or editing prose.
 
@@ -58,4 +58,4 @@ Section V of `elements-of-style.md`. When a specific word choice is in doubt, lo
 
 ## Bottom Line
 
-Writing for humans? Read `${CLAUDE_PLUGIN_ROOT}/skills/writing-clearly-and-concisely/elements-of-style.md` and apply the rules.
+Writing for humans? Read `elements-of-style.md` and apply the rules.

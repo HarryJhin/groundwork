@@ -1,7 +1,7 @@
 출처:
-- https://www.asd-ste100.org/about_STE.html
-- https://www.iso.org/standard/78907.html
-- https://journals.sagepub.com/doi/10.1177/0963721417727521
+- [^about-ste-html]
+- [^s-78907-html]
+- [^s-0963721417727521]
 
 # Three layers of word choice: phenomenon, norm, enforcement
 
@@ -77,3 +77,7 @@ STE는 항공 정비 매뉴얼, ISO 24495-1은 일반 대중용 문서, 단어 �
 
 한국어 어휘 빈도에 대한 근거는 확인하지 않았다.  
 위 연구는 영어를 비롯한 표기 체계의 결과이고 한자어 비중이 높은 한국어에서 같은 크기의 효과가 나타나는지는 이 조사 범위 밖이다.
+
+[^about-ste-html]: https://www.asd-ste100.org/about_STE.html
+[^s-0963721417727521]: https://journals.sagepub.com/doi/10.1177/0963721417727521
+[^s-78907-html]: https://www.iso.org/standard/78907.html

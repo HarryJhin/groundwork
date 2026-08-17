@@ -120,7 +120,7 @@ skills/
    대상 파일 경로·인자를 호출자가 넘기는지 스스로 찾는지, 찾는다면 어떤 규칙인지, 받지 못했을 때 무엇을 하는지.
 2. **경로 기준**: 그 문서가 적은 상대 경로의 기준 디렉터리. 스킬은 플러그인 디렉터리에 설치되고 실행 시점 작업 디렉터리는 사용자 프로젝트다.  
    기준을 밝히지 않으면 적힌 그대로 Read해서 실패한다.  
-   플러그인 안의 파일을 가리킬 때는 `${CLAUDE_PLUGIN_ROOT}` 기준으로 적는다.
+   자기 스킬의 파일은 스킬 루트 기준 상대 경로로 적고 다른 스킬의 파일은 그 스킬 이름으로 부른다(아래 「SKILL.md structure」).
 3. **주체**: 그 문서를 실행하는 것이 누구인지, 문서가 쓰는 다른 역할 이름(저자·메인·컨트롤러·리뷰어 등)과 어떤 관계인지. 실행자가 자기 역할을 특정하지 못하면 어느 지시를 자기 몫으로 볼지 정할 수 없다.
 4. **출력**: 그 스킬이 무엇을 반환하고 어디로 넘기는가.  
    다음 단계로 넘긴다면 그 대상.
@@ -132,7 +132,7 @@ skills/
 그 스킬의 `delta-skill.md`가 위 항목을 판정 축으로 갖는다.
 
 이 문서 자신의 경로 기준도 같은 규칙을 따른다.  
-아래에서 파일명만 적은 참조는 이 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/` 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
+아래에서 파일명만 적은 참조는 이 스킬 디렉터리 기준이다.
 
 ## SKILL.md structure
 
@@ -145,8 +145,54 @@ h1은 스킬 디렉터리 이름을 그대로 쓴다.
 개념을 가리키는 제목은 `-ing`로 시작하지 않는 명사구로 쓴다(`Reviewer roster`).  
 선택 구역은 제목 앞에 `Optional:`을 붙인다.
 
-본문에서 다른 절을 가리킬 때는 그 영문 제목을 `「」`로 감싸 그대로 적는다.  
+**참조 형태는 가리키는 대상으로 정해진다.**  
+대상마다 형태가 하나씩이고 같은 대상에 두 형태를 쓰지 않는다.
+
+| 가리키는 것      | 형태                                            |
+|------------------|-------------------------------------------------|
+| 같은 문서의 절   | `「Iron law」`                                  |
+| 같은 문서의 용어 | `「연속 실행」`. 절이 아닌 정의어에만 쓴다      |
+| 같은 스킬의 파일 | `[references/x.md](references/x.md)`의 `「절」` |
+| 다른 스킬        | `groundwork:<이름>`의 `「절」`                  |
+| 외부 URL         | 각주 `[^slug]`                                  |
+
+같은 스킬의 파일은 스킬 루트 기준 상대 경로로 적는다.  
+Agent Skills 명세가 정한 형태이고 하네스를 가리지 않는다.
+
+다른 스킬의 파일을 경로로 가리키지 않는다.  
+스킬 이름으로 부르면 실행 환경이 그 스킬을 로드하고, 그 안에서 상대 경로가 다시 해소된다.
+
+절 제목은 번역하지 않고 영문 그대로 적는다.  
 번역해 부르면 독자가 찾을 헤딩이 문서에 없다.
+
+**외부 URL은 각주로 낸다.**  
+맨몸 URL을 산문에 심으면 문장이 끊기고 같은 URL이 여러 곳에 복제된다.  
+각주는 참조마다 슬러그 하나를 주므로 중복이 한 줄로 모이고 URL이 바뀔 때 고칠 곳이 하나다.
+
+- 슬러그는 URL의 마지막 경로 조각에서 딴다 (`about-readmes`, `semver-org`).
+- 정의는 파일 맨 끝에 모은다.
+- 같은 URL은 슬러그 하나를 공유한다.
+- 정의 없는 각주와 쓰이지 않는 정의를 남기지 않는다.
+
+**강조는 심각도가 아니라 하는 일로 고른다.**  
+SKILL.md는 렌더되지 않고 평문으로 컨텍스트에 실린다.  
+장치는 아래 다섯이고 각각 다른 일을 한다.
+
+| 장치            | 하는 일                                                     |
+|-----------------|-------------------------------------------------------------|
+| `> [!CAUTION]`  | 철칙. 어기면 산출물이 무효가 되는 금지 한 줄                |
+| `<TAG>`         | 주소 지정과 경계. 읽을 수신자를 가리거나 주입 블록을 감싼다 |
+| ` ```text `     | 절차 표기. 의사코드, 판정 흐름, 발화 예시                   |
+| `**볼드**`      | 그 문단의 주장, 또는 구조 레이블 (`**입력**` 따위)          |
+| `## Red flags`  | 합리화 차단. 드는 생각과 실제를 대조하는 표                 |
+
+GFM 콜아웃은 `[!CAUTION]` 하나만 쓴다.  
+타입을 여럿 들이면 저자가 매번 심각도를 고르게 되고 리뷰에서 반려할 기준이 사라진다.
+
+철칙을 ` ```text `나 `<TAG>`로 감싸지 않는다.  
+자연어 규칙은 코드가 아니고 코드 펜스는 그렇다고 주장한다.  
+태그는 강조 장치가 아니라 주소 지정 장치다.  
+`<SUBAGENT-STOP>`처럼 누가 읽을지를 가르는 것만 태그로 쓴다.
 
 **Frontmatter (YAML):**
 - 필수 필드 둘: `name`과 `description`(지원 필드 전체는 [agentskills.io/specification](https://agentskills.io/specification) 참조)
@@ -164,7 +210,7 @@ name: <skill-name>
 description: Use when [specific triggering conditions and symptoms]
 ---
 
-# Skill Name
+# <skill-name>
 
 ## Overview
 What is this? Core principle in 1-2 sentences.
@@ -377,13 +423,13 @@ digraph when_flowchart {
 - 선형 지시 → 번호 목록
 - 의미 없는 라벨(step1, helper2)
 
-graphviz 스타일 규칙은 `${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/graphviz-conventions.dot`을 참조한다.
+graphviz 스타일 규칙은 `graphviz-conventions.dot`을 참조한다.
 
-**사용자에게 시각화:** `${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js`로 스킬의 플로차트를 SVG로 렌더한다.  
+**사용자에게 시각화:** `render-graphs.js`로 스킬의 플로차트를 SVG로 렌더한다.  
 인자는 렌더 대상 스킬의 디렉터리 경로다.
 ```bash
-${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디렉터리>           # 다이어그램마다 따로
-${CLAUDE_PLUGIN_ROOT}/skills/writing-skills/render-graphs.js <대상 스킬 디렉터리> --combine # 전부 한 SVG로
+render-graphs.js <대상 스킬 디렉터리>           # 다이어그램마다 따로
+render-graphs.js <대상 스킬 디렉터리> --combine # 전부 한 SVG로
 ```
 
 ## Code examples
@@ -441,9 +487,8 @@ pptx/
 
 ## Iron law
 
-```text
-NO SKILL WITHOUT A FAILING TEST FIRST
-```
+> [!CAUTION]
+> NO SKILL WITHOUT A FAILING TEST FIRST
 
 이것은 새 스킬 **그리고** 기존 스킬 편집에 적용된다.
 

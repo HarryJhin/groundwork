@@ -1,7 +1,7 @@
 출처:
-- https://philpapers.org/archive/CLADKA.pdf
-- https://web.stanford.edu/~clark/1970s/Haviland,%20S.E.%20_%20Clark,%20H.H.%20_What's%20new_%20Acquiring%20new%20information%20as%20a%20process%20in%20comprehension_%201974.pdf
-- https://bpspsychub.onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8279.1992.tb01017.x
+- [^cladka-pdf]
+- [^haviland],%20S.E.%20_%20Clark,%20H.H.%20_What's%20new_%20Acquiring%20new%20information%20as%20a%20process%20in%20comprehension_%201974.pdf
+- [^j-2044-8279-1992-tb01017-x]
 
 # Cognitive and psycholinguistic basis for the axes
 
@@ -55,3 +55,7 @@ Clark & Marshall의 공유 근거 분류는 2차 요약을 경유한 것이라 �
 특히 split-attention effect는 본문과 도해처럼 형식이 다른 정보원 사이의 통합을 다루고 이 스킬이 말하는 "같은 문서 안 여러 절에 흩어진 규칙"은 그 원래 실험 조건과 다르다.
 
 인지 부하 이론 자체(Sweller 1988)는 이번 조사에서 원출처를 확인하지 않았고 Chandler & Sweller의 서지에 딸린 배경으로만 다뤘다.
+
+[^cladka-pdf]: https://philpapers.org/archive/CLADKA.pdf
+[^haviland]: https://web.stanford.edu/~clark/1970s/Haviland
+[^j-2044-8279-1992-tb01017-x]: https://bpspsychub.onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8279.1992.tb01017.x

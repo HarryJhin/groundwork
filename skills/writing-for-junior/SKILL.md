@@ -270,25 +270,25 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 ## When to read the references
 
 규범과 판정 축의 근거 원문을 `references/`에 두었다.  
-이 문서의 상대 경로는 모두 스킬 디렉터리 `${CLAUDE_PLUGIN_ROOT}/skills/writing-for-junior/` 기준이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.  
+이 문서의 상대 경로는 모두 이 스킬 디렉터리 기준이고
 평소에는 읽지 않는다.  
 아래 상황에 해당 파일만 연다.
 
 | 언제 여나                                                                                                 | 파일                                                                                    | 담긴 것                                                                                |
 |-----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론                                               | [why-authors-cannot-see-it.md][why-authors-cannot-see-it]                               | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거                                 |
-| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함                                    | [comprehension-mechanics.md][comprehension-mechanics]                                   | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문            |
-| 어떤 결함부터 잡을지 우선순위를 정할 때                                                                   | [api-doc-failures.md][api-doc-failures]                                                 | 문제 유형별 정의와 실무 분포                                                           |
-| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨                                           | [newcomer-barriers.md][newcomer-barriers]                                               | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
-| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안                     | [plain-language-and-controlled-vocabulary.md][plain-language-and-controlled-vocabulary] | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유                                          |
-| 「Production-circumstance leakage」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | [writer-based-prose.md][writer-based-prose]                                             | 현상의 명칭과 판정 규칙의 출처                                                         |
+| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론                                               | why-authors-cannot-see-it.md[^why-authors-cannot-see-it]                                | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거                                 |
+| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함                                    | comprehension-mechanics.md[^comprehension-mechanics]                                    | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문            |
+| 어떤 결함부터 잡을지 우선순위를 정할 때                                                                   | api-doc-failures.md[^api-doc-failures]                                                  | 문제 유형별 정의와 실무 분포                                                           |
+| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨                                           | newcomer-barriers.md[^newcomer-barriers]                                                | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
+| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안                     | plain-language-and-controlled-vocabulary.md[^plain-language-and-controlled-vocabulary]  | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유                                          |
+| 「Production-circumstance leakage」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | writer-based-prose.md[^writer-based-prose]                                              | 현상의 명칭과 판정 규칙의 출처                                                         |
 
 `references/`의 파일은 모두 「Verification scope」 절에 무엇을 원문으로 확인했고 무엇을 대조하지 않았는지 적었다.  
 인용을 다른 문서로 옮길 때 그 표기를 함께 옮긴다.
 
-[why-authors-cannot-see-it]: references/why-authors-cannot-see-it.md
-[comprehension-mechanics]: references/comprehension-mechanics.md
-[api-doc-failures]: references/api-doc-failures.md
-[newcomer-barriers]: references/newcomer-barriers.md
-[plain-language-and-controlled-vocabulary]: references/plain-language-and-controlled-vocabulary.md
-[writer-based-prose]: references/writer-based-prose.md
+[^api-doc-failures]: references/api-doc-failures.md
+[^comprehension-mechanics]: references/comprehension-mechanics.md
+[^newcomer-barriers]: references/newcomer-barriers.md
+[^plain-language-and-controlled-vocabulary]: references/plain-language-and-controlled-vocabulary.md
+[^why-authors-cannot-see-it]: references/why-authors-cannot-see-it.md
+[^writer-based-prose]: references/writer-based-prose.md

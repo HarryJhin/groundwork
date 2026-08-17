@@ -114,15 +114,14 @@ description: 설계 문서를 리뷰어 패널로 검증한다. finding-unknowns
 리뷰어는 정의 파일이 아니라 프롬프트 템플릿 주입으로 돈다.
 
 - 대상 서브에이전트 타입은 항상 `general-purpose`다.
-- 아래 경로의 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이고 실행 시점 작업 디렉터리가 아니다.
-- `junior-read`의 지시는 `${CLAUDE_PLUGIN_ROOT}/skills/writing-for-junior/junior-read-prompt.md`를 Read로 읽어 주입한다.  
+- `junior-read`의 지시는 `groundwork:writing-for-junior`의 `junior-read-prompt.md`를 Read로 읽어 주입한다.  
   문서 유형과 무관한 공통 렌즈라 `groundwork:writing-for-junior`가 소유한다.  
   설계 리뷰에는 델타를 동봉하지 않는다.
-- 나머지 리뷰어의 지시는 `${CLAUDE_PLUGIN_ROOT}/skills/design-review/<lens>-prompt.md`를 Read로 읽어 그 전문을 프롬프트 본문으로 주입한다.  
+- 나머지 리뷰어의 지시는 `<lens>-prompt.md`를 Read로 읽어 그 전문을 프롬프트 본문으로 주입한다.  
   `<lens>`는 위 로스터의 이름을 그대로 쓴다.
 - 도구 격리는 각 프롬프트의 도구 범위 지시로 대체하고 별도 화이트리스트 파라미터를 쓰지 않는다.
 - **리뷰어마다 모델을 명시해 띄운다.**  
-  렌즈별 티어는 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`의 「Dispatch axis: document review lenses」에 있다.  
+  렌즈별 티어는 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: document review lenses」에 있다.  
   빠뜨리면 로스터 전원이 세션 모델을 상속한다.
 - 한 메시지에서 병렬로 띄우고 그 라운드의 `REVIEW_VERDICT`를 전원에게서 수거한 뒤에 다음 행동을 정한다.  
   먼저 온 발견부터 고치기 시작하면 아직 반환하지 않은 리뷰어가 낡은 문서를 보게 된다.  

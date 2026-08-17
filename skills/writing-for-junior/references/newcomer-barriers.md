@@ -1,4 +1,4 @@
-출처: https://www.ime.usp.br/~gerosa/papers/Steinmacher2014_Chapter_BarriersFacedByNewcomersToOpen.pdf
+출처: [^steinmacher2014-chapter-barriersfacedbyn]
 
 # Barriers Faced by Newcomers to Open Source Projects: A Systematic Review
 
@@ -48,3 +48,5 @@ Table 1의 범주·장벽 이름과 위 인용구는 저자 공개본 PDF의 해
 이 리뷰는 오픈소스 프로젝트의 사람 기여자를 다루고 문서를 읽는 에이전트를 다루지 않는다.  
 장벽 모델을 문서 판독성 판정으로 옮긴 것은 이 스킬의 유추다.  
 Social Interactions 범주는 이 스킬의 대상이 아니라 옮기지 않았다.
+
+[^steinmacher2014-chapter-barriersfacedbyn]: https://www.ime.usp.br/~gerosa/papers/Steinmacher2014_Chapter_BarriersFacedByNewcomersToOpen.pdf

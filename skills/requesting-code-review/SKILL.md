@@ -82,7 +82,7 @@ echo "$DIFF_FILE"
 - `[DIFF_FILE]`: 위에서 만든 diff 파일 경로. diff를 파일로 넘기면 조율자 컨텍스트에 diff가 들어오지 않는다
 
 **리뷰어의 모델을 명시해 띄운다.**  
-티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`의 「Dispatch axis: code review tasks」에 있다(`${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이고 실행 시점 작업 디렉터리가 아니다).  
+티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: code review tasks」에 있다.  
 모델을 빠뜨리면 세션 모델을 상속한다.
 
 **3. 피드백에 대응한다**

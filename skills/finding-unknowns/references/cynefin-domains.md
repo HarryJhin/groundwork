@@ -1,4 +1,4 @@
-출처: https://untools.co/cynefin-framework/
+출처: [^cynefin-framework]
 
 # Cynefin domains and the order of action
 
@@ -35,3 +35,5 @@ unknown의 종류마다 도구가 갈리는 구조가 이 틀과 같다.
 
 위 인용구는 출처 페이지에서 확인했다.  
 Snowden & Boone(HBR 2007) 원논문은 대조하지 않았고 실천 이름(best·good·emergent·novel practice)은 이 틀의 통용 표기를 따랐다.
+
+[^cynefin-framework]: https://untools.co/cynefin-framework/

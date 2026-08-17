@@ -10,8 +10,7 @@ groundwork에서 모델을 고르는 스킬이 모두 이 문서를 기준으로
 모델 티어는 설계·리뷰·실행 어느 단계에도 걸리는 교차 규범이라 특정 실행 경로가 소유하지 않는다.
 
 **경로 기준**은 플러그인 루트다.  
-다른 문서가 이 파일을 가리킬 때 쓰는 경로는 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`이고 `${CLAUDE_PLUGIN_ROOT}`는 groundwork 플러그인이 설치된 디렉터리이지 실행 시점 작업 디렉터리가 아니다.
-
+다른 문서가 이 파일을 가리킬 때 쓰는 경로는 `choosing-model-tier.md`이고
 ## Tiers
 
 티어는 실행 환경이 제공하는 모델을 능력 순으로 늘어놓은 층이다.  

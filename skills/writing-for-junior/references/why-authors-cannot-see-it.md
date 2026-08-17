@@ -1,6 +1,6 @@
 출처:
-- https://www.cmu.edu/dietrich/sds/docs/loewenstein/CurseknowledgeEconSet.pdf
-- https://journals.sagepub.com/doi/abs/10.1111/1467-9280.00439
+- [^curseknowledgeeconset-pdf]
+- [^s-1467-9280-00439]
 
 # Why authors cannot see the context missing from their own documents
 
@@ -51,3 +51,6 @@ Keysar & Henly의 72%/61% 수치와 illusion of transparency 명명, 두 가지 
 인용을 다른 문서로 옮길 때 이 표기를 함께 옮긴다.
 
 흔히 함께 인용되는 Newton(1990)의 tapping study는 이번 조사에서 원출처를 확인하지 않았으므로 근거로 쓰지 않았다.
+
+[^curseknowledgeeconset-pdf]: https://www.cmu.edu/dietrich/sds/docs/loewenstein/CurseknowledgeEconSet.pdf
+[^s-1467-9280-00439]: https://journals.sagepub.com/doi/abs/10.1111/1467-9280.00439

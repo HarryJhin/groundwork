@@ -154,7 +154,7 @@ unknown unknown의 ×는 물어도 답이 나오지 않아서다.
 선례가 없다는 것도 설계 결정이 기대는 사실이라 그 결정 옆에 그렇게 적는다.
 
 **조사 에이전트마다 모델을 명시해 띄운다.**  
-티어는 `${CLAUDE_PLUGIN_ROOT}/skills/using-groundwork/choosing-model-tier.md`의 「Dispatch axis: investigation tasks」에 있다.  
+티어는 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: investigation tasks」에 있다.  
 모델을 빠뜨리면 세션 모델을 상속한다.
 
 역인터뷰와 프로토타이핑은 **메인이 직접 전담한다.**  
@@ -433,18 +433,18 @@ SDK·API·플랫폼·라이브러리의 시그니처, 제약, 기본값, 지원 
 
 | 트리거                                                  | 파일                                                                   | 담긴 것                                                                |
 |---------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| 표의 분류나 도구 배정에 이의가 제기됨                   | [re11-unknown-knowns][re11-unknown-knowns]                             | `expressible`·`relevant` 술어와 도달 실패 원인                         |
-| unknown unknown 행을 "해소됐다"로 적고 싶어짐           | [re13-elicitation-unknown-unknowns][re13-elicitation-unknown-unknowns] | 그 행이 도출 기법으로 해소되지 않는 이유                               |
-| 질문을 더 할지 프로토타입으로 넘어갈지 판단이 서지 않음 | [cynefin-domains][cynefin-domains]                                     | 분석이 통하는 도메인과 probe가 필요한 도메인의 구분                    |
-| 용어 계보나 다른 문헌의 unknown known 정의와 충돌       | [knowledge-quadrant-lineage][knowledge-quadrant-lineage]               | 이 스킬의 정의가 요구공학 쪽이고 Žižek 쪽이 아니라는 것                |
-| 유형 4종의 이름이 조어라는 지적                         | [investigable-unknown-types][investigable-unknown-types]               | 각 유형의 통용 개념과 실증 근거, 조어를 유지하는 이유                  |
-| 답을 돌려주는 단계가 군더더기로 보임                    | [grounding-in-interview][grounding-in-interview]                       | 기여가 두 국면으로 완성된다는 것, 확인 생략이 대화의 기본값이라는 진단 |
+| 표의 분류나 도구 배정에 이의가 제기됨                   | re11-unknown-knowns[^re11-unknown-knowns]                              | `expressible`·`relevant` 술어와 도달 실패 원인                         |
+| unknown unknown 행을 "해소됐다"로 적고 싶어짐           | re13-elicitation-unknown-unknowns[^re13-elicitation-unknown-unknowns]  | 그 행이 도출 기법으로 해소되지 않는 이유                               |
+| 질문을 더 할지 프로토타입으로 넘어갈지 판단이 서지 않음 | cynefin-domains[^cynefin-domains]                                      | 분석이 통하는 도메인과 probe가 필요한 도메인의 구분                    |
+| 용어 계보나 다른 문헌의 unknown known 정의와 충돌       | knowledge-quadrant-lineage[^knowledge-quadrant-lineage]                | 이 스킬의 정의가 요구공학 쪽이고 Žižek 쪽이 아니라는 것                |
+| 유형 4종의 이름이 조어라는 지적                         | investigable-unknown-types[^investigable-unknown-types]                | 각 유형의 통용 개념과 실증 근거, 조어를 유지하는 이유                  |
+| 답을 돌려주는 단계가 군더더기로 보임                    | grounding-in-interview[^grounding-in-interview]                        | 기여가 두 국면으로 완성된다는 것, 확인 생략이 대화의 기본값이라는 진단 |
 
 각 파일 끝의 「Verification scope」가 초록만 본 것과 전문을 대조한 것을 구분해 둔다.
 
-[re11-unknown-knowns]: references/re11-unknown-knowns.md
-[re13-elicitation-unknown-unknowns]: references/re13-elicitation-unknown-unknowns.md
-[cynefin-domains]: references/cynefin-domains.md
-[knowledge-quadrant-lineage]: references/knowledge-quadrant-lineage.md
-[investigable-unknown-types]: references/investigable-unknown-types.md
-[grounding-in-interview]: references/grounding-in-interview.md
+[^cynefin-domains]: references/cynefin-domains.md
+[^grounding-in-interview]: references/grounding-in-interview.md
+[^investigable-unknown-types]: references/investigable-unknown-types.md
+[^knowledge-quadrant-lineage]: references/knowledge-quadrant-lineage.md
+[^re11-unknown-knowns]: references/re11-unknown-knowns.md
+[^re13-elicitation-unknown-unknowns]: references/re13-elicitation-unknown-unknowns.md
