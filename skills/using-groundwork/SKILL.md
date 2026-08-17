@@ -13,11 +13,10 @@ groundwork flow 진입 규율이다.
 이 규율은 메인 루프 전용이다.  
 </SUBAGENT-STOP>
 
-<EXTREMELY-IMPORTANT>  
-groundwork 클래스 작업에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다.  
-flow 진입은 선택이 아니다.  
-합리화로 빠져나가지 않는다.  
-</EXTREMELY-IMPORTANT>
+> [!CAUTION]
+> groundwork 클래스 작업에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다.  
+> flow 진입은 선택이 아니다.  
+> 합리화로 빠져나가지 않는다.
 
 ## groundwork-class test
 

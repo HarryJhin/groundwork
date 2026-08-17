@@ -12,9 +12,8 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
 
 ## Iron law
 
-```text
-근본 원인 조사 없이 수정하지 않는다
-```
+> [!CAUTION]
+> 근본 원인 조사 없이 수정하지 않는다
 
 아래 「Root cause investigation」를 마치지 않았다면 수정을 제안할 수 없다.
 
