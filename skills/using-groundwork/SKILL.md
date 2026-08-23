@@ -5,8 +5,7 @@ description: Use when starting any conversation - groundwork 설계 flow 진입�
 
 # using-groundwork
 
-groundwork flow 진입 규율이다.  
-세션 시작 훅이 이 문서 전문을 컨텍스트에 주입한다.
+groundwork flow 진입 규율이다.
 
 <SUBAGENT-STOP>  
 특정 태스크를 실행하도록 디스패치된 서브에이전트라면 이 스킬을 무시한다.  
@@ -15,7 +14,6 @@ groundwork flow 진입 규율이다.
 
 > [!CAUTION]
 > groundwork 클래스 작업에서는 코드·탐색·질문에 앞서 groundwork flow로 진입한다.  
-> flow 진입은 선택이 아니다.  
 > 합리화로 빠져나가지 않는다.
 
 ## groundwork-class test
@@ -35,8 +33,7 @@ groundwork flow 진입 규율이다.
 **규모는 판별 기준이 아니다.**  
 정답이 하나뿐인 멀티파일 리팩터는 flow가 세금이고, 한 줄이어도 그 한 줄이 제품 결정이면 flow가 필요하다.
 
-판별이 서지 않으면 1번 물음만 다시 본다.  
-요청을 두 가지로 읽을 수 있는데도 어느 쪽인지 모른 채 시작하는 것이 가장 비싼 실패다.
+판별이 서지 않으면 1번 물음만 다시 본다.
 
 ## The rule
 
@@ -50,8 +47,7 @@ invoke할 때는 "Using [skill] to [purpose]"를 알리고 스킬을 그대로 �
 groundwork 클래스 작업에는 넷을 강제한다.
 
 - **진입**: 코드·탐색 전에 `groundwork:finding-unknowns`로 unknowns부터 찾아낸다.
-- **발산 리다이렉트**: 실행 환경이 제공하는 아이디어 발산·요구 탐색 스킬이 먼저 걸려도 거기 머물지 않고 `groundwork:finding-unknowns`로 넘어간다.  
-  finding-unknowns가 필요한 발산을 내부에서 이끈다.
+- **발산 리다이렉트**: 실행 환경이 제공하는 아이디어 발산·요구 탐색 스킬이 먼저 걸려도 거기 머물지 않고 `groundwork:finding-unknowns`로 넘어간다.
 - **게이트**: 설계 문서는 `groundwork:design-review`를 거치고 사용자 명시 승인을 받아야 구현으로 간다.  
   리뷰를 돌릴지와 어느 범위로 돌릴지는 그 스킬이 사용자에게 묻는다.  
   저자가 대신 정하거나 스킬 호출을 건너뛰지 않는다.  
@@ -78,8 +74,7 @@ groundwork 클래스 작업에는 넷을 강제한다.
 
 ## Skill priority
 
-여러 스킬이 걸리면 process 스킬이 먼저다.  
-process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
+여러 스킬이 걸리면 process 스킬이 먼저다.
 
 - "X를 만들자" → groundwork 클래스면 `groundwork:finding-unknowns` 먼저.  
   아니면 실행 환경의 발산·요구 탐색 스킬을 쓰고 그런 스킬이 없으면 바로 처리한다.
@@ -90,35 +85,20 @@ process 스킬이 접근을 잡고 그 뒤 구현 스킬이 실행한다.
 아래 생각이 들면 멈춘다.  
 합리화 중이라는 신호다.
 
-| 생각                                      | 실제                                                                         |
-|-------------------------------------------|------------------------------------------------------------------------------|
-| "이건 그냥 간단한 질문이야"               | 질문도 작업이다. 스킬을 확인한다.                                            |
-| "맥락부터 더 모아야 해"                   | 스킬 확인이 확인 질문보다 먼저다.                                            |
-| "코드베이스부터 좀 볼게"                  | 스킬이 탐색 방법을 알려준다. 먼저 확인한다.                                  |
-| "파일 하나만 고치면 되니 flow는 과해"     | 크기는 판별 기준이 아니다. 「groundwork-class test」의 세 물음으로 가른다.   |
-| "멀티파일이니 무조건 flow"                | 이것도 크기 판정이다. 정답이 하나뿐이면 flow는 세금이다. 세 물음으로 가른다. |
-| "이 스킬 기억나"                          | 스킬은 바뀐다. 현재 버전을 읽는다.                                           |
-| "일단 이것 하나만 먼저"                   | 무엇이든 하기 전에 확인한다.                                                 |
-| "요청이 애매하지만 내가 알아서 읽으면 돼" | 1번 물음이 `예`다. 그게 flow 진입 조건이다.                                  |
-| "테스트가 통과하니 방향도 맞을 것이다"    | 2번 물음이 그 착각을 겨눈다. 검증은 문법을 보지 의도를 보지 않는다.          |
+| 생각                                      | 실제                                                                |
+|-------------------------------------------|---------------------------------------------------------------------|
+| "이건 그냥 간단한 질문이야"               | 질문도 작업이다. 무엇이든 하기 전에 스킬을 확인한다.                |
+| "맥락부터 더 모아야 해"                   | 스킬 확인이 확인 질문과 코드 탐색보다 먼저다.                       |
+| "파일 하나뿐이라 과해" · "멀티파일이니 무조건" | 둘 다 크기 판정이다. 「groundwork-class test」의 세 물음으로 가른다. |
+| "이 스킬 기억나"                          | 스킬은 바뀐다. 현재 버전을 읽는다.                                  |
+| "요청이 애매하지만 내가 알아서 읽으면 돼" | 1번 물음이 `예`다. 그게 flow 진입 조건이다.                         |
+| "테스트가 통과하니 방향도 맞을 것이다"    | 2번 물음이 그 착각을 겨눈다. 검증은 문법을 보지 의도를 보지 않는다. |
 
 ## Precedence
 
 사용자 지시 > groundwork > 다른 플러그인 스킬 > 기본 동작.  
-사용자가 명시로 지시했을 때만 스킬 워크플로우를 건너뛴다.
-
+사용자가 명시로 지시했을 때만 스킬 워크플로우를 건너뛴다.  
 같은 규율의 다른 플러그인 스킬이 함께 걸리면 groundwork 것을 쓴다.
-
-| 규율                    | 정본                                        |
-|-------------------------|---------------------------------------------|
-| 설계 실행과 태스크 분해 | `groundwork:executing-design`               |
-| 테스트 주도 개발        | `groundwork:test-driven-development`        |
-| 체계적 디버깅           | `groundwork:systematic-debugging`           |
-| 완료 전 검증            | `groundwork:verification-before-completion` |
-| 코드 리뷰 요청          | `groundwork:requesting-code-review`         |
-| 받은 리뷰 처리          | `groundwork:receiving-code-review`          |
-| 워크스페이스 격리       | `groundwork:using-git-worktrees`            |
-| 독립 문제의 병렬 조사   | `groundwork:dispatching-parallel-agents`    |
 
 ### Questions that outrank default behavior
 
@@ -132,14 +112,9 @@ groundwork 클래스 작업이 아니어도 이 규율은 적용된다.
 
 ## Where each convention lives
 
-이 문서는 무엇을 언제 부를지만 정한다.  
-아래는 소유 스킬을 로드해서 찾는다.
-
-| 규약                                 | 소유 스킬                                        |
-|--------------------------------------|--------------------------------------------------|
-| 산출물 경로·명명·번호                | `groundwork:finding-unknowns`                    |
-| 설계 문서에 담는 것과 담지 않는 것   | `groundwork:finding-unknowns`                    |
-| 역인터뷰 절차                        | `groundwork:finding-unknowns`                    |
-| 리뷰 관점(lens) 목록과 디스패치 방식 | `groundwork:design-review`                       |
-| 태스크 분해 규범                     | `groundwork:executing-design`                    |
-| 모델 티어와 벤더 교차 디스패치       | [choosing-model-tier.md](choosing-model-tier.md) |
+| 규약                                             | 소유 스킬                                        |
+|--------------------------------------------------|--------------------------------------------------|
+| 산출물 경로·명명, 설계 문서의 내용, 역인터뷰 절차 | `groundwork:finding-unknowns`                    |
+| 리뷰어 로스터와 디스패치 방식                    | `groundwork:design-review`                       |
+| 태스크 분해 규범                                 | `groundwork:executing-design`                    |
+| 모델 티어와 벤더 교차 디스패치                   | [choosing-model-tier.md](choosing-model-tier.md) |

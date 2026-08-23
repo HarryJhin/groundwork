@@ -1,37 +1,21 @@
 ---
 name: writing-clearly-and-concisely
-description: Apply Strunk's timeless writing rules to ANY prose humans will read—documentation, commit messages, error messages, explanations, reports, or UI text. Makes your writing clearer, stronger, and more professional.
+description: Use when writing or editing prose a human will read - documentation, README, commit message, PR description, error message, UI copy, help text, report, or explanation. Also use when a sentence reads long, passive, hedged, or vague and you cannot say why.
 ---
 
-# Writing Clearly and Concisely
+# Writing clearly and concisely
 
-## Overview
+**경로 기준**: 이 문서의 상대 경로는 이 스킬 디렉터리를 기준으로 한다.
 
-William Strunk Jr.'s *The Elements of Style* (1918) teaches you to write clearly and cut ruthlessly.
+## The rules
 
-**Path base:** Relative paths in this document are rooted at this skill's directory, not the working directory at run time.
+Strunk의 규칙 열여덟이다.  
+볼드는 가장 자주 어기는 것이므로 먼저 검사한다.
 
-**WARNING:** `elements-of-style.md` (the full 1918 text) consumes ~12,000 tokens. Read it only when writing or editing prose.
+### Elementary rules of usage
 
-## When to use this skill
+영어 문법과 구두점 규칙이라 영어 산문에만 적용한다.
 
-Use this skill whenever you write prose for humans:
-
-- Documentation, README files, technical explanations
-- Commit messages, pull request descriptions
-- Error messages, UI copy, help text, comments
-- Reports, summaries, or any explanation
-- Editing to improve clarity
-
-**If you're writing sentences for a human to read, use this skill.**
-
-**Scope:** Rules 1–7 are English grammar and punctuation rules and apply only to English prose. Rules 8–18 are composition principles that hold in any language. When writing in another language, apply 8–18 here and load that language's own sentence-level skill if your agent runtime provides one.
-
-## All Rules
-
-Bold marks the rules violated most often. Check those first; the rest still apply.
-
-### Elementary Rules of Usage (Grammar/Punctuation)
 1. Form possessive singular by adding 's
 2. Use comma after each term in series except last
 3. Enclose parenthetic expressions between commas
@@ -40,7 +24,10 @@ Bold marks the rules violated most often. Check those first; the rest still appl
 6. Don't break sentences in two
 7. Participial phrase at beginning refers to grammatical subject
 
-### Elementary Principles of Composition
+### Elementary principles of composition
+
+어느 언어에나 적용한다.
+
 8. One paragraph per topic
 9. Begin paragraph with topic sentence
 10. **Use active voice**
@@ -53,9 +40,19 @@ Bold marks the rules violated most often. Check those first; the rest still appl
 17. Keep to one tense in summaries
 18. **Place emphatic words at end of sentence**
 
-### Words and Expressions Commonly Misused
-Section V of `elements-of-style.md`. When a specific word choice is in doubt, look it up there — the entries are alphabetical.
+한국어로 쓸 때는 8~18을 적용하고, 실행 환경이 그 언어의 문장 규범 스킬을 제공하면 함께 로드한다.
 
-## Bottom Line
+## When to open the full text
 
-Writing for humans? Read `elements-of-style.md` and apply the rules.
+[elements-of-style.md](elements-of-style.md)는 1918년 원문 전문이고 약 12,000 토큰이다.  
+**규칙을 적용하려고 이 파일을 열지 않는다.**  
+위 열여덟이 규칙의 전부이고 각 규칙의 뜻과 예시는 이미 알고 있다.
+
+이 파일을 여는 경우는 하나다.  
+**특정 단어의 용법이 의심스러워 Section V (Words and expressions commonly misused)를 조회할 때**다.  
+그때도 전문을 읽지 말고 그 항목만 찾는다.  
+항목은 알파벳 순이라 Grep으로 단어를 직접 친다.
+
+```bash
+grep -n -A3 '^\*\*Nice\.\*\*' elements-of-style.md
+```

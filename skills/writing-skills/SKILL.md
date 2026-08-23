@@ -24,13 +24,12 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 그 스킬이 근본 RED-GREEN-REFACTOR 사이클을 정의한다.  
 이 스킬은 TDD를 문서에 적용한다.
 
-**공식 가이드:** Anthropic의 공식 스킬 작성 베스트 프랙티스는 anthropic-best-practices.md를 참조한다.  
-그 문서는 이 스킬의 TDD 중심 접근을 보완하는 추가 패턴·가이드라인을 담는다.
+**외부 가이드:** Anthropic의 스킬 작성 베스트 프랙티스 사본이 [anthropic-best-practices.md](anthropic-best-practices.md)에 있다.  
+**충돌하면 이 문서가 이긴다.**  
+그 가이드는 규칙마다 이유를 붙이라고 권하지만 이 리포는 적용을 바꾸지 않는 근거를 `references/`로 내린다.  
+새 패턴을 찾을 때만 열고 규칙의 정본으로 삼지 않는다.
 
 ## What a skill is
-
-**스킬**은 검증된 기법·패턴·도구의 레퍼런스 가이드다.  
-스킬은 후속 에이전트가 효과적인 접근을 찾아 적용하도록 돕는다.
 
 **스킬인 것:** 재사용 가능한 기법·패턴·도구·레퍼런스 가이드
 
@@ -50,8 +49,6 @@ Codex, Copilot CLI, Gemini CLI는 제품을 가리지 않는 별칭으로 `~/.ag
 | **최소 코드**          | 그 위반만 겨냥한 스킬을 씀                   |
 | **통과를 지켜보기**    | 이제 에이전트가 준수하는지 검증              |
 | **리팩터 사이클**      | 새 합리화 발견 → 막음 → 재검증               |
-
-스킬 작성 과정 전체가 RED-GREEN-REFACTOR를 따른다.
 
 ## Create a skill
 
@@ -82,24 +79,14 @@ API 문서, 문법 가이드, 도구 사용법 문서
 
 ## Directory structure
 
+스킬은 `skills/<이름>/SKILL.md` 하나로 시작하고 딸린 파일은 필요할 때만 만든다.  
+모든 스킬이 평평한 네임스페이스 하나에 있다.
 
-```text
-skills/
-  skill-name/
-    SKILL.md              # Main reference (required)
-    supporting-file.*     # Only if needed
-```
-
-**평평한 네임스페이스** - 모든 스킬이 하나의 검색 가능한 네임스페이스에 있다
-
-**별도 파일로 분리:**
-1. **무거운 레퍼런스**(100줄 이상) - API 문서, 포괄적 문법
-2. **재사용 도구** - 스크립트, 유틸리티, 템플릿
-
-**인라인으로 유지:**
-- 원칙과 개념
-- 코드 패턴(50줄 미만)
-- 그 밖의 모든 것
+| 무엇                              | 어디            |
+|-----------------------------------|-----------------|
+| 100줄 넘는 레퍼런스 자료          | `references/`   |
+| 재사용 스크립트·템플릿            | 스킬 루트의 파일 |
+| 원칙·개념·50줄 미만 코드 패턴     | `SKILL.md` 인라인 |
 
 ## Input and output of this skill
 
@@ -198,64 +185,27 @@ GFM 콜아웃은 `[!CAUTION]` 하나만 쓴다.
 - 필수 필드 둘: `name`과 `description`(지원 필드 전체는 [agentskills.io/specification](https://agentskills.io/specification) 참조)
 - 총 1024자 이하
 - `name`: 문자·숫자·하이픈만 쓴다(괄호·특수문자 없음)
-- `description`: 3인칭, **언제 쓰는가만** 서술한다(무엇을 하는지는 쓰지 않는다)
-    - "Use when..."으로 시작해 트리거 조건에 집중한다
-    - 구체적 증상·상황·맥락을 담는다
-    - **스킬의 프로세스나 워크플로를 절대 요약하지 않는다**(이유는 아래 「Skill discovery optimization (SDO)」 절 참조)
-    - 가능하면 500자 이하로 유지한다
+- `description`: 아래 「Skill discovery optimization (SDO)」이 정한다. 500자 이하로 유지한다
 
-```markdown
+```yaml
 ---
 name: <skill-name>
 description: Use when [specific triggering conditions and symptoms]
 ---
-
-# <skill-name>
-
-## Overview
-What is this? Core principle in 1-2 sentences.
-
-## When to use
-[Small inline flowchart IF decision non-obvious]
-
-Bullet list with SYMPTOMS and use cases
-When NOT to use
-
-## Core pattern
-Before/after code comparison
-
-## Quick reference
-Table or bullets for scanning common operations
-
-## Implementation
-Inline code for simple patterns
-Link to file for heavy reference or reusable tools
-
-## Common mistakes
-What goes wrong + fixes
-
-## Optional: real-world impact
-Concrete results
 ```
+
+절 구성은 고정 템플릿이 아니라 그 스킬이 실행되는 순서를 따른다.  
+독자가 위에서 아래로 읽으면서 그대로 수행할 수 있으면 순서가 맞다.
 
 
 ## Skill discovery optimization (SDO)
 
-**탐색에 결정적:** 후속 에이전트가 네 스킬을 찾아야 한다
-
 ### A rich description field
 
-**목적:** 에이전트는 주어진 작업에 어떤 스킬을 로드할지 정하려고 description을 읽는다.  
-"지금 이 스킬을 읽어야 하나?"에 답하게 만든다.
+에이전트는 어떤 스킬을 로드할지 정하려고 description을 읽는다.  
+3인칭으로 "Use when..."으로 시작해 트리거 조건만 쓴다.
 
-**형식:** "Use when..."으로 시작해 트리거 조건에 집중한다
-
-**핵심: description = 언제 쓰는가, 스킬이 무엇을 하는가가 아니다**
-
-description은 트리거 조건만 서술해야 한다.  
-스킬의 프로세스나 워크플로를 description에 요약하지 마라.
-
-**왜 중요한가:** 테스트로 드러난 사실이다.  
+**스킬의 프로세스나 워크플로를 요약하지 않는다.**  
 description이 스킬의 워크플로를 요약하면, 에이전트는 스킬 본문 전체를 읽는 대신 description을 따를 수 있다.  
 "태스크 사이 코드 리뷰"라고 적힌 description은 에이전트가 리뷰를 한 번만 하게 만들었다.  
 스킬의 플로차트는 리뷰 두 번(설계 준수 다음 코드 품질)을 분명히 보여 줬는데도 그랬다.
@@ -331,13 +281,30 @@ description: Use when using React Router and handling authentication redirects
 
 ### Token efficiency (decisive)
 
-**문제:** 모든 세션에 주입되는 진입 스킬(groundwork에서는 `using-groundwork`)과 자주 참조되는 스킬은 모든 대화에 로드된다.  
-토큰 하나하나가 중요하다.
+**비용은 크기가 아니라 크기 × 로드 빈도다.**  
+`references/`는 필요할 때만 읽히지만 훅이 주입하는 문서와 SKILL.md 본문은 전량 들어온다.  
+같은 100단어라도 자리에 따라 비용이 다르다.
 
-**목표 단어 수:**
-- 모든 세션에 주입되는 진입 스킬의 워크플로: 각 150단어 미만
-- 자주 로드되는 스킬: 총 200단어 미만
-- 그 밖의 스킬: 500단어 미만(그래도 간결하게)
+| 자리                        | 상한   |
+|-----------------------------|--------|
+| 매 세션 주입 (`using-groundwork`) | 800단어 |
+| 서브에이전트에 주입하는 프롬프트  | 1,000단어 |
+| 그 밖의 SKILL.md 본문             | 2,500단어 |
+
+**상한을 넘었다는 것은 삭제 지시가 아니라 검사 지시다.**  
+무엇을 지울지는 아래 no-op 테스트가 정한다.  
+상한에 맞추려고 규칙을 지우면 문서는 짧아지고 행동은 나빠진다.
+
+**no-op 테스트:** 그 줄을 지웠을 때 에이전트의 행동이 달라지는가.  
+달라지지 않으면 지운다.  
+문장이 좋은지 나쁜지는 판정 기준이 아니다.
+
+걸리는 꼴은 넷이다.
+
+- 문서가 자기를 설명하는 문장 ("이 스킬은 ~를 담는다", "아래에서 ~를 설명한다")
+- 모델이 이미 아는 일반 지식. 이 리포 고유의 규약이나 모델이 자주 틀리는 지점은 해당되지 않는다
+- 규칙을 변호만 하고 적용을 바꾸지 않는 근거. `references/`로 내린다
+- 같은 규칙의 반복 서술. 정본 하나만 남긴다
 
 **기법:**
 
@@ -399,18 +366,7 @@ wc -w skills/path/SKILL.md
 
 ## Flowchart usage
 
-```dot
-digraph when_flowchart {
-    "Need to show information?" [shape=diamond];
-    "Decision where I might go wrong?" [shape=diamond];
-    "Use markdown" [shape=box];
-    "Small inline flowchart" [shape=box];
-
-    "Need to show information?" -> "Decision where I might go wrong?" [label="yes"];
-    "Decision where I might go wrong?" -> "Small inline flowchart" [label="yes"];
-    "Decision where I might go wrong?" -> "Use markdown" [label="no"];
-}
-```
+다이어그램은 Mermaid로 그린다.
 
 **플로차트는 다음에만 쓴다:**
 - 자명하지 않은 결정 지점
@@ -423,14 +379,6 @@ digraph when_flowchart {
 - 선형 지시 → 번호 목록
 - 의미 없는 라벨(step1, helper2)
 
-graphviz 스타일 규칙은 `graphviz-conventions.dot`을 참조한다.
-
-**사용자에게 시각화:** `render-graphs.js`로 스킬의 플로차트를 SVG로 렌더한다.  
-인자는 렌더 대상 스킬의 디렉터리 경로다.
-```bash
-render-graphs.js <대상 스킬 디렉터리>           # 다이어그램마다 따로
-render-graphs.js <대상 스킬 디렉터리> --combine # 전부 한 SVG로
-```
 
 ## Code examples
 
@@ -453,36 +401,14 @@ render-graphs.js <대상 스킬 디렉터리> --combine # 전부 한 SVG로
 - 빈칸 채우기 템플릿 작성
 - 억지 예시 작성
 
-너는 포팅을 잘한다.  
-훌륭한 예시 하나면 충분하다.
 
 ## File organization
 
-스킬 크기에 따라 셋 중 하나를 고른다.
-
-### Self-contained skill
-```text
-defense-in-depth/
-  SKILL.md    # Everything inline
-```
-언제: 모든 내용이 들어가고 무거운 레퍼런스가 필요 없을 때
-
-### Skill with reusable tools
-```text
-condition-based-waiting/
-  SKILL.md    # Overview + patterns
-  example.ts  # Working helpers to adapt
-```
-언제: 도구가 서사가 아니라 재사용 코드일 때
-
-### Skill with heavy references
-```text
-pptx/
-  SKILL.md       # Overview + workflows
-  pptxgenjs.md   # 600 lines API reference
-  ooxml.md       # 500 lines XML structure
-  scripts/       # Executable tools
-```
+| 구성                    | 언제                                             |
+|-------------------------|--------------------------------------------------|
+| `SKILL.md` 하나         | 모든 내용이 상한 안에 들어갈 때                  |
+| `SKILL.md` + 재사용 코드 | 딸린 파일이 서사가 아니라 가져다 쓸 코드일 때    |
+| `SKILL.md` + `references/` | 레퍼런스 자료가 인라인으로 두기엔 클 때        |
 언제: 레퍼런스 자료가 인라인으로 두기엔 너무 클 때
 
 ## Iron law
@@ -510,68 +436,27 @@ pptx/
 
 ## Test every skill type
 
-스킬 유형이 다르면 테스트 접근도 다르다:
+유형마다 무엇을 재는지가 다르다.  
+어느 유형이든 시나리오를 돌려 에이전트의 실제 행동을 본다.
 
-### Discipline-enforcing skill (rules and requirements)
+| 유형     | 무엇을 재나                              | 통과 기준                                  |
+|----------|------------------------------------------|--------------------------------------------|
+| 규율 강제 | 압박 속 준수. 시간·매몰 비용·탈진을 겹친다 | 최대 압박에서도 규칙을 따른다              |
+| 기법     | 새 시나리오와 엣지케이스에 적용          | 지시의 빈틈 없이 기법을 적용한다           |
+| 패턴     | 적용할 때와 적용하지 않을 때의 인식      | 반례에서 적용하지 않는다                   |
+| 레퍼런스 | 검색과 적용                              | 필요한 항목을 찾아 올바로 쓴다             |
 
-**예:** TDD, verification-before-completion, designing-before-coding
-
-**테스트 방법:**
-- 학술 질문: 규칙을 이해하는가?
-- 압박 시나리오: 스트레스 속에서 준수하는가?
-- 복합 압박: 시간 + 매몰 비용 + 탈진
-- 합리화를 식별해 명시적 반박을 추가
-
-**성공 기준:** 최대 압박 속에서 에이전트가 규칙을 따른다
-
-### Technique skill (how-to guide)
-
-**예:** condition-based-waiting, root-cause-tracing, defensive-programming
-
-**테스트 방법:**
-- 적용 시나리오: 기법을 올바로 적용하는가?
-- 변형 시나리오: 엣지케이스를 다루는가?
-- 정보 누락 테스트: 지시에 빈틈이 있는가?
-
-**성공 기준:** 에이전트가 새 시나리오에 기법을 성공적으로 적용한다
-
-### Pattern skill (mental model)
-
-**예:** reducing-complexity, information-hiding 개념
-
-**테스트 방법:**
-- 인식 시나리오: 패턴이 적용될 때를 인식하는가?
-- 적용 시나리오: 멘탈 모델을 쓸 수 있는가?
-- 반례: 적용하지 **않을** 때를 아는가?
-
-**성공 기준:** 에이전트가 패턴을 언제·어떻게 적용할지 올바로 식별한다
-
-### Reference skill (documentation and API)
-
-**예:** API 문서, 명령 레퍼런스, 라이브러리 가이드
-
-**테스트 방법:**
-- 검색 시나리오: 올바른 정보를 찾는가?
-- 적용 시나리오: 찾은 것을 올바로 쓰는가?
-- 갭 테스트: 흔한 사용례가 커버되는가?
-
-**성공 기준:** 에이전트가 레퍼런스 정보를 찾아 올바로 적용한다
+규율 강제 유형은 테스트에서 나온 합리화를 그대로 수집해 명시적 반박으로 만든다.
 
 ## Common rationalizations for skipping tests
 
-| 핑계                       | 현실                                                                     |
-|----------------------------|--------------------------------------------------------------------------|
-| "스킬이 명백히 명확하다"   | 나에게 명확 ≠ 다른 에이전트에게 명확. 테스트하라.                        |
-| "그냥 레퍼런스일 뿐"       | 레퍼런스에도 빈틈·불명확한 부분이 있다. 검색을 테스트하라.               |
-| "테스트는 과잉이다"        | 테스트 안 한 스킬엔 문제가 있다. 언제나. 15분 테스트가 몇 시간을 아낀다. |
-| "문제 생기면 테스트하겠다" | 문제 = 에이전트가 스킬을 못 쓴다. 배포 전에 테스트하라.                  |
-| "테스트가 너무 지루하다"   | 테스트는 프로덕션에서 나쁜 스킬 디버깅보다 덜 지루하다.                  |
-| "좋다고 확신한다"          | 과신이 문제를 보장한다. 그래도 테스트하라.                               |
-| "학술 검토로 충분하다"     | 읽기 ≠ 쓰기. 적용 시나리오를 테스트하라.                                 |
-| "테스트할 시간이 없다"     | 테스트 안 한 스킬 배포가 나중에 고치는 데 더 많은 시간을 쓴다.           |
-
-**이 모두가 뜻하는 것: 배포 전에 테스트하라.**  
-**예외 없다.**
+| 핑계                     | 현실                                                       |
+|--------------------------|------------------------------------------------------------|
+| "명백히 명확하다"        | 나에게 명확한 것과 다른 에이전트에게 명확한 것은 다르다    |
+| "그냥 레퍼런스일 뿐"     | 레퍼런스에도 빈틈이 있다. 검색을 테스트한다               |
+| "좋다고 확신한다"        | 과신이 곧 문제의 신호다                                    |
+| "학술 검토로 충분하다"   | 읽는 것과 쓰는 것은 다르다. 적용 시나리오를 돌린다        |
+| "시간이 없다"            | 테스트 안 한 스킬을 나중에 고치는 데 더 든다              |
 
 ## Match the format to the failure
 
@@ -601,112 +486,20 @@ pptx/
 
 ## Bulletproof the skill against rationalization
 
-규율을 강제하는 스킬(TDD 같은)은 합리화에 저항해야 한다.  
-에이전트는 똑똑하고 압박받으면 빈틈을 찾아낸다.
+규율을 강제하는 스킬은 압박 속에서 합리화에 저항해야 한다.  
+빈틈을 닫는 절차와 합리화 표·red flags 목록을 만드는 방법은 [testing-skills-with-subagents.md](testing-skills-with-subagents.md)의 「REFACTOR stage: close the holes (stay green)」에 있다.
 
 **범위:** 이 도구모음은 규율 실패용이다.  
-규칙을 알면서 압박 속에 건너뛰는 에이전트 말이다.  
-형태가 틀린 출력이나 누락된 요소에는 금지 기반 방탄화가 역효과다.  
-「Match the format to the failure」의 형식을 쓰라.
+규칙을 알면서 압박 속에 건너뛰는 에이전트가 대상이다.  
+형태가 틀린 출력이나 누락된 요소에는 금지 기반 방탄화가 역효과이므로 위 「Match the format to the failure」의 형식을 쓴다.
 
-**심리 노트:** 설득 기법이 왜 통하는지 이해하면 그것을 체계적으로 적용할 수 있다.  
-연구 근거(Cialdini 2021, Meincke et al. 2025)의 authority, commitment, scarcity, social proof, unity 원칙은 persuasion-principles.md를 참조한다.
-
-### Close every loophole explicitly
-
-규칙을 진술만 하지 말고 구체적 우회를 금지하라:
-
-**나쁨:**
-```markdown
-Write code before test? Delete it.
-```
-
-**좋음:**
-```markdown
-Write code before test? Delete it. Start over.
-
-**No exceptions:**
-- Don't keep it as "reference"
-- Don't "adapt" it while writing tests
-- Don't look at it
-- Delete means delete
-```
-
-### Answer the "spirit versus letter" argument
-
-근본 원칙을 일찍 넣는다:
-
-```markdown
-**Violating the letter of the rules is violating the spirit of the rules.**
-```
-
-이것은 "나는 정신을 따르고 있다" 부류의 합리화 전체를 끊는다.
-
-### Build a rationalization table
-
-베이스라인 테스트에서 나온 합리화를 잡는다(아래 테스트 절 참조).  
-에이전트가 대는 모든 핑계가 표에 들어간다:
-
-```markdown
-| Excuse | Reality |
-|--------|---------|
-| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after" | Tests passing immediately prove nothing. |
-| "Tests after achieve same goals" | Tests-after = "what does this do?" Tests-first = "what should this do?" |
-```
-
-### Build a red flags list
-
-에이전트가 합리화 중일 때 스스로 점검하기 쉽게 만든다:
-
-```markdown
-## Red flags. Stop and start over
-
-- Code before test
-- "I already manually tested it"
-- "Tests after achieve the same purpose"
-- "It's about spirit not ritual"
-- "This is different because..."
-
-**All of these mean: Delete code. Start over with TDD.**
-```
-
-### Update SDO with violation symptoms
-
-규칙을 위반하기 **직전**의 증상을 description에 추가한다:
-
-```yaml
-description: use when implementing any feature or bugfix, before writing implementation code
-```
+설득 원칙(Cialdini 2021, Meincke et al. 2025)의 근거는 [persuasion-principles.md](persuasion-principles.md)에 있다.
 
 ## RED-GREEN-REFACTOR for skills
 
-TDD 사이클을 따른다:
+스킬 없이 압박 시나리오를 돌려 실패를 관측하고(RED), 그 합리화만 겨냥한 최소 문서를 쓰고(GREEN), 새로 나온 합리화를 막는다(REFACTOR).  
+각 단계의 절차와 시나리오 작성법은 [testing-skills-with-subagents.md](testing-skills-with-subagents.md)가 정본이다.
 
-### RED: write the failing test (baseline)
-
-스킬 **없이** 서브에이전트로 압박 시나리오를 돌린다.  
-정확한 행동을 기록한다:
-- 어떤 선택을 했나?
-- 어떤 합리화를 썼나(그대로)?
-- 어떤 압박이 위반을 유발했나?
-
-이것이 "테스트가 실패하는 걸 지켜보기"다.  
-스킬을 쓰기 전에 에이전트가 자연스럽게 무엇을 하는지 봐야 한다.
-
-### GREEN: write the minimum skill
-
-그 구체적 합리화를 겨냥한 스킬을 쓴다.  
-가상의 경우를 위한 추가 내용을 넣지 않는다.
-
-같은 시나리오를 스킬과 **함께** 돌린다.  
-이제 에이전트가 준수해야 한다.
-
-### REFACTOR: close the loopholes
-
-에이전트가 새 합리화를 찾았나?  
-명시적 반박을 추가한다.  
-방탄이 될 때까지 재테스트한다.
 
 ### Micro-test the wording before the full scenario
 

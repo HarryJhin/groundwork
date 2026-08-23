@@ -22,11 +22,8 @@ groundwork는 자기 방법론을 자기 개발에 적용한다.
 `adr/`는 동결된 이력이다.  
 새 파일을 만들지 않고 이 리포는 더 이상 결정을 별도 문서로 모으지 않는다.
 
-폐기 근거는 이 디렉터리 자신에 있다.  
-ADR-0008, ADR-0010이 각각 자기 `Consequences`에 같은 대가를 적었다.  
-앞 결정을 고치지 않고 새 문서로 덮으므로 현재 구조를 알려면 여러 문서를 함께 읽어야 한다는 것이다.  
-같은 결함이 연속한 결정마다 반복 기록됐다는 것은 개별 문서의 문제가 아니라 형식이 그 결함을 낳는다는 뜻이다.  
-설계는 계속 바뀌는데 불변 문서를 쌓으면 문서 수가 늘어나는 만큼 현재 상태를 읽어내는 비용이 함께 는다.
+ADR-0008과 ADR-0010이 각각 자기 `Consequences`에 같은 대가를 적었다.  
+앞 결정을 고치지 않고 새 문서로 덮으므로 현재 구조를 알려면 여러 문서를 함께 읽어야 한다는 것이다.
 
 지금 규범은 다음과 같다.  
 결정은 그것을 쓰는 설계 문서 안에 있고 그 문서를 제자리에서 고친다.  
@@ -47,9 +44,7 @@ ADR-0008, ADR-0010이 각각 자기 `Consequences`에 같은 대가를 적었다
 `artifacts/`만 `.gitignore` 대상이라 이 리포에는 보이지 않는다.  
 방향을 실물로 병치해 반응을 받는 용도이고 결정이 설계 문서에 반영되면 역할이 끝난다.
 
-`designs/`는 아직 비어 있다.  
-이 리포는 자기 flow를 자기 개정에 쓰지 않기 때문이다(루트 `CONTRIBUTING.md`의 「Revise groundwork itself」).  
-설계 문서는 groundwork를 설치한 다른 리포에서 생긴다.
+이 리포는 자기 flow를 자기 개정에 쓰지 않으므로 (루트 `CONTRIBUTING.md`의 「Revise groundwork itself」) 설계 문서는 groundwork를 설치한 다른 리포에서 생긴다.
 
 ## Deleted archives
 
@@ -67,10 +62,6 @@ git log --diff-filter=D --name-only -- docs/specs docs/plans
 git show <삭제 직전 커밋>:docs/specs/SPEC-0001-spec-pipeline.md
 ```
 
-## Reading order
-
-groundwork가 지금 무엇을 하는지 알려면 `skills/`를 읽는다.  
-스킬 본문이 현재 규범의 정본이고 이 디렉터리는 정본이 아니다.
 
 groundwork가 왜 지금 모습이 됐는지가 궁금하면 `adr/`를 번호순으로 읽는다.  
 동결된 이력이라 현재 규범과 어긋나는 대목이 있고 어긋나면 스킬이 맞다.

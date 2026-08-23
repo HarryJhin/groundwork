@@ -131,8 +131,7 @@ Claude Code 전용이다.
 - `hooks/pre-artifact-write-junior-gate` 설계 문서·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다.  
   차단은 한 세션에서 문서 종류마다 한 번이다(설계 문서·스킬 각 1회).  
   같은 종류의 다음 문서는 차단하지 않고 규범을 계속 적용하라는 한 줄만 낸다.  
-  이미 있는 파일 편집은 처음부터 통과시킨다.  
-  파일 단위로 차단하던 이전 동작은 문서를 여러 개 쓰는 세션에서 같은 안내문을 파일 수만큼 반복했고 그때마다 완성된 쓰기 내용이 폐기됐다
+  이미 있는 파일 편집은 처음부터 통과시킨다.
 - `hooks/pre-standard-doc-write-gate` README·CONTRIBUTING·CODE_OF_CONDUCT·SECURITY·SUPPORT·GOVERNANCE·CHANGELOG·이슈 템플릿·PR 템플릿을 새로 만드는 쓰기를 한 번 막고 그 문서의 표준 요지와 읽을 레퍼런스를 반환한다.  
   대상은 리포 루트·`.github/`·`docs/`에 놓인 것뿐이라 하위 디렉터리의 동명 파일은 걸리지 않는다.  
   차단은 한 세션에서 문서 종류마다 한 번이다.  
@@ -148,9 +147,7 @@ exit 0의 평문 stdout은 디버그 로그로만 가고 모델에 닿지 않는
 
 `skills/executing-design/scripts/` 아래에 있다.  
 실행 자산은 기본 경로인 `executing-design`이 소유하고 조건부 경로인 `subagent-driven-development`가 건너와서 쓴다.  
-존재 이유는 컨텍스트 경제다.  
-컨트롤러가 태스크 텍스트와 diff를 자기 컨텍스트로 통과시키면 그것이 남은 세션 내내 상주한다.  
-스크립트가 산출물을 파일로 넘겨 그 비용을 없앤다.
+컨트롤러가 태스크 텍스트와 diff를 자기 컨텍스트로 통과시키면 그것이 남은 세션 내내 상주하므로, 스크립트가 산출물을 파일로 넘긴다.
 
 - `design-scratch` 설계 문서별 실행 스크래치 디렉터리를 `.groundwork/run/` 아래에 확보한다
 - `review-package` 커밋 목록과 diff를 리뷰용 파일 하나로 묶는다
@@ -167,9 +164,7 @@ exit 0의 평문 stdout은 디버그 로그로만 가고 모델에 닿지 않는
 
 **둘 다 지우는 것은 `finish`뿐이다.**  
 실행 스킬은 만들기만 하고 지우지 않는다.  
-실행 스킬이 스크래치를 지우면 `finish`의 「Report the outstanding findings」가 읽을 진행 기록이 없어진다.  
-태스크 브리프를 뽑던 `task-brief`는 없앴다.  
-분해가 문서가 아니라 실행 시점 산출물이 되면서 브리프를 파싱할 원본이 사라졌고, 이제 컨트롤러가 분해 결과를 브리프 파일로 직접 쓴다.
+실행 스킬이 스크래치를 지우면 `finish`의 「Report the outstanding findings」가 읽을 진행 기록이 없어진다.
 
 ### Manifests
 
