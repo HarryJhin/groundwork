@@ -388,15 +388,14 @@ todo를 in_progress로 표시하고 직접 구현한다.
 
 | 바뀌는 절                                                                            | 처리           |
 |--------------------------------------------------------------------------------------|----------------|
-| `Scope`·`Non-goals`·`Acceptance criteria`                                            | 사용자 재승인  |
-| `Design`·`Global constraints`·`Cross-cutting concerns`·`Compatibility and migration` | 재리뷰 후 통지 |
+| `Scope`·`Non-goals`·`User flows and scenarios`·`Acceptance criteria`                 | 사용자 재승인  |
+| `Design`·`Global constraints`·`Cross-cutting concerns`·`Compatibility and migration` | self-review 후 통지 |
 
 **앞줄은 사용자가 승인한 대상이라 바뀌면 게이트가 판정한 것이 남지 않는다.**  
 재승인은 바뀐 절과 바뀐 이유만 제시하고 문서 전체를 다시 올리지 않는다.
 
-**뒷줄은 재리뷰만 돈다.**  
-고친 절을 담당하는 리뷰어에만 `groundwork:design-review`를 돌리고 로스터 전원을 부르지 않는다.  
-그 재리뷰 규칙은 그 스킬의 「Review rules」에 있다.  
+**뒷줄은 self-review만 한 번 돈다.**  
+개정한 설계 문서 전체를 `groundwork:design-review`의 한 번 판정으로 확인한다.  
 반환을 받은 뒤 무엇을 왜 고쳤는지 사용자에게 통지하고 답을 기다리지 않는다.
 
 어느 줄이든 문서를 고친 뒤 그 태스크를 개정된 문서로 다시 시작한다.  
@@ -410,7 +409,7 @@ todo를 in_progress로 표시하고 직접 구현한다.
   코드가 스스로 설명하는 세부는 코드 주석으로 둔다.  
   결정만 모으는 별도 문서를 새로 만들지 않는다
 - 모호함이나 설계 문서의 공백을 임의로 해석하지 않는다.  
-  설계 문서로 회귀해 재리뷰한다
+  설계 문서로 회귀해 한 번 self-review한다
 - 사용자 의도 없이 정할 수 없는 결정만 사용자에게 올린다
 - 설계 문서에 없는 작업은 범위 변경이다.  
   사용자에게 확인한다

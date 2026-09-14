@@ -179,7 +179,7 @@ git commit -m "설계 문서의 갱신일을 올린다"
 
 이 커밋이 `FEATURE_BRANCH`의 마지막 커밋이 되고 아래 통합이 그것을 함께 나른다.
 
-이 뒤에 설계 문서를 고치면 `groundwork:design-review`를 다시 돌린다.
+이 뒤에 설계 문서를 고치면 `groundwork:design-review`로 한 번 self-review한다.
 
 ## Present the options
 

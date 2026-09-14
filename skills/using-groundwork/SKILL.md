@@ -49,9 +49,8 @@ groundwork 클래스 작업에는 넷을 강제한다.
 - **진입**: 코드·탐색 전에 `groundwork:finding-unknowns`로 unknowns부터 찾아낸다.
 - **발산 리다이렉트**: 실행 환경이 제공하는 아이디어 발산·요구 탐색 스킬이 먼저 걸려도 거기 머물지 않고 `groundwork:finding-unknowns`로 넘어간다.
 - **게이트**: 설계 문서는 `groundwork:design-review`를 거치고 사용자 명시 승인을 받아야 구현으로 간다.  
-  리뷰를 돌릴지와 어느 범위로 돌릴지는 그 스킬이 사용자에게 묻는다.  
-  저자가 대신 정하거나 스킬 호출을 건너뛰지 않는다.  
-  반환은 `통과`·`조건부 통과`·`건너뜀` 중 하나이고 어느 쪽인지 사용자에게 밝힌다.  
+  저자가 같은 세션에서 모든 기준을 한 번 self-review하고 범위 선택이나 리뷰어 디스패치를 하지 않는다.  
+  반환은 `통과`·`조건부 통과` 중 하나이고 어느 쪽인지 사용자에게 밝힌다.  
   침묵과 모호 발화는 승인이 아니다.
 - **작성 규범**: 설계 문서·스킬을 쓰기 전에 `groundwork:writing-for-junior`를 로드한다.  
   리뷰에서 반려된 뒤가 아니라 쓰는 시점에 적용한다.
@@ -115,6 +114,6 @@ groundwork 클래스 작업이 아니어도 이 규율은 적용된다.
 | 규약                                             | 소유 스킬                                        |
 |--------------------------------------------------|--------------------------------------------------|
 | 산출물 경로·명명, 설계 문서의 내용, 역인터뷰 절차 | `groundwork:finding-unknowns`                    |
-| 리뷰어 로스터와 디스패치 방식                    | `groundwork:design-review`                       |
+| 설계 self-review 기준                            | `groundwork:design-review`                       |
 | 태스크 분해 규범                                 | `groundwork:executing-design`                    |
 | 모델 티어와 벤더 교차 디스패치                   | [choosing-model-tier.md](choosing-model-tier.md) |
