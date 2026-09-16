@@ -1,6 +1,6 @@
 # Why the interview runs in two directions
 
-`SKILL.md`의 「Interview procedure」가 묻기와 돌려주기를 짝으로 요구하는 근거다.  
+`groundwork:finding-unknowns`의 [Explain the decision before asking](../SKILL.md#explain-the-decision-before-asking)에서 질문의 경위와 선택 영향을 설명하는 배경이다.
 인터뷰의 목적을 재료 수집 하나로 두면 돌려주기가 낭비로 보이고 사용자의 이해 형성을 목적에 넣으면 필수가 된다.  
 아래 근거가 그 차이를 만든다.
 
@@ -87,7 +87,6 @@ initiation of each contribution to its mutual acceptance.
 
 참여자는 상호 이해에 드는 총 노동을 줄이려 한다.  
 그래서 확인 생략은 게으름이 아니라 대화의 기본 경향이다.  
-규칙으로 명시하지 않으면 인터뷰가 저절로 추출로 수렴하는 이유가 이것이고 「Interview procedure」가 돌려주기를 순환의 한 단계로 고정한 이유도 같다.
 
 ## The respondent is not a vessel holding answers
 

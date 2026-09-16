@@ -83,5 +83,6 @@
   "startup_context": {
     "before_bytes": 7949,
     "after_bytes": 1588
-  }
+  },
+  "measured_revision": "a3fd10fbd09fa8486b11c722e7b94424658507c0"
 }

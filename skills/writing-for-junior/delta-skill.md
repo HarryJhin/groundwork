@@ -57,4 +57,4 @@
 ## Output additions
 
 - 실패 유형에 `실행계약`·`셸블록`을 쓴다(예: `실행계약(경로 기준 없음)`).
-- PASS 출력의 CHECKED에 「Execution contract」 각 항목의 충족 여부를 적는다.
+- PASS 출력의 CHECKED에 [Extra axis: execution contract](#extra-axis-execution-contract) 각 항목의 충족 여부를 적는다.

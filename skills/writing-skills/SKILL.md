@@ -94,8 +94,8 @@ API 문서, 문법 가이드, 도구 사용법 문서
 신규면 스킬 이름과 그것이 다룰 기법을, 편집이면 대상 `SKILL.md`의 경로를 호출자에게 받는다.  
 둘 다 받지 못했으면 무엇을 쓸지 사용자에게 묻는다.
 
-**출력**: 위 「Where skills live」이 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.  
-아래 「Skill authoring checklist」를 통과하면 끝이고 다음 스킬로 자동으로 넘기지 않는다.
+**출력**: 위 [Where skills live](#where-skills-live)이 정한 위치에 만든 `SKILL.md`와 그 참조 파일이다.
+아래 [Skill authoring checklist](#skill-authoring-checklist)를 통과하면 끝이고 다음 스킬로 자동으로 넘기지 않는다.
 
 ## Execution contract
 
@@ -107,7 +107,7 @@ API 문서, 문법 가이드, 도구 사용법 문서
    대상 파일 경로·인자를 호출자가 넘기는지 스스로 찾는지, 찾는다면 어떤 규칙인지, 받지 못했을 때 무엇을 하는지.
 2. **경로 기준**: 그 문서가 적은 상대 경로의 기준 디렉터리. 스킬은 플러그인 디렉터리에 설치되고 실행 시점 작업 디렉터리는 사용자 프로젝트다.  
    기준을 밝히지 않으면 적힌 그대로 Read해서 실패한다.  
-   자기 스킬의 파일은 스킬 루트 기준 상대 경로로 적고 다른 스킬의 파일은 그 스킬 이름으로 부른다(아래 「SKILL.md structure」).
+   파일 링크는 스킬 루트 기준 상대 경로와 필요한 앵커로 적는다(아래 [SKILL.md structure](#skillmd-structure)).
 3. **주체**: 그 문서를 실행하는 것이 누구인지, 문서가 쓰는 다른 역할 이름(저자·메인·컨트롤러·리뷰어 등)과 어떤 관계인지. 실행자가 자기 역할을 특정하지 못하면 어느 지시를 자기 몫으로 볼지 정할 수 없다.
 4. **출력**: 그 스킬이 무엇을 반환하고 어디로 넘기는가.  
    다음 단계로 넘긴다면 그 대상.
@@ -135,22 +135,16 @@ h1은 스킬 디렉터리 이름을 그대로 쓴다.
 **참조 형태는 가리키는 대상으로 정해진다.**  
 대상마다 형태가 하나씩이고 같은 대상에 두 형태를 쓰지 않는다.
 
-| 가리키는 것      | 형태                                            |
-|------------------|-------------------------------------------------|
-| 같은 문서의 절   | `「Iron law」`                                  |
-| 같은 문서의 용어 | `「연속 실행」`. 절이 아닌 정의어에만 쓴다      |
-| 같은 스킬의 파일 | `[references/x.md](references/x.md)`의 `「절」` |
-| 다른 스킬        | `groundwork:<이름>`의 `「절」`                  |
-| 외부 URL         | 각주 `[^slug]`                                  |
+| 가리키는 것 | 형태 |
+|---|---|
+| 같은 문서의 절 | [Iron law](#iron-law) |
+| 같은 문서의 용어 | **용어**. 정의 절이 있으면 그 앵커로 연결한다 |
+| 같은 스킬의 파일·절 | [Test setup](testing-skills-with-subagents.md#test-setup) |
+| 다른 스킬의 절 | `groundwork:executing-design`의 [Execution contract](../executing-design/SKILL.md#execution-contract) |
+| 외부 URL | 각주 `[^slug]` |
 
-같은 스킬의 파일은 스킬 루트 기준 상대 경로로 적는다.  
-Agent Skills 명세가 정한 형태이고 하네스를 가리지 않는다.
-
-다른 스킬의 파일을 경로로 가리키지 않는다.  
-스킬 이름으로 부르면 실행 환경이 그 스킬을 로드하고, 그 안에서 상대 경로가 다시 해소된다.
-
-절 제목은 번역하지 않고 영문 그대로 적는다.  
-번역해 부르면 독자가 찾을 헤딩이 문서에 없다.
+파일 링크는 이 스킬 디렉터리 기준 상대 경로를 쓴다. 다른 스킬의 실행이 필요하면 `groundwork:<이름>`으로 로드한다.
+절 링크의 텍스트는 대상 영문 제목을 쓰고, 앵커는 실제 헤딩 ID와 일치시킨다.
 
 **외부 URL은 각주로 낸다.**  
 맨몸 URL을 산문에 심으면 문장이 끊기고 같은 URL이 여러 곳에 복제된다.  
@@ -185,7 +179,7 @@ GFM 콜아웃은 `[!CAUTION]` 하나만 쓴다.
 - 필수 필드 둘: `name`과 `description`(지원 필드 전체는 [agentskills.io/specification](https://agentskills.io/specification) 참조)
 - 총 1024자 이하
 - `name`: 문자·숫자·하이픈만 쓴다(괄호·특수문자 없음)
-- `description`: 아래 「Skill discovery optimization (SDO)」이 정한다. 500자 이하로 유지한다
+- `description`: 아래 [Skill discovery optimization (SDO)](#skill-discovery-optimization-sdo)이 정한다. 500자 이하로 유지한다
 
 ```yaml
 ---
@@ -354,9 +348,9 @@ wc -w skills/path/SKILL.md
 
 ### Cross-reference other skills
 
-**다른 스킬을 참조하는 문서를 쓸 때:**
+**다른 스킬의 실행을 요구할 때:**
 
-스킬 이름만 쓰고 요구 마커를 명시한다:
+스킬 이름과 요구 마커를 명시한다:
 - 좋음: `**REQUIRED SUB-SKILL:** Use groundwork:test-driven-development`
 - 좋음: `**REQUIRED BACKGROUND:** You MUST understand groundwork:systematic-debugging`
 - 나쁨: `See skills/testing/test-driven-development`(필수인지 불분명)
@@ -465,14 +459,14 @@ wc -w skills/path/SKILL.md
 
 | 베이스라인 실패                                                      | 맞는 형식                                                                                 | 틀린 형식                                       |
 |----------------------------------------------------------------------|-------------------------------------------------------------------------------------------|-------------------------------------------------|
-| 압박 속에서 규칙을 건너뛰거나 위반(더 잘 알면서도 그냥 한다)         | 금지 + 합리화 표 + Red Flags(아래 「Bulletproof the skill against rationalization」 참조) | 부드러운 가이드("~를 선호하라", "~를 고려하라") |
+| 압박 속에서 규칙을 건너뛰거나 위반(더 잘 알면서도 그냥 한다)         | 금지 + 합리화 표 + Red Flags(아래 [Bulletproof the skill against rationalization](#bulletproof-the-skill-against-rationalization) 참조) | 부드러운 가이드("~를 선호하라", "~를 고려하라") |
 | 준수하지만 출력의 형태가 틀림(부푼 프롬프트, 묻힌 판정, 요구 재서술) | 긍정 레시피나 계약: 출력이 무엇**인지** 명시(부분들을 순서대로)                           | 금지 목록("재서술하지 마라", "서술하지 마라")   |
 | 이미 만드는 것에서 필수 요소를 누락                                  | 구조적: 채워 넣는 템플릿의 REQUIRED 필드나 슬롯                                           | 템플릿 근처의 산문 알림                         |
 | 동작이 조건에 따라 달라져야 함                                       | 관측 가능한 술어에 건 조건문("brief가 있으면 참조하라")                                   | 무조건 규칙 + 예외 조항                         |
 
 **왜 금지가 형태 문제에 역효과인가:** 경쟁 인센티브("프롬프트를 자기완결로 만들어라") 아래서 에이전트는 "X 하지 마라"와 협상한다.  
 서브에이전트 디스패치 프롬프트 작성 규칙을 대상으로 한 문구 테스트에서, 금지 방식은 레시피 방식보다 원치 않는 내용을 뚜렷이 더 많이 만들었고(분포가 완전히 분리됨), 규칙 문구가 없는 대조군보다도 나빴다.  
-기본으로 금지에 손대지 말고 자기 사례를 직접 마이크로 테스트하라(아래 「Micro-test the wording before the full scenario」).  
+기본으로 금지에 손대지 말고 자기 사례를 직접 마이크로 테스트하라(아래 [Micro-test the wording before the full scenario](#micro-test-the-wording-before-the-full-scenario)).
 레시피는 협상할 여지를 남기지 않는다.  
 출력이 명시된 형태에 맞거나 안 맞거나 둘 중 하나다.
 
@@ -487,11 +481,11 @@ wc -w skills/path/SKILL.md
 ## Bulletproof the skill against rationalization
 
 규율을 강제하는 스킬은 압박 속에서 합리화에 저항해야 한다.  
-빈틈을 닫는 절차와 합리화 표·red flags 목록을 만드는 방법은 [testing-skills-with-subagents.md](testing-skills-with-subagents.md)의 「REFACTOR stage: close the holes (stay green)」에 있다.
+빈틈을 닫는 절차와 합리화 표·red flags 목록을 만드는 방법은 [REFACTOR stage: close the holes (stay green)](testing-skills-with-subagents.md#refactor-stage-close-the-holes-stay-green)에 있다.
 
 **범위:** 이 도구모음은 규율 실패용이다.  
 규칙을 알면서 압박 속에 건너뛰는 에이전트가 대상이다.  
-형태가 틀린 출력이나 누락된 요소에는 금지 기반 방탄화가 역효과이므로 위 「Match the format to the failure」의 형식을 쓴다.
+형태가 틀린 출력이나 누락된 요소에는 금지 기반 방탄화가 역효과이므로 위 [Match the format to the failure](#match-the-format-to-the-failure)의 형식을 쓴다.
 
 설득 원칙(Cialdini 2021, Meincke et al. 2025)의 근거는 [persuasion-principles.md](persuasion-principles.md)에 있다.
 
@@ -579,7 +573,7 @@ helper1, helper2, step3, pattern4 **왜 나쁜가:** 라벨엔 의미가 있어�
 - [ ] 검색용 키워드를 곳곳에(에러, 증상, 도구)
 - [ ] 핵심 원칙이 담긴 명확한 개요
 - [ ] RED에서 식별한 구체적 베이스라인 실패에 대응
-- [ ] 규칙 문구의 형식이 실패 유형에 맞음(「Match the format to the failure」 참조)
+- [ ] 규칙 문구의 형식이 실패 유형에 맞음([Match the format to the failure](#match-the-format-to-the-failure) 참조)
 - [ ] 행동을 형성하는 규칙 문구는 대조군과 함께 마이크로 테스트(5회 이상, 플래그된 매치 하나하나 직접 읽음) - 순수 레퍼런스 스킬은 해당 없음
 - [ ] 코드 인라인 또는 별도 파일 링크
 - [ ] 훌륭한 예시 하나(다언어 아님)

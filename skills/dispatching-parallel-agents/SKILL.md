@@ -18,14 +18,14 @@ description: 독립적인 문제 영역마다 서브에이전트 하나를 붙�
 동시에 일하게 둔다.
 
 **입력**은 현재 확인된 실패 목록이다.  
-테스트 출력이나 에러 로그에서 뽑고 아래 「Identify independent areas」로 영역을 가른다.  
+테스트 출력이나 에러 로그에서 뽑고 아래 [Identify independent areas](#identify-independent-areas)로 영역을 가른다.
 영역이 하나로 묶이면 이 스킬을 쓰지 않는다.
 
 **주체**는 에이전트를 띄우는 조율자다.  
 디스패치되는 서브에이전트는 이 문서를 읽지 않는다.
 
 **출력**은 통합된 수정과 전체 테스트 스위트 통과다.  
-아래 「Verification」을 통과하면 끝이다.
+아래 [Verification](#verification)을 통과하면 끝이다.
 
 ## Applicability
 
@@ -64,7 +64,7 @@ description: 독립적인 문제 영역마다 서브에이전트 하나를 붙�
 ### Write focused agent tasks
 
 에이전트마다 다음을 준다.  
-이 목록이 프롬프트 구성의 정본이고 아래 「Agent prompt structure」는 이것을 채운 예시다.
+이 목록이 프롬프트 구성의 정본이고 아래 [Agent prompt structure](#agent-prompt-structure)는 이것을 채운 예시다.
 
 - **구체적 범위**: 테스트 파일 하나 또는 서브시스템 하나
 - **명확한 목표**: 이 테스트들을 통과시킨다
@@ -88,16 +88,16 @@ description: 독립적인 문제 영역마다 서브에이전트 하나를 붙�
 응답마다 하나씩이면 순차 실행이다.
 
 **에이전트마다 모델을 명시한다.**  
-티어는 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: investigation tasks」에 있다.  
+티어는 `groundwork:using-groundwork`의 [Dispatch axis: investigation tasks](../using-groundwork/choosing-model-tier.md#dispatch-axis-investigation-tasks)에 있다.
 모델을 빠뜨리면 세션 모델을 상속해 영역 수만큼 최상위 모델이 돈다.
 
 ### Review and integrate
 
-에이전트가 돌아오면 아래 「Verification」의 절차를 따른다.
+에이전트가 돌아오면 아래 [Verification](#verification)의 절차를 따른다.
 
 ## Agent prompt structure
 
-아래는 「Write focused agent tasks」의 항목을 채운 예시다.  
+아래는 [Write focused agent tasks](#write-focused-agent-tasks)의 항목을 채운 예시다.
 그대로 보낼 문구가 아니라 형식 견본이다.
 
 ```markdown

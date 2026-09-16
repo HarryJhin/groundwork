@@ -55,7 +55,7 @@ diff로 확인할 수 없는 요구는 메인이 실제 공백인지 판단한�
 ### Resolve findings
 
 기술 발견은 근거를 확인해 해결한다. 설계의 구현 지시와 리뷰가 충돌해도 동일 서비스 계약을 만족하면 에이전트가 정하고 필요한 문서·기록을 갱신한다.
-정책 변경 제안은 사용자 영향·목표·제약의 새 근거를 확인한다. 재검토가 필요하면 기존 합의와 달라진 점을 `groundwork:finding-unknowns`의 「Explain the decision before asking」에 따라 설명하고 사용자와 결정한다. 구현 편의만을 근거로 한 제안은 기각한다.
+정책 변경 제안은 사용자 영향·목표·제약의 새 근거를 확인한다. 재검토가 필요하면 기존 합의와 달라진 점을 `groundwork:finding-unknowns`의 [Explain the decision before asking](../finding-unknowns/SKILL.md#explain-the-decision-before-asking)에 따라 설명하고 사용자와 결정한다. 구현 편의만을 근거로 한 제안은 기각한다.
 Minor는 진행 기록에 보류하고 최종 리뷰로 넘긴다. 설계 준수 실패·실제 공백·Critical·Important는 수정하고 덮는 검증을 다시 실행한다.
 수정 패키지는 `scripts/review-package DESIGN_FILE FIX_BASE HEAD`로 만들고 [re-review-prompt.md](re-review-prompt.md)에 직전 발견과 새 검증 결과를 넘긴다. `FIX_BASE`는 직전 리뷰가 본 head다.
 태스크당 수정·범위 한정 재리뷰는 최대 3라운드다. 라운드와 커밋·열린 발견을 기록한다.

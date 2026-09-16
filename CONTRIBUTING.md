@@ -32,7 +32,7 @@ PR도 받는다.
   마크다운 헤딩은 h1부터 전부 영문 sentence case다.  
   작업을 지시하는 제목은 원형 동사로 시작하고(`Apply the review gate`) 개념을 가리키는 제목은 명사구로 쓴다(`Decision authority`).  
   둘 다 `-ing`를 첫 단어로 쓰지 않는다.  
-  본문에서 절을 가리킬 때는 그 영문 제목을 `「」`로 감싸 그대로 적는다
+  절 참조는 영문 제목을 링크 텍스트로 쓰고 Markdown 앵커로 연결한다
 - 매니페스트를 고쳤으면 `claude plugin validate . --strict`를 돌린다
 
 `plugin.json`의 `version`은 명시돼 있다.  
@@ -119,7 +119,7 @@ Claude Code 전용이며 `hooks/hooks.json`이 SessionStart 훅 하나를 등록
 
 **둘 다 지우는 것은 `finish`뿐이다.**  
 실행 스킬은 만들기만 하고 지우지 않는다.  
-실행 스킬이 스크래치를 지우면 `finish`의 「Report the outstanding findings」가 읽을 진행 기록이 없어진다.
+실행 스킬이 스크래치를 지우면 `finish`의 [Report the outstanding findings](skills/finish/SKILL.md#report-the-outstanding-findings)가 읽을 진행 기록이 없어진다.
 
 ### Manifests
 

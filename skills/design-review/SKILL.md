@@ -24,7 +24,7 @@ description: Use when a design proposal is ready for review or an existing desig
 ## Resolve and report
 
 이미 확정된 정책과 확인한 사실로 고칠 수 있으면 그 자리에서 고친다. 기술 문제는 저자가 조사하고 결정한다.
-남은 도메인 결정과 기존 합의를 바꿀 근거는 `groundwork:finding-unknowns`의 「Explain the decision before asking」에 따라 사용자와 검토한다.
+남은 도메인 결정과 기존 합의를 바꿀 근거는 `groundwork:finding-unknowns`의 [Explain the decision before asking](../finding-unknowns/SKILL.md#explain-the-decision-before-asking)에 따라 사용자와 검토한다.
 확인하지 못한 사실은 가정과 영향을 남긴다.
 잔여가 없으면 `통과`다. 잔여가 있으면 `조건부 통과`로 위치·영향·필요한 정책 결정이나 사실 확인을 보고한다.
 개정 내용을 반영한 최종 상태를 판정하고, 실행 가능한 범위는 요청에 따라 진행한다.

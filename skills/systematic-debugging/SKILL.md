@@ -15,7 +15,7 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
 > [!CAUTION]
 > 근본 원인 조사 없이 수정하지 않는다
 
-아래 「Root cause investigation」를 마치지 않았다면 수정을 제안할 수 없다.
+아래 [Root cause investigation](#root-cause-investigation)를 마치지 않았다면 수정을 제안할 수 없다.
 
 ## Where it applies
 
@@ -108,7 +108,7 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
 2. **최소로 검증한다**: 가설을 검증할 가장 작은 변경을 만든다.  
    한 번에 변수 하나.  
    여러 개를 동시에 고치지 않는다
-3. **계속하기 전에 확인한다**: 됐으면 「Implementation」으로. 안 됐으면 **새 가설**을 세운다.  
+3. **계속하기 전에 확인한다**: 됐으면 [Implementation](#implementation)으로. 안 됐으면 **새 가설**을 세운다.
    수정 위에 수정을 쌓지 않는다
 4. **모를 때**: "X를 이해하지 못하겠다"고 말한다.  
    아는 척하지 않는다.  
@@ -140,8 +140,8 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
    - 멈춘다
    - 센다.  
      수정을 몇 번 시도했는가
-   - 3회 미만이면 「Root cause investigation」로 돌아가 새 정보로 재분석한다
-   - **3회 이상이면 멈추고 아키텍처를 의심한다(「Implementation」의 다섯째 항목)**
+   - 3회 미만이면 [Root cause investigation](#root-cause-investigation)로 돌아가 새 정보로 재분석한다
+   - **3회 이상이면 멈추고 아키텍처를 의심한다([Implementation](#implementation)의 다섯째 항목)**
    - 아키텍처 논의 없이 4번째 수정을 시도하지 않는다
 
 5. **수정 3회가 실패했으면 아키텍처를 의심한다**
@@ -177,9 +177,9 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
 - **수정할 때마다 다른 곳에서 새 문제가 드러난다**
 
 전부 같은 뜻이다.  
-멈추고 「Root cause investigation」로 돌아간다.
+멈추고 [Root cause investigation](#root-cause-investigation)로 돌아간다.
 
-**3회 이상 실패했으면** 아키텍처를 의심한다(「Implementation」의 다섯째 항목).
+**3회 이상 실패했으면** 아키텍처를 의심한다([Implementation](#implementation)의 다섯째 항목).
 
 ## User signals that you are off track
 
@@ -191,7 +191,7 @@ description: 수정을 제안하기 전에 근본 원인을 찾게 강제한다.
 - "깊이 생각해보세요" → 증상이 아니라 근본을 의심하라는 뜻이다
 - "우리 막힌 건가요?"(답답함) → 접근이 듣지 않고 있다
 
-이 신호가 보이면 멈추고 「Root cause investigation」로 돌아간다.
+이 신호가 보이면 멈추고 [Root cause investigation](#root-cause-investigation)로 돌아간다.
 
 ## Common rationalizations
 

@@ -59,16 +59,16 @@
   그 조건어가 가리키는 대상이 문서에 없어 문장 자체가 판독되지 않을 때만 이 축의 소관이다.
 
 문체 취향은 판정하지 않는다.  
-「Statement readability」의 기준은 "좋은 문장인가"가 아니라 "한 번 읽어 판독되는가"다.
+[Statement readability](#statement-readability)의 기준은 "좋은 문장인가"가 아니라 "한 번 읽어 판독되는가"다.
 
-「Production-circumstance leakage」도 문체가 아니다.  
+[Production-circumstance leakage](#production-circumstance-leakage)도 문체가 아니다.
 문장이 잘 읽히더라도 그 내용이 독자에게 쓸모없는 제작 사정이면 발견이다.  
-「Statement readability」과 헷갈리면 이렇게 가른다.  
+[Statement readability](#statement-readability)과 헷갈리면 이렇게 가른다.
 그쪽은 "읽히지 않는다"이고 이쪽은 "읽히는데 독자 것이 아니다"다.
 
-「Structural duplication」과 「Notation systems」도 갈린다.  
-「Notation systems」는 지금 이 문서에서 읽는 법이 없어 헷갈리는 것을 본다.  
-「Structural duplication」은 지금은 맞지만 항목이 바뀌면 낡을 것을 본다.  
+[Structural duplication](#structural-duplication)과 [Notation systems](#notation-systems)도 갈린다.
+[Notation systems](#notation-systems)는 지금 이 문서에서 읽는 법이 없어 헷갈리는 것을 본다.
+[Structural duplication](#structural-duplication)은 지금은 맞지만 항목이 바뀌면 낡을 것을 본다.
 판정 시점이 다르다.
 
 ## The tests (this prompt is the source of truth)
@@ -210,16 +210,16 @@
 1. 문서를 Read로 읽는다.  
    이전 라운드에서 저자가 해소한 발견은 다시 올리지 않는다.
 1. **용어 수집 패스**: 본문의 명사·약칭·코드명을 훑어 목록을 만든다.  
-   「Knowledge boundary」 절차를 목록 전체에 돌린다.  
+   [Knowledge boundary](#knowledge-boundary) 절차를 목록 전체에 돌린다.
    이 패스를 건너뛰고 인상으로 판정하지 않는다.
 1. **전수 스윕**: 델타 재리뷰 여부와 무관하게 항상 문서 전체를 훑는다(자기완결은 델타 개념이 없다. 낡은 절의 세션 잔여물도 결함이다).
 1. **델타 패스**: 유형별 델타가 동봉됐으면 그 축을 돌린다.
-1. **발견 패스**: 「Production-circumstance leakage」과 「Structural duplication」을 제외한 공통 축과 델타 축으로 해소 실패 지점을 전수 수집한다.
-1. **잉여 패스**: 「Production-circumstance leakage」의 이식성 테스트와 「Structural duplication」의 항목 증감 테스트를 문서 전체에 따로 돌린다.  
+1. **발견 패스**: [Production-circumstance leakage](#production-circumstance-leakage)과 [Structural duplication](#structural-duplication)을 제외한 공통 축과 델타 축으로 해소 실패 지점을 전수 수집한다.
+1. **잉여 패스**: [Production-circumstance leakage](#production-circumstance-leakage)의 이식성 테스트와 [Structural duplication](#structural-duplication)의 항목 증감 테스트를 문서 전체에 따로 돌린다.
    앞 패스가 빠진 것을 찾는 동안 이 패스는 남아 있으면 안 되는 것을 찾는다.  
    같은 패스에 합치면 두 축이 누락된다.
 1. **필터 패스**: 표준 자료로 해소되는 항목, 문맥상 여집합 추론이 자명한 항목은 버리되 한 줄로 명시한다.  
-   「Knowledge boundary」에서 판정이 갈린 항목은 버리지 않는다(위 「Judging principle: what you know is not evidence」).
+   [Knowledge boundary](#knowledge-boundary)에서 판정이 갈린 항목은 버리지 않는다(위 [Judging principle: what you know is not evidence](#judging-principle-what-you-know-is-not-evidence)).
 
 ## Axis names and how findings are returned
 
@@ -236,7 +236,7 @@
 
 ## Re-review of this axis
 
-용어 정의를 추가한 개정은 「Knowledge boundary」를 다시 돌린다.  
+용어 정의를 추가한 개정은 [Knowledge boundary](#knowledge-boundary)를 다시 돌린다.
 정의를 더하면서 새 도메인 용어를 끌어들이는 일이 잦다.
 
 델타 재리뷰 여부와 무관하게 문서 전체를 다시 훑는다.  

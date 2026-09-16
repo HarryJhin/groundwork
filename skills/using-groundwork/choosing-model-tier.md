@@ -80,7 +80,7 @@ reasoning effort는 이 규율에 넣지 않는다.
 설계 문서가 계약이라 어떤 순서로 어느 파일을 건드릴지는 실행 스킬이 정한다.  
 그 분해에 판단이 들기 때문에 실행 티어를 싼 모델까지 내리지 않는다.  
 싼 모델로 내리려면 분해까지 미리 확정해 브리프에 담아야 하고, 그러면 그 확정을 누군가 더 비싼 모델로 해야 하므로 절약분이 앞단으로 옮겨 갈 뿐이다.  
-아래 「Turn count beats token price」와 같은 이유다.
+아래 [Turn count beats token price](#turn-count-beats-token-price)와 같은 이유다.
 
 ## Dispatch axis: implementation and design tasks
 
@@ -108,7 +108,7 @@ diff의 크기·복잡도·위험에 맞춘다.
 
 
 리뷰어에 싼 모델을 쓰지 않는다.  
-아래 「Turn count beats token price」가 이유다.
+아래 [Turn count beats token price](#turn-count-beats-token-price)가 이유다.
 
 ## Cross-vendor dispatch
 

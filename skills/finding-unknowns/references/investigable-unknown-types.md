@@ -1,6 +1,6 @@
 # Lineage of the investigable types
 
-`SKILL.md`의 「Definitions of the investigable types」가 쓰는 유형 4종의 이름(리포 미지·사양 미지·관측 미지·참조 미지)은 이 스킬의 조어다.  
+이 문서의 유형 이름(리포 미지·사양 미지·관측 미지·참조 미지)은 이 스킬의 조어다.
 4종을 한 묶음으로 갖는 통용 분류 체계는 확인되지 않았다.  
 각 유형은 서로 다른 문헌의 독립된 개념에 대응하고 이 문서가 그 대응과 실증 근거를 담는다.
 
@@ -78,7 +78,7 @@ Robillard에서 코드 예제 사용은 55%이고 `Resources` 아래 `Examples`(
 
 출처: Ko, DeLine & Venolia, "Information Needs in Collocated Software Development Teams", ICSE 2007. 대형 소프트웨어 회사의 개발자 17명을 90분 세션으로 관찰해 정보 탐색 334건을 정보 요구 21종으로 추상화했다.
 
-이 논문이 이 스킬의 표에서 「답이 있는 곳」 열과 같은 축을 쓴다.  
+이 논문이 이전 스킬의 표에서 `답이 있는 곳` 열과 같은 축을 쓴다.
 Figure 3이 정보 유형마다 탐색 시간, 탐색 빈도와 결과(획득·연기·포기), 그리고 **출처 빈도**를 기록한다.  
 출처로 나타나는 값은 `code`, `docs`, `tools`, `coworker`, `debugger`, `spec`, `intuition`, `memory`, `bug report`, `comment`, `inference`, `email`, `log`, `test`, `compile`, `screenshot`이다.
 

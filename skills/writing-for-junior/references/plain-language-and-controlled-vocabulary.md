@@ -5,7 +5,7 @@
 
 # Three layers of word choice: phenomenon, norm, enforcement
 
-「Knowledge boundary」의 용어 오용과 희소 어휘 항목이 기대는 근거다.  
+[Knowledge boundary](../SKILL.md#knowledge-boundary)의 용어 오용과 희소 어휘 항목이 기대는 근거다.
 3갈래가 각각 다른 층을 다룬다.  
 왜 드문 단어가 판독을 막는가(현상), 무엇을 목표로 삼는가(규범), 어떻게 강제하는가(강제)다.
 

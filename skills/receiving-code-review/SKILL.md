@@ -15,7 +15,7 @@ description: 받은 코드 리뷰 피드백을 검증하고 대응하는 규율.
 
 **입력**은 방금 받은 리뷰 피드백이다.  
 사용자가 대화에서 직접 준 것일 수도 있고 `groundwork:requesting-code-review`가 띄운 리뷰어 서브에이전트의 반환이나 PR에 달린 리뷰 코멘트일 수도 있다.  
-아래 「Handle feedback by source」의 갈림은 발화 주체로 판정한다.  
+아래 [Handle feedback by source](#handle-feedback-by-source)의 갈림은 발화 주체로 판정한다.
 사용자 본인이 말한 것이면 사용자 피드백이고 그 밖의 모든 출처는 외부 리뷰어 피드백이다.  
 판정이 갈리면 외부 리뷰어로 다룬다.
 
@@ -40,7 +40,7 @@ description: 받은 코드 리뷰 피드백을 검증하고 대응하는 규율.
 ```
 
 3·4단계는 외부 리뷰어 피드백에만 적용한다.  
-사용자 피드백은 「Handle feedback by source」가 정한 대로 검증 없이 이해 후 반영한다.
+사용자 피드백은 [Handle feedback by source](#handle-feedback-by-source)가 정한 대로 검증 없이 이해 후 반영한다.
 
 ## Forbidden responses
 

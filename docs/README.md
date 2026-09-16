@@ -11,7 +11,7 @@ groundwork의 현재 상태를 서술하지 않는다.
 groundwork를 사용하는 작업 리포에서 설계 산출물은 다음 수명을 갖는다.
 
 - **설계 문서는 닫히지 않는다.**  
-  구현이 설계를 벗어나면 실행 중에 그 문서를 고치고(`skills/executing-design/SKILL.md`의 「Revise the design document」), 나중에 설계가 바뀌어도 같은 문서를 고친다.  
+  구현이 설계를 벗어나면 실행 중에 그 문서를 고치고([Revise the design document](../skills/executing-design/SKILL.md#revise-the-design-document)), 나중에 설계가 바뀌어도 같은 문서를 고친다.
   frontmatter의 `updated`가 마지막으로 손댄 날을 담는다.  
   종료 표기는 없다.  
   무엇이 언제 바뀌었는지는 git 히스토리가 담고 문서 본문은 지금 무엇이 규범인지만 담는다.
@@ -41,7 +41,7 @@ ADR-0008과 ADR-0010이 각각 자기 `Consequences`에 같은 대가를 적었�
 `artifacts/`만 `.gitignore` 대상이라 이 리포에는 보이지 않는다.  
 방향을 실물로 병치해 반응을 받는 용도이고 결정이 설계 문서에 반영되면 역할이 끝난다.
 
-이 리포는 자기 flow를 자기 개정에 쓰지 않으므로 (루트 `CONTRIBUTING.md`의 「Revise groundwork itself」) 설계 문서는 groundwork를 설치한 다른 리포에서 생긴다.
+이 리포는 자기 flow를 자기 개정에 쓰지 않으므로 (루트 [Revise groundwork itself](../CONTRIBUTING.md#revise-groundwork-itself)) 설계 문서는 groundwork를 설치한 다른 리포에서 생긴다.
 
 ## Deleted archives
 

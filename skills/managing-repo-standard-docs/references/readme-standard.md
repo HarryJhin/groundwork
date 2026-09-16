@@ -8,10 +8,10 @@ LICENSE와 같이 리포마다 자체 보유한다.
 
 ## Rules and limits of this document
 
-- 「GitHub-enforced README behavior」와 「Profile README is a separate feature」는 GitHub 공식 문서 사실이고 각 절 머리의 출처 URL이 검증 경로다.
-- 「Observed section composition」은 제3자 실측 연구다.  
+- [GitHub-enforced README behavior](#github-enforced-readme-behavior)와 [Profile README is a separate feature](#profile-readme-is-a-separate-feature)는 GitHub 공식 문서 사실이고 각 절 머리의 출처 URL이 검증 경로다.
+- [Observed section composition](#observed-section-composition)은 제3자 실측 연구다.
   이 스킬의 다른 레퍼런스와 달리 벤더 자사 출처가 아니다.
-- 「Recommended structure」는 그 실측에서 끌어낸 해석이다.  
+- [Recommended structure](#recommended-structure)는 그 실측에서 끌어낸 해석이다.
   독립 효과성 검증이 아니다.
 
 ## GitHub-enforced README behavior

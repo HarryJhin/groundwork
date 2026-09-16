@@ -58,13 +58,13 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 문서 결함의 실무 분포는 API 문서 조사가 보고한다(Uddin & Robillard 2015. IBM 전문가 323명).  
 거기서 content 문제가 presentation 문제를 크게 웃돌았고 이 스킬이 문장 다듬기보다 용어·참조·구조를 앞에 두는 근거가 그것이다.  
 독자를 능력이 아니라 맥락의 부재로 정의한 근거는 오픈소스 신규 기여자 장벽 모델이 기술 경험과 도메인 지식을 별도 장벽으로 가른 데 있다(Steinmacher, Silva & Gerosa 2014).  
-원문과 확인 범위는 `references/`에 있다(아래 「When to read the references」).
+원문과 확인 범위는 `references/`에 있다(아래 [When to read the references](#when-to-read-the-references)).
 
 ## Authoring norms
 
 각 축은 판정 기준과 그 짝이 되는 작성 처방을 함께 담는다.  
 대부분은 부족해서 안 읽히는 것을 잡는다.  
-「Production-circumstance leakage」과 「Structural duplication」은 반대로 넘쳐서 문제가 되는 것을 잡는다.
+[Production-circumstance leakage](#production-circumstance-leakage)과 [Structural duplication](#structural-duplication)은 반대로 넘쳐서 문제가 되는 것을 잡는다.
 
 ### Knowledge boundary
 
@@ -229,12 +229,12 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 - **연혁을 규범에 섞지 않는다.**  
   "무엇과 달라졌나", "어느 원본에서 왔나"는 규칙 적용에 쓰이지 않으면서 독자에게 확인할 외부를 하나 더 만든다.  
   규범 문장은 형식만 적는다.  
-  「Production-circumstance leakage」이 규범 문서에서 가장 자주 취하는 꼴이다.
+  [Production-circumstance leakage](#production-circumstance-leakage)이 규범 문서에서 가장 자주 취하는 꼴이다.
 - **근거를 문서 밖에 매달지 않는다.**  
   "X가 그렇게 정했으니 이 형식이다"는 독자가 X를 확인해야 판정된다.  
   규칙 자체가 근거를 지게 쓴다.
 - **필수 절을 빠뜨리지 않는다.**  
-  아래 「Required sections by document type」을 따른다.
+  아래 [Required sections by document type](#required-sections-by-document-type)을 따른다.
 
 ## Required sections by document type
 
@@ -276,19 +276,11 @@ description: 맥락이 없는 주니어 독자가 문서만으로 이해하고 �
 
 | 언제 여나                                                                                                 | 파일                                                                                    | 담긴 것                                                                                |
 |-----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론                                               | why-authors-cannot-see-it.md[^why-authors-cannot-see-it]                                | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거                                 |
-| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함                                    | comprehension-mechanics.md[^comprehension-mechanics]                                    | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문            |
-| 어떤 결함부터 잡을지 우선순위를 정할 때                                                                   | api-doc-failures.md[^api-doc-failures]                                                  | 문제 유형별 정의와 실무 분포                                                           |
-| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨                                           | newcomer-barriers.md[^newcomer-barriers]                                                | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
-| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안                     | plain-language-and-controlled-vocabulary.md[^plain-language-and-controlled-vocabulary]  | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유                                          |
-| 「Production-circumstance leakage」 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | writer-based-prose.md[^writer-based-prose]                                              | 현상의 명칭과 판정 규칙의 출처                                                         |
+| 저자에게 "맥락 없이 읽어보라"고 요구하면 되지 않느냐는 반론                                               | [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md)                                | 그 요구가 듣지 않는 이유와 격리된 리뷰어가 필요한 근거                                 |
+| 참조 해소·전방 참조·정보 분산 축의 근거를 묻거나 판정 기준을 고치려 함                                    | [comprehension-mechanics.md](references/comprehension-mechanics.md)                                    | common ground(Clark & Marshall)와 given-new contract(Haviland & Clark) 원문            |
+| 어떤 결함부터 잡을지 우선순위를 정할 때                                                                   | [api-doc-failures.md](references/api-doc-failures.md)                                                  | 문제 유형별 정의와 실무 분포                                                           |
+| 독자 정의("주니어는 능력이 아니라 맥락의 부재")에 이의가 제기됨                                           | [newcomer-barriers.md](references/newcomer-barriers.md)                                                | 신규 기여자 장벽의 체계적 문헌 고찰. 기술 경험과 도메인 지식을 별도 장벽으로 가른 근거 |
+| 어휘 판정(용어 오용·희소 어휘·조어 남발)의 근거를 묻거나 승인 어휘 목록을 두자는 제안                     | [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md)  | 목록을 두지 않고 대체 가능성 판정을 쓰는 이유                                          |
+| [Production-circumstance leakage](#production-circumstance-leakage) 판정이 문체 지적 아니냐는 반론, 이식성 테스트의 기준 환경을 고치려 함 | [writer-based-prose.md](references/writer-based-prose.md)                                              | 현상의 명칭과 판정 규칙의 출처                                                         |
 
-`references/`의 파일은 모두 「Verification scope」 절에 무엇을 원문으로 확인했고 무엇을 대조하지 않았는지 적었다.  
-인용을 다른 문서로 옮길 때 그 표기를 함께 옮긴다.
-
-[^api-doc-failures]: references/api-doc-failures.md
-[^comprehension-mechanics]: references/comprehension-mechanics.md
-[^newcomer-barriers]: references/newcomer-barriers.md
-[^plain-language-and-controlled-vocabulary]: references/plain-language-and-controlled-vocabulary.md
-[^why-authors-cannot-see-it]: references/why-authors-cannot-see-it.md
-[^writer-based-prose]: references/writer-based-prose.md
+인용을 다른 문서로 옮길 때 원문 대조 여부도 함께 옮긴다.

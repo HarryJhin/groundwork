@@ -31,7 +31,7 @@
 
 ## Where the skill uses this
 
-「Why authors cannot see this failure」 절의 근거다.
+[Why authors cannot see this failure](../SKILL.md#why-authors-cannot-see-this-failure) 절의 근거다.
 
 - 저자가 맥락 누락을 못 보는 것은 주의력 부족이 아니라 관측 위치의 문제라는 진술이 curse of knowledge에 대응한다.  
   방금 읽은 원본과 방금 나눈 대화가 저자에게 이미 해소된 상태라 그 정보를 배제한 상태를 재구성하지 못한다.

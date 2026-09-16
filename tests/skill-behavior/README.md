@@ -46,7 +46,7 @@ python3 tests/skill-behavior/evaluate.py --variant handoff --cases handoff-direc
 
 ## Context size
 
-[크기 기록](size-metrics.json)은 `57b0938`과 변경 파일의 UTF-8 바이트·행을 비교한다.
+[크기 기록](size-metrics.json)은 `57b0938`과 `v0.13.0` (`a3fd10f`) 파일의 UTF-8 바이트·행을 비교한다.
 
 | 로드 대상 | 기존 | 변경 |
 |---|---:|---:|

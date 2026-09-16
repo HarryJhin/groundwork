@@ -27,7 +27,7 @@ Flower의 진단은 원인을 능력이나 성의가 아니라 **변형의 부�
 유능한 필자는 생각을 표현하는 데 그치지 않고 독자의 필요에 맞춰 그것을 변형한다.  
 저자 자신에게는 뜻이 다 통하는 글이 독자에게는 같은 뜻을 전하지 못하는 일이 여기서 생긴다.
 
-이 스킬의 「Why authors cannot see this failure」가 같은 진단을 다룬다.  
+이 스킬의 [Why authors cannot see this failure](../SKILL.md#why-authors-cannot-see-this-failure)가 같은 진단을 다룬다.
 G축은 그중 문서가 자기 제작 과정을 기록하는 형태를 떼어 판정 축으로 세운 것이다.
 
 ## The rule: the portability test

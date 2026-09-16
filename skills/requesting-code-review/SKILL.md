@@ -24,12 +24,12 @@ description: 코드 리뷰어 서브에이전트를 디스패치해 완료된 �
 
 | 자리                    | 정본                                                      | 프롬프트                            | diff                     |
 |-------------------------|-----------------------------------------------------------|-------------------------------------|--------------------------|
-| 태스크 하나를 마친 뒤   | 실행 스킬의 「Apply the review gate」·「Review the task」 | `task-reviewer-prompt.md`           | `scripts/review-package` |
-| fix 라운드의 재리뷰     | 실행 스킬의 「Fix loop」                                  | `re-review-prompt.md`               | `scripts/review-package` |
-| 브랜치 전체 (최종 리뷰) | 실행 스킬의 「Final review」                              | 이 스킬의 `code-reviewer-prompt.md` | `scripts/review-package` |
+| 태스크 하나를 마친 뒤   | 실행 스킬의 [Review the task](../executing-design/SKILL.md#review-the-task) | `task-reviewer-prompt.md`           | `scripts/review-package` |
+| fix 라운드의 재리뷰     | 실행 스킬의 [Resolve findings](../executing-design/SKILL.md#resolve-findings)                                  | `re-review-prompt.md`               | `scripts/review-package` |
+| 브랜치 전체 (최종 리뷰) | 실행 스킬의 [Final review and handoff](../executing-design/SKILL.md#final-review-and-handoff)                              | 이 스킬의 `code-reviewer-prompt.md` | `scripts/review-package` |
 
 최종 리뷰만 이 스킬의 프롬프트를 쓰고 그때도 diff는 실행 스킬이 `review-package`로 만들어 넘긴다.  
-아래 「How to request」의 셸 절차를 그 자리에 쓰지 않는다.
+아래 [How to request](#how-to-request)의 셸 절차를 그 자리에 쓰지 않는다.
 
 이유는 `BASE`다.  
 아래 절차의 기본값 후보인 `HEAD~1`은 커밋이 여럿인 태스크에서 마지막 하나만 남기고 나머지를 조용히 버린다.  
@@ -82,7 +82,7 @@ echo "$DIFF_FILE"
 - `[DIFF_FILE]`: 위에서 만든 diff 파일 경로. diff를 파일로 넘기면 조율자 컨텍스트에 diff가 들어오지 않는다
 
 **리뷰어의 모델을 명시해 띄운다.**  
-티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `groundwork:using-groundwork`의 `choosing-model-tier.md`의 「Dispatch axis: code review tasks」에 있다.  
+티어는 diff의 크기·복잡도·위험에 맞추고 배정 기준은 `groundwork:using-groundwork`의 [Dispatch axis: code review tasks](../using-groundwork/choosing-model-tier.md#dispatch-axis-code-review-tasks)에 있다.
 모델을 빠뜨리면 세션 모델을 상속한다.
 
 **3. 피드백에 대응한다**
@@ -100,7 +100,7 @@ echo "$DIFF_FILE"
 |------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | "리뷰어를 띄우느니 내가 diff를 보겠다"         | 너는 조율자다. diff를 인라인으로 읽으면 작업을 계속 끌고 갈 컨텍스트 창을 소모한다. 리뷰어를 디스패치하면 diff와 평가가 그쪽 컨텍스트에 머물고 발견만 돌아온다. |
 | "리뷰어가 이해하려면 세션 히스토리가 필요하다" | 정밀하게 구성한 컨텍스트를 준다. 세션 히스토리는 주지 않는다. 그래야 리뷰어가 네 사고 과정이 아니라 결과물에 집중한다.                                          |
-| "태스크를 끝냈으니 이 스킬의 절차로 리뷰한다"  | 그 자리의 정본은 실행 스킬이다. 위 「Where this skill does not apply」를 본다. 프롬프트도 `BASE` 구하는 법도 다르다.                                            |
+| "태스크를 끝냈으니 이 스킬의 절차로 리뷰한다"  | 그 자리의 정본은 실행 스킬이다. 위 [Where this skill does not apply](#where-this-skill-does-not-apply)를 본다. 프롬프트도 `BASE` 구하는 법도 다르다.                                            |
 | "`HEAD~1`이면 방금 한 작업이다"                | 커밋이 여럿이면 마지막 하나만 남는다. 버려진 커밋은 리뷰어 쪽에 흔적을 남기지 않아 통과가 통과처럼 보인다.                                                      |
 
 ## Red flags

@@ -12,7 +12,7 @@ description: Use when README, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, 
 
 **사실의 근거**: 문서마다 표준의 출처가 다르다.  
 GitHub이 동작으로 규정한 것, 커뮤니티가 합의한 것, 관측으로 채운 것을 섞지 않는다.  
-어느 쪽인지는 「The document set」이 가른다.
+어느 쪽인지는 [The document set](#the-document-set)이 가른다.
 
 ## The document set
 
@@ -62,11 +62,11 @@ bash scripts/audit-docs.sh [repo_dir]
 
 스크립트는 (a) 문서별 존재·위치, (b) 부재 목록, (c) 원격이 있으면 `gh api repos/{owner}/{repo}/community/profile`의 `health_percentage`를 출력한다.  
 그 수치를 완전성 근거로 쓰지 않는다.  
-이유는 「Gotchas」에 있다.
+이유는 [Gotchas](#gotchas)에 있다.
 
 ### Write or fix a document
 
-「The document set」에서 그 문서의 근거 레퍼런스를 찾아 읽고 그 표준대로 쓴다.  
+[The document set](#the-document-set)에서 그 문서의 근거 레퍼런스를 찾아 읽고 그 표준대로 쓴다.
 빌드·테스트 명령과 현재 지원 범위는 리포와 CI에서 확인한다. 연락처·지원 정책·행동강령 담당자는 확정된 프로젝트 자료를 먼저 찾고, 미정인 운영 정책이나 담당자만 경위와 영향을 설명해 확인한다. 추측으로 채우지 않는다.
 
 CoC 소스 선택, CLA 채택 여부, SECURITY 보고 경로 설계처럼 판단이 필요하면 주요 기업의 실제 관행과 그 트레이드오프를 정리한 [industry-practices.md](references/industry-practices.md)를 읽는다.  
