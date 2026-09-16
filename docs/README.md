@@ -8,8 +8,7 @@ groundwork의 현재 상태를 서술하지 않는다.
 
 ## Why stale content stays
 
-groundwork는 자기 방법론을 자기 개발에 적용한다.  
-그 방법론이 산출물의 수명을 이렇게 정한다.
+groundwork를 사용하는 작업 리포에서 설계 산출물은 다음 수명을 갖는다.
 
 - **설계 문서는 닫히지 않는다.**  
   구현이 설계를 벗어나면 실행 중에 그 문서를 고치고(`skills/executing-design/SKILL.md`의 「Revise the design document」), 나중에 설계가 바뀌어도 같은 문서를 고친다.  
@@ -29,9 +28,7 @@ ADR-0008과 ADR-0010이 각각 자기 `Consequences`에 같은 대가를 적었�
 결정은 그것을 쓰는 설계 문서 안에 있고 그 문서를 제자리에서 고친다.  
 현재 규범의 정본은 `skills/`와 루트 [README.md](../README.md)다.
 
-`adr/`의 파일들은 스킬 본문이 근거로 인용하고 있어 남긴다.  
-`skills/design-review/SKILL.md`가 리뷰어 재사용의 토큰 실측을 ADR-0006에서 끌어오고, `skills/finding-unknowns/example-design.md`가 규율 하드 게이트를 없앤 이력을 ADR-0004로 가리킨다.  
-그 인용이 사라지면 이 디렉터리도 지운다.
+`adr/`는 이전 결정의 근거와 대가를 찾아볼 수 있도록 동결된 이력으로 남긴다. 현재 규약의 설명이나 자동 로드 자료로 쓰지 않는다.
 
 ## Contents by directory
 

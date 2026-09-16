@@ -15,15 +15,6 @@ A. Sutcliffe, P. Sawyer. RE'13 (21st IEEE International Requirements Engineering
 
 노출을 늘리는 기법(장기 관찰을 동반한 민족지)이 tacit knowledge와 unknown unknown 요구를 우연히 드러낸 보고가 있으나, 자원 비용이 크고 표집이 운에 좌우된다는 단서가 붙는다.
 
-## Where the skill uses this
-
-「unknown unknown」 행에 해소 도구를 비워 둔 근거다.  
-이 행은 해소 대상이 아니라 노출량으로 관리한다.  
-설계 문서에 이 행을 위한 절은 따로 두지 않고 노출로 드러난 것이 있으면 설계에서 그것을 쓰는 곳에 근거와 함께 들어간다.
-
-동시에 조사 3종과 프로토타입을 "unknown이 없어 보여도 돌린다"는 규칙의 근거이기도 하다.  
-부산물로만 드러나는 것을 겨냥해서 찾을 수는 없다.
-
 ## Verification scope
 
 위 초록은 출처 페이지에서 verbatim으로 확인했다.  

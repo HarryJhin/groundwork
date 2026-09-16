@@ -1,0 +1,87 @@
+{
+  "baseline_revision": "57b0938",
+  "measurement": "UTF-8 bytes and lines; not exact model tokens",
+  "files": [
+    {
+      "file": "skills/using-groundwork/SKILL.md",
+      "before_bytes": 7715,
+      "after_bytes": 1562,
+      "before_lines": 119,
+      "after_lines": 27
+    },
+    {
+      "file": "skills/finding-unknowns/SKILL.md",
+      "before_bytes": 40187,
+      "after_bytes": 8291,
+      "before_lines": 515,
+      "after_lines": 87
+    },
+    {
+      "file": "skills/design-review/SKILL.md",
+      "before_bytes": 5679,
+      "after_bytes": 2176,
+      "before_lines": 104,
+      "after_lines": 30
+    },
+    {
+      "file": "skills/executing-design/SKILL.md",
+      "before_bytes": 28701,
+      "after_bytes": 7244,
+      "before_lines": 430,
+      "after_lines": 74
+    },
+    {
+      "file": "skills/subagent-driven-development/SKILL.md",
+      "before_bytes": 32052,
+      "after_bytes": 3096,
+      "before_lines": 401,
+      "after_lines": 33
+    },
+    {
+      "file": "skills/using-git-worktrees/SKILL.md",
+      "before_bytes": 11011,
+      "after_bytes": 2522,
+      "before_lines": 212,
+      "after_lines": 27
+    },
+    {
+      "file": "skills/verification-before-completion/SKILL.md",
+      "before_bytes": 6324,
+      "after_bytes": 1385,
+      "before_lines": 128,
+      "after_lines": 19
+    },
+    {
+      "file": "skills/finish/SKILL.md",
+      "before_bytes": 20148,
+      "after_bytes": 4530,
+      "before_lines": 376,
+      "after_lines": 46
+    },
+    {
+      "file": "skills/executing-design/task-reviewer-prompt.md",
+      "before_bytes": 8442,
+      "after_bytes": 1934,
+      "before_lines": 124,
+      "after_lines": 25
+    },
+    {
+      "file": "skills/executing-design/re-review-prompt.md",
+      "before_bytes": 4687,
+      "after_bytes": 1233,
+      "before_lines": 77,
+      "after_lines": 18
+    },
+    {
+      "file": "skills/subagent-driven-development/implementer-prompt.md",
+      "before_bytes": 7023,
+      "after_bytes": 1989,
+      "before_lines": 133,
+      "after_lines": 22
+    }
+  ],
+  "startup_context": {
+    "before_bytes": 7949,
+    "after_bytes": 1588
+  }
+}

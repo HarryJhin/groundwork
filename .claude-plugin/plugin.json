@@ -1,7 +1,7 @@
 {
   "name": "groundwork",
-  "description": "코딩 에이전트용 개발방법론 플러그인. 설계에서 종료까지 이어지는 단계 사슬을 스킬로 덮고 세션마다 에이전트가 그 사슬에 진입하도록 강제한다.",
-  "version": "0.12.0",
+  "description": "코딩 에이전트용 개발방법론 플러그인. 도메인 결정을 사용자와 확정하고 필요한 설계·구현·검증을 이어간다.",
+  "version": "0.13.0",
   "author": {
     "name": "Harry Jhin",
     "url": "https://github.com/HarryJhin"

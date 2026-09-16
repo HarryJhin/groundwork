@@ -6,8 +6,8 @@ PR도 받는다.
 ## Skill changes require evidence
 
 스킬은 산문이 아니라 에이전트 행동을 형성하는 코드다.  
-표현이 어색해 보이는 대목이 대체로 에이전트 행동을 겨냥해 일부러 그렇게 쓴 대목이다.  
-강한 어조, 반복, 「Red flags」 표 같은 장치가 그렇다.
+최소 지침으로 시작하고 실제 실패를 관측한 뒤 보완한다.
+모델이 이미 아는 일반 지식과 관측된 효용이 없는 반복·고정 절차는 기본값으로 두지 않는다.
 
 그래서 스킬 본문을 고치는 PR에는 다음을 요구한다.
 
@@ -19,6 +19,7 @@ PR도 받는다.
 
 ## Working rules
 
+- 상시 주입과 실제 로드량을 함께 확인한다. 지침을 참조 파일로 옮긴 뒤 매번 읽게 하는 것은 절감이 아니다
 - 스킬을 새로 쓰거나 고칠 때는 `writing-skills`를 따른다.  
   프론트매터는 `name`과 `description`만 쓰고 `description`은 언제 쓰는지(트리거·증상·맥락)만 담는다.  
   절차를 요약하면 에이전트가 본문을 읽지 않고 요약만 따라가는 지름길이 생긴다
@@ -49,8 +50,7 @@ PR도 받는다.
 
 **설계·리뷰**
 
-- `finding-unknowns` 설계 진입. 블라인드 스팟 탐색, 기존 구현·문서와의 대조, 위험 가정 검증(스파이크)을 서브에이전트로 병렬 조사한다.  
-  에이전트가 사용자에게 되묻는 인터뷰와 프로토타이핑은 메인 에이전트가 전담한다
+- `finding-unknowns` 도메인 정책 확인과 필요한 설계 제안. 질문의 발견 경위·선택별 동작·영향을 설명한다. 조사·스파이크·프로토타입은 위험에 맞게 선택하며 사용자와의 대화는 메인이 맡는다
 - `design-review` 설계 저자가 같은 세션에서 한 번 수행하는 self-review다
 
 **실행**
@@ -86,36 +86,17 @@ PR도 받는다.
 ### Reviews
 
 설계 문서는 별도 리뷰어를 띄우지 않는다.  
-설계 저자가 사용자 요청·역인터뷰 답변·리포 실물과 문서를 한 컨텍스트에서 한 번 대조하고 `통과`나 `조건부 통과`를 판정한다.  
+설계 저자가 확정된 사용자 정책·리포 실물과 문서를 한 번 대조하고 `통과`나 `조건부 통과`를 판정한다.
 리뷰 범위 선택, 리뷰어 프롬프트, 재리뷰 라운드, 확인 라운드는 없다.
 
 코드를 검증하는 리뷰어는 하나이고 프롬프트가 `skills/requesting-code-review/code-reviewer-prompt.md`에 있다.
 
 ### Hooks
 
-Claude Code 전용이다.  
-`hooks/hooks.json`이 등록한다.
-
-- `hooks/session-start-groundwork` `skills/using-groundwork/SKILL.md` 전문을 읽어 `<EXTREMELY_IMPORTANT>` 블록으로 감싼 뒤 세션 컨텍스트에 주입한다.  
-  파일 부재나 읽기 실패는 무해 종료라 세션을 막지 않는다
-- `hooks/session-start-standard-docs` 작업 디렉터리에 빠진 리포 표준 문서를 세션 컨텍스트에 알린다.  
-  git 리포이고 origin 원격이 있고 부재가 하나라도 있을 때만 방출하므로 완비된 리포에서는 출력이 없다.  
-  네트워크를 쓰지 않는다.  
-  쓰기 게이트가 못 잡는 경우를 덮는다. 없는 파일은 쓰이지도 변경되지도 않아 `PreToolUse`·`FileChanged` 어느 쪽에도 안 걸린다
-- `hooks/pre-artifact-write-junior-gate` 설계 문서·스킬을 새로 만드는 쓰기를 한 번 막고 `writing-for-junior`의 작성 규범을 반환한다.  
-  차단은 한 세션에서 문서 종류마다 한 번이다(설계 문서·스킬 각 1회).  
-  같은 종류의 다음 문서는 차단하지 않고 규범을 계속 적용하라는 한 줄만 낸다.  
-  이미 있는 파일 편집은 처음부터 통과시킨다.
-- `hooks/pre-standard-doc-write-gate` README·CONTRIBUTING·CODE_OF_CONDUCT·SECURITY·SUPPORT·GOVERNANCE·CHANGELOG·이슈 템플릿·PR 템플릿을 새로 만드는 쓰기를 한 번 막고 그 문서의 표준 요지와 읽을 레퍼런스를 반환한다.  
-  대상은 리포 루트·`.github/`·`docs/`에 놓인 것뿐이라 하위 디렉터리의 동명 파일은 걸리지 않는다.  
-  차단은 한 세션에서 문서 종류마다 한 번이다.  
-  이미 있는 문서를 고칠 때는 차단하지 않고 한 줄만 낸다.  
-  `managing-repo-standard-docs` 스킬이 정본이고 이 훅은 그 스킬로 들어가는 입구다
-
-`PreToolUse` 훅에서 차단하지 않는 안내는 JSON `hookSpecificOutput.additionalContext`로 낸다.  
-exit 0의 평문 stdout은 디버그 로그로만 가고 모델에 닿지 않는다.  
-평문 stdout이 컨텍스트가 되는 이벤트는 `SessionStart`·`UserPromptSubmit`·`UserPromptExpansion` 셋뿐이다.  
-차단(exit 2)의 사유는 stderr로 전달한다.
+Claude Code 전용이며 `hooks/hooks.json`이 SessionStart 훅 하나를 등록한다.
+`hooks/session-start-groundwork`가 `skills/using-groundwork/SKILL.md` 본문을 `<GROUNDWORK>` 블록으로 감싸 `hookSpecificOutput.additionalContext`로 주입한다.
+파일 부재나 읽기 실패는 무해 종료라 세션을 막지 않는다.
+표준 문서 부재 알림과 문서 쓰기 차단 훅은 없다. 문서 규범과 표준 자료는 해당 작업에서 필요할 때 읽는다.
 
 ### Scripts
 
@@ -173,5 +154,5 @@ claude plugin install groundwork@groundwork
 
 이 리포에서는 flow를 쓰지 않는다.  
 새 기능이나 멀티파일 변경이라도 직접 처리한다.  
-부트스트랩이 매 세션 flow 진입을 강제하지만 그 부트스트랩 자신이 사용자 지시를 groundwork보다 위에 둔다.  
+사용자 지시는 groundwork의 기본 경로보다 우선한다.
 이 문단이 그 사용자 지시다.
