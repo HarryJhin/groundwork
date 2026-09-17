@@ -15,8 +15,6 @@ description: Use when implementing an approved design document in the current se
 ## Choose the execution path
 
 구현은 이 세션에서 직접 하는 것이 기본이다. 태스크가 여럿이고 독립적이며 기계적이고, 약한 모델의 비용 이득이 전달·재구성 비용을 넘으면 `groundwork:subagent-driven-development`를 쓸 수 있다.
-리뷰어 모델은 변경의 복잡도에 맞게 명시한다. 기계적 변경에는 싼 모델, 판단이 필요한 변경에는 중간 이상, 최종 브랜치 리뷰에는 가장 유능한 모델을 쓴다.
-다른 벤더 리뷰나 세션 모델 전환이 필요할 때만 `groundwork:using-groundwork`의 모델 선택 자료를 읽는다.
 
 ## Set up and resume
 
@@ -64,7 +62,7 @@ Minor는 진행 기록에 보류하고 최종 리뷰로 넘긴다. 설계 준수
 
 ## Final review and handoff
 
-기본 브랜치와 현재 브랜치의 분기 커밋을 `MERGE_BASE`로 확인한다. `scripts/review-package DESIGN_FILE MERGE_BASE HEAD` 패키지와 보류 기록을 가장 유능한 리뷰어에게 `groundwork:requesting-code-review`로 넘긴다.
+기본 브랜치와 현재 브랜치의 분기 커밋을 `MERGE_BASE`로 확인한다. `scripts/review-package DESIGN_FILE MERGE_BASE HEAD` 패키지와 보류 기록을 격리된 리뷰어에게 `groundwork:requesting-code-review`로 넘긴다.
 최종 발견은 한 묶음으로 고치고 수정 범위 재리뷰를 한 번 한다. 남은 발견은 판정·근거와 함께 보류하거나 의존 작업을 멈춘다. 반복 라운드를 늘리지 않는다.
 구현·검증 결과, 설계와 달라진 결정, 잔여 문제를 보고하고 설계 경로·스크래치 경로를 `groundwork:finish`에 넘긴다. 정리는 그 스킬이 통합 처리 후 한다.
 

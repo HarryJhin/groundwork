@@ -3,9 +3,9 @@
 - [^self-references-to-avoid]
 - [^comments-md]
 
-# Basis for production-circumstance leakage (axis G)
+# Basis for production-circumstance leakage
 
-G축이 잡는 결함에는 학술 명칭과 실무 판정 규칙이 각각 따로 있다.  
+제작 사정 판정 기준이 잡는 결함에는 학술 명칭과 실무 판정 규칙이 각각 따로 있다.
 명칭은 현상을 가리키고 규칙은 판정 방법을 준다.
 
 ## The name of the phenomenon: writer-based prose
@@ -27,8 +27,8 @@ Flower의 진단은 원인을 능력이나 성의가 아니라 **변형의 부�
 유능한 필자는 생각을 표현하는 데 그치지 않고 독자의 필요에 맞춰 그것을 변형한다.  
 저자 자신에게는 뜻이 다 통하는 글이 독자에게는 같은 뜻을 전하지 못하는 일이 여기서 생긴다.
 
-이 스킬의 [Why authors cannot see this failure](../SKILL.md#why-authors-cannot-see-this-failure)가 같은 진단을 다룬다.
-G축은 그중 문서가 자기 제작 과정을 기록하는 형태를 떼어 판정 축으로 세운 것이다.
+이 스킬의 [Production-circumstance leakage](../SKILL.md#production-circumstance-leakage)가 이 현상의 한 형태를 다룬다.
+제작 사정 판정 기준은 그중 문서가 자기 제작 과정을 기록하는 형태를 떼어 판정 축으로 세운 것이다.
 
 ## The rule: the portability test
 
@@ -42,7 +42,7 @@ Wikipedia Manual of Style, "Self-references to avoid".
 특정 백과사전이나 접근 방식을 전제하지 않는 서술은 자기 참조가 아니다.  
 예로 목록 문서가 자기 수록 기준을 서두에 밝히는 것은 허용된다.
 
-G축의 판정식이 이 형태를 그대로 옮겼다.  
+제작 사정 판정 기준의 판정식이 이 형태를 그대로 옮겼다.
 기준 환경만 바꾼다.  
 위키백과 사본 대신 "이 문서를 만든 환경 밖"이고 그 환경은 저자의 도구 설정, 문서를 만든 세션, 거쳐 온 리뷰 라운드를 가리킨다.
 
@@ -50,7 +50,7 @@ G축의 판정식이 이 형태를 그대로 옮겼다.
 
 Robert C. Martin, *Clean Code*, 4장 Comments의 불량 주석 분류에서 3가지가 대응한다.
 
-| 이름             | 정의                                                | G축의 어느 꼴인가             |
+| 이름             | 정의                                                | 제작 사정 판정 기준의 어느 꼴인가             |
 |------------------|-----------------------------------------------------|-------------------------------|
 | Journal Comments | 변경 이력을 코드에 적는 주석. 버전 관리가 더 잘한다 | 처리 흔적, 연혁               |
 | Noise Comments   | 값을 더하지 않고 뻔한 것을 되풀이한다               | 형식 선택의 변호, 완결성 선언 |
@@ -58,7 +58,7 @@ Robert C. Martin, *Clean Code*, 4장 Comments의 불량 주석 분류에서 3가
 
 Journal Comment의 논리가 특히 쓸모 있다.  
 정보가 틀려서 빼는 것이 아니라 **그 정보를 담을 더 나은 곳이 따로 있어서** 뺀다.  
-G축이 "근거가 정말 필요하면 결정 옆이나 코드 주석으로 간다"고 적은 근거가 같다.
+제작 사정 판정 기준이 "근거가 정말 필요하면 결정 옆이나 코드 주석으로 간다"고 적은 근거가 같다.
 
 ## What only partly overlaps
 

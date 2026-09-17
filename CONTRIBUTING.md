@@ -73,7 +73,6 @@ PR도 받는다.
 
 - `writing-for-junior` 맥락 없는 독자를 기준으로 쓰는 작성 규범과 그것을 검사하는 판정 기준
 - `writing-skills` 스킬 작성 표준
-- `writing-clearly-and-concisely` 문장 층위 산문 규범
 
 **리포 표준**
 

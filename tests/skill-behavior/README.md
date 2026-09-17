@@ -44,6 +44,33 @@ python3 tests/skill-behavior/evaluate.py --variant handoff --cases handoff-direc
 
 실행 상태·프롬프트 해시와 대표 응답은 [관측 기록](observations.json)에 있다. 초기 비교는 같은 CLI 방식의 선행 러너를 사용해 현재 fixture와 문구가 일부 다르다. 정책 재검토와 마무리 비교는 이 리포의 러너로 실행했다. 마지막 중복 문장 삭제와 종료 정리의 소유권 보완은 정적 리뷰로 확인했다.
 
+## No-op removal probes
+
+2026-09-17에는 기초 설명·중복 지시를 제거한 스킬의 핵심 행동을 지침 없는 대조군, 수정 전(`2212d7a`), 수정 후로 비교했다. [시나리오](noop-cases.json)의 각 조건은 새 컨텍스트에서 1회씩 실행했고 원시 응답을 직접 판독했다. 15개 호출은 모두 성공했고 각 시나리오의 핵심 기대 행동도 수행했다. 단일 표본이므로 반복 안정성이나 전체 작업 품질을 입증하지 않는다.
+
+| 스킬 파일 | 시나리오 | 확인한 행동 |
+|---|---|---|
+| `skills/test-driven-development/SKILL.md` | `test-first` | 실패 테스트 후 최소 수정과 검증 |
+| `skills/systematic-debugging/SKILL.md` | `debug-pressure` | 타임아웃 증가 전에 원인 확인 |
+| `skills/receiving-code-review/SKILL.md` | `review-feedback` | 입력 계약을 깨는 봇 제안 반박 |
+| `skills/dispatching-parallel-agents/SKILL.md` | `parallel-boundary` | 같은 픽스처의 실패를 묶고 독립 영역만 분리 |
+| `skills/writing-skills/SKILL.md` | `minimal-authoring` | 가상 금지 목록 대신 관측에 맞는 출력 계약 |
+
+아래는 첫 행의 재현 커맨드다. 다른 행은 `--prompt-file`과 `--cases`를 해당 값으로 바꾼다. 대조군은 `--prompt-file` 없이 실행한다.
+
+```bash
+python3 tests/skill-behavior/evaluate.py --variant none --cases-file tests/skill-behavior/noop-cases.json --cases test-first --repeat 1
+python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/test-driven-development/SKILL.md --cases-file tests/skill-behavior/noop-cases.json --cases test-first --repeat 1 --revision 2212d7a
+python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/test-driven-development/SKILL.md --cases-file tests/skill-behavior/noop-cases.json --cases test-first --repeat 1
+```
+
+수정 전 병렬 조사 응답은 모델 티어 문서를 먼저 조회한다고 했다. 수정 후에는 그 조회 없이 같은 원인의 실패를 묶고 독립 영역을 분리했다. 대조군도 핵심 행동을 수행했으므로 이 표본은 장문의 기초 설명이 필요한 근거가 되지 않는다.
+초기 수정 후 디버깅 응답은 제목에서 원인 확인 전에 해법을 제시했다. 기존의 원인 확인 후 수정 제안 게이트를 명시해 한 번 더 확인했고, 최종 응답은 가설 확인부터 계획했다.
+독립 판독 검토에서 발견한 오래된 근거 앵커와 축 식별자를 고쳤고 재검토는 PASS였다.
+
+변경된 스킬 본문 합계는 111,786 → 27,130 UTF-8 bytes로 약 76% 줄었다. 이는 같은 파일 집합의 크기이며 실제 세션 로드량이나 모델 토큰 수가 아니다. 반복 참조 자료와 모델 티어 문서를 포함한 변경 Markdown 합계는 339,587 → 57,096 bytes다.
+프롬프트·시나리오 해시, 모델 사용량, 원시 응답과 판독, 파일별 크기는 [관측 기록](noop-observations.json)에 있다.
+
 ## Context size
 
 [크기 기록](size-metrics.json)은 `57b0938`과 `v0.13.0` (`a3fd10f`) 파일의 UTF-8 바이트·행을 비교한다.

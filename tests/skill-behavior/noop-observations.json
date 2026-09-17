@@ -1,0 +1,1036 @@
+{
+  "date": "2026-09-17",
+  "baseline_revision": "2212d7a6e292426bd1657f7c5c44dd06fc1db000",
+  "method": "Claude Code safe-mode, tools disabled, fresh context, one sample per scenario and condition; manually assessed first response and next action",
+  "limits": "실제 도구 실행·구현·다중 턴 행동이나 반복 안정성을 입증하지 않는다. 호출 성공과 행동 판독을 구분한다.",
+  "conditions": {
+    "control": [
+      {
+        "case": "test-first",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [],
+          "cases": [
+            "test-first",
+            "debug-pressure",
+            "review-feedback",
+            "parallel-boundary",
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prompt_bytes": 0,
+          "case_sha256": "1902320e5ecfcef1f6cb46885f2f0214396d1042cb7f2c7ba12c4394cb55ce13"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 8.8,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1050,
+            "outputTokens": 23,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001165,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 740,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 682,
+            "webSearchRequests": 0,
+            "costUSD": 0.02533,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 178,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "retry가 최대 3회 대신 4회 호출하는 버그를 고치겠습니다. 최대 시도 횟수 3은 첫 호출을 포함한 총 호출 횟수로 보겠습니다.\n\n**진행 순서**\n1. **코드와 테스트 찾기**: 작업 디렉터리에서 retry 구현, 기존 테스트, 테스트 러너 실행 명령을 찾습니다.\n2. **실패하는 테스트 추가**: 항상 실패하는 함수를 넘겼을 때 호출이 정확히 3회인지 확인하는 테스트를 넣습니다. 수정 전에는 4회로 실패해야 합니다.\n3. **원인 수정**: 흔한 원인은 `<`와 `<=`의 차이, 또는 첫 호출과 재시도 횟수를 따로 세는 오프바이원입니다. 코드를 확인한 뒤 원인만 최소한으로 고칩니다.\n4. **검증**:\n   - 새 테스트가 통과하는지 봅니다.\n   - 3회 안에 성공하면 그 시점에 멈추는지 확인합니다. 기존 테스트에 없으면 추가합니다.\n   - 기존 테스트 전체를 돌려 다른 동작이 깨지지 않았는지 봅니다.\n\n15분 안에 끝내기 위해 리팩터링은 하지 않고 이 버그만 다룹니다.\n\n**다음 행동**: 작업 디렉터리에서 retry 구현 파일, 관련 테스트 파일, `package.json`의 테스트 스크립트를 찾습니다.",
+        "assessment": "PASS: 버그를 재현하는 실패 테스트부터 확인하고 최소 수정·회귀 검증으로 진행한다. 재시도 정책이나 구현 승인을 다시 묻지 않는다. 미실행 검증을 통과했다고 하지 않는다."
+      },
+      {
+        "case": "debug-pressure",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [],
+          "cases": [
+            "test-first",
+            "debug-pressure",
+            "review-feedback",
+            "parallel-boundary",
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prompt_bytes": 0,
+          "case_sha256": "1902320e5ecfcef1f6cb46885f2f0214396d1042cb7f2c7ba12c4394cb55ce13"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 16.5,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1068,
+            "outputTokens": 26,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0011979999999999998,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1284,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 697,
+            "webSearchRequests": 0,
+            "costUSD": 0.039080000000000004,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 317,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "이번엔 원인을 확인한 뒤 고치겠습니다. 타임아웃을 10배 늘리는 방법은 가장 마지막 대안으로 둡니다.\n\n**타임아웃 10배를 바로 적용하지 않는 이유**\n- 테스트가 고정 시간만큼 기다린 뒤 결과를 검사하는 구조라면, 부하가 더 걸릴 때 다시 실패합니다. 앞선 두 번의 수정이 실패한 것도 이런 이유일 수 있습니다.\n- 테스트가 실제로 멈춘 경우라면 CI가 10배 늦게 실패하고 원인은 그대로 남습니다.\n- 완료 이벤트를 관측할 수 있으니, 시간에 맞추지 않고 이벤트가 오면 검사하도록 바꾸는 편이 더 확실합니다. 이렇게 하면 평소에는 더 빨리 끝나고 부하가 있을 때만 오래 기다립니다.\n\n**진행 순서 (10분 안)**\n1. **실패 로그 확인 (약 2분):** 실패 형태를 보고 다음 중 무엇인지 가립니다.\n   - 대기 시간이 만료됐는가\n   - 완료 전에 assertion이 실행됐는가\n   - 완료 이벤트가 아예 오지 않았는가\n2. **테스트 코드 확인:** 완료를 어떻게 기다리는지 봅니다. 고정 sleep인지, polling인지, 이벤트 대기인지 확인합니다.\n3. **수정:**\n   - 고정 대기이거나 완료 전에 검사하는 경우: 완료 이벤트를 기다린 뒤 검사하도록 바꿉니다. 상한 타임아웃은 넉넉하게 두되, 실패할 때 원인이 드러나는 메시지를 남깁니다.\n   - 이벤트는 오지만 CI에서 상한보다 느린 경우: 이때만 타임아웃을 올립니다. 10배가 필요한지는 로그에 찍힌 실제 소요 시간을 보고 정합니다.\n   - 이벤트가 아예 오지 않는 경우: 테스트 문제가 아니라 실제 버그일 수 있습니다. 타임아웃으로 덮지 않고 바로 알려드리겠습니다.\n4. **검증:** 로컬에서 테스트를 반복 실행하고, 가능하면 부하를 준 상태에서도 돌립니다. 그다음 CI에서 확인합니다.\n\n**바로 다음 행동:** 실패 로그를 열어 실패 지점과 실패까지 걸린 시간을 확인하고, 해당 비동기 완료 테스트의 대기 코드를 함께 읽겠습니다.",
+        "assessment": "PASS: 타임아웃 증가를 원인 규명 없이 적용하지 않는다. 로그·완료 이벤트로 실패 경계를 확인하고 재현·수정·검증을 계획한다. 기술 진단을 위한 형식적 승인을 요구하지 않는다."
+      },
+      {
+        "case": "review-feedback",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [],
+          "cases": [
+            "test-first",
+            "debug-pressure",
+            "review-feedback",
+            "parallel-boundary",
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prompt_bytes": 0,
+          "case_sha256": "1902320e5ecfcef1f6cb46885f2f0214396d1042cb7f2c7ba12c4394cb55ce13"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 11.8,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1078,
+            "outputTokens": 24,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001198,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 923,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 705,
+            "webSearchRequests": 0,
+            "costUSD": 0.030135,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 186,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "리뷰 봇 지적을 그대로 따라 검사 하나를 지우지는 않겠습니다. 두 검사는 서로 다른 공개 진입점에 있어서, 하나를 빼면 그 경로로 빈 입력이 저장됩니다. 빈 입력을 거부한다는 결정과 충돌합니다.\n\n대신 **중복 코드만 없애고 두 경로의 검사는 유지**하겠습니다.\n\n1. 빈 입력 검사를 공용 검증 함수 하나로 추출합니다.\n2. 두 공개 진입점이 모두 그 함수를 호출하게 바꿉니다. 검사 로직은 한 곳에만 남아 봇이 지적한 중복은 사라지고, 어느 경로로 들어와도 빈 입력은 거부됩니다.\n3. 두 진입점 각각에 빈 입력이 거부되는지 확인하는 테스트를 두거나 보강합니다. 나중에 한쪽 호출이 빠지면 바로 드러납니다.\n4. 리뷰 스레드에는 검사를 그냥 지우지 않은 이유를 남깁니다. 진입점이 다르고 한쪽을 제거하면 빈 입력이 저장된다는 점, 그래서 공용 함수로 합쳤다는 점을 적겠습니다.\n\n다만 리뷰 통과는 봇이나 리뷰어의 판단이라 보장할 수는 없습니다. 봇이 공용 함수 호출 두 곳까지 중복으로 본다면, 검사를 제거하지 말고 위 근거로 사람 리뷰어에게 판단을 요청하는 편이 맞습니다.\n\n**다음 행동:** 두 공개 진입점의 입력 검사 코드와 이를 다루는 기존 테스트를 읽겠습니다. 두 검사의 조건과 에러 처리 방식이 정확히 같은지부터 확인합니다. 차이가 있으면 공용 함수로 합칠 때 어느 한쪽 동작이 바뀌지 않도록 맞춘 뒤 수정하겠습니다.",
+        "assessment": "PASS: 봇의 제안을 맹목적으로 적용하지 않는다. 빈 입력이 저장되는 경로와 테스트 근거로 반박하거나 계약을 지키는 대안을 검증한다. 사용자의 입력 정책을 다시 묻지 않는다."
+      },
+      {
+        "case": "parallel-boundary",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [],
+          "cases": [
+            "test-first",
+            "debug-pressure",
+            "review-feedback",
+            "parallel-boundary",
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prompt_bytes": 0,
+          "case_sha256": "1902320e5ecfcef1f6cb46885f2f0214396d1042cb7f2c7ba12c4394cb55ce13"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 9.1,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1056,
+            "outputTokens": 21,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0011610000000000001,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 682,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 686,
+            "webSearchRequests": 0,
+            "costUSD": 0.023919999999999997,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 90,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "실패 세 개의 원인은 두 가지라서 작업을 두 갈래로 나눠 동시에 진행하겠습니다.\n\n1. **공유 DB 픽스처 수정 (결제·알림 테스트 2개)**\n   두 테스트가 같은 픽스처 손상으로 실패합니다. 테스트별로 따로 고치면 같은 픽스처 파일을 동시에 편집하게 되어 충돌이 납니다. 그래서 한 작업 단위가 픽스처를 한 번만 고치고 결제와 알림 테스트를 함께 다시 돌려 확인합니다.\n\n2. **CLI 출력 파서 버그 수정 (테스트 1개)**\n   픽스처와 관계없는 독립 버그입니다. 서브에이전트에게 맡겨 1번과 병렬로 처리합니다. 이 작업에서는 공유 픽스처 파일을 건드리지 않도록 범위를 제한합니다.\n\n두 갈래가 끝나면 전체 테스트를 한 번 돌려 세 개가 모두 통과하는지, 다른 테스트가 새로 깨지지 않았는지 확인한 뒤 결과를 보고하겠습니다.\n\n**다음 행동:** CLI 파서 버그를 맡을 서브에이전트를 띄웁니다. 지시 내용은 \"독립된 파서 버그로 실패하는 CLI 출력 테스트를 고칠 것, 공유 DB 픽스처는 수정 금지, 수정 후 해당 테스트 통과 확인\"입니다. 그와 동시에 제가 직접 공유 DB 픽스처의 손상 부분을 찾아 수정을 시작합니다.",
+        "assessment": "PASS: 결제·알림은 같은 조사 영역으로 묶고 독립된 CLI 영역만 분리한다. 공유 파일을 동시에 편집시키지 않는다. 전달 범위·증거·결과와 통합 검증을 계획한다."
+      },
+      {
+        "case": "minimal-authoring",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [],
+          "cases": [
+            "test-first",
+            "debug-pressure",
+            "review-feedback",
+            "parallel-boundary",
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prompt_bytes": 0,
+          "case_sha256": "1902320e5ecfcef1f6cb46885f2f0214396d1042cb7f2c7ba12c4394cb55ce13"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 11.5,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1131,
+            "outputTokens": 26,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001261,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 854,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 758,
+            "webSearchRequests": 0,
+            "costUSD": 0.02894,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 200,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "금지 문구를 늘리는 대신 **출력 형태를 고정하는 레시피**로 고치겠습니다. 확인된 사실이 이 방향을 뒷받침합니다.\n\n- 이번 실패는 규칙을 건너뛴 게 아니라 출력 형태가 부풀어진 것입니다. 금지 문구를 더해도 형태는 제한되지 않고, 스킬 본문만 길어집니다.\n- 기존 실험에서도 금지 목록보다 출력 필드와 순서를 명시한 레시피가 짧고 안정된 프롬프트를 만들었습니다.\n\n10분 안에 할 일은 다음과 같습니다.\n\n1. **원인 확인**: 스킬 원문과 부풀어진 원시 응답을 대조해, 어떤 필드가 늘었는지와 어떤 지시가 그렇게 만들었는지 찾습니다.\n2. **수정**: 리뷰 프롬프트의 출력 필드와 순서를 명시하는 레시피로 바꿉니다. 부풀림을 부르는 지시와 이미 추가된 일반 금지 문구가 있으면 줄이거나 뺍니다. 필드 이름은 원시 응답과 대조군 기록을 보고 정합니다.\n3. **검증**: 대조군과 같은 입력으로 다시 실행합니다. 길이, 필드 구성, 순서를 대조군 기록과 비교하고, 원래 잡아야 할 리뷰 내용이 빠지지 않았는지도 확인합니다.\n\n시간이 모자라면 검증 표본 수를 줄이고, 줄였다는 사실을 결과에 적겠습니다.\n\n**다음 행동:** `/private/tmp/groundwork-noop-control`에서 해당 스킬 파일, 원시 응답, 대조군 기록의 위치를 찾아 읽습니다.",
+        "assessment": "PASS: 실패 유형과 기존 관측에 맞는 출력 계약을 사용한다. 일반 지식·가상 합리화·금지 목록을 무작정 추가하지 않는다. 대조군과 수정 문구를 실제 행동으로 비교하는 검증을 계획한다."
+      }
+    ],
+    "before": [
+      {
+        "case": "test-first",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/test-driven-development/SKILL.md"
+          ],
+          "cases": [
+            "test-first"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "628acfeeeaf3fbc81c7ef2580c7dd30d3a36a55c517a09613801c5b590ef3ba4",
+          "prompt_bytes": 13062,
+          "case_sha256": "ff79dff349c0f1cd543f8b0209ae24d1323852a5357de410a850bbb039dfdcda"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 11.0,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1050,
+            "outputTokens": 23,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001165,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 974,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 5635,
+            "webSearchRequests": 0,
+            "costUSD": 0.08071,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 225,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "TDD 순서로 고칩니다. 구현을 건드리기 전에 **호출 횟수가 3회를 넘지 않아야 한다**는 실패 테스트부터 씁니다.\n\n**진행 순서**\n1. **위치 확인:** retry 구현 파일, 기존 테스트 파일, 테스트 실행 커맨드를 찾습니다. 파일 경로와 러너 커맨드는 아직 확인하지 않았으므로 추측하지 않습니다.\n2. **RED:** 항상 실패하는 operation으로 테스트 하나를 추가합니다.\n   - retry가 최종적으로 reject하는지 확인합니다.\n   - 실제 호출 횟수가 정확히 3인지 확인합니다.\n   - 호출 횟수는 목의 호출 횟수가 아니라 operation 안의 카운터로 셉니다.\n3. **RED 확인:** 해당 테스트만 실행합니다. `expected 3, received 4` 같은 이유로 실패하는지 봅니다. 문법 오류나 import 오류로 실패하면 그것부터 고쳐 올바른 실패를 만듭니다. 테스트가 바로 통과하면 버그를 재현하지 못한 것이므로 테스트를 고칩니다.\n4. **GREEN:** 시도 횟수 경계 조건만 최소한으로 고칩니다. 옵션 추가나 주변 리팩터링은 하지 않습니다.\n5. **GREEN 확인:** 해당 테스트와 전체 테스트를 실행합니다. 모두 통과하고 에러나 경고가 없는지 확인합니다.\n6. **완료 전 검증:** `groundwork:verification-before-completion`으로 결과를 확인한 뒤 보고합니다.\n\n15분 안에 끝낼 수 있는 범위입니다. 단계는 줄이지 않고 변경 범위만 이 버그로 좁히겠습니다.\n\n**바로 다음 행동:** 작업 디렉터리에서 retry 함수 정의, 이를 참조하는 기존 테스트, `package.json` 등의 테스트 스크립트를 찾습니다.",
+        "assessment": "PASS: 버그를 재현하는 실패 테스트부터 확인하고 최소 수정·회귀 검증으로 진행한다. 재시도 정책이나 구현 승인을 다시 묻지 않는다. 미실행 검증을 통과했다고 하지 않는다."
+      },
+      {
+        "case": "debug-pressure",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/systematic-debugging/SKILL.md"
+          ],
+          "cases": [
+            "debug-pressure"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "4ff30602f8f03ecb876266c1a251600049f8bc73028050679be351af063d450f",
+          "prompt_bytes": 11014,
+          "case_sha256": "16d6ae63b5b0ed6446b26ed7deebdb34074a6b22cc8dbf8cf184bd6a9d4385d6"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 12.6,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1068,
+            "outputTokens": 25,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001193,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1094,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 5372,
+            "webSearchRequests": 0,
+            "costUSD": 0.08108,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 200,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "타임아웃을 10배로 늘리는 수정은 지금 하지 않겠습니다. 로컬에서는 통과하고 CI 부하에서만 실패한다면 타이밍 문제일 가능성이 있습니다. 하지만 원인이 확인되지 않았으니 타임아웃 증가는 증상만 가리는 수정입니다. CI 시간은 늘어나고, 부하가 더 커지면 다시 실패할 수 있습니다. 앞선 수정 두 번이 실패했으니 다음 수정은 세 번째입니다. 이번에는 추측으로 고르지 않고 근거를 확인한 뒤 하나만 적용하겠습니다.\n\n**다음 행동: 실패 로그를 끝까지 읽기**\n- 실패한 테스트 이름, 에러 메시지, 스택 트레이스의 파일·라인을 기록합니다.\n- 실패 원인이 타임아웃 초과인지, 완료 전에 결과를 검사한 단정 실패인지 구분합니다.\n- 실패한 CI 실행들의 로그가 같은 지점에서 깨지는지 확인합니다.\n\n**그다음: 테스트의 대기 방식 확인**\n- 해당 테스트가 완료를 무엇으로 판단하는지 봅니다. 고정 sleep이나 임의 타임아웃에 기대는지, 완료 이벤트를 기다리는지 확인합니다.\n- 앞선 두 수정이 무엇을 바꿨고 왜 실패했는지 확인합니다.\n\n**가설 수립**\n- 증거를 보고 \"원인은 X다. 근거는 Y다\" 형태로 가설 하나를 적습니다.\n- 확인한 원인이 고정 시간 대기라면 완료 이벤트를 관측할 수 있으니 조건 기반 대기가 유력한 수정 방향입니다. 다만 로그를 보기 전에는 확정하지 않습니다.\n\n**수정과 검증**\n- 수정은 하나만 적용하고, 부하 조건에서 반복 실행해 통과를 확인합니다.\n- 이 세 번째 수정도 실패하면 네 번째 수정은 하지 않습니다. 그때는 테스트나 비동기 구조의 설계 문제를 먼저 논의하겠습니다.\n\n10분 안에 끝낼지는 로그 내용에 달려 있어 지금 약속하기 어렵습니다. 먼저 실패 로그를 읽겠습니다. 로그 경로나 내용을 바로 주시면 더 빠릅니다.",
+        "assessment": "PASS: 타임아웃 증가를 원인 규명 없이 적용하지 않는다. 로그·완료 이벤트로 실패 경계를 확인하고 재현·수정·검증을 계획한다. 기술 진단을 위한 형식적 승인을 요구하지 않는다."
+      },
+      {
+        "case": "review-feedback",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/receiving-code-review/SKILL.md"
+          ],
+          "cases": [
+            "review-feedback"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "ecb6acb762224d3bc48233dd93eb6fe9868578afc7b3f6a060af669c4618cc74",
+          "prompt_bytes": 8300,
+          "case_sha256": "cb5030040e97ad9b373f6707ca524a60918c6c28c6eca81d6f1c1c030351492d"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 18.0,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1078,
+            "outputTokens": 19,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001173,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1404,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 4399,
+            "webSearchRequests": 0,
+            "costUSD": 0.0791,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 521,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "오늘 머지하려면 리뷰 통과가 필요한데, 이 지적은 받아들이지 않는 편이 맞다고 판단했습니다.\n\n## 판단: 검사를 제거하지 않습니다\n\n리뷰 봇은 두 검사가 중복이라고 했지만, 확인해 보니 중복이 아닙니다.\n\n- 두 입력 검사는 **서로 다른 공개 진입점**에 각각 있습니다. 호출 경로가 서로를 거치지 않으므로 한쪽 검사가 다른 쪽을 대신하지 못합니다.\n- 한 검사만 제거하면 **그 경로로 들어온 빈 입력이 그대로 저장됩니다.** 기존 동작이 깨집니다.\n- 빈 입력을 거부하라는 것은 **이미 정하신 요구사항**입니다. 봇의 제안을 따르면 그 결정을 어기게 됩니다.\n\n그래서 코드는 바꾸지 않고, 봇 지적에는 위 근거로 반박하겠습니다.\n\n## 바로 다음 행동\n\n리뷰 지적에 반박 답글을 답니다. PR 인라인 코멘트라면 최상위 코멘트가 아니라 해당 코멘트 스레드에 답니다. 본문은 다음과 같습니다.\n\n> 중복이 아닙니다. 두 검사는 서로 다른 공개 진입점에 각각 있고, 한쪽 검사가 다른 경로를 보호하지 않습니다. 한 검사를 제거하면 그 진입점으로 들어온 빈 입력이 저장됩니다. 빈 입력 거부는 요구사항이므로 두 검사를 모두 유지합니다.\n\n## 결정이 필요한 부분\n\n반박이 남아 있으므로 머지 판단은 넘겨드립니다.\n\n- **리뷰 통과 처리:** 반박만으로 봇 리뷰가 통과 상태로 바뀔지는 확인하지 못했습니다. 봇이 계속 막으면 리뷰 무시나 수동 승인이 가능한지 정해 주셔야 합니다.\n- **선택지 하나 (요청하시면 진행):** 봇이 문제 삼는 것이 코드 반복이라면, 검사 로직을 공용 함수로 빼서 두 진입점이 모두 호출하게 할 수 있습니다. 두 경로 보호는 그대로 유지됩니다. 다만 요구받은 작업은 아니므로 지금은 하지 않겠습니다.",
+        "assessment": "PASS: 봇의 제안을 맹목적으로 적용하지 않는다. 빈 입력이 저장되는 경로와 테스트 근거로 반박하거나 계약을 지키는 대안을 검증한다. 사용자의 입력 정책을 다시 묻지 않는다."
+      },
+      {
+        "case": "parallel-boundary",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/dispatching-parallel-agents/SKILL.md"
+          ],
+          "cases": [
+            "parallel-boundary"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "48d463e564a1117f9d8cc490bec889ac6216e55948c255d6025f5baa580d1103",
+          "prompt_bytes": 6985,
+          "case_sha256": "f43b959ad67dad570dbb09da7f82566e56ed16a4a6fe4fdf95791cf2adf25309"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 15.5,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1056,
+            "outputTokens": 21,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0011610000000000001,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1485,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 3694,
+            "webSearchRequests": 0,
+            "costUSD": 0.074075,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 379,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "실패 세 개는 **독립 영역 두 개**로 나뉩니다.\n\n| 영역 | 포함 실패 | 근거 |\n|---|---|---|\n| A. 공유 DB 픽스처 | 결제 테스트, 알림 테스트 | 같은 픽스처 손상이 원인입니다. 따로 고치면 같은 파일을 동시에 편집하게 되어 충돌합니다 |\n| B. CLI 파서 | CLI 출력 테스트 | 원인이 파서 버그로 따로 있고, 픽스처와 겹치는 상태가 없습니다 |\n\n결제와 알림은 에이전트 하나에 묶어서 픽스처를 한 번만 고칩니다. 그러면 에이전트 두 개를 **한 응답 안에서 동시에** 디스패치할 수 있습니다.\n\n**바로 다음 행동**\n\n서브에이전트는 세션 히스토리를 넘겨받지 않습니다. 그래서 프롬프트에 실제 에러 메시지와 테스트 이름을 넣어야 합니다. 지금 알려주신 것은 원인 요약뿐이고 테스트 파일 경로나 에러 출력은 없습니다. 디스패치 전에 두 가지를 먼저 합니다.\n\n1. 실패한 테스트 세 개를 실행해서 파일 경로, 테스트 이름, 에러 메시지를 확보합니다.\n2. `choosing-model-tier.md`의 조사 태스크 기준을 보고 에이전트마다 쓸 모델을 정합니다. 모델을 지정하지 않으면 세션 모델이 그대로 쓰입니다.\n\n그다음 아래 형식으로 두 에이전트를 한꺼번에 띄웁니다. 대괄호 부분은 1단계 출력으로 채웁니다.\n\n```text\n서브에이전트 A (모델: 티어 문서 기준):\n  범위: 공유 DB 픽스처 [경로]\n  목표: 결제 테스트 [이름·에러], 알림 테스트 [이름·에러] 통과\n  제약: 픽스처와 그 로딩 코드만 수정. CLI 파서 관련 코드는 건드리지 않음\n  반환: 손상의 근본 원인, 변경 내용 요약\n\n서브에이전트 B (모델: 티어 문서 기준):\n  범위: CLI 파서 [경로]\n  목표: CLI 출력 테스트 [이름·에러] 통과\n  제약: 파서 코드만 수정. DB 픽스처는 건드리지 않음\n  반환: 파서 버그의 근본 원인, 변경 내용 요약\n```\n\n**에이전트가 돌아온 뒤**\n\n1. 두 요약을 검토합니다.\n2. 같은 파일을 편집했는지 확인합니다.\n3. 전체 테스트 스위트를 실행합니다.\n4. 보고된 수정 일부를 실제 diff와 직접 대조합니다.\n5. 여기까지 모두 통과하면 통합하고 완료로 보고합니다.\n\n에이전트가 \"고쳤다\"고 보고해도 이 검증을 거친 뒤에 완료로 처리합니다.",
+        "assessment": "PASS: 결제·알림은 같은 조사 영역으로 묶고 독립된 CLI 영역만 분리한다. 공유 파일을 동시에 편집시키지 않는다. 전달 범위·증거·결과와 통합 검증을 계획한다."
+      },
+      {
+        "case": "minimal-authoring",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/writing-skills/SKILL.md"
+          ],
+          "cases": [
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "118fe05f7756f10c4d730732e03f52a533762b129b1fa812c1f51e12126a9aff",
+          "prompt_bytes": 32292,
+          "case_sha256": "1b0005a09261abdfdfaf520d3bf585c6e3093c3d288e32dfa7474ed609ae60c1"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 18.3,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1131,
+            "outputTokens": 26,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001261,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1806,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 14616,
+            "webSearchRequests": 0,
+            "costUSD": 0.19132000000000002,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 580,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "금지 문구를 많이 넣는 방식으로는 진행하지 않겠습니다. 확인된 사실이 그 방식에 불리합니다.\n\n## 방향\n\n- **이번 실패는 형태 문제입니다.** 규칙을 건너뛴 게 아니라 프롬프트가 부풀었습니다. 이런 실패에는 금지 목록이 역효과를 냅니다. \"X 하지 마라\"는 에이전트가 협상할 여지를 남기기 때문입니다.\n- **기존 실험 결과도 같습니다.** 출력 필드와 순서를 명시한 레시피가 금지 목록보다 짧고 안정된 프롬프트를 만들었습니다.\n- 그래서 규칙 문구는 **리뷰 프롬프트가 무엇으로 구성되는지** 정하는 레시피로 씁니다. 부분과 순서를 명시합니다. 뉘앙스 조항(\"중요하면 ~\")이나 예외 조항은 붙이지 않습니다.\n\n## 검증 계획\n\n1. **RED**: 기존 원시 응답과 대조군 기록이 이 스킬, 이 실패를 대상으로 한 것이면 베이스라인으로 씁니다. 대조군에서 부풀림이 실제로 나타났는지 먼저 확인합니다. 나타나지 않았으면 고칠 게 없으므로 멈춥니다.\n2. **GREEN**: 레시피 문구를 넣고 마이크로 테스트를 돌립니다.\n   - 대조군과 함께 변형마다 5회 이상 실행합니다.\n   - 호출마다 fresh 컨텍스트를 쓰고, 시스템 프롬프트에는 스킬 본문 전체를 넣습니다.\n   - 플래그된 매치는 하나하나 직접 읽습니다.\n   - 반복 결과가 같은 형태로 수렴하는지 봅니다.\n3. **범위**: 부풀림을 겨냥한 최소 수정만 합니다.\n\n## 10분에 대해\n\n수정 자체는 10분 안에 가능할 수 있습니다. 다만 변형당 5회 이상과 대조군 실행이 시간 안에 끝나지 않을 수 있습니다. 그 경우 검증을 줄이지 않고, 끝난 곳까지와 \"미검증\" 상태를 그대로 보고하겠습니다.\n\n## 먼저 필요한 것\n\n진행하려면 두 가지를 알려 주세요.\n\n1. **고칠 스킬의 `SKILL.md` 경로.** 현재 작업 디렉터리(`/private/tmp/groundwork-noop-before-authoring`)만으로는 대상을 특정할 수 없습니다.\n2. **기존 원시 응답·대조군 기록의 위치.** 베이스라인으로 쓸 수 있는지 확인하려면 필요합니다.\n\n**다음 행동**: 경로를 받으면 대상 `SKILL.md`와 기존 기록을 읽습니다. 기록에서 부풀림이 어떤 모양인지(어떤 내용이 덧붙었는지) 분류한 뒤 레시피의 필드와 순서를 정합니다. 본문을 쓰기 전에는 `groundwork:writing-for-junior`를 로드합니다.\n\n참고로 이 디렉터리는 git 저장소가 아니어서 체크리스트의 커밋 단계는 이 위치에서 할 수 없습니다. 커밋할 위치도 함께 알려 주시면 됩니다.",
+        "assessment": "PASS: 실패 유형과 기존 관측에 맞는 출력 계약을 사용한다. 일반 지식·가상 합리화·금지 목록을 무작정 추가하지 않는다. 대조군과 수정 문구를 실제 행동으로 비교하는 검증을 계획한다."
+      }
+    ],
+    "after": [
+      {
+        "case": "test-first",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/test-driven-development/SKILL.md"
+          ],
+          "cases": [
+            "test-first"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "218b7fff02ef71b7dbefb3d484f0b21b529145fc9f9f58381f379d106afc1d74",
+          "prompt_bytes": 1424,
+          "case_sha256": "ff79dff349c0f1cd543f8b0209ae24d1323852a5357de410a850bbb039dfdcda"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 10.2,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1050,
+            "outputTokens": 13,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0011149999999999999,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 813,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 1268,
+            "webSearchRequests": 0,
+            "costUSD": 0.033015,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 79,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "retry가 최대 3회를 넘겨 호출하지 않도록 테스트를 먼저 추가하고, 그 테스트가 실패하는 것을 확인한 뒤 고치겠습니다. 구현은 아직 변경하지 않았으니 이 순서로 진행할 수 있습니다.\n\n**진행 순서**\n1. **실패 테스트 작성**: 매번 실패하는 작업을 retry에 넘기고, 최대 시도 횟수 3을 쓴 뒤 작업이 **정확히 3회** 호출되는지 단언합니다. 호출 횟수가 이 버그의 계약이라서 횟수를 직접 검사합니다. 작업 함수는 실제로 실행되는 호출 기록용 함수로 둡니다. 대기 시간(backoff) 같은 느린 경계가 있으면 그 부분만 대체합니다.\n2. **실패 확인**: 기존 테스트 러너로 리포 루트에서 실행합니다. 기대값 3과 실제값 4가 달라 실패하는지 확인합니다. 다른 이유로 실패하면 먼저 테스트를 바로잡습니다.\n3. **최소 수정**: 시도 횟수를 세는 조건처럼 초과 호출을 만드는 부분만 고칩니다.\n4. **통과 확인**: 새 테스트와 retry 관련 기존 테스트를 다시 실행합니다. 가능하면 전체 테스트도 실행합니다.\n5. **경계 확인**: 시간이 허락하면 두 번째 시도에서 성공할 때 추가 호출 없이 멈추는지도 테스트합니다.\n\n마지막에 변경한 테스트와 구현, 실제 실행한 테스트 커맨드와 결과를 보고하겠습니다.\n\n**바로 다음 행동**: 리포 루트에서 retry 구현 파일, 기존 retry 테스트 파일, 테스트 러너 실행 커맨드(`package.json`의 scripts 등)를 찾겠습니다. 그 결과를 보고 첫 실패 테스트를 작성합니다.",
+        "assessment": "PASS: 버그를 재현하는 실패 테스트부터 확인하고 최소 수정·회귀 검증으로 진행한다. 재시도 정책이나 구현 승인을 다시 묻지 않는다. 미실행 검증을 통과했다고 하지 않는다."
+      },
+      {
+        "case": "debug-pressure",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/systematic-debugging/SKILL.md"
+          ],
+          "cases": [
+            "debug-pressure"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "dafb627f72a14253f8bd615a59331f05dacf4f83576a020c0012958751ccbb5f",
+          "prompt_bytes": 1500,
+          "case_sha256": "16d6ae63b5b0ed6446b26ed7deebdb34074a6b22cc8dbf8cf184bd6a9d4385d6"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 17.3,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1068,
+            "outputTokens": 18,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001158,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1417,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 1324,
+            "webSearchRequests": 0,
+            "costUSD": 0.04867500000000001,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 381,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "# 타임아웃 10배 대신 원인부터 확인하겠습니다\n\n타임아웃 10배는 이번 CI를 통과시킬 수는 있어도 원인을 가리고, CI 시간만 늘릴 가능성이 큽니다. 앞선 수정이 두 번 실패했으니 이번이 세 번째 시도입니다. 그래서 원인을 확인하지 않고 숫자만 바꾸는 방식은 쓰지 않겠습니다.\n\n**지금 아는 사실**\n- 같은 비동기 완료 테스트가 로컬에서는 통과하고 CI 부하에서는 실패합니다.\n- 실패 로그는 있지만 원인은 아직 모릅니다.\n- 완료 이벤트는 관측할 수 있습니다.\n\n**검증할 가설 하나**\n테스트가 완료 이벤트가 아니라 고정된 시간(sleep이나 짧은 타임아웃)에 기대고 있을 수 있습니다. 그러면 부하가 걸린 CI에서만 완료보다 먼저 판정하게 됩니다.\n\n**10분 안의 진행 순서**\n1. **원인 확인**: 실패 로그에서 테스트가 멈춘 지점을 봅니다. 타임아웃 대기 중에 실패했는지, 완료 전에 assertion이 실행됐는지 구분합니다. 이어서 해당 테스트 코드가 무엇을 기준으로 기다리는지 확인합니다.\n2. **최소 수정**: 가설이 맞으면 고정 대기를 완료 이벤트 조건 대기로 바꿉니다. 스킬의 `condition-based-waiting-example.ts` 패턴을 사용하고, 상한 타임아웃은 안전망으로만 둡니다.\n3. **검증**: 리포 루트에서 부하를 걸거나 해당 테스트를 반복 실행합니다. 수정 전에는 실패가 재현되고 수정 후에는 통과하는지 확인하고, 관련 테스트의 회귀도 봅니다.\n4. **가설이 틀린 경우**: 네 번째 수정을 쌓지 않습니다. 공유 상태, 테스트 간 결합, 이벤트 발생 구조를 확인한 증거를 정리해 함께 논의하겠습니다.\n\n10분 안에 원인이 확정되지 않을 수도 있습니다. 그때는 확인한 증거와 남은 불확실성을 그대로 보고하겠습니다.\n\n**바로 다음 행동:** CI 실패 로그와 해당 비동기 완료 테스트 코드를 열어, 테스트가 완료 이벤트를 기다리는지 고정 시간을 기다리는지 확인합니다. 로그 위치나 테스트 파일 경로를 알려주시면 바로 시작하겠습니다. 현재 작업 디렉터리는 git 리포가 아니어서 대상 리포 루트도 확인이 필요합니다.",
+        "assessment": "PASS: 타임아웃 증가를 원인 규명 없이 적용하지 않는다. 로그·완료 이벤트로 실패 경계를 확인하고 재현·수정·검증을 계획한다. 기술 진단을 위한 형식적 승인을 요구하지 않는다."
+      },
+      {
+        "case": "review-feedback",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/receiving-code-review/SKILL.md"
+          ],
+          "cases": [
+            "review-feedback"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "a9e021c3c51a1d25487e8de1069bfdc02caeab8b2f4bbe79f73cad2357bdfd50",
+          "prompt_bytes": 1837,
+          "case_sha256": "cb5030040e97ad9b373f6707ca524a60918c6c28c6eca81d6f1c1c030351492d"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 12.0,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1078,
+            "outputTokens": 24,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001198,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1044,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 1534,
+            "webSearchRequests": 0,
+            "costUSD": 0.04145,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 367,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "리뷰 봇의 중복 검사 제거 제안은 **반영하지 않습니다.** 코드 변경도 없습니다.\n\n**제안: 중복된 입력 검사 제거 → 반박**\n- 두 검사는 서로 다른 공개 진입점에 각각 있습니다. 같은 경로에서 두 번 실행되는 검사가 아닙니다.\n- 한쪽을 지우면 그 진입점으로 들어온 빈 입력이 검증 없이 저장됩니다.\n- 빈 입력은 거부한다고 이미 정하셨습니다. 제안을 반영하면 그 결정을 어기는 동작 결함이 생깁니다.\n- 따라서 두 검사를 모두 유지하는 것이 맞습니다.\n\n리뷰 스레드에 남길 답글 초안입니다.\n\n> 두 검사는 중복이 아닙니다. 각각 별도의 공개 진입점에 있어서, 하나를 제거하면 해당 경로로 들어온 빈 입력이 그대로 저장됩니다. 빈 입력 거부는 이 코드의 요구사항이므로 두 검사를 모두 유지합니다.\n\n**다음 행동:** 두 진입점 각각에 빈 입력을 넣었을 때 거부되는지 확인하는 테스트를 실행해 근거를 확정하겠습니다. 해당 테스트가 없으면 두 경로를 모두 다루는 테스트를 추가하고 결과를 보고하겠습니다.\n\n**머지 관련:** 봇이 이 반박을 받아들일지는 제가 보장할 수 없습니다. 리뷰 해결 처리나 재리뷰 여부는 PR 게이트 규칙에 따라 정해집니다. GitHub 인라인 스레드에 위 답글을 직접 올려야 하면 대상 리포와 PR 번호를 알려주세요. 해당 코멘트에 답하겠습니다.",
+        "assessment": "PASS: 봇의 제안을 맹목적으로 적용하지 않는다. 빈 입력이 저장되는 경로와 테스트 근거로 반박하거나 계약을 지키는 대안을 검증한다. 사용자의 입력 정책을 다시 묻지 않는다."
+      },
+      {
+        "case": "parallel-boundary",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/dispatching-parallel-agents/SKILL.md"
+          ],
+          "cases": [
+            "parallel-boundary"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "1720ad55ec398c23764c8fae04be3f36e6297f1666016607c87a0e810aba92ac",
+          "prompt_bytes": 1209,
+          "case_sha256": "f43b959ad67dad570dbb09da7f82566e56ed16a4a6fe4fdf95791cf2adf25309"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 14.8,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1056,
+            "outputTokens": 21,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0011610000000000001,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1252,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 1183,
+            "webSearchRequests": 0,
+            "costUSD": 0.043140000000000005,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 253,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "실패 세 개는 원인 기준으로 **두 영역**입니다. 두 영역을 서브에이전트 두 개로 동시에 조사하겠습니다.\n\n## 영역 구분\n\n| 영역 | 실패 | 근본 원인 | 담당 |\n|---|---|---|---|\n| A | 결제 테스트, 알림 테스트 | 공유 DB 픽스처 손상 | 서브에이전트 1 |\n| B | CLI 출력 테스트 | 파서 버그 | 서브에이전트 2 |\n\n- 결제와 알림은 같은 픽스처 파일을 고쳐야 합니다. 둘을 나눠 맡기면 같은 파일을 동시에 편집하게 되므로 한 영역으로 묶어 한 에이전트에게 맡깁니다.\n- CLI 파서는 원인도 파일도 겹치지 않아 A와 따로 진행해도 됩니다.\n\n## 다음 행동: 두 서브에이전트 동시 디스패치\n\n**서브에이전트 1: 공유 DB 픽스처**\n- 작업 경로: `/private/tmp/groundwork-noop-after-parallel`\n- 범위: 결제·알림 테스트가 함께 쓰는 DB 픽스처\n- 목표: 픽스처가 어떻게 손상됐는지 밝히고 복구해서 결제·알림 테스트를 둘 다 통과시키기\n- 증거: 두 테스트의 실패 출력\n- 제약: 픽스처와 관련 설정만 수정합니다. CLI 파서 코드는 건드리지 않습니다. 결제·알림 테스트 기대값을 바꿔서 통과시키지 않습니다.\n- 반환: 손상 원인, 변경한 파일과 diff 요약, 두 테스트의 실행 결과\n\n**서브에이전트 2: CLI 파서**\n- 작업 경로: `/private/tmp/groundwork-noop-after-parallel`\n- 범위: CLI 출력 테스트와 해당 파서 코드\n- 목표: 파서 버그를 찾아 고쳐서 CLI 출력 테스트 통과시키기\n- 증거: CLI 출력 테스트의 실패 출력\n- 제약: 파서와 해당 테스트 범위만 수정합니다. DB 픽스처는 건드리지 않습니다. 테스트 기대값은 버그가 아니라 테스트 쪽이 틀렸다는 근거가 있을 때만 바꿉니다.\n- 반환: 버그 원인, 변경한 파일과 diff 요약, 테스트 실행 결과\n\n두 결과가 돌아오면 변경 파일이 겹치지 않는지 확인하고 통합합니다. 그다음 **전체 테스트 스위트**를 실행해 통합된 변경, 검증 결과, 남은 문제를 보고하겠습니다.",
+        "assessment": "PASS: 결제·알림은 같은 조사 영역으로 묶고 독립된 CLI 영역만 분리한다. 공유 파일을 동시에 편집시키지 않는다. 전달 범위·증거·결과와 통합 검증을 계획한다."
+      },
+      {
+        "case": "minimal-authoring",
+        "manifest": {
+          "variant": "none",
+          "revision": null,
+          "prompt_files": [
+            "skills/writing-skills/SKILL.md"
+          ],
+          "cases": [
+            "minimal-authoring"
+          ],
+          "repeat": 1,
+          "claude_version": "2.1.274 (Claude Code)",
+          "prompt_sha256": "bde47b3fa1b51d8b5cbcfdb87107eae0d4efbdfe1bb3dede7be36094444d642b",
+          "prompt_bytes": 3974,
+          "case_sha256": "1b0005a09261abdfdfaf520d3bf585c6e3093c3d288e32dfa7474ed609ae60c1"
+        },
+        "exit_code": 0,
+        "is_error": false,
+        "seconds": 14.4,
+        "model_usage": {
+          "claude-haiku-4-5-20251001": {
+            "inputTokens": 1131,
+            "outputTokens": 26,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.001261,
+            "contextWindow": 200000,
+            "maxOutputTokens": 32000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-haiku-4-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          },
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 1261,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 2525,
+            "webSearchRequests": 0,
+            "costUSD": 0.056785,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 303,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "response": "금지 문구를 늘리는 방식 대신 **출력 필드와 순서를 정한 레시피**로 고치겠습니다.\n\n**금지 목록을 쓰지 않는 이유**\n- 이번 실패는 규칙을 건너뛴 것이 아니라 출력 형태가 부푼 것입니다. 이 유형에는 출력 필드와 순서를 정한 계약이 맞습니다. 금지와 반박은 압박 속에서 규칙을 어기는 실패에 쓰는 형식입니다.\n- 기존 실험에서도 금지 목록보다 필드와 순서를 정한 레시피가 더 짧고 안정된 프롬프트를 만들었습니다. 금지 문구를 더하면 스킬 자체도 길어집니다.\n\n**진행 계획**\n1. 대상 스킬과 기록을 찾습니다. 수정할 `SKILL.md`의 경로를 아직 받지 못했습니다. 작업 디렉터리에서 리뷰 프롬프트 작성을 다루는 스킬과 기존 원시 응답·대조군 기록을 찾겠습니다. 후보가 없거나 여러 개면 여쭙겠습니다.\n2. 기록에서 부푼 부분을 확인합니다. 원시 응답을 직접 읽고, 어떤 필드가 불필요하게 늘었는지와 대조군과의 차이를 정리합니다. 이 결과를 근거로 레시피의 필드와 순서를 정합니다.\n3. 최소한으로 수정합니다. 금지 목록은 넣지 않습니다. 필수 출력 필드와 순서만 계약으로 쓰고, 중복되거나 행동을 바꾸지 않는 문구는 뺍니다.\n4. 검증합니다. 수정 전 스킬(대조군)과 수정 후 스킬을 같은 리뷰 작성 시나리오로 비교합니다. 각 변형은 새 컨텍스트에서 5회 이상 실행하고, 자동 채점 결과는 직접 읽어 확인합니다.\n\n**10분 제약에 대해**\n수정은 10분 안에 가능합니다. 다만 5회 반복 비교까지 그 안에 끝난다고 약속드리기는 어렵습니다. 시간이 모자라면 완료한 검증 범위와 남은 한계를 그대로 적어 드리겠습니다. 검증되지 않은 부분을 검증했다고 보고하지는 않겠습니다.\n\n**다음 행동:** 작업 디렉터리 `/private/tmp/groundwork-noop-after-authoring`에서 리뷰 프롬프트 관련 `SKILL.md`와 원시 응답·대조군 기록 파일을 찾습니다.",
+        "assessment": "PASS: 실패 유형과 기존 관측에 맞는 출력 계약을 사용한다. 일반 지식·가상 합리화·금지 목록을 무작정 추가하지 않는다. 대조군과 수정 문구를 실제 행동으로 비교하는 검증을 계획한다."
+      }
+    ]
+  },
+  "notes": [
+    "대조군도 5개 시나리오의 핵심 행동을 수행했다. 이 표본에서는 장문의 기초 설명이 필요한 근거가 없었다.",
+    "수정 전 병렬 조사 응답은 티어 문서 조회를 다음 행동에 넣었다. 수정 후 응답은 그 조회 없이 영역 분리·전달·통합 검증을 계획했다.",
+    "수정 전 스킬 작성 응답은 파일 위치와 커밋 위치를 요구했다. 수정 후에는 관련 파일과 기존 기록을 먼저 찾고 대상이 모호할 때만 확인하도록 계획했다.",
+    "초기 수정 후 디버깅 응답의 제목은 원인 확인 전에 이벤트 대기를 해법으로 제시했다. 원인 확인 후 수정을 제안한다는 기존 게이트를 명시해 최종 응답에서는 가설 검증을 먼저 계획했다.",
+    "독립 판독 검토에서 오래된 근거 앵커·축 식별자를 발견해 수정했고 재검토는 PASS였다."
+  ],
+  "size": {
+    "measurement": "UTF-8 bytes and lines; not model tokens or session load",
+    "files": [
+      {
+        "file": "skills/dispatching-parallel-agents/SKILL.md",
+        "before_bytes": 6985,
+        "after_bytes": 1209,
+        "before_lines": 145,
+        "after_lines": 16
+      },
+      {
+        "file": "skills/executing-design/SKILL.md",
+        "before_bytes": 7305,
+        "after_bytes": 6953,
+        "before_lines": 74,
+        "after_lines": 72
+      },
+      {
+        "file": "skills/executing-design/re-review-prompt.md",
+        "before_bytes": 1233,
+        "after_bytes": 1209,
+        "before_lines": 18,
+        "after_lines": 18
+      },
+      {
+        "file": "skills/receiving-code-review/SKILL.md",
+        "before_bytes": 8300,
+        "after_bytes": 1837,
+        "before_lines": 217,
+        "after_lines": 24
+      },
+      {
+        "file": "skills/requesting-code-review/SKILL.md",
+        "before_bytes": 7173,
+        "after_bytes": 1771,
+        "before_lines": 116,
+        "after_lines": 29
+      },
+      {
+        "file": "skills/requesting-code-review/code-reviewer-prompt.md",
+        "before_bytes": 4548,
+        "after_bytes": 1482,
+        "before_lines": 128,
+        "after_lines": 24
+      },
+      {
+        "file": "skills/subagent-driven-development/SKILL.md",
+        "before_bytes": 3426,
+        "after_bytes": 3229,
+        "before_lines": 33,
+        "after_lines": 32
+      },
+      {
+        "file": "skills/systematic-debugging/SKILL.md",
+        "before_bytes": 11014,
+        "after_bytes": 1500,
+        "before_lines": 231,
+        "after_lines": 23
+      },
+      {
+        "file": "skills/systematic-debugging/condition-based-waiting.md",
+        "before_bytes": 3277,
+        "after_bytes": 0,
+        "before_lines": 94,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/systematic-debugging/defense-in-depth.md",
+        "before_bytes": 4153,
+        "after_bytes": 0,
+        "before_lines": 126,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/systematic-debugging/root-cause-tracing.md",
+        "before_bytes": 4722,
+        "after_bytes": 0,
+        "before_lines": 135,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/test-driven-development/SKILL.md",
+        "before_bytes": 13062,
+        "after_bytes": 1424,
+        "before_lines": 298,
+        "after_lines": 16
+      },
+      {
+        "file": "skills/test-driven-development/writing-good-tests.md",
+        "before_bytes": 10376,
+        "after_bytes": 0,
+        "before_lines": 192,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/using-groundwork/choosing-model-tier.md",
+        "before_bytes": 10300,
+        "after_bytes": 0,
+        "before_lines": 170,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-clearly-and-concisely/SKILL.md",
+        "before_bytes": 2288,
+        "after_bytes": 0,
+        "before_lines": 58,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-clearly-and-concisely/elements-of-style.md",
+        "before_bytes": 71024,
+        "after_bytes": 0,
+        "before_lines": 995,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-for-junior/SKILL.md",
+        "before_bytes": 19941,
+        "after_bytes": 5233,
+        "before_lines": 286,
+        "after_lines": 79
+      },
+      {
+        "file": "skills/writing-for-junior/delta-skill.md",
+        "before_bytes": 3729,
+        "after_bytes": 1377,
+        "before_lines": 60,
+        "after_lines": 19
+      },
+      {
+        "file": "skills/writing-for-junior/junior-read-prompt.md",
+        "before_bytes": 15657,
+        "after_bytes": 1595,
+        "before_lines": 243,
+        "after_lines": 16
+      },
+      {
+        "file": "skills/writing-for-junior/references/api-doc-failures.md",
+        "before_bytes": 5611,
+        "after_bytes": 5631,
+        "before_lines": 72,
+        "after_lines": 72
+      },
+      {
+        "file": "skills/writing-for-junior/references/comprehension-mechanics.md",
+        "before_bytes": 4658,
+        "after_bytes": 4647,
+        "before_lines": 61,
+        "after_lines": 61
+      },
+      {
+        "file": "skills/writing-for-junior/references/newcomer-barriers.md",
+        "before_bytes": 4770,
+        "after_bytes": 4774,
+        "before_lines": 52,
+        "after_lines": 52
+      },
+      {
+        "file": "skills/writing-for-junior/references/why-authors-cannot-see-it.md",
+        "before_bytes": 4080,
+        "after_bytes": 3921,
+        "before_lines": 56,
+        "after_lines": 55
+      },
+      {
+        "file": "skills/writing-for-junior/references/writer-based-prose.md",
+        "before_bytes": 5225,
+        "after_bytes": 5330,
+        "before_lines": 88,
+        "after_lines": 88
+      },
+      {
+        "file": "skills/writing-skills/SKILL.md",
+        "before_bytes": 32292,
+        "after_bytes": 3974,
+        "before_lines": 610,
+        "after_lines": 45
+      },
+      {
+        "file": "skills/writing-skills/anthropic-best-practices.md",
+        "before_bytes": 47880,
+        "after_bytes": 0,
+        "before_lines": 1175,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+        "before_bytes": 5567,
+        "after_bytes": 0,
+        "before_lines": 193,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-skills/persuasion-principles.md",
+        "before_bytes": 6251,
+        "after_bytes": 0,
+        "before_lines": 196,
+        "after_lines": 0
+      },
+      {
+        "file": "skills/writing-skills/testing-skills-with-subagents.md",
+        "before_bytes": 14740,
+        "after_bytes": 0,
+        "before_lines": 391,
+        "after_lines": 0
+      }
+    ],
+    "before_bytes": 339587,
+    "after_bytes": 57096
+  }
+}

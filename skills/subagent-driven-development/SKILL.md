@@ -19,7 +19,6 @@ description: Use when an approved design document has many independent mechanica
 ## Dispatch an implementer
 
 태스크 요구·정확한 인터페이스와 제약·검증 방법을 `<scratch>/task-<N>-brief.md`에 적는다. 새 구현자에게 브리프 경로와 작업 경로를 [implementer-prompt.md](implementer-prompt.md)로 넘긴다.
-구현자 모델을 명시한다. 완전한 기계적 작업은 싼 모델, 통합·판단이 필요한 작업은 중간 이상을 쓴다. 약한 모델이 왕복을 늘리면 티어를 올린다.
 같은 파일이나 상태를 바꾸는 구현자는 동시에 실행하지 않는다. 컨트롤러는 자기 세션 전체나 이미 파일에 있는 본문을 디스패치 메시지에 복사하지 않는다.
 구현자는 `<scratch>/task-<N>-report.md`에 변경·검증 커맨드와 출력·커밋·잔여 문제를 적고 최종 응답에는 경로와 상태만 반환한다.
 

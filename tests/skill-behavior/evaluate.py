@@ -25,12 +25,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--variant", choices=PROMPTS, default="design")
     parser.add_argument("--revision", help="Read prompts from this git revision; default: working tree")
+    parser.add_argument("--prompt-file", action="append", help="Repo-relative prompt path; replaces the variant prompts (repeatable)")
+    parser.add_argument("--cases-file", type=Path, help="Scenario JSON; default: cases.json beside this script")
     parser.add_argument("--cases", help="Comma-separated case names")
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
-    cases = json.loads(Path(__file__).with_name("cases.json").read_text())
+    cases = json.loads((args.cases_file or Path(__file__).with_name("cases.json")).read_text())
     group = "handoff" if args.variant == "handoff" else "execution" if args.variant in {"execution", "subagent", "review"} else "design"
     names = args.cases.split(",") if args.cases else [k for k, v in cases.items() if v["group"] == group]
     if args.repeat < 1 or args.workers < 1 or any(name not in cases for name in names):
@@ -38,7 +40,8 @@ def main():
     out = (args.out or Path(tempfile.mkdtemp(prefix="groundwork-probes-"))).resolve()
     out.mkdir(parents=True, exist_ok=True)
     parts = []
-    for path in PROMPTS[args.variant]:
+    prompt_paths = args.prompt_file or PROMPTS[args.variant]
+    for path in prompt_paths:
         if args.revision:
             value = subprocess.run(["git", "show", f"{args.revision}:{path}"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
         else:
@@ -49,7 +52,7 @@ def main():
     if body:
         system += "\n\n" + body
     version = subprocess.run(["claude", "--version"], capture_output=True, text=True, check=True).stdout.strip()
-    manifest = {"variant": args.variant, "revision": args.revision, "cases": names, "repeat": args.repeat, "claude_version": version, "prompt_sha256": hashlib.sha256(body.encode()).hexdigest(), "prompt_bytes": len(body.encode()), "case_sha256": hashlib.sha256(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, sort_keys=True).encode()).hexdigest()}
+    manifest = {"variant": args.variant, "revision": args.revision, "prompt_files": prompt_paths, "cases": names, "repeat": args.repeat, "claude_version": version, "prompt_sha256": hashlib.sha256(body.encode()).hexdigest(), "prompt_bytes": len(body.encode()), "case_sha256": hashlib.sha256(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, sort_keys=True).encode()).hexdigest()}
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "prompt.txt").write_text(system)
     (out / "cases.json").write_text(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, indent=2) + "\n")

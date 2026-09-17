@@ -31,10 +31,9 @@
 
 ## Where the skill uses this
 
-[Why authors cannot see this failure](../SKILL.md#why-authors-cannot-see-this-failure) 절의 근거다.
+[Review readability](../SKILL.md#review-readability)의 격리된 독자 검토를 뒷받침하는 근거다.
 
-- 저자가 맥락 누락을 못 보는 것은 주의력 부족이 아니라 관측 위치의 문제라는 진술이 curse of knowledge에 대응한다.  
-  방금 읽은 원본과 방금 나눈 대화가 저자에게 이미 해소된 상태라 그 정보를 배제한 상태를 재구성하지 못한다.
+- 저자가 작성 대화를 안다는 이유로 독자의 맥락을 가정하지 않게 하는 판단에 curse of knowledge를 적용했다.
 - 판정 축을 저자 자신이 아니라 격리된 리뷰어에게 맡기는 설계가 여기서 나온다.  
   저자에게 "맥락 없이 읽어보라"고 요구하는 것은 이 편향이 요구를 듣지 않는다는 실험 결과와 충돌한다.
 - illusion of transparency의 72% 대 61% 간극은 리뷰 없이 저자 자기점검만 두면 남는 잔차의 크기를 가늠하게 한다.
