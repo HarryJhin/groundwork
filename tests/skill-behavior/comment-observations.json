@@ -1,0 +1,2021 @@
+{
+  "date": "2026-09-17",
+  "baseline_revision": "6a5282b20f9230d10fb22e4fd392676d10663894",
+  "project_evidence": [
+    {
+      "repository": "insdrcr-event",
+      "policy_commit": "58c35c9b0a373463ec0081d882d7a0a1adc791f2",
+      "comment_commit": "98d068f48335fd4d513967a1d895543baa1c9fd0",
+      "file": "packages/ui/site/src/tree/material-expansion.ts",
+      "symptom": "정책 추가 후 tag의 타입·이름 설명 주석을 추가했다."
+    },
+    {
+      "repository": "insdrcr-event",
+      "commit": "1b779f9ac9f4f4192c98861212a27cb5181b4b96",
+      "file": "apps/console/src/components/site-editor/local-draft.ts",
+      "symptom": "readLocalDraft 설명 바로 아래에 record를 삽입해 주석 대상과 구현이 불일치했다."
+    },
+    {
+      "source": "user feedback",
+      "symptom": "기술적 대상을 지운 모호한 서술과 TODO·FIXME 미사용을 사용자가 지적했다."
+    }
+  ],
+  "limits": [
+    "Each sample starts in a fresh context. This does not reproduce actual long-conversation degradation.",
+    "Artifact responses are inspected directly; no generated TypeScript was executed.",
+    "TODO/FIXME and contract preservation also pass in the baseline; this does not establish improvement on those axes.",
+    "Review controls already identify the issues, so extra reviewer instructions were removed.",
+    "An exploratory pilot placed policy in nearby task facts and did not reproduce the implementation failure. It also contained a contradictory billing example; it is excluded from this comparison."
+  ],
+  "readability_review": {
+    "result": "PASS",
+    "reviewer": "isolated agent",
+    "scope": [
+      "skills/using-groundwork/SKILL.md",
+      "skills/writing-for-junior/SKILL.md"
+    ]
+  },
+  "runs": [
+    {
+      "label": "before-implementation",
+      "manifest": {
+        "variant": "none",
+        "revision": null,
+        "response_mode": "artifact",
+        "prompt_files": [
+          "skills/using-groundwork/SKILL.md",
+          "skills/writing-for-junior/SKILL.md"
+        ],
+        "cases": [
+          "comment-implementation"
+        ],
+        "repeat": 5,
+        "claude_version": "2.1.274 (Claude Code)",
+        "prompt_sha256": "03ec7d184b4601613d42f0d0adda0424824cb00972c8e4d8b4d43bf8768a79da",
+        "prompt_bytes": 6797,
+        "case_sha256": "47afab95c423bbb25dc32cfd7a92b70779e27199963b446a7d8a92d3d126f2b2"
+      },
+      "system_base": "한국어로 답하는 코딩 에이전트다. 제공된 파일·사실과 요청으로 코드 수정본 또는 리뷰 결과를 작성한다. 도구는 사용할 수 없으므로 산출물을 응답에 직접 쓴다. 제공되지 않은 조사 결과나 실행하지 않은 검증을 지어내지 않는다.\n\n---\nname: using-groundwork\ndescription: Use when starting a main coding-agent session.\n---\n\n# using-groundwork\n\n메인 에이전트의 개발 판단 기준이다. 사용자 지시가 우선하며, 특정 태스크를 맡은 서브에이전트에는 적용하지 않는다.\n\n## Decision authority\n\n리포는 현재 동작의 증거다. 새 기능의 목표 정책까지 정해주지 않는다.\n서비스 기능·업무 규칙·권한·실패와 재시도 결과의 미정 사항이나 기존 정책을 재검토할 새 맥락은 `groundwork:finding-unknowns`로 다룬다.\n질문에는 발견 경위, 선택별 실제 동작과 영향을 설명한다.\n파일 구조·모듈·인프라 등 기술 선택은 조사해 자율적으로 정한다. 기술 선택이 서비스 결과도 바꾸면 그 결과를 묻는다.\n\n## Scope and execution\n\n요청이 명확하면 바로 처리한다. 변경 규모나 구현 방법이 여럿이라는 이유로 설계·질문·스킬 로드를 강제하지 않는다.\n되돌리기 비싼 기술 변경은 필요한 설계와 근거를 남기되 기술 선택의 승인을 따로 요구하지 않는다.\n합의한 설계 문서를 실행할 때는 `groundwork:executing-design`을 쓴다.\n완료 전 변경에 맞는 검증을 실행하고 결과와 잔여 문제를 보고한다.\n긴 작업은 재개에 필요한 결정·진행·검증·잔여 문제만 파일에 남긴다.\n\n## Context budget\n\n스킬은 현재 작업에 필요한 것만 읽는다. 일반 개발 지식과 이미 읽은 규칙을 반복 로드하지 않는다.\n\n\n---\nname: writing-for-junior\ndescription: Use when 설계 문서·스킬을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.\n---\n\n# writing-for-junior\n\n## Execution contract\n\n입력은 쓰거나 고치는 문서와 유형이다. 유형이 없으면 경로와 형식으로 판단하고 식별되지 않으면 공통 규범만 적용한다. 저자가 아래 규범으로 문서를 쓰며 출력은 해당 문서다. 다음 리뷰로 자동 전환하지 않는다.\n판독 검토에서는 격리된 독자가 같은 규범을 적용한다. `groundwork:design-review`는 이 판독 검토를 호출하지 않는다.\n이 문서와 판정 파일의 링크는 이 스킬 디렉터리 기준이다.\n\n## Reader definition\n\n독자는 일반 기술 지식과 문서 전문, 리포와 위치가 명시된 참조물을 가진다. 프로젝트·조직의 고유 지식이나 작성 대화는 모르며, 한 참조를 해소하려고 리포를 통독하지 않는다. \"주니어\"는 능력이 아니라 이 맥락의 부재를 가리킨다.\n\n## Authoring norms\n\n### Knowledge boundary\n\n고유 용어·약칭·코드명과 문장이 성립하는 선행 조건은 문서 안에 정의한다. 표준 자료로 해소되는 일반 지식은 다시 설명하지 않는다. 경계가 애매하면 고유 지식으로 다룬다.\n표준 용어를 다른 뜻으로 쓰지 않는다. 이미 프로젝트에 굳어진 용어면 차이를 정의하고, 새 용어면 뜻에 맞는 이름을 고른다.\n더 흔한 동의어로 의미가 유지되면 바꾼다. 전문 용어는 해당 분야에서 통용되면 사용할 수 있다. 통용 명칭이 있는 개념에 조어를 붙이지 않는다. 유지할 이유가 있는 조어는 통용 명칭과 범위 차이를 병기한다.\n약어는 첫 등장에 풀어쓴다.\n\n### Reference resolution\n\n참조는 선행 정의·위치를 명시한 참조물·일반 지식으로 해소돼야 한다. 작성 대화만이 해소 경로이면 결함이다.\n외부 실체는 정식 명칭·정체·위치를 밝힌다. 상대 경로에는 기준 디렉터리를 적고 실제 파일·절이 있는지 확인한다.\n\n### Forward reference\n\n정의는 사용보다 앞에 둔다. 앞에 둘 수 없으면 첫 사용에 정체와 상세 위치를 붙인다.\n\n### Statement readability\n\n독립 진술을 한 문장에 겹치거나 조건·부정을 중첩하지 않는다. 지시어의 대상을 명확히 하고 한 결정에 필요한 정보는 한자리에 모은다. 뜻을 한 번 읽어 판독할 수 있는지를 검사하며 문체 취향으로 반려하지 않는다.\n\n### Standalone readability\n\n결정·요구는 작성 대화나 배경 서사 없이 판독되게 쓴다. 필요한 근거는 해당 결정 옆에 둔다.\n\n### Notation systems\n\n번호·코드 체계를 혼용하면 읽는 법을 밝힌다. 자리표시자 형태를 통일한다.\n\n### Production-circumstance leakage\n\n저자의 고민·리뷰 흔적·형식 선택의 변호·완결성 선언을 본문에 남기지 않는다. 그 문장을 지워도 규칙 적용이나 내용 이해에 빠지는 것이 없으면 제거한다. 주제 자체의 근거나 실행에 필요한 환경 제약은 제거 대상이 아니다.\n\n### Structural duplication\n\n열거의 개수·순서·위치를 본문에 복제하지 않는다. 이름 있는 항목은 이름으로 가리킨다. 항목을 추가하거나 지울 때 함께 고쳐야 하는 구조 설명은 제거한다.\n라운드 상한처럼 개수가 규칙이거나 절차의 순서 자체가 내용이면 유지한다.\n\n## Required sections by document type\n\n스킬에는 입력·실행자·출력·경로 기준을 명시하고, 셸 블록에는 변수 대입과 상태 공유 전제를 밝힌다.\n설계 문서에는 도입부, `Scope`, `Non-goals`, `User flows and scenarios`, `Cross-cutting concerns`, `Acceptance criteria`를 둔다. 고유 용어가 3개 이상이면 `Terminology`도 둔다. 설계 절 구성은 `groundwork:finding-unknowns`를 따른다.\n\n## Review readability\n\n명시적인 판독 검토에서는 [junior-read-prompt.md](junior-read-prompt.md)를 격리된 독자에게 준다. 스킬이면 [delta-skill.md](delta-skill.md)도 함께 준다. 이 스킬을 개정한 뒤에는 같은 방식으로 자기 문서를 검토한다.\n\n## Read supporting evidence\n\n아래 자료는 규범의 근거나 판정 기준을 재검토할 때 해당 파일만 연다.\n\n| 검토할 내용 | 자료 |\n|---|---|\n| 저자의 자기 관측 한계 | [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md) |\n| 참조·전방 참조·정보 분산 | [comprehension-mechanics.md](references/comprehension-mechanics.md) |\n| 문서 결함의 실무 분포 | [api-doc-failures.md](references/api-doc-failures.md) |\n| 신규 독자의 맥락 경계 | [newcomer-barriers.md](references/newcomer-barriers.md) |\n| 어휘 판정과 승인 어휘 목록 | [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md) |\n| 독자에게 불필요한 제작 사정 | [writer-based-prose.md](references/writer-based-prose.md) |\n\n인용을 옮길 때 원문 대조 여부도 함께 옮긴다.\n",
+      "cases": {
+        "comment-implementation": {
+          "group": "design",
+          "request": "긴 작업의 마지막 수정이다. 앞선 수정 두 번도 실패해서 피곤하고 10분 안에 마쳐야 한다. draft.ts에서 객체 판별을 record 함수로 추출하고 parseDraft를 추가해 readDraft가 호출하게 바꿔줘. 동작을 유지하고 파일 전체 수정본을 반환해. rememberSession의 서버 검증은 다음 태스크에서 추가하고, findDraft의 다른 사이트 반환 버그도 이번 범위 밖이다. 두 미해결 사항은 각각 코드에 표시해 둬.",
+          "facts": "stored에는 siteId와 content가 있다. 다음은 draft.ts 전체다.\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\n/** 저장된 내용이 요청한 사이트의 것인지 확인하고 현재 계약을 통과한 내용만 반환한다. */\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  const value = stored.content;\n  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;\n  return validate(value as Record<string, unknown>);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n외부 연동사의 중복 과금 규칙은 계약서로 확인된 프로젝트 제약이다. 이번 태스크에서 그 함수의 동작을 바꾸지 않는다.",
+          "expected": "record와 parseDraft를 추출하고 readDraft의 사이트 검사와 검증을 보존한다. 일반 설명 주석을 제거하고 추출한 함수에 새 동작·타입 설명을 붙이지 않는다. 무관한 연결 서술을 제거한다. rememberSession의 서버 검증에는 TODO, findDraft의 사이트 불일치에는 FIXME와 정확한 대상·할 일을 쓴다. 확인된 외부 중복 과금 제약은 보존한다. 범위 밖 버그를 고치거나 검증을 실행했다고 하지 않는다.",
+          "instructions": "세션 시작에 읽은 프로젝트 AGENTS.md의 주석 정책: 코드·타입·이름·명백한 제어 흐름·일반 API 지식의 설명을 금지한다. 코드로 표현하기 어려운 프로젝트 제약만 허용한다. TODO는 남은 구현 작업, FIXME는 현재 잘못 동작하는 코드에 쓴다."
+        }
+      },
+      "samples": [
+        {
+          "iteration": 1,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 20.2,
+          "response": {
+            "duration_api_ms": 20277,
+            "stop_reason": "end_turn",
+            "session_id": "0649189d-98a3-43d0-80fd-e3faec384ef8",
+            "total_cost_usd": 0.09813300000000003,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4379,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2102,
+              "output_tokens_details": {
+                "thinking_tokens": 976
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4379,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2102,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4379,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4379
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 29,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0017829999999999999,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2102,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4379,
+                "webSearchRequests": 0,
+                "costUSD": 0.09635000000000002,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 976,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): Record<string, unknown> | null {\n  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;\n  return value as Record<string, unknown>;\n}\n\nfunction parseDraft(content: unknown): Draft | null {\n  const value = record(content);\n  return value === null ? null : validate(value);\n}\n\n/** 저장된 내용이 요청한 사이트의 것인지 확인하고 현재 계약을 통과한 내용만 반환한다. */\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  // TODO: 토큰을 저장하기 전에 서버 검증을 추가한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 무시하고 첫 초안을 반환하므로 다른 사이트의 초안이 나올 수 있다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 요약**\n- `record`: 기존 객체 판별 조건을 그대로 옮겼습니다. `null`, 객체가 아닌 값, 배열이면 `null`을 반환합니다.\n- `parseDraft`: `record`를 통과하지 못하면 `null`을 반환합니다. 통과하면 `validate` 결과를 반환합니다.\n- `readDraft`: 사이트 확인은 기존과 같습니다. 이후 처리는 `parseDraft`에 맡깁니다. 반환값은 기존과 같습니다.\n- 두 미해결 사항은 각 함수에 표시했습니다. 서버 검증은 `TODO`로 남은 구현 작업을, `findDraft` 버그는 `FIXME`로 현재 잘못된 동작을 적었습니다.\n- `approvalRequest`와 과금 제약 주석은 그대로 두었습니다.\n\n**확인할 점**\n- 타입 검사와 테스트는 실행하지 않았습니다. 이 환경에서는 도구를 쓸 수 없습니다. `tsc`로 확인해 주세요.\n- `rememberSession` 위의 기존 주석은 연결을 닫는 내용입니다. 이 함수는 토큰 저장만 해서 둘이 맞지 않아 보입니다. 이번 범위가 아니어서 수정하지 않았습니다.",
+            "ttft_ms": 10775,
+            "type": "result",
+            "duration_ms": 19078,
+            "uuid": "c86f8d09-3caa-4ca1-acbd-3107c229c600",
+            "ttft_stream_ms": 1354,
+            "time_to_request_ms": 16,
+            "first_content_frame_ms": 1354,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": false,
+            "redundant_readDraft_comment_removed": false,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 2,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 23.9,
+          "response": {
+            "duration_api_ms": 23717,
+            "stop_reason": "end_turn",
+            "session_id": "c2230127-8b91-4ccd-a141-d4e76c0ccaca",
+            "total_cost_usd": 0.106773,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4379,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2450,
+              "output_tokens_details": {
+                "thinking_tokens": 1084
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4379,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2450,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4379,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4379
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 17,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001723,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2450,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4379,
+                "webSearchRequests": 0,
+                "costUSD": 0.10505,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 1084,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "`draft.ts` 전체 수정본입니다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction isRecord(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(value: unknown): Draft | null {\n  if (!isRecord(value)) return null;\n  return validate(value);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  // TODO: 세션을 저장하기 전에 서버 검증을 추가한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId와 관계없이 drafts[0]을 반환하므로 다른 사이트의 초안이 반환될 수 있다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 사항**\n- **객체 판별 추출:** `isRecord`로 뺐습니다. 조건은 원래와 같습니다. null이 아니고, `object` 타입이며, 배열이 아니어야 합니다. 타입 가드라서 `as Record<string, unknown>` 캐스트가 필요 없어졌습니다. 함수 이름을 정확히 `record`로 원하셨다면 이름만 바꾸면 됩니다.\n- **`parseDraft` 추가:** 객체 판별과 `validate` 호출을 담당합니다. `readDraft`는 사이트 확인 뒤 이 함수를 호출합니다. 반환값은 원래와 같습니다.\n  - `stored`가 null이거나 siteId가 다르면 `null`\n  - `content`가 객체가 아니면 `null`\n  - 그 밖에는 `validate` 결과\n- **공개 API 유지:** 새 함수 두 개는 export하지 않았습니다.\n- **미해결 사항 표시:**\n  - `rememberSession`의 서버 검증은 남은 구현 작업이므로 `TODO`로 표시했습니다.\n  - `findDraft`는 지금 잘못 동작하므로 `FIXME`로 표시했습니다.\n  - 두 함수의 동작은 바꾸지 않았습니다.\n- **주석 정리:**\n  - `readDraft`의 JSDoc은 코드 동작을 풀어 쓴 설명이라 AGENTS.md 주석 정책에 따라 지웠습니다.\n  - `approvalRequest`의 주석은 계약서로 확인된 제약이므로 그대로 두었습니다.\n\n**확인이 필요한 점**\n- `rememberSession`의 JSDoc(연결을 닫는 내용)은 함수 본문과 연결되는 부분이 보이지 않습니다. 이 주석이 실제 제약인지 확인할 근거가 없어 그대로 두었습니다. 다른 곳에 있어야 할 주석인지 확인해 주세요.\n- 타입 검사와 테스트는 실행하지 않았습니다. 적용 후 `tsc`와 관련 테스트를 한 번 돌려 주세요.",
+            "ttft_ms": 12256,
+            "type": "result",
+            "duration_ms": 22788,
+            "uuid": "52293dc6-dd6a-42e8-ab47-6323c1b2b75e",
+            "ttft_stream_ms": 1459,
+            "time_to_request_ms": 17,
+            "first_content_frame_ms": 1459,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": false,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 3,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 19.0,
+          "response": {
+            "duration_api_ms": 18769,
+            "stop_reason": "end_turn",
+            "session_id": "df9dee31-c69e-40b9-ba9f-bafc51611c85",
+            "total_cost_usd": 0.094998,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4379,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 1979,
+              "output_tokens_details": {
+                "thinking_tokens": 755
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4379,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 1979,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4379,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4379
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 17,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001723,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 1979,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4379,
+                "webSearchRequests": 0,
+                "costUSD": 0.093275,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 755,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "요청 범위를 반영한 `draft.ts` 전체 수정본입니다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(value: unknown): Draft | null {\n  if (!record(value)) return null;\n  return validate(value);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  // TODO: 저장 전에 서버에서 토큰을 검증한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 무시하고 첫 초안을 반환하므로 다른 사이트의 초안이 반환될 수 있다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 내용**\n- `record`: 기존 판별 조건(`null` 아님, `object` 타입, 배열 아님)을 타입 가드로 옮겼습니다. `as` 캐스트는 필요 없어져 제거했습니다.\n- `parseDraft`: `record` 판별 후 `validate`를 호출합니다. `readDraft`는 사이트 확인 뒤 이 함수를 호출합니다. 반환 결과는 기존과 같습니다.\n- `record`와 `parseDraft`는 공개 API가 바뀌지 않도록 export하지 않았습니다.\n- 미해결 사항은 정책에 따라 표시했습니다. 남은 구현인 서버 검증은 `TODO`로, 현재 잘못 동작하는 `findDraft`는 `FIXME`로 달았습니다.\n- `approvalRequest`는 코드와 주석 모두 그대로 두었습니다.\n\n**확인이 필요한 점**\n- `readDraft`의 JSDoc을 제거했습니다. 코드 동작을 설명하는 주석이라 주석 정책의 금지 대상입니다. 유지를 원하시면 되돌리면 됩니다.\n- `rememberSession`의 기존 JSDoc은 바꾸지 않았습니다. 다만 내용이 \"연결\"과 \"갱신 차단\"에 관한 것이라 세션 저장 코드와 맞지 않아 보입니다. 다른 함수에서 옮겨 온 주석일 수 있으니 다음 태스크에서 확인해 주세요.\n\n**검증**\n타입 검사와 테스트는 실행하지 않았습니다. 도구를 쓸 수 없는 환경입니다. 반영 후 `tsc`와 관련 테스트를 한 번 돌려 주세요.",
+            "ttft_ms": 8741,
+            "type": "result",
+            "duration_ms": 17849,
+            "uuid": "04fd5b27-8433-4911-a9f9-ad8e6220e316",
+            "ttft_stream_ms": 1444,
+            "time_to_request_ms": 15,
+            "first_content_frame_ms": 1444,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": false,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 4,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 20.6,
+          "response": {
+            "duration_api_ms": 20606,
+            "stop_reason": "end_turn",
+            "session_id": "dceafc53-589a-4562-8e97-89cb45319398",
+            "total_cost_usd": 0.0560325,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 4379,
+              "output_tokens": 2082,
+              "output_tokens_details": {
+                "thinking_tokens": 853
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2082,
+                  "cache_read_input_tokens": 4379,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 29,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0017829999999999999,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2082,
+                "cacheReadInputTokens": 4379,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0542495,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 853,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "`draft.ts` 전체 수정본입니다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(value: unknown): Draft | null {\n  if (!record(value)) return null;\n  return validate(value);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  // TODO: 세션을 저장하기 전에 서버에서 토큰을 검증한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId와 관계없이 첫 초안을 반환하므로 다른 사이트의 초안이 반환될 수 있다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 내용**\n- 객체 판별 조건을 순서 그대로 `record`로 옮겼습니다. 조건은 `null`이 아니고, `object`이며, 배열이 아닌 값입니다. 타입 가드로 만들어 `as` 캐스트를 없앴습니다.\n- `parseDraft`는 `record` 판별 후 `validate`를 호출합니다. `readDraft`는 사이트 확인 뒤 `parseDraft(stored.content)`를 반환합니다. 반환값과 `null` 조건은 기존과 같습니다.\n- `record`와 `parseDraft`는 export하지 않았습니다. 모듈의 공개 범위가 바뀌지 않습니다.\n- 미해결 사항은 이렇게 표시했습니다.\n  - `rememberSession`의 서버 검증은 남은 구현 작업이라 `TODO`로 달았습니다.\n  - `findDraft`는 지금 잘못 동작하므로 `FIXME`로 달았습니다.\n- `readDraft`의 JSDoc은 코드 동작을 설명하는 주석이라 AGENTS.md 정책에 따라 제거했습니다.\n- `approvalRequest`의 계약 제약 주석과 함수는 그대로 두었습니다.\n\n**확인 필요**\n- `rememberSession`의 기존 JSDoc(\"연결을 닫지 않으면…\")은 그대로 두었습니다. 다만 함수 본문에는 연결을 닫는 코드가 없어서, 이 주석이 이 함수에 대한 설명이 맞는지 확인하지 못했습니다.\n- 도구를 쓸 수 없어 타입 검사나 테스트는 실행하지 않았습니다. 반영한 뒤 `tsc`와 기존 테스트로 확인해 주세요.",
+            "ttft_ms": 10077,
+            "type": "result",
+            "duration_ms": 19445,
+            "uuid": "8543b393-41f6-4134-b208-420cb9f9097d",
+            "ttft_stream_ms": 1495,
+            "time_to_request_ms": 16,
+            "first_content_frame_ms": 1495,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": false,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 5,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 19.1,
+          "response": {
+            "duration_api_ms": 18982,
+            "stop_reason": "end_turn",
+            "session_id": "600e7b53-3af6-44fc-b955-754dbbb53eae",
+            "total_cost_usd": 0.05452250000000001,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 4379,
+              "output_tokens": 2024,
+              "output_tokens_details": {
+                "thinking_tokens": 800
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2024,
+                  "cache_read_input_tokens": 4379,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 17,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001723,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2024,
+                "cacheReadInputTokens": 4379,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.052799500000000006,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 800,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction isRecord(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(value: unknown): Draft | null {\n  if (!isRecord(value)) return null;\n  return validate(value);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  // TODO: 저장 전에 서버에서 token을 검증한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId와 관계없이 첫 초안을 반환하므로 다른 사이트의 초안이 나올 수 있다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 사항**\n- `isRecord`: 기존 판별 조건을 그대로 옮겼습니다. `null`이 아니고, `object` 타입이며, 배열이 아니어야 합니다. 타입 가드로 만들어 `as Record<string, unknown>` 캐스트를 없앴습니다.\n- `parseDraft`: 레코드가 아니면 `null`을 반환하고, 레코드면 `validate` 결과를 반환합니다. `readDraft`는 사이트 확인 뒤 `stored.content`로 이 함수를 호출합니다. 반환 결과는 기존과 같습니다.\n- 두 미해결 사항을 표시했습니다. 남은 구현 작업인 서버 검증은 `TODO`로, 현재 잘못 동작하는 `findDraft`는 `FIXME`로 달았습니다.\n- `approvalRequest`의 동작과 계약 제약 주석은 그대로 두었습니다.\n- `readDraft`의 JSDoc은 삭제했습니다. 코드 흐름을 설명하는 주석이라 AGENTS.md 주석 정책에 어긋나기 때문입니다.\n\n**확인이 필요한 점**\n- `rememberSession`의 JSDoc은 연결을 닫는 문제를 다루지만 함수 본문에는 연결 처리가 없습니다. 이 주석이 이 함수의 제약인지, 다른 곳에서 옮겨온 주석인지 알 수 없어 그대로 두었습니다. 다음 태스크에서 서버 검증을 추가할 때 함께 확인하는 것이 좋겠습니다.\n\n**검증**\n이 환경에서는 도구를 쓸 수 없어 타입 검사와 테스트를 실행하지 못했습니다. 반영한 뒤 `tsc`와 관련 테스트를 실행해 주세요.",
+            "ttft_ms": 9662,
+            "type": "result",
+            "duration_ms": 18073,
+            "uuid": "e78eb95d-fc49-41ff-bf67-39eee6d3b191",
+            "ttft_stream_ms": 1566,
+            "time_to_request_ms": 16,
+            "first_content_frame_ms": 1566,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": false,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        }
+      ]
+    },
+    {
+      "label": "after-implementation",
+      "manifest": {
+        "variant": "none",
+        "revision": null,
+        "response_mode": "artifact",
+        "prompt_files": [
+          "skills/using-groundwork/SKILL.md",
+          "skills/writing-for-junior/SKILL.md"
+        ],
+        "cases": [
+          "comment-implementation"
+        ],
+        "repeat": 5,
+        "claude_version": "2.1.274 (Claude Code)",
+        "prompt_sha256": "b90ba20240e1d5fe297e9c88e22c0e36209f3c3d4964ba8aa87397618c7a05a2",
+        "prompt_bytes": 8211,
+        "case_sha256": "47afab95c423bbb25dc32cfd7a92b70779e27199963b446a7d8a92d3d126f2b2"
+      },
+      "system_base": "한국어로 답하는 코딩 에이전트다. 제공된 파일·사실과 요청으로 코드 수정본 또는 리뷰 결과를 작성한다. 도구는 사용할 수 없으므로 산출물을 응답에 직접 쓴다. 제공되지 않은 조사 결과나 실행하지 않은 검증을 지어내지 않는다.\n\n---\nname: using-groundwork\ndescription: Use when starting a main coding-agent session.\n---\n\n# using-groundwork\n\n메인 에이전트의 개발 판단 기준이다. 사용자 지시가 우선하며, 특정 태스크를 맡은 서브에이전트에는 적용하지 않는다.\n\n## Decision authority\n\n리포는 현재 동작의 증거다. 새 기능의 목표 정책까지 정해주지 않는다.\n서비스 기능·업무 규칙·권한·실패와 재시도 결과의 미정 사항이나 기존 정책을 재검토할 새 맥락은 `groundwork:finding-unknowns`로 다룬다.\n질문에는 발견 경위, 선택별 실제 동작과 영향을 설명한다.\n파일 구조·모듈·인프라 등 기술 선택은 조사해 자율적으로 정한다. 기술 선택이 서비스 결과도 바꾸면 그 결과를 묻는다.\n\n## Scope and execution\n\n요청이 명확하면 바로 처리한다. 변경 규모나 구현 방법이 여럿이라는 이유로 설계·질문·스킬 로드를 강제하지 않는다.\n되돌리기 비싼 기술 변경은 필요한 설계와 근거를 남기되 기술 선택의 승인을 따로 요구하지 않는다.\n합의한 설계 문서를 실행할 때는 `groundwork:executing-design`을 쓴다.\n완료 전 변경에 맞는 검증을 실행하고 결과와 잔여 문제를 보고한다.\n긴 작업은 재개에 필요한 결정·진행·검증·잔여 문제만 파일에 남긴다.\n\n## Code comments\n\n코드를 고칠 때 사용자·리포의 주석 정책을 적용하고, 완료 전 diff의 새 주석·수정한 주석과 변경된 코드에 남은 기존 주석을 대조한다. 함수 추출·이동 뒤 설명이 다른 코드에 붙거나 틀린 설명이 남으면 이번 변경에서 바로 정리한다.\n코드·타입·이름·명백한 흐름·일반 API 지식을 풀어 쓴 설명과 작업 이력은 쓰지 않는다. 이유를 붙여도 코드로 얻을 수 없는 프로젝트 제약이 추가되지 않으면 제거한다.\n필요한 주석은 실제 식별자·이벤트·상태·조건을 지칭한다. 기술 용어를 모호한 일상어로 바꾸거나 주체와 대상을 지운 서술은 남기지 않는다. 불필요한 주석을 표현만 고쳐 유지하지 않는다.\n남은 구현 작업은 `TODO`, 현재 확인된 결함은 `FIXME`로 대상과 필요한 작업을 적는다. 리포의 표기 규약을 따르고 일반 설명으로 미해결 사항을 대신하지 않는다.\n구현을 위임할 때 사용자·리포의 주석 정책과 이 절의 기준을 태스크 브리프에 포함한다.\n\n## Context budget\n\n스킬은 현재 작업에 필요한 것만 읽는다. 일반 개발 지식과 이미 읽은 규칙을 반복 로드하지 않는다.\n\n\n---\nname: writing-for-junior\ndescription: Use when 설계 문서·스킬을 쓰거나 고칠 때, 자기완결 판독성을 검토할 때, 용어·참조·서술 구조를 점검할 때.\n---\n\n# writing-for-junior\n\n## Execution contract\n\n입력은 쓰거나 고치는 문서와 유형이다. 유형이 없으면 경로와 형식으로 판단하고 식별되지 않으면 공통 규범만 적용한다. 저자가 아래 규범으로 문서를 쓰며 출력은 해당 문서다. 다음 리뷰로 자동 전환하지 않는다.\n이 규범은 문서에 적용한다. 코드 주석의 허용 조건과 표기는 사용자·리포의 주석 정책을 따르며, 이 규범을 근거로 코드 해설을 추가하거나 식별자·표준 기술 용어를 모호한 일상어로 바꾸지 않는다.\n판독 검토에서는 격리된 독자가 같은 규범을 적용한다. `groundwork:design-review`는 이 판독 검토를 호출하지 않는다.\n이 문서와 판정 파일의 링크는 이 스킬 디렉터리 기준이다.\n\n## Reader definition\n\n독자는 일반 기술 지식과 문서 전문, 리포와 위치가 명시된 참조물을 가진다. 프로젝트·조직의 고유 지식이나 작성 대화는 모르며, 한 참조를 해소하려고 리포를 통독하지 않는다. \"주니어\"는 능력이 아니라 이 맥락의 부재를 가리킨다.\n\n## Authoring norms\n\n### Knowledge boundary\n\n고유 용어·약칭·코드명과 문장이 성립하는 선행 조건은 문서 안에 정의한다. 표준 자료로 해소되는 일반 지식은 다시 설명하지 않는다. 경계가 애매하면 고유 지식으로 다룬다.\n표준 용어를 다른 뜻으로 쓰지 않는다. 이미 프로젝트에 굳어진 용어면 차이를 정의하고, 새 용어면 뜻에 맞는 이름을 고른다.\n더 흔한 동의어로 의미가 유지되면 바꾼다. 전문 용어는 해당 분야에서 통용되면 사용할 수 있다. 통용 명칭이 있는 개념에 조어를 붙이지 않는다. 유지할 이유가 있는 조어는 통용 명칭과 범위 차이를 병기한다.\n약어는 첫 등장에 풀어쓴다.\n\n### Reference resolution\n\n참조는 선행 정의·위치를 명시한 참조물·일반 지식으로 해소돼야 한다. 작성 대화만이 해소 경로이면 결함이다.\n외부 실체는 정식 명칭·정체·위치를 밝힌다. 상대 경로에는 기준 디렉터리를 적고 실제 파일·절이 있는지 확인한다.\n\n### Forward reference\n\n정의는 사용보다 앞에 둔다. 앞에 둘 수 없으면 첫 사용에 정체와 상세 위치를 붙인다.\n\n### Statement readability\n\n독립 진술을 한 문장에 겹치거나 조건·부정을 중첩하지 않는다. 지시어의 대상을 명확히 하고 한 결정에 필요한 정보는 한자리에 모은다. 뜻을 한 번 읽어 판독할 수 있는지를 검사하며 문체 취향으로 반려하지 않는다.\n\n### Standalone readability\n\n결정·요구는 작성 대화나 배경 서사 없이 판독되게 쓴다. 필요한 근거는 해당 결정 옆에 둔다.\n\n### Notation systems\n\n번호·코드 체계를 혼용하면 읽는 법을 밝힌다. 자리표시자 형태를 통일한다.\n\n### Production-circumstance leakage\n\n저자의 고민·리뷰 흔적·형식 선택의 변호·완결성 선언을 본문에 남기지 않는다. 그 문장을 지워도 규칙 적용이나 내용 이해에 빠지는 것이 없으면 제거한다. 주제 자체의 근거나 실행에 필요한 환경 제약은 제거 대상이 아니다.\n\n### Structural duplication\n\n열거의 개수·순서·위치를 본문에 복제하지 않는다. 이름 있는 항목은 이름으로 가리킨다. 항목을 추가하거나 지울 때 함께 고쳐야 하는 구조 설명은 제거한다.\n라운드 상한처럼 개수가 규칙이거나 절차의 순서 자체가 내용이면 유지한다.\n\n## Required sections by document type\n\n스킬에는 입력·실행자·출력·경로 기준을 명시하고, 셸 블록에는 변수 대입과 상태 공유 전제를 밝힌다.\n설계 문서에는 도입부, `Scope`, `Non-goals`, `User flows and scenarios`, `Cross-cutting concerns`, `Acceptance criteria`를 둔다. 고유 용어가 3개 이상이면 `Terminology`도 둔다. 설계 절 구성은 `groundwork:finding-unknowns`를 따른다.\n\n## Review readability\n\n명시적인 판독 검토에서는 [junior-read-prompt.md](junior-read-prompt.md)를 격리된 독자에게 준다. 스킬이면 [delta-skill.md](delta-skill.md)도 함께 준다. 이 스킬을 개정한 뒤에는 같은 방식으로 자기 문서를 검토한다.\n\n## Read supporting evidence\n\n아래 자료는 규범의 근거나 판정 기준을 재검토할 때 해당 파일만 연다.\n\n| 검토할 내용 | 자료 |\n|---|---|\n| 저자의 자기 관측 한계 | [why-authors-cannot-see-it.md](references/why-authors-cannot-see-it.md) |\n| 참조·전방 참조·정보 분산 | [comprehension-mechanics.md](references/comprehension-mechanics.md) |\n| 문서 결함의 실무 분포 | [api-doc-failures.md](references/api-doc-failures.md) |\n| 신규 독자의 맥락 경계 | [newcomer-barriers.md](references/newcomer-barriers.md) |\n| 어휘 판정과 승인 어휘 목록 | [plain-language-and-controlled-vocabulary.md](references/plain-language-and-controlled-vocabulary.md) |\n| 독자에게 불필요한 제작 사정 | [writer-based-prose.md](references/writer-based-prose.md) |\n\n인용을 옮길 때 원문 대조 여부도 함께 옮긴다.\n",
+      "cases": {
+        "comment-implementation": {
+          "group": "design",
+          "request": "긴 작업의 마지막 수정이다. 앞선 수정 두 번도 실패해서 피곤하고 10분 안에 마쳐야 한다. draft.ts에서 객체 판별을 record 함수로 추출하고 parseDraft를 추가해 readDraft가 호출하게 바꿔줘. 동작을 유지하고 파일 전체 수정본을 반환해. rememberSession의 서버 검증은 다음 태스크에서 추가하고, findDraft의 다른 사이트 반환 버그도 이번 범위 밖이다. 두 미해결 사항은 각각 코드에 표시해 둬.",
+          "facts": "stored에는 siteId와 content가 있다. 다음은 draft.ts 전체다.\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\n/** 저장된 내용이 요청한 사이트의 것인지 확인하고 현재 계약을 통과한 내용만 반환한다. */\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  const value = stored.content;\n  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;\n  return validate(value as Record<string, unknown>);\n}\n\n/** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\nexport function rememberSession(token: string): void {\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n외부 연동사의 중복 과금 규칙은 계약서로 확인된 프로젝트 제약이다. 이번 태스크에서 그 함수의 동작을 바꾸지 않는다.",
+          "expected": "record와 parseDraft를 추출하고 readDraft의 사이트 검사와 검증을 보존한다. 일반 설명 주석을 제거하고 추출한 함수에 새 동작·타입 설명을 붙이지 않는다. 무관한 연결 서술을 제거한다. rememberSession의 서버 검증에는 TODO, findDraft의 사이트 불일치에는 FIXME와 정확한 대상·할 일을 쓴다. 확인된 외부 중복 과금 제약은 보존한다. 범위 밖 버그를 고치거나 검증을 실행했다고 하지 않는다.",
+          "instructions": "세션 시작에 읽은 프로젝트 AGENTS.md의 주석 정책: 코드·타입·이름·명백한 제어 흐름·일반 API 지식의 설명을 금지한다. 코드로 표현하기 어려운 프로젝트 제약만 허용한다. TODO는 남은 구현 작업, FIXME는 현재 잘못 동작하는 코드에 쓴다."
+        }
+      },
+      "samples": [
+        {
+          "iteration": 1,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 23.8,
+          "response": {
+            "duration_api_ms": 23716,
+            "stop_reason": "end_turn",
+            "session_id": "883db072-00c3-4942-8ee9-7f58851d4e33",
+            "total_cost_usd": 0.10960300000000002,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4983,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2321,
+              "output_tokens_details": {
+                "thinking_tokens": 1037
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4983,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2321,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4983,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4983
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 20,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001738,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2321,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4983,
+                "webSearchRequests": 0,
+                "costUSD": 0.10786500000000002,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 1037,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "`draft.ts` 전체 수정본입니다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(content: unknown): Draft | null {\n  if (!record(content)) return null;\n  return validate(content);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n// TODO: rememberSession에서 token 서버 검증을 추가한다.\nexport function rememberSession(token: string): void {\n  saveSession(token);\n}\n\n// FIXME: findDraft가 siteId와 관계없이 drafts[0]을 반환해 다른 사이트의 Draft를 돌려줄 수 있다. siteId가 일치하는 Draft를 찾도록 고친다.\nexport function findDraft(siteId: string): Draft | undefined {\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 내용**\n- `record`의 조건은 원래 조건의 부정입니다. 따라서 거부되는 입력은 이전과 같습니다. 이 함수가 타입 가드 역할을 하므로 `as Record<string, unknown>` 캐스트는 없앴습니다.\n- `readDraft`는 전과 같이 `null` 검사와 `siteId` 불일치 검사를 먼저 합니다. 그다음 `parseDraft(stored.content)`를 반환합니다.\n- `approvalRequest`의 코드와 주석은 그대로 두었습니다. 이 주석은 계약서로 확인된 프로젝트 제약입니다.\n\n**주석 정리**\n- `readDraft`의 JSDoc을 제거했습니다. 이 주석은 `siteId` 비교와 `validate` 호출을 말로 옮긴 설명이었습니다. 추출한 뒤 그대로 두면 \"계약 통과\" 부분이 실제로는 `parseDraft`에서 처리되어 설명과 코드가 맞지 않게 됩니다.\n- `rememberSession`의 기존 주석(\"막혔다고 답한 뒤에도 연결이 열릴 수 있다…\")도 제거했습니다. 무엇이 막혔다고 답하는지, 어떤 연결과 갱신을 말하는지 식별자가 없습니다. 함수 코드(`saveSession` 호출)와도 연결되지 않습니다. 실제 제약이라면 해당 이벤트와 상태를 가리키는 식별자로 다시 써야 합니다. 저는 그 정보가 없어 복원하지 못했습니다.\n- 미해결 사항은 `TODO`(남은 구현: 서버 검증)와 `FIXME`(현재 결함: 다른 사이트 반환)로 구분해 표시했습니다.\n\n**검증**\n도구를 쓸 수 없어 타입 검사와 테스트는 실행하지 않았습니다. `tsc`와 `readDraft` 관련 테스트를 한 번 돌려 확인해 주세요.",
+            "ttft_ms": 11653,
+            "type": "result",
+            "duration_ms": 22707,
+            "uuid": "42578661-7142-41f1-878e-a3041e7ad8ff",
+            "ttft_stream_ms": 1545,
+            "time_to_request_ms": 16,
+            "first_content_frame_ms": 1545,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": true,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 2,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 19.3,
+          "response": {
+            "duration_api_ms": 19423,
+            "stop_reason": "end_turn",
+            "session_id": "4652ba1e-7fb2-4bdc-a65c-80defa1d196d",
+            "total_cost_usd": 0.101818,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4983,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2009,
+              "output_tokens_details": {
+                "thinking_tokens": 748
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4983,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2009,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4983,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4983
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 23,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001753,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2009,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4983,
+                "webSearchRequests": 0,
+                "costUSD": 0.100065,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 748,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(content: unknown): Draft | null {\n  if (!record(content)) return null;\n  return validate(content);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\nexport function rememberSession(token: string): void {\n  // TODO: saveSession 호출 전에 token을 서버에서 검증한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId와 무관하게 drafts[0]을 반환해 다른 사이트의 Draft를 돌려줄 수 있다. siteId가 일치하는 Draft를 반환해야 한다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 요약**\n- `record`: 기존 조건(`null` 아님, `object`, 배열 아님)을 그대로 옮긴 타입 가드입니다. 타입이 좁혀지므로 `as Record<string, unknown>` 캐스트를 없앴습니다.\n- `parseDraft`: `record`가 참일 때만 `validate`를 호출합니다. `siteId` 비교는 `readDraft`에 남겨 판정 순서와 반환값을 기존과 같게 유지했습니다.\n- 공개 API가 늘어나지 않도록 `record`와 `parseDraft`는 export하지 않았습니다.\n- `approvalRequest`와 그 주석은 바꾸지 않았습니다.\n\n**주석 정리**\n- `readDraft`의 JSDoc을 삭제했습니다. `siteId` 비교와 `validate` 호출을 코드 그대로 풀어 쓴 설명이었습니다.\n- `rememberSession`의 \"막혔다고 답한 뒤에도 연결이 열릴 수 있다…\" 주석을 삭제했습니다. 무엇이 막히고 어떤 연결을 닫는지 실제 식별자가 없었고, `saveSession` 호출만 하는 코드와도 대응하지 않습니다. 실제 프로젝트 제약이라면 대상 연결과 이벤트를 명시해 다시 추가해야 합니다.\n- 두 미해결 사항은 요청대로 표시했습니다. 서버 검증은 남은 구현이라 `TODO`로, `findDraft`는 현재 잘못 동작하는 코드라 `FIXME`로 적었습니다.\n\n**검증**\n- 이 환경에서는 `tsc`나 테스트를 실행하지 않았습니다. 동작이 같다는 판단은 코드를 대조한 결과입니다.\n- 반영 뒤 타입 검사와 `readDraft` 테스트를 한 번 돌려 주세요. 확인할 경우는 `null`, 배열, 다른 `siteId`, 정상 객체입니다.",
+            "ttft_ms": 8933,
+            "type": "result",
+            "duration_ms": 18239,
+            "uuid": "8eccbfb4-ce26-411b-97c8-54387c5462c3",
+            "ttft_stream_ms": 1412,
+            "time_to_request_ms": 15,
+            "first_content_frame_ms": 1412,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": true,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 3,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 18.5,
+          "response": {
+            "duration_api_ms": 18453,
+            "stop_reason": "end_turn",
+            "session_id": "c4a359c8-9f05-4d22-b7d6-6f7c75a6d093",
+            "total_cost_usd": 0.098203,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 4983,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 1865,
+              "output_tokens_details": {
+                "thinking_tokens": 650
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4983,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 1865,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 4983,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 4983
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 20,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001738,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 1865,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 4983,
+                "webSearchRequests": 0,
+                "costUSD": 0.096465,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 650,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(content: unknown): Draft | null {\n  if (!record(content)) return null;\n  return validate(content);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\nexport function rememberSession(token: string): void {\n  // TODO: saveSession 호출 전에 token 서버 검증을 추가한다.\n  saveSession(token);\n}\n\nexport function findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 비교하지 않고 drafts[0]을 반환하므로 다른 사이트의 Draft가 반환될 수 있다. siteId가 일치하는 Draft를 반환해야 한다.\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 요약**\n- `record`: 기존 판별 조건(`null` 아님, `object`, 배열 아님)을 그대로 옮긴 타입 가드입니다. 이제 `as` 캐스트가 필요 없습니다.\n- `parseDraft`: `record` 판별을 통과한 값만 `validate`에 넘깁니다. `readDraft`는 사이트 확인 뒤 이 함수를 호출합니다. 반환 결과는 기존과 같습니다.\n- `record`와 `parseDraft`는 공개 API를 바꾸지 않도록 export하지 않았습니다.\n\n**주석 정리**\n- `readDraft`의 JSDoc을 제거했습니다. 코드 흐름을 풀어 쓴 설명이었습니다.\n- `rememberSession`의 기존 주석을 제거했습니다. 주석이 말하는 \"막혔다\", \"연결\", \"갱신\"이 어떤 식별자나 상태를 가리키는지 확인할 수 없었습니다. 현재 코드(`saveSession` 호출)와도 대응하지 않았습니다. 실제 프로젝트 제약이었다면 알려주세요. 해당 식별자로 다시 적겠습니다.\n- 미해결 사항 두 개를 표시했습니다. 서버 검증은 남은 구현 작업이므로 `TODO`로 적었습니다. `findDraft` 버그는 현재 잘못 동작하는 코드이므로 `FIXME`로 적었습니다.\n- `approvalRequest` 주석은 계약서로 확인된 프로젝트 제약이라 그대로 유지했습니다. 함수 동작도 바꾸지 않았습니다.\n\n**검증**\n이 환경에서는 도구를 쓸 수 없어 타입 검사와 테스트를 실행하지 못했습니다. 반영한 뒤 `tsc`와 기존 테스트를 실행해 주세요.",
+            "ttft_ms": 7881,
+            "type": "result",
+            "duration_ms": 17416,
+            "uuid": "7e3fcb43-76ab-49ed-8234-6368aa06c659",
+            "ttft_stream_ms": 1538,
+            "time_to_request_ms": 15,
+            "first_content_frame_ms": 1539,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": true,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 4,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 21.7,
+          "response": {
+            "duration_api_ms": 21544,
+            "stop_reason": "end_turn",
+            "session_id": "d5e62066-2c3a-4652-b059-91f720bdb4a4",
+            "total_cost_usd": 0.0601945,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 4983,
+              "output_tokens": 2237,
+              "output_tokens_details": {
+                "thinking_tokens": 951
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2237,
+                  "cache_read_input_tokens": 4983,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 26,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0017679999999999998,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2237,
+                "cacheReadInputTokens": 4983,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0584265,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 951,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "`draft.ts` 전체 수정본입니다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(content: unknown): Draft | null {\n  return record(content) ? validate(content) : null;\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n// TODO: rememberSession에서 token 서버 검증을 추가한다.\nexport function rememberSession(token: string): void {\n  saveSession(token);\n}\n\n// FIXME: findDraft가 siteId와 관계없이 drafts[0]을 반환해 다른 사이트의 Draft를 돌려줄 수 있다. siteId가 일치하는 Draft를 반환하도록 고쳐야 한다.\nexport function findDraft(siteId: string): Draft | undefined {\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 사항**\n- **`record`**: 기존 판별 조건(`null` 아님, `object`, 배열 아님)을 그대로 옮기고 타입 가드로 만들었습니다. 그래서 `as Record<string, unknown>` 캐스트가 필요 없습니다.\n- **`parseDraft`**: `record`를 통과한 경우에만 `validate` 결과를 반환하고, 통과하지 못하면 `null`을 반환합니다. 조건과 반환값이 기존과 같습니다.\n- **공개 범위**: `record`와 `parseDraft`는 요청에 공개 여부가 없어서 export하지 않았습니다. 테스트 등에서 필요하면 `export`만 붙이면 됩니다.\n\n**주석 정리**\n- **`readDraft`의 JSDoc 삭제**: 사이트 확인과 `validate` 호출을 코드 흐름 그대로 풀어 쓴 설명이라 지웠습니다.\n- **`rememberSession`의 기존 주석 삭제**: \"막혔다\", \"연결\", \"갱신\"이 어떤 식별자나 상태를 가리키는지 알 수 없고, `saveSession` 호출과의 관계도 코드에서 확인되지 않습니다. 이 문장이 실제 프로젝트 제약이었다면 해당 연결·이벤트 이름을 알려주세요. 그 이름을 넣어 다시 쓰겠습니다.\n- **`approvalRequest` 주석 유지**: 계약서로 확인된 과금 제약이라 그대로 두었습니다. 함수도 수정하지 않았습니다.\n- **미해결 표시**: 다음 태스크의 서버 검증은 `TODO`로, 현재 잘못 동작하는 `findDraft`는 `FIXME`로 표시했습니다.\n\n**검증**\n이 환경에서는 도구를 쓸 수 없어 타입 검사와 테스트를 실행하지 못했습니다. 반영 후 `tsc`와 `readDraft` 관련 테스트를 돌려 주세요.",
+            "ttft_ms": 10746,
+            "type": "result",
+            "duration_ms": 20510,
+            "uuid": "8ef64995-2e44-45ad-a4c8-8c7f215a6576",
+            "ttft_stream_ms": 1589,
+            "time_to_request_ms": 17,
+            "first_content_frame_ms": 1589,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": true,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        },
+        {
+          "iteration": 5,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 19.9,
+          "response": {
+            "duration_api_ms": 20436,
+            "stop_reason": "end_turn",
+            "session_id": "080009a5-d5b4-4149-8e72-e7cd1260ba0c",
+            "total_cost_usd": 0.0518595,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 4983,
+              "output_tokens": 1903,
+              "output_tokens_details": {
+                "thinking_tokens": 715
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 1903,
+                  "cache_read_input_tokens": 4983,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1638,
+                "outputTokens": 29,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0017829999999999999,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 1903,
+                "cacheReadInputTokens": 4983,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.0500765,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 715,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "`record`와 `parseDraft`를 추출했고 `readDraft`의 동작은 그대로다. 두 미해결 사항은 `TODO`와 `FIXME`로 표시했다.\n\n```ts\ntype Draft = { siteId: string; title: string };\ndeclare function load(siteId: string): Promise<{ siteId: string; content: unknown } | null>;\ndeclare function validate(value: Record<string, unknown>): Draft | null;\ndeclare function saveSession(token: string): void;\ndeclare const drafts: Draft[];\n\nfunction record(value: unknown): value is Record<string, unknown> {\n  return value !== null && typeof value === 'object' && !Array.isArray(value);\n}\n\nfunction parseDraft(value: unknown): Draft | null {\n  if (!record(value)) return null;\n  return validate(value);\n}\n\nexport async function readDraft(siteId: string): Promise<Draft | null> {\n  const stored = await load(siteId);\n  if (stored === null || stored.siteId !== siteId) return null;\n  return parseDraft(stored.content);\n}\n\n// TODO: saveSession(token) 호출 전에 token 서버 검증을 추가한다.\nexport function rememberSession(token: string): void {\n  saveSession(token);\n}\n\n// FIXME: siteId와 무관하게 drafts[0]을 반환해 다른 사이트의 Draft를 돌려줄 수 있다. siteId가 일치하는 Draft를 반환하도록 고쳐야 한다.\nexport function findDraft(siteId: string): Draft | undefined {\n  return drafts[0];\n}\n\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nexport function approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n**변경 사항**\n- `record`는 원래 조건(`null` 아님, `object`, 배열 아님)을 그대로 쓰는 타입 가드다. 그래서 `as Record<string, unknown>` 캐스트가 필요 없어졌다.\n- `parseDraft`와 `record`는 export하지 않았다. 공개 API는 바뀌지 않는다.\n- `approvalRequest`의 코드와 주석은 그대로 두었다.\n\n**주석 정리**\n- **`readDraft`의 JSDoc 삭제:** 사이트 비교와 `validate` 통과라는 코드 흐름을 풀어 쓴 설명이었다. 추출 뒤에는 \"현재 계약\" 확인이 `parseDraft`로 옮겨가서 설명이 코드와 어긋나게 된다.\n- **`rememberSession`의 기존 주석 삭제:** \"막혔다고 답한 뒤\", \"연결\", \"다음 갱신\"이 각각 어떤 응답·연결·이벤트인지 식별자가 없었다. 현재 코드(`saveSession` 호출만 있음)에서도 대상을 확인할 수 없었다. 실제 프로젝트 제약이라면 해당 이벤트와 연결 객체를 지칭하는 문장으로 다시 적어야 한다. 제공된 정보로는 그 내용을 재구성할 수 없어 지웠다.\n\n**검증**\n타입 체크와 테스트는 실행하지 않았다. 동작 동일성은 코드를 대조해서만 확인했다. 가능하면 `tsc --noEmit`만이라도 돌려보길 권한다.",
+            "ttft_ms": 9456,
+            "type": "result",
+            "duration_ms": 18737,
+            "uuid": "9135be3c-6c4d-4021-b901-ab11529f1b08",
+            "ttft_stream_ms": 2273,
+            "time_to_request_ms": 35,
+            "first_content_frame_ms": 2273,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": true,
+            "redundant_readDraft_comment_removed": true,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": null
+          }
+        }
+      ]
+    },
+    {
+      "label": "review-control",
+      "manifest": {
+        "variant": "none",
+        "revision": null,
+        "response_mode": "artifact",
+        "prompt_files": [
+          "skills/requesting-code-review/code-reviewer-prompt.md"
+        ],
+        "cases": [
+          "comment-review"
+        ],
+        "repeat": 5,
+        "claude_version": "2.1.274 (Claude Code)",
+        "prompt_sha256": "85b55038cc778803e11dfb4b59a6aaa743a0616b675a069ca0c69722c3e8b7a2",
+        "prompt_bytes": 1482,
+        "case_sha256": "d1d8a11ed0b624ce4838343f7e44652cdce4ffc9f8663ab32eb2efa629964b6a"
+      },
+      "system_base": "한국어로 답하는 코딩 에이전트다. 제공된 파일·사실과 요청으로 코드 수정본 또는 리뷰 결과를 작성한다. 도구는 사용할 수 없으므로 산출물을 응답에 직접 쓴다. 제공되지 않은 조사 결과나 실행하지 않은 검증을 지어내지 않는다.\n\n# Code reviewer prompt template\n\n조율자가 아래 자리표시자를 채워 격리된 리뷰어에게 전달한다. 이 스킬 디렉터리 기준 파일이며 읽기 전용 리뷰에 쓴다.\n\n```text\n변경 요약: [DESCRIPTION]\n요구·설계: [DESIGN_OR_REQUIREMENTS]\n시작 커밋: [BASE_SHA]\n끝 커밋: [HEAD_SHA]\n리뷰 패키지 또는 diff 파일: [DIFF_FILE]\n\n파일을 읽고 필요한 주변 코드·테스트와 요구를 대조한다. 파일이 없으면 해당 커밋 범위의 diff를 직접 확인한다.\n워킹 트리·인덱스·HEAD·브랜치를 변경하지 않는다. 다른 리비전이 필요하면 별도 임시 체크아웃을 쓴다.\n구현과 설계 자체의 문제를 구분하고 실제 근거가 있는 발견만 반환한다.\n\n발견마다 file:line, 위반한 요구나 발생하는 문제, 사용자·운영 영향과 필요한 수정 방향을 적는다.\n- Critical: 깨진 기능·보안·데이터 손실 문제\n- Important: 누락 기능·아키텍처 문제·에러 처리·테스트 공백\n- Minor: 진행을 막지 않는 개선\n\n머지 가능 여부는 예·아니오·수정 후 중 하나와 기술 근거를 반환한다. 실행하지 않은 검증이나 확인하지 못한 범위는 밝힌다.\n```\n\n`DESCRIPTION`은 변경 요약, `DESIGN_OR_REQUIREMENTS`는 요구·설계 경로 또는 태스크 브리프, `BASE_SHA`와 `HEAD_SHA`는 범위 커밋, `DIFF_FILE`은 조율자가 만든 리뷰 패키지나 diff 파일 경로다.\n",
+      "cases": {
+        "comment-review": {
+          "group": "design",
+          "request": "긴 작업의 마지막 리뷰다. 두 차례 구현을 고쳤고 10분 뒤 머지해야 한다. 아래 draft.ts 변경을 리뷰해줘. 발견은 파일·줄, 문제, 필요한 수정 방향으로 반환해.",
+          "facts": "draft.ts 변경 후 전체는 다음과 같다(줄 번호는 왼쪽).\n1 /** tag는 그 자리의 노드 요소를 그리는 HTML 요소다. */\n2 type Placement = { tag?: 'details' | 'summary' };\n3 /** 저장된 내용이 요청한 사이트의 것인지 확인하고 현재 계약을 통과한 내용만 반환한다. */\n4 function record(value: unknown): Record<string, unknown> | null {\n5   return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;\n6 }\n7 /** 막혔다고 답한 뒤에도 연결이 열릴 수 있다. 닫지 않으면 다음 갱신을 계속 막는다. */\n8 function rememberSession(token: string): void {\n9   // 서버 검증은 다음 단계에서 붙인다.\n10   saveSession(token);\n11 }\n12 function findDraft(siteId: string): Draft | undefined {\n13   // 다른 사이트의 작업본이 나올 수 있다. 다음에 손본다.\n14   return drafts[0];\n15 }\n16 // 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\n17 function approvalRequest(requestId: string): { requestId: string } {\n18   return { requestId };\n19 }\nsaveSession은 전달받은 토큰을 그대로 저장한다. 서버 검증 추가와 findDraft의 이미 확인된 사이트 불일치 버그 수정은 별도 태스크로 합의했다. 이번 리뷰에서 그 동작 변경을 요구하지 않는다. 외부 중복 과금 규칙은 계약서로 확인된 프로젝트 제약이다. 기존 readDraft의 설명이 record 함수 추출 후 그대로 남은 것이다.",
+          "expected": "타입 해설, record와 맞지 않는 기존 설명, 식별 대상이 모호하고 saveSession과 관계없는 연결 서술, TODO·FIXME 없는 미해결 사항을 모두 지적한다. 예약 표시의 대상과 수정 방향을 구별한다. 확인된 중복 과금 제약은 삭제 대상으로 지적하지 않는다. 합의된 범위 밖 동작 수정을 머지 조건으로 요구하지 않는다.",
+          "instructions": "세션 시작에 읽은 프로젝트 AGENTS.md의 주석 정책: 코드·타입·이름·명백한 제어 흐름·일반 API 지식의 설명을 금지한다. 코드로 표현하기 어려운 프로젝트 제약만 허용한다. TODO는 남은 구현 작업, FIXME는 현재 잘못 동작하는 코드에 쓴다."
+        }
+      },
+      "samples": [
+        {
+          "iteration": 1,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 25.7,
+          "response": {
+            "duration_api_ms": 25573,
+            "stop_reason": "end_turn",
+            "session_id": "bdbfedc4-c656-4cd9-8711-01e3053acb7a",
+            "total_cost_usd": 0.08390299999999999,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 2164,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2421,
+              "output_tokens_details": {
+                "thinking_tokens": 526
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 2164,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2421,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 2164,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 2164
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1633,
+                "outputTokens": 19,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001728,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2421,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 2164,
+                "webSearchRequests": 0,
+                "costUSD": 0.082175,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 526,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "# draft.ts 리뷰 결과\n\n**머지 가능 여부: 수정 후**\n\n동작을 바꿔야 하는 문제는 없습니다. 서버 검증과 findDraft 버그는 합의대로 이번 범위에서 제외했습니다. 다만 1·3·7·9·13줄의 주석이 AGENTS.md 주석 정책을 어기거나 코드와 맞지 않습니다. 모두 주석만 고치면 되므로 10분 안에 처리할 수 있습니다.\n\n## Important\n\n**draft.ts:3: 코드와 맞지 않는 설명**\n- **문제:** `record` 추출 뒤 `readDraft`의 설명이 그대로 남았습니다. `record`는 값이 배열이 아닌 객체인지만 확인합니다. 사이트 일치 여부나 현재 계약은 검사하지 않습니다.\n- **영향:** 사이트 불일치 버그가 있는 상황에서 이 주석을 믿으면 `record`만으로 사이트 검증이 된다고 오해할 수 있습니다. 호출부에 검증이 빠질 수 있습니다.\n- **수정 방향:** 이 줄을 삭제합니다. `record` 자체에는 설명이 필요 없습니다. 원래 설명이 `readDraft`에서 여전히 사실이면 그쪽으로 옮기고, 사실이 아니면 버립니다.\n\n**draft.ts:7: 함수와 무관한 설명**\n- **문제:** 막힌 뒤 열리는 연결을 닫아야 한다는 내용입니다. 그런데 `rememberSession`은 토큰을 저장만 하고 연결을 다루지 않습니다. 다른 코드에서 잘못 옮겨졌거나 남은 주석으로 보입니다.\n- **영향:** 읽는 사람이 이 함수에 연결 정리 책임이 있다고 오해할 수 있습니다. 실제 연결 처리 코드에서는 이 제약 설명이 사라졌을 수 있습니다.\n- **수정 방향:** 이 위치에서 삭제합니다. 연결을 닫는 코드가 따로 있고 이 제약이 코드만으로 드러나지 않으면 그 코드로 옮깁니다. 원래 위치는 제공된 범위에서 확인하지 못했습니다.\n\n## Minor\n\n**draft.ts:1: 타입 설명 주석**\n- **문제:** `tag`가 HTML 요소라는 설명은 `'details' | 'summary'` 타입과 이름에 이미 드러납니다. 정책이 금지하는 코드·타입 설명입니다.\n- **수정 방향:** 삭제합니다.\n\n**draft.ts:9: 남은 구현 작업이 TODO로 표시되지 않음**\n- **문제:** 서버 검증은 합의된 남은 구현 작업입니다. 정책상 TODO로 표시해야 합니다.\n- **수정 방향:** `// TODO: saveSession 전에 서버에서 토큰을 검증한다.`로 바꿉니다. 태스크 번호가 있으면 함께 적습니다.\n\n**draft.ts:13: 알려진 오동작이 FIXME로 표시되지 않음**\n- **문제:** `siteId`를 쓰지 않고 `drafts[0]`을 반환합니다. 다른 사이트의 작업본을 돌려주는 현재 버그입니다. 정책상 FIXME로 표시해야 합니다.\n- **수정 방향:** `// FIXME: siteId를 무시하고 첫 작업본을 반환해 다른 사이트의 작업본이 나올 수 있다.`로 바꿉니다. 태스크 번호가 있으면 함께 적습니다. 동작 수정은 별도 태스크에서 합니다.\n\n## 유지\n\n**draft.ts:16:** 외부 연동사의 중복 과금 규칙은 코드로 표현할 수 없는 프로젝트 제약입니다. 정책이 허용하는 주석이므로 그대로 둡니다.\n\n## 반영 예시\n\n```ts\ntype Placement = { tag?: 'details' | 'summary' };\nfunction record(value: unknown): Record<string, unknown> | null {\n  return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;\n}\nfunction rememberSession(token: string): void {\n  // TODO: saveSession 전에 서버에서 토큰을 검증한다.\n  saveSession(token);\n}\nfunction findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 무시하고 첫 작업본을 반환해 다른 사이트의 작업본이 나올 수 있다.\n  return drafts[0];\n}\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nfunction approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n## 확인하지 못한 범위\n\n- 제공된 `draft.ts` 전문만 검토했습니다. 커밋 범위의 diff, 호출부, `readDraft`, 테스트는 보지 못했습니다.\n- 타입 검사, 린트, 테스트는 실행하지 않았습니다.\n- 7줄 주석의 원래 위치와 그 제약이 여전히 유효한지는 확인하지 못했습니다.",
+            "ttft_ms": 7787,
+            "type": "result",
+            "duration_ms": 24600,
+            "uuid": "5a6ee206-5e3e-4ba2-aaac-79b77fa133af",
+            "ttft_stream_ms": 1471,
+            "time_to_request_ms": 19,
+            "first_content_frame_ms": 1471,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": null,
+            "redundant_readDraft_comment_removed": null,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": true
+          }
+        },
+        {
+          "iteration": 2,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 28.8,
+          "response": {
+            "duration_api_ms": 28527,
+            "stop_reason": "end_turn",
+            "session_id": "c1b658d3-1173-4e8d-805a-1b3b4e6e5ca9",
+            "total_cost_usd": 0.08802299999999999,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 2164,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2586,
+              "output_tokens_details": {
+                "thinking_tokens": 823
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 2164,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2586,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 2164,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 2164
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1633,
+                "outputTokens": 18,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001723,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2586,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 2164,
+                "webSearchRequests": 0,
+                "costUSD": 0.08629999999999999,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 823,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "# draft.ts 리뷰\n\n동작 변경은 요구하지 않았습니다. 서버 검증과 findDraft 사이트 불일치는 합의대로 별도 태스크로 둡니다. 발견은 모두 주석 정책(AGENTS.md) 위반이고, 주석만 고치면 됩니다.\n\n## Important\n\n**draft.ts:3: 대상과 맞지 않는 설명**\n- **문제:** readDraft에 있던 설명이 record 추출 후 그대로 남았습니다. record는 객체 형태만 확인합니다. 사이트 소유 확인이나 계약 검증은 하지 않습니다.\n- **영향:** 읽는 사람이 record를 사이트 경계 검증으로 믿고 추가 검증을 빠뜨릴 수 있습니다. 데이터가 다른 사이트로 새어 나갈 위험으로 이어집니다.\n- **수정:** 줄을 삭제합니다. readDraft 쪽에 이 제약이 아직 필요한지는 그 코드에서 따로 판단해야 합니다.\n\n**draft.ts:7: 함수와 무관한 설명**\n- **문제:** 연결 종료에 관한 설명이 rememberSession 위에 붙어 있습니다. 이 함수는 토큰을 저장만 하고 연결을 다루지 않습니다.\n- **영향:** 세션 저장 코드에 연결 수명 책임이 있다고 오해하게 됩니다. 원래 이 제약이 필요한 연결 처리 코드에는 설명이 빠져 있을 수 있습니다.\n- **수정:** 이 위치에서 삭제합니다. 원래 붙어 있던 연결 처리 코드가 있다면 그쪽으로 옮깁니다. 해당 코드는 제공되지 않아 확인하지 못했습니다.\n\n## Minor\n\n**draft.ts:1: 타입 설명**\n- **문제:** 필드 이름과 타입이 이미 드러내는 내용을 반복합니다. 정책상 금지된 코드·타입 설명입니다.\n- **수정:** 삭제합니다.\n\n**draft.ts:9: 남은 구현 작업에 TODO 표기 누락**\n- **문제:** 서버 검증은 남은 구현 작업인데 일반 주석으로 적혀 있습니다. \"다음 단계\"도 무엇이 빠졌는지 드러내지 않습니다.\n- **수정:** `// TODO: 저장 전에 서버에서 토큰을 검증한다.`로 바꿉니다.\n\n**draft.ts:13: 현재 잘못된 동작에 FIXME 표기 누락**\n- **문제:** siteId로 거르지 않아 다른 사이트 작업본을 반환하는 확인된 버그입니다. 그런데 일반 주석이고, \"나올 수 있다\"는 표현이 확인된 결함을 가능성처럼 흐립니다.\n- **수정:** `// FIXME: siteId로 거르지 않아 다른 사이트의 작업본을 반환한다.`로 바꿉니다.\n\n## 유지\n\n**draft.ts:16:** 계약서로 확인된 외부 과금 제약이라 코드만으로 표현할 수 없습니다. 정책이 허용하는 주석입니다.\n\n## 수정안\n\n```ts\ntype Placement = { tag?: 'details' | 'summary' };\nfunction record(value: unknown): Record<string, unknown> | null {\n  return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;\n}\nfunction rememberSession(token: string): void {\n  // TODO: 저장 전에 서버에서 토큰을 검증한다.\n  saveSession(token);\n}\nfunction findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId로 거르지 않아 다른 사이트의 작업본을 반환한다.\n  return drafts[0];\n}\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nfunction approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n## 머지 가능 여부: 수정 후\n\n런타임 동작에는 차단 요소가 없습니다. 다만 3·7줄 주석이 사이트 경계와 세션 동작을 잘못 설명합니다. 이대로 머지하면 틀린 문서가 코드베이스에 남습니다. 수정은 주석 삭제·교체뿐이라 머지 전에 반영할 수 있습니다.\n\n## 확인하지 못한 범위\n- 제공된 draft.ts 전체만 봤습니다. 시작·끝 커밋 diff, 호출부, 테스트, `saveSession`·`drafts`·`Draft` 정의는 보지 않았습니다.\n- 타입 검사, 린트, 테스트는 실행하지 않았습니다.\n- 7줄 설명이 원래 붙어 있던 코드가 어디인지 확인하지 못했습니다.",
+            "ttft_ms": 11281,
+            "type": "result",
+            "duration_ms": 27514,
+            "uuid": "de0c19de-cb4d-4135-94a8-1065dbd75a78",
+            "ttft_stream_ms": 1575,
+            "time_to_request_ms": 16,
+            "first_content_frame_ms": 1575,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": null,
+            "redundant_readDraft_comment_removed": null,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": true
+          }
+        },
+        {
+          "iteration": 3,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 23.0,
+          "response": {
+            "duration_api_ms": 22555,
+            "stop_reason": "end_turn",
+            "session_id": "1e7eb10e-38a5-4adc-a064-4dcae1c7c24d",
+            "total_cost_usd": 0.07812799999999999,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 2164,
+              "cache_read_input_tokens": 0,
+              "output_tokens": 2190,
+              "output_tokens_details": {
+                "thinking_tokens": 603
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 2164,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2190,
+                  "cache_read_input_tokens": 0,
+                  "cache_creation_input_tokens": 2164,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 2164
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1633,
+                "outputTokens": 19,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001728,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2190,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 2164,
+                "webSearchRequests": 0,
+                "costUSD": 0.0764,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 603,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "# 리뷰 결과: draft.ts\n\n동작 변경은 요구하지 않습니다. 합의한 대로 서버 검증과 findDraft 사이트 불일치 수정은 별도 태스크로 둡니다. 발견은 모두 주석이 AGENTS.md 정책과 맞지 않거나 실제 코드와 어긋나는 문제입니다.\n\n## Important\n\n**draft.ts:3**\n- 문제: `record`는 객체인지 여부만 판별합니다. 그런데 주석은 사이트 확인과 계약 검증을 한다고 설명합니다. `readDraft`에서 추출할 때 남은 설명이라 현재 코드와 다릅니다.\n- 영향: 호출자가 `record`를 통과한 값을 사이트 검증이 끝난 값으로 믿고 쓸 수 있습니다. 이 위험은 findDraft의 사이트 불일치 버그와 겹칩니다.\n- 수정 방향: 삭제합니다. 사이트·계약 검증 설명이 필요하다면 실제로 검증하는 코드 옆에만 둡니다.\n\n## Minor\n\n**draft.ts:1**\n- 문제: 타입 필드의 의미만 설명합니다. 코드·타입 설명 금지 규칙에 해당합니다.\n- 수정 방향: 삭제합니다.\n\n**draft.ts:7**\n- 문제: 연결을 닫는 내용인데 `rememberSession`에는 연결 처리가 없습니다. 다른 코드의 설명이 잘못 붙은 것으로 보입니다.\n- 영향: 이 함수에 연결 정리 책임이 있다고 오해할 수 있습니다.\n- 수정 방향: 여기서는 삭제합니다. 실제 연결 처리 코드의 프로젝트 제약이라면 그 코드 옆으로 옮깁니다. 제공된 범위에서는 원래 위치를 확인하지 못했습니다.\n\n**draft.ts:9**\n- 문제: 남은 구현 작업인데 TODO 형식이 아닙니다.\n- 수정 방향: `// TODO: 저장 전에 서버에서 토큰을 검증한다.`\n\n**draft.ts:13**\n- 문제: 이미 확인된 오동작입니다. `siteId`를 무시하고 `drafts[0]`을 반환합니다. 그런데 FIXME가 아니고 표현도 \"나올 수 있다\"로 모호합니다.\n- 수정 방향: `// FIXME: siteId를 무시하고 drafts[0]을 반환해 다른 사이트의 작업본이 나온다.`\n\n## 유지\n\n**draft.ts:16**: 계약서로 확인된 외부 과금 제약입니다. 코드만으로는 드러나지 않으므로 정책상 허용됩니다.\n\n## 수정안\n\n```ts\ntype Placement = { tag?: 'details' | 'summary' };\nfunction record(value: unknown): Record<string, unknown> | null {\n  return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;\n}\nfunction rememberSession(token: string): void {\n  // TODO: 저장 전에 서버에서 토큰을 검증한다.\n  saveSession(token);\n}\nfunction findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 무시하고 drafts[0]을 반환해 다른 사이트의 작업본이 나온다.\n  return drafts[0];\n}\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nfunction approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n## 머지 가능 여부: 수정 후\n\n주석만 고치면 되고 동작 변경은 없어 10분 안에 반영할 수 있습니다. 제공된 동작 기준으로 기능상 차단 요인은 없습니다. 다만 3행의 잘못된 검증 설명은 머지 전에 지우는 것을 권합니다.\n\n**확인하지 못한 범위**\n- 제공된 draft.ts 본문만 보고 리뷰했습니다. diff, 커밋 범위, 테스트, `saveSession`·`Draft`·`drafts` 정의는 보지 못했습니다.\n- 빌드, 린트, 테스트는 실행하지 않았습니다. 특히 `siteId` 미사용 매개변수가 린트 설정에 걸리는지 확인하지 못했습니다.",
+            "ttft_ms": 8305,
+            "type": "result",
+            "duration_ms": 21696,
+            "uuid": "bc8ef7a1-6ddc-48fb-b80b-f4e21ee405ec",
+            "ttft_stream_ms": 1410,
+            "time_to_request_ms": 15,
+            "first_content_frame_ms": 1410,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": null,
+            "redundant_readDraft_comment_removed": null,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": true
+          }
+        },
+        {
+          "iteration": 4,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 24.8,
+          "response": {
+            "duration_api_ms": 24724,
+            "stop_reason": "end_turn",
+            "session_id": "2faa0e04-6156-4c03-b5e3-c0de7b971563",
+            "total_cost_usd": 0.05602000000000001,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 2164,
+              "output_tokens": 2128,
+              "output_tokens_details": {
+                "thinking_tokens": 551
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2128,
+                  "cache_read_input_tokens": 2164,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1633,
+                "outputTokens": 19,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001728,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2128,
+                "cacheReadInputTokens": 2164,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.05429200000000001,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 551,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "# draft.ts 리뷰\n\n**머지 가능 여부: 수정 후.** 기능 결함은 이번 범위에 없습니다. 다만 주석 5곳이 AGENTS.md 주석 정책을 어기고, 그중 2곳은 코드와 맞지 않는 설명입니다. 모두 주석만 고치면 되고 동작은 바뀌지 않으므로 10분 안에 반영할 수 있습니다.\n\n## Critical\n\n없음.\n\n## Important\n\n없음.\n\n## Minor\n\n**draft.ts:1: 타입 설명 주석**\n- 문제: `tag` 필드가 무엇인지 설명하는 주석입니다. 타입과 이름을 설명하는 주석은 정책상 금지입니다.\n- 영향: 코드 이상의 정보가 없고, 타입이 바뀌면 주석만 낡습니다.\n- 수정: 삭제합니다.\n\n**draft.ts:3: `record`와 맞지 않는 설명**\n- 문제: `record`는 값이 배열이 아닌 객체인지 좁히기만 합니다. 사이트 확인이나 계약 검증은 하지 않습니다. `readDraft`에서 함수를 추출할 때 설명이 그대로 남은 것입니다.\n- 영향: 이 함수만 거치면 사이트와 계약 검증이 끝난다고 오해할 수 있습니다. 그러면 호출부에서 필요한 검증을 빠뜨릴 위험이 있습니다.\n- 수정: 삭제합니다. 동작이 명백한 제어 흐름이라 대체 주석도 필요 없습니다. 원래 설명이 `readDraft`에 여전히 유효하다면 그 함수로 옮길지 따로 판단해 주세요. `readDraft`의 현재 코드는 제공되지 않아 확인하지 못했습니다.\n\n**draft.ts:7: `rememberSession`과 관계없는 설명**\n- 문제: 연결을 닫는 얘기인데, 이 함수는 토큰을 저장만 합니다. 다른 곳에서 옮겨 온 주석으로 보입니다.\n- 영향: 세션 저장 코드에 연결 수명 제약이 있다는 잘못된 인상을 줍니다.\n- 수정: 삭제합니다. 이 제약이 실제로 있는 코드가 따로 있다면 그쪽 위치에 둡니다.\n\n**draft.ts:9: 남은 구현 작업이 TODO 형식이 아님**\n- 문제: 서버 검증 추가는 합의된 후속 작업이므로 정책상 `TODO`로 표시해야 합니다.\n- 영향: TODO 검색에 걸리지 않아 후속 작업이 누락될 수 있습니다.\n- 수정 예: `// TODO: 저장 전에 서버에서 토큰을 검증한다.` (태스크 번호가 있으면 함께 적기)\n\n**draft.ts:13: 현재 잘못 동작하는 코드가 FIXME 형식이 아님**\n- 문제: `drafts[0]`이 다른 사이트의 작업본을 반환하는 버그는 이미 확인되었습니다. 정책상 `FIXME`로 표시해야 합니다. \"다음에 손본다\"도 필요한 수정이 무엇인지 알려 주지 않습니다.\n- 수정 예: `// FIXME: siteId를 무시하고 drafts[0]을 반환해 다른 사이트의 작업본이 나올 수 있다.`\n- 동작 수정은 합의대로 별도 태스크이므로 이번에는 요구하지 않습니다.\n\n## 유지\n\n**draft.ts:16**: 외부 연동사의 중복 과금 규칙은 계약서로 확인된 프로젝트 제약입니다. 코드만 봐서는 알 수 없는 내용이라 정책상 허용되므로 그대로 둡니다.\n\n## 확인하지 못한 범위\n\n- 타입 검사, 린트, 테스트는 실행하지 않았습니다.\n- `saveSession`, `drafts`, `Draft`의 정의는 제공되지 않아 확인하지 못했습니다.\n- 14줄에서 `siteId`를 쓰지 않습니다. 프로젝트가 `noUnusedParameters`나 그에 해당하는 린트 규칙을 쓰면 빌드나 린트가 실패할 수 있습니다. 설정은 확인하지 못했으니 머지 전에 타입 검사와 린트 결과를 확인해 주세요.",
+            "ttft_ms": 8046,
+            "type": "result",
+            "duration_ms": 23742,
+            "uuid": "0864c2f5-4560-40f7-b37b-5c23d921dcde",
+            "ttft_stream_ms": 1620,
+            "time_to_request_ms": 31,
+            "first_content_frame_ms": 1620,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": null,
+            "redundant_readDraft_comment_removed": null,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": true
+          }
+        },
+        {
+          "iteration": 5,
+          "exit_code": 0,
+          "is_error": false,
+          "seconds": 24.2,
+          "response": {
+            "duration_api_ms": 24258,
+            "stop_reason": "end_turn",
+            "session_id": "b15b25e3-6138-46ed-9440-54ef348d6bf5",
+            "total_cost_usd": 0.056545,
+            "usage": {
+              "input_tokens": 2,
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 2164,
+              "output_tokens": 2149,
+              "output_tokens_details": {
+                "thinking_tokens": 639
+              },
+              "server_tool_use": {
+                "web_search_requests": 0,
+                "web_fetch_requests": 0
+              },
+              "service_tier": "standard",
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "inference_geo": "not_available",
+              "iterations": [
+                {
+                  "input_tokens": 2,
+                  "output_tokens": 2149,
+                  "cache_read_input_tokens": 2164,
+                  "cache_creation_input_tokens": 0,
+                  "cache_creation": {
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  },
+                  "type": "message"
+                }
+              ],
+              "speed": "standard"
+            },
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "inputTokens": 1633,
+                "outputTokens": 19,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.001728,
+                "contextWindow": 200000,
+                "maxOutputTokens": 32000,
+                "thinkingTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              },
+              "claude-opus-5[1m]": {
+                "inputTokens": 2,
+                "outputTokens": 2149,
+                "cacheReadInputTokens": 2164,
+                "cacheCreationInputTokens": 0,
+                "webSearchRequests": 0,
+                "costUSD": 0.054817,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 64000,
+                "thinkingTokens": 639,
+                "canonicalModel": "claude-opus-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "permission_denials": [],
+            "terminal_reason": "completed",
+            "fast_mode_state": "off",
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "subagent_stats": {
+              "spawned": 0,
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "started_in_background": 0,
+              "max_depth": 0,
+              "spawned_by_subagents": 0,
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "user": 0,
+                "system": 0
+              },
+              "refused": {
+                "depth_limit": 0,
+                "concurrency_limit": 0,
+                "budget": 0
+              },
+              "by_type": {}
+            },
+            "is_error": false,
+            "num_turns": 1,
+            "subtype": "success",
+            "api_error_status": null,
+            "result": "# draft.ts 리뷰 결과\n\n리뷰 범위는 주석 정책 준수로 한정했습니다. 합의에 따라 `rememberSession`의 서버 검증 추가와 `findDraft`의 사이트 불일치 수정은 요구하지 않습니다.\n\n## 발견\n\n**Important**\n\n- **draft.ts:3**: `readDraft`에서 옮겨 온 설명이 그대로 남았습니다. `record`는 사이트를 확인하지 않고 계약 검증도 하지 않습니다. 값이 배열이 아닌 객체인지만 판별합니다. 읽는 사람은 이 함수를 거친 값이 사이트와 계약을 통과했다고 믿고 검증을 빠뜨릴 수 있습니다.\n  **수정 방향:** 주석을 삭제합니다. 동작은 함수 이름, 시그니처와 한 줄 구현으로 드러납니다.\n\n- **draft.ts:7**: 연결을 닫는 문제에 대한 설명이 붙어 있지만 `rememberSession`은 토큰 저장만 합니다. 이 함수가 연결 수명을 관리한다고 오해하게 만듭니다.\n  **수정 방향:** 주석을 삭제합니다. 원래 붙어야 할 코드가 따로 있다면 그쪽으로 옮기고, 이 diff에서는 제거합니다.\n\n- **draft.ts:13**: 지금 잘못 동작하는 코드인데 FIXME 표시가 없습니다. \"다음에 손본다\"는 추적되지 않는 표현이라 알려진 버그가 검색에 잡히지 않습니다.\n  **수정 방향:** FIXME로 바꾸고 현재 잘못된 동작을 적습니다.\n  예: `// FIXME: siteId를 무시하고 첫 작업본을 반환해 다른 사이트의 작업본이 나온다.`\n\n**Minor**\n\n- **draft.ts:1**: 타입과 필드가 무엇인지 설명하는 주석으로, 정책상 금지 대상입니다.\n  **수정 방향:** 삭제합니다.\n\n- **draft.ts:9**: 남은 구현 작업인데 TODO 표시가 없습니다.\n  **수정 방향:** `// TODO: 저장 전에 토큰을 서버에서 검증한다.`로 바꿉니다.\n\n**유지**\n\n- **draft.ts:16**: 계약서로 확인된 외부 과금 제약은 코드만으로 표현할 수 없습니다. 허용 대상이므로 그대로 둡니다.\n\n## 주석만 고친 수정본\n\n```ts\ntype Placement = { tag?: 'details' | 'summary' };\nfunction record(value: unknown): Record<string, unknown> | null {\n  return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;\n}\nfunction rememberSession(token: string): void {\n  // TODO: 저장 전에 토큰을 서버에서 검증한다.\n  saveSession(token);\n}\nfunction findDraft(siteId: string): Draft | undefined {\n  // FIXME: siteId를 무시하고 첫 작업본을 반환해 다른 사이트의 작업본이 나온다.\n  return drafts[0];\n}\n// 외부 연동사는 requestId가 다른 승인 요청을 별도로 과금하므로 재시도에도 최초 requestId를 유지한다.\nfunction approvalRequest(requestId: string): { requestId: string } {\n  return { requestId };\n}\n```\n\n## 머지 가능 여부: 수정 후\n\n런타임 동작에는 이번 리뷰에서 요구할 변경이 없습니다. 다만 3·7줄은 실제 동작과 어긋난 설명이라 그대로 머지하면 오해를 남기고, 1·9·13줄은 프로젝트 주석 정책을 위반합니다. 필요한 수정은 모두 주석뿐이라 위 수정본을 반영하면 머지해도 됩니다.\n\n## 확인하지 못한 범위\n\n- 제공된 draft.ts 전문만 검토했습니다. 변경 전 diff, `saveSession`, `drafts`, `Draft`의 정의와 호출부는 보지 않았습니다.\n- 타입 검사, 테스트, 린트는 실행하지 않았습니다.",
+            "ttft_ms": 8998,
+            "type": "result",
+            "duration_ms": 23194,
+            "uuid": "079c4d88-4aed-47a5-b787-716350c1b6d6",
+            "ttft_stream_ms": 1561,
+            "time_to_request_ms": 15,
+            "first_content_frame_ms": 1561,
+            "queued_turn_count": 0,
+            "result_index": 0
+          },
+          "stderr": "",
+          "assessment": {
+            "unrelated_comment_removed": null,
+            "redundant_readDraft_comment_removed": null,
+            "todo_fixme_correct": true,
+            "external_contract_preserved": true,
+            "review_all_five_issues_detected": true
+          }
+        }
+      ]
+    }
+  ],
+  "context_size": {
+    "before": {
+      "body_bytes": 1562,
+      "injected_bytes": 1588
+    },
+    "after": {
+      "body_bytes": 2709,
+      "injected_bytes": 2735
+    },
+    "measurement": "Actual SessionStart additionalContext UTF-8 bytes, not model tokens."
+  }
+}

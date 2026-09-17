@@ -1,10 +1,10 @@
 # Skill behavior probes
 
-Groundwork 지침을 줄였을 때 필요한 도메인 질문은 유지되고, 기술 선택·형식적 승인 절차는 줄어드는지 확인한다. 특히 기존 승인을 인터뷰에서 재검토할 수 있어야 한다.
+Groundwork 지침의 도메인 질문·기술 선택·정책 재검토와 코드 주석 정책 적용을 확인한다.
 
 ## Run the probes
 
-Python 표준 라이브러리와 인증된 Claude Code CLI를 쓴다. 한 호출마다 새 대화로 첫 응답과 다음 행동을 생성하며 실제 구현 도구는 비활성화한다. 기본값은 케이스당 5회, 동시 호출 3개다. 모델 호출 비용이 발생한다.
+Python 표준 라이브러리와 인증된 Claude Code CLI를 쓴다. 한 호출마다 새 대화로 첫 응답과 다음 행동을 생성하며 실제 구현 도구는 비활성화한다. `--response-mode artifact`는 코드 수정본·리뷰를 응답에 직접 생성한다. 케이스의 선택적 `instructions`는 스킬 본문보다 앞의 시스템 지침으로 넣는다. 기본값은 케이스당 5회, 동시 호출 3개다. 모델 호출 비용이 발생한다.
 
 ```bash
 python3 tests/skill-behavior/evaluate.py --variant none --cases ambiguous
@@ -71,6 +71,29 @@ python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/tes
 변경된 스킬 본문 합계는 111,786 → 27,130 UTF-8 bytes로 약 76% 줄었다. 이는 같은 파일 집합의 크기이며 실제 세션 로드량이나 모델 토큰 수가 아니다. 반복 참조 자료와 모델 티어 문서를 포함한 변경 Markdown 합계는 339,587 → 57,096 bytes다.
 프롬프트·시나리오 해시, 모델 사용량, 원시 응답과 판독, 파일별 크기는 [관측 기록](noop-observations.json)에 있다.
 
+## Code comment probes
+
+2026-09-17에 Claude Code 2.1.274로 [주석 시나리오](comment-cases.json)를 실행했다. 프로젝트 정책은 세션 시작 지침으로 넣고, 작업 요청에는 코드와 수정 범위만 제시했다. 실제 리포에서 관측한 타입·동작 해설, 모호한 기술 서술, 함수 추출 뒤 주석 불일치와 사용자가 지적한 TODO·FIXME 미사용을 검사 대상으로 삼았다.
+
+| 조건 | 직접 판독한 결과 |
+|---|---|
+| 수정 전 구현 5개 | 모두 무관한 연결 설명을 남겼다. 1개는 코드 흐름 설명도 남겼다. 불일치를 인식하면서 범위 밖이나 다음 태스크로 미루는 응답이 있었다. |
+| 수정 후 구현 5개 | 모두 두 설명을 제거했다. 새 함수에 해설 주석을 추가하지 않았고 기존 동작과 외부 과금 제약을 보존했다. |
+| 기존 리뷰 지침 5개 | 모두 타입 해설·주석 불일치·무관한 설명·TODO 누락·FIXME 누락을 지적하고 외부 계약 주석을 보존했다. 추가 리뷰 문구는 유지하지 않았다. |
+
+TODO·FIXME 구분은 수정 전후 모두 수행했다. 그 축의 개선을 입증한 결과는 아니다. 새 문구는 수정한 코드의 기존 주석까지 완료 전에 대조하고, 불일치를 이번 변경에서 정리하는 실패를 겨냥한다. 문서 규범이 코드 해설 추가나 기술 용어를 모호한 일상어로 바꾸는 근거가 되지 않도록 적용 범위도 명시했다. 독립 판독 검토는 PASS였다.
+
+리포 루트에서 아래 세 커맨드로 비교를 재현한다. 각 커맨드의 결과는 별도 임시 디렉터리에 저장된다.
+
+```bash
+python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/using-groundwork/SKILL.md --prompt-file skills/writing-for-junior/SKILL.md --revision 6a5282b --cases-file tests/skill-behavior/comment-cases.json --cases comment-implementation --response-mode artifact --repeat 5
+python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/using-groundwork/SKILL.md --prompt-file skills/writing-for-junior/SKILL.md --cases-file tests/skill-behavior/comment-cases.json --cases comment-implementation --response-mode artifact --repeat 5
+python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/requesting-code-review/code-reviewer-prompt.md --cases-file tests/skill-behavior/comment-cases.json --cases comment-review --response-mode artifact --repeat 5
+```
+
+[관측 기록](comment-observations.json)에 15개 원시 응답·전체 지침·시나리오·해시·모델 사용량·판독과 리포 증거를 남겼다. 실제 SessionStart 주입은 1,588 → 2,735 UTF-8 bytes다. 토큰 수가 아니며 참조 파일의 추가 상시 로드는 없다.
+각 호출은 새 컨텍스트에서 수행했다. 실제 긴 대화의 지침 망각을 재현하거나 방지했다고 주장하지 않는다. 생성된 TypeScript의 실행·타입 검증도 이 비교 범위 밖이다.
+
 ## Context size
 
 [크기 기록](size-metrics.json)은 `57b0938`과 `v0.13.0` (`a3fd10f`) 파일의 UTF-8 바이트·행을 비교한다.
@@ -86,4 +109,4 @@ python3 tests/skill-behavior/evaluate.py --variant none --prompt-file skills/tes
 
 ## Limits
 
-이 검사는 도구 없는 첫 응답과 다음 행동 계획을 확인한다. 실제 다중 턴 인터뷰·코딩·리뷰·통합의 품질이나 전체 시간·토큰 이득을 입증하지 않는다. 시작 시 컨텍스트의 10%를 쓴다는 관측도 동일 모델·세션 조건에서 재측정한 것은 아니다.
+이 검사는 도구 없는 첫 응답·행동 계획 또는 응답에 생성한 코드·리뷰를 확인한다. 실제 다중 턴 인터뷰·코딩·리뷰·통합의 품질이나 전체 시간·토큰 이득을 입증하지 않는다. 시작 시 컨텍스트의 10%를 쓴다는 관측도 동일 모델·세션 조건에서 재측정한 것은 아니다.

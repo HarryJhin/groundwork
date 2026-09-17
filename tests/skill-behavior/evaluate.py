@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fresh-context first-response probes; results require human assessment."""
+"""Fresh-context response probes; results require human assessment."""
 import argparse
 import concurrent.futures
 import hashlib
@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--cases", help="Comma-separated case names")
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--workers", type=int, default=3)
+    parser.add_argument("--response-mode", choices=["plan", "artifact"], default="plan")
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
     cases = json.loads((args.cases_file or Path(__file__).with_name("cases.json")).read_text())
@@ -49,10 +50,12 @@ def main():
         parts.append(value)
     body = "\n\n".join(parts)
     system = "한국어로 답하는 코딩 에이전트다. 제공된 현재 사실을 사용해 실제 작업의 첫 사용자 응답과 바로 다음 행동을 작성한다. 도구 호출과 실제 구현은 이 테스트에서 하지 않는다. 제공되지 않은 요구나 조사 결과를 지어내지 않는다."
+    if args.response_mode == "artifact":
+        system = "한국어로 답하는 코딩 에이전트다. 제공된 파일·사실과 요청으로 코드 수정본 또는 리뷰 결과를 작성한다. 도구는 사용할 수 없으므로 산출물을 응답에 직접 쓴다. 제공되지 않은 조사 결과나 실행하지 않은 검증을 지어내지 않는다."
     if body:
         system += "\n\n" + body
     version = subprocess.run(["claude", "--version"], capture_output=True, text=True, check=True).stdout.strip()
-    manifest = {"variant": args.variant, "revision": args.revision, "prompt_files": prompt_paths, "cases": names, "repeat": args.repeat, "claude_version": version, "prompt_sha256": hashlib.sha256(body.encode()).hexdigest(), "prompt_bytes": len(body.encode()), "case_sha256": hashlib.sha256(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, sort_keys=True).encode()).hexdigest()}
+    manifest = {"variant": args.variant, "revision": args.revision, "response_mode": args.response_mode, "prompt_files": prompt_paths, "cases": names, "repeat": args.repeat, "claude_version": version, "prompt_sha256": hashlib.sha256(body.encode()).hexdigest(), "prompt_bytes": len(body.encode()), "case_sha256": hashlib.sha256(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, sort_keys=True).encode()).hexdigest()}
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     (out / "prompt.txt").write_text(system)
     (out / "cases.json").write_text(json.dumps({name: cases[name] for name in names}, ensure_ascii=False, indent=2) + "\n")
@@ -61,9 +64,10 @@ def main():
         name, iteration = item
         case = cases[name]
         user = case["request"] + "\n확인된 현재 사실: " + case["facts"]
+        case_system = "\n\n".join(part for part in (case.get("instructions", ""), system) if part)
         started = time.monotonic()
         try:
-            result = subprocess.run(["claude", "-p", "--safe-mode", "--tools", "", "--no-session-persistence", "--output-format", "json", "--system-prompt", system, user], cwd=out, capture_output=True, text=True, timeout=180)
+            result = subprocess.run(["claude", "-p", "--safe-mode", "--tools", "", "--no-session-persistence", "--output-format", "json", "--system-prompt", case_system, user], cwd=out, capture_output=True, text=True, timeout=180)
         except subprocess.TimeoutExpired:
             return {"case": name, "iteration": iteration, "error": "timeout"}
         path = out / f"{name}-{iteration}.json"
